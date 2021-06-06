@@ -46,7 +46,7 @@ const App: React.FC = () => {
     palette: {
       type: 'dark',
       primary: {
-        main: '#913f9e',
+        main: '#6f48e3',
       },
       secondary: {
         main: '#2196F3',

@@ -1,24 +1,15 @@
 import React, { Fragment, useEffect } from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Card, CardHeader, Divider, List } from '@material-ui/core';
+import { CardHeader, Divider, List } from '@material-ui/core';
 import { getTodayDate } from '../../../common/helpers/dateHandler';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchCoins, selectCoins } from '../../../features/coinsSlice';
 import { Coin } from '../../../models';
 import CoinItem from '../molecules/CoinItem';
 import { fetchCoinMarketChartList, selectCoinMarketChartList } from '../../../features/coinMarketChartList';
+import CardLayout from '../molecules/CardLayout';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  card: {
-    display: 'flex',
-    flexFlow: 'column',
-    backgroundColor: theme.palette.card.main,
-    height: '100%',
-    borderRadius: 12,
-    '& ::-webkit-scrollbar': {
-      display: 'none',
-    },
-  },
   coinList: {
     overflow: 'scroll',
     paddingBottom: 8
@@ -33,7 +24,7 @@ const TopCoinsCard: React.FC = () => {
   const coinMarketChartList = useAppSelector(selectCoinMarketChartList);
 
   useEffect(() => {
-    if (coins.value.length === 0  && coins.status === 'IDLE') {
+    if (coins.value.length === 0 && coins.status === 'IDLE') {
       dispatch(fetchCoins());
     }
   }, [dispatch, coins.value.length, coins.status]);
@@ -44,10 +35,10 @@ const TopCoinsCard: React.FC = () => {
         coins.value.map((coin: Coin) => coin.id)
       ));
     }
-  }, [dispatch, coins.value, coinMarketChartList.value, coinMarketChartList.status])
+  }, [dispatch, coins.value, coinMarketChartList.value, coinMarketChartList.status]);
 
   return (
-    <Card className={classes.card}>
+    <CardLayout>
       <CardHeader
         title="Top Coins"
         subheader={getTodayDate()}
@@ -70,7 +61,7 @@ const TopCoinsCard: React.FC = () => {
         )}
 
       </List>
-    </Card>
+    </CardLayout>
   )
 }
 

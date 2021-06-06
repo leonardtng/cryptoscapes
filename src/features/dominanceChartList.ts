@@ -12,7 +12,7 @@ const initialState: GenericState<CoinMarketChartList> = {
   param: 'key'
 };
 
-export const fetchCoinMarketChartList = createAsyncThunk('coinMarketChartList', async (coinIdList: string[]) => {
+export const fetchDominanceChartList = createAsyncThunk('dominanceChartList', async (coinIdList: string[]) => {
   const canceler = axios.CancelToken.source();
 
   const normalizedResponse = {} as any
@@ -20,7 +20,7 @@ export const fetchCoinMarketChartList = createAsyncThunk('coinMarketChartList', 
   for (var i = 0; i < coinIdList.length; i++) {
     const response = await axios.request({
       ...config,
-      url: API.coinMarketChart(coinIdList[i], 1),
+      url: API.coinMarketChart(coinIdList[i], 30),
       cancelToken: canceler.token
     });
 
@@ -30,29 +30,29 @@ export const fetchCoinMarketChartList = createAsyncThunk('coinMarketChartList', 
   return normalizedResponse as CoinMarketChartList
 });
 
-export const selectCoinMarketChartList: (state: RootState) => GenericState<CoinMarketChartList>
-  = (state: RootState) => state.coinMarketChartList;
+export const selectDominanceChartList: (state: RootState) => GenericState<CoinMarketChartList>
+  = (state: RootState) => state.dominanceChartList;
 
-const coinMarketChartListSlice: Slice<GenericState<CoinMarketChartList>, {}, 'coinMarketChartList'> = createSlice({
-  name: 'coinMarketChartList',
+const dominanceChartListSlice: Slice<GenericState<CoinMarketChartList>, {}, 'dominanceChartList'> = createSlice({
+  name: 'dominanceChartList',
   initialState,
   reducers: {
 
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCoinMarketChartList.pending, (state) => {
+      .addCase(fetchDominanceChartList.pending, (state) => {
         state.status = 'LOADING';
       })
-      .addCase(fetchCoinMarketChartList.fulfilled, (state, action) => {
+      .addCase(fetchDominanceChartList.fulfilled, (state, action) => {
         state.status = 'IDLE';
         state.value = action.payload;
       })
-      .addCase(fetchCoinMarketChartList.rejected, (state, action) => {
+      .addCase(fetchDominanceChartList.rejected, (state, action) => {
         state.status = 'FAILED';
         state.error = action.error.message
       })
   },
 });
 
-export default coinMarketChartListSlice.reducer
+export default dominanceChartListSlice.reducer

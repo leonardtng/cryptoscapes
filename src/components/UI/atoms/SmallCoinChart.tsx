@@ -6,6 +6,10 @@ import { Coin, CoinMarketChart } from '../../../models';
 import { useAppSelector } from '../../../app/hooks';
 import { selectCoinMarketChartList } from '../../../features/coinMarketChartList';
 
+interface ChartDataFormat {
+  date: number;
+  value: number;
+}
 
 interface Props {
   coin: Coin;
@@ -17,20 +21,26 @@ const SmallCoinChart: React.FC<Props> = ({ coin, dataKey }) => {
   const coinMarketChartList = useAppSelector(selectCoinMarketChartList);
   const gain = coin.priceChangePercentage24H > 0;
 
-  const formatRawData = () => {
-    const newData = []
-    for (const arr of coinMarketChartList.value[coin.id][dataKey]) {
-      newData.push({ date: arr[0], dataKey: arr[1] })
-    }
-    return newData
+  const formatRawData = (coinId: string, dataKey: keyof CoinMarketChart) => {
+    const chartData: ChartDataFormat[] = [];
+    coinMarketChartList.value[coinId][dataKey]
+    .forEach((dataPair: [number, number]) => {
+      chartData.push({ date: dataPair[0], value: dataPair[1] })
+    });
+    return chartData
   }
 
   return (
     <>
       {!coinMarketChartList.value[coin.id] ? (
-        <Skeleton animation="wave" height={60} width={100} id="titleSkeleton" />
+        <Skeleton animation="wave" height={60} width={100} />
       ) : (
-        <AreaChart width={100} height={60} data={formatRawData()} margin={{ top: 0, right: 8, left: 8, bottom: 0 }}>
+        <AreaChart
+          height={60}
+          width={100}
+          data={formatRawData(coin.id, dataKey)}
+          margin={{ top: 0, right: 8, left: 8, bottom: 0 }}
+        >
           <defs>
             <linearGradient id={gain ? 'gain' : 'loss'} x1="0" y1="0" x2="0" y2="1">
               <stop
@@ -48,7 +58,7 @@ const SmallCoinChart: React.FC<Props> = ({ coin, dataKey }) => {
           <YAxis domain={[(dataMin: number) => dataMin * 0.95, (dataMax: number) => dataMax * 1.05]} hide />
           <Area
             type="monotone"
-            dataKey="dataKey"
+            dataKey="value"
             dot={false}
             animationDuration={3000}
             stroke={gain ? theme.palette.success.main : theme.palette.error.main}
