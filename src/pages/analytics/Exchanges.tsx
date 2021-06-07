@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-const Exchanges = () => {
+const Exchanges: React.FC = () => {
   
   return (
     <div>

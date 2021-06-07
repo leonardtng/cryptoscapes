@@ -1,11 +1,12 @@
-import { AccountBalanceRounded, DataUsageRounded, TrendingUpRounded } from '@material-ui/icons';
 import React from 'react';
+import { AccountBalanceRounded, DataUsageRounded, People, TrendingUpRounded } from '@material-ui/icons';
 import { BrowserRouter } from 'react-router-dom';
 import PageLayout from '../components/templates/PageLayout';
 import { NavItem } from '../components/UI/atoms/NavListItem';
-import Coins from './Coins';
-import Exchanges from './Exchanges';
-import Trends from './Trends';
+import Coins from './analytics/Coins';
+import Exchanges from './analytics/Exchanges';
+import Trends from './analytics/Trends';
+import Events from './information/Events';
 
 const Main: React.FC = () => {
   const pages: NavItem[] = [
@@ -28,6 +29,13 @@ const Main: React.FC = () => {
       path: '/exchanges',
       icon: <AccountBalanceRounded />,
       page: <Exchanges />,
+      index: 2
+    },
+    {
+      label: 'Events',
+      path: '/events',
+      icon: <People />,
+      page: <Events />,
       index: 2
     }
   ];

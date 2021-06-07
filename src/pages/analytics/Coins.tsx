@@ -1,8 +1,8 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
-import TopCoinsCard from '../components/UI/organisms/TopCoinsCard';
-import DominanceCard from '../components/UI/organisms/DominanceCard';
+import TopCoinsCard from '../../components/UI/organisms/TopCoinsCard';
+import DominanceCard from '../../components/UI/organisms/DominanceCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {

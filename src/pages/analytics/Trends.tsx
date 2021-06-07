@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Trends = () => {
+const Trends: React.FC = () => {
 
   return (
     <div>

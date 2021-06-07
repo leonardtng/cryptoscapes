@@ -20,42 +20,38 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  navItems?: NavItem[];
+  navItems: NavItem[];
 }
 
 const DrawerItems: React.FC<Props> = ({ navItems }) => {
   const classes = useStyles();
 
   return (
-    <>
-      {navItems ? (
-        <div className={classes.navItemsWrapper}>
-          <List
-            subheader={
-              <ListSubheader component="div">
-                Analytics
-                </ListSubheader>
-            }
-          >
-            {navItems.map((item: NavItem) => {
-              return <NavListItem navItem={item} key={item.path} />
-            })}
-          </List>
-        </div>
-      ) : (
-        <div className={classes.filterItemsWrapper}>
-          <List
-            subheader={
-              <ListSubheader component="div">
-                Filters
+    <div className={classes.navItemsWrapper}>
+      <List
+        subheader={
+          <ListSubheader component="div">
+            Analytics
               </ListSubheader>
-            }
-          >
+        }
+      >
+        {navItems.slice(0, 3).map((item: NavItem) => {
+          return <NavListItem navItem={item} key={item.path} />
+        })}
+      </List>
+      <List
+        subheader={
+          <ListSubheader component="div">
+            Information
+              </ListSubheader>
+        }
+      >
+        {navItems.slice(3).map((item: NavItem) => {
+          return <NavListItem navItem={item} key={item.path} />
+        })}
+      </List>
+    </div>
 
-          </List>
-        </div>
-      )}
-    </>
   )
 }
 
