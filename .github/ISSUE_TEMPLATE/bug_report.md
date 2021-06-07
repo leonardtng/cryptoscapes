@@ -1,7 +1,7 @@
---------
+---
 name: Bug Report
 about: Create a report to help improve the project
---------
+---
 
 <!-- Please search existing issues to avoid creating duplicates. -->
 
