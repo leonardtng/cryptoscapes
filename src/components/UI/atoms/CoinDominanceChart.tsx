@@ -1,4 +1,5 @@
 import React from 'react';
+import { Theme, makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab';
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
@@ -7,6 +8,13 @@ import { Coin, CoinMarketChart } from '../../../models';
 import { shortenNumber } from '../../../common/helpers/shortenNumber';
 import { convertTimestamp } from '../../../common/helpers/dateHandler';
 import { selectDominanceChartList } from '../../../features/dominanceChartList';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  chartSkeleton: {
+    margin: '0 16px',
+    transform: 'scale(1, 0.8)',
+  },
+}));
 
 interface DataFormat {
   date: number;
@@ -20,6 +28,7 @@ interface Props {
 }
 
 const CoinDominanceChart: React.FC<Props> = ({ coinList, dataKey }) => {
+  const classes = useStyles();
   const theme = useTheme();
   const dominanceChartList = useSelector(selectDominanceChartList);
 
@@ -45,8 +54,8 @@ const CoinDominanceChart: React.FC<Props> = ({ coinList, dataKey }) => {
 
   return (
     <>
-      {!dominanceChartList.value[top1.id] || !dominanceChartList.value[top2.id] ? (
-        <Skeleton animation="wave" height="100%" id="titleSkeleton" style={{ margin: '0 20px' }} />
+      {coinList.length !== 2 || !dominanceChartList.value[top1.id] || !dominanceChartList.value[top2.id] ? (
+        <Skeleton animation="wave" height="100%" className={classes.chartSkeleton} />
       ) : (
         <ResponsiveContainer height="100%" width="100%">
           <AreaChart data={formatRawData(top1.id, top2.id, dataKey)}
@@ -70,7 +79,7 @@ const CoinDominanceChart: React.FC<Props> = ({ coinList, dataKey }) => {
             />
             <Tooltip
               formatter={(value: number, name: string) =>
-                [shortenNumber(value), name === 'top1' ? top1.name : top2.name]}
+                [`US$${shortenNumber(value)}`, name === 'top1' ? top1.name : top2.name]}
             />
             <Area
               type="monotone"

@@ -41,7 +41,7 @@ const Coins: React.FC = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item lg={4} xl={5}>
+      <Grid item md={4} lg={4} xl={5}>
 
       </Grid>
     </Grid>

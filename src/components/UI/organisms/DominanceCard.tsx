@@ -49,9 +49,7 @@ const DominanceCard: React.FC = () => {
         <Skeleton animation="wave" height={24} className={classes.headerSkeleton} />
       )}
       <div className={classes.chartWrapper}>
-        {top2Coins.length === 2 &&
-          <CoinDominanceChart coinList={top2Coins} dataKey="marketCaps" />
-        }
+        <CoinDominanceChart coinList={top2Coins} dataKey="marketCaps" />
       </div>
     </CardLayout>
   )

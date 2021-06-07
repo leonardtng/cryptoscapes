@@ -13,9 +13,13 @@ export const shortenNumber = (num: number) => {
   const limits = {
     THOUSAND: 1000,
     MILLION: 1000000,
-    BILLION: 1000000000
+    BILLION: 1000000000,
+    TRILLION: 1000000000000
   };
 
+  if (num >= limits.TRILLION) {
+    return format(num / limits.TRILLION, 'T');
+  }
   if (num >= limits.BILLION) {
     return format(num / limits.BILLION, 'B');
   }
