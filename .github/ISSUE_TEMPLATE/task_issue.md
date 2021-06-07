@@ -12,4 +12,4 @@ assignees: leonardtng
 As a user, I want to be able to...
 
 **Epic Parent**
-[Epic: Awesome Epic Title](https://github.com/username/repository-name/issues/1)
+[EPIC: Awesome Epic Title](https://github.com/leonardtng/cryptoscapes/issues/1)
