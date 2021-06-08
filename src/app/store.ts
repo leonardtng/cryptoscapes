@@ -1,7 +1,8 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import coinsReducer from '../features/coinsSlice';
 import coinMarketChartListReducer from '../features/coinMarketChartList';
 import dominanceChartListReducer from '../features/dominanceChartList';
-import coinsReducer from '../features/coinsSlice';
+import gasOracleReducer from '../features/gasOracleSlice';
 import themeReducer from '../features/themeSlice';
 
 export const store = configureStore({
@@ -9,6 +10,7 @@ export const store = configureStore({
     coins: coinsReducer,
     coinMarketChartList: coinMarketChartListReducer,
     dominanceChartList: dominanceChartListReducer,
+    gasOracle: gasOracleReducer,
     theme: themeReducer
   },
 });

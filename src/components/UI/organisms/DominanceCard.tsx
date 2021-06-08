@@ -43,7 +43,7 @@ const DominanceCard: React.FC = () => {
       {top2Coins.length === 2 ? (
         <CardHeader
           title={`${top2Coins[0].symbol.toUpperCase()} vs ${top2Coins[1].symbol.toUpperCase()} Dominance`}
-          titleTypographyProps={{ variant: "body1" }}
+          titleTypographyProps={{ variant: 'body1' }}
         />
       ) : (
         <Skeleton animation="wave" height={24} className={classes.headerSkeleton} />

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, Slice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toCamelCase } from '../common/helpers/caseTransformer';
 import { RootState } from '../app/store';
-import { endpoints as API } from '../common/endpoints';
+import { coinGecko as API } from '../common/endpoints';
 import { API_CONFIG as config } from '../common/constants';
 import { CoinMarketChartList, GenericState } from '../models';
 
@@ -19,7 +19,7 @@ export const fetchDominanceChartList = createAsyncThunk('dominanceChartList', as
 
   for (var i = 0; i < coinIdList.length; i++) {
     const response = await axios.request({
-      ...config,
+      ...config('coinGecko'),
       url: API.coinMarketChart(coinIdList[i], 30),
       cancelToken: canceler.token
     });

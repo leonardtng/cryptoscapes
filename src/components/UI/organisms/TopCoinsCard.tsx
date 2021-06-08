@@ -56,8 +56,8 @@ const TopCoinsCard: React.FC = () => {
       <CardHeader
         title="Top Coins"
         subheader={getTodayDate()}
-        titleTypographyProps={{ variant: "h6" }}
-        subheaderTypographyProps={{ variant: "caption" }}
+        titleTypographyProps={{ variant: 'h6' }}
+        subheaderTypographyProps={{ variant: 'caption' }}
       />
       <Divider />
       <List dense disablePadding className={classes.coinList}>

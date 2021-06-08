@@ -3,6 +3,7 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import TopCoinsCard from '../../components/UI/organisms/TopCoinsCard';
 import DominanceCard from '../../components/UI/organisms/DominanceCard';
+import GasOracleCard from '../../components/UI/organisms/GasOracleCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
@@ -25,23 +26,23 @@ const Coins: React.FC = () => {
       justify="center"
       alignItems="stretch"
     >
-      <Grid item xs={6} md={5} lg={4} xl={3}>
+      <Grid item xs={6} md={6} lg={4} xl={3}>
         <TopCoinsCard />
       </Grid>
-      <Grid item xs={6} md={3} lg={4}>
+      <Grid item xs={6} md={6} lg={4}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <DominanceCard />
           </Grid>
           <Grid item xs={12}>
-
+            <GasOracleCard />
           </Grid>
           <Grid item xs={12}>
 
           </Grid>
         </Grid>
       </Grid>
-      <Grid item md={4} lg={4} xl={5}>
+      <Grid item lg={4} xl={5}>
 
       </Grid>
     </Grid>

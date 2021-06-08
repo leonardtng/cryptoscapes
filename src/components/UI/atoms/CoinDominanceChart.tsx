@@ -63,7 +63,7 @@ const CoinDominanceChart: React.FC<Props> = ({ coinList, dataKey }) => {
             <defs>
               <linearGradient id="top1" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={theme.palette.primary.main} stopOpacity={0.3} />
-                <stop offset="55%" stopColor={theme.palette.primary.main} stopOpacity={0} />
+                <stop offset="70%" stopColor={theme.palette.primary.main} stopOpacity={0} />
               </linearGradient>
               <linearGradient id="top2" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={theme.palette.secondary.main} stopOpacity={0.3} />

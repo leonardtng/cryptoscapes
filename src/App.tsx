@@ -60,7 +60,8 @@ const App: React.FC = () => {
         secondary: '#8492c4'
       },
       card: {
-        main: '#212946' // #202940
+        default: '#212946', // #202940
+        paper: '#29314F'
       }
     },
     ...common
@@ -80,7 +81,8 @@ const App: React.FC = () => {
         paper: 'rgb(33, 41, 70)',
       },
       card: {
-        main: '#212946'
+        default: '#212946',
+        paper: '#29314F'
       }
     },
     ...common
