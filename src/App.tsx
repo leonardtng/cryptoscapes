@@ -2,11 +2,11 @@ import React from 'react';
 import Gilroy from './assets/fonts/Gilroy-ExtraBold.woff';
 import { createMuiTheme, CssBaseline, Theme, ThemeOptions, ThemeProvider } from '@material-ui/core';
 import { useAppSelector } from './app/hooks';
-import { selectTheme } from './features/themeSlice';
+import { selectAppState } from './features/appStateSlice';
 import Main from './pages/Main';
 
 const App: React.FC = () => {
-  const theme = useAppSelector(selectTheme);
+  const appState = useAppSelector(selectAppState);
 
   const gilroy = {
     fontFamily: 'Gilroy',
@@ -46,7 +46,7 @@ const App: React.FC = () => {
     palette: {
       type: 'dark',
       primary: {
-        main: '#6f48e3',
+        main: '#7C4DFF',
       },
       secondary: {
         main: '#2196F3',
@@ -89,7 +89,7 @@ const App: React.FC = () => {
   });
 
   return (
-    <ThemeProvider theme={theme.darkMode ? dark : light}>
+    <ThemeProvider theme={appState.darkMode ? dark : light}>
       <CssBaseline />
       <Main />
     </ThemeProvider>

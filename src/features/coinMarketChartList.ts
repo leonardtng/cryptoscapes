@@ -15,7 +15,7 @@ const initialState: GenericState<CoinMarketChartList> = {
 export const fetchCoinMarketChartList = createAsyncThunk('coinMarketChartList', async (coinIdList: string[]) => {
   const canceler = axios.CancelToken.source();
 
-  const normalizedResponse = {} as any
+  const normalizedResponse = {} as any;
 
   for (var i = 0; i < coinIdList.length; i++) {
     const response = await axios.request({
@@ -50,7 +50,7 @@ const coinMarketChartListSlice: Slice<GenericState<CoinMarketChartList>, {}, 'co
       })
       .addCase(fetchCoinMarketChartList.rejected, (state, action) => {
         state.status = 'FAILED';
-        state.error = action.error.message
+        state.error = action.error.message;
       })
   },
 });

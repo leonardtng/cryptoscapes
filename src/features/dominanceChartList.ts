@@ -15,7 +15,7 @@ const initialState: GenericState<CoinMarketChartList> = {
 export const fetchDominanceChartList = createAsyncThunk('dominanceChartList', async (coinIdList: string[]) => {
   const canceler = axios.CancelToken.source();
 
-  const normalizedResponse = {} as any
+  const normalizedResponse = {} as any;
 
   for (var i = 0; i < coinIdList.length; i++) {
     const response = await axios.request({
@@ -24,7 +24,7 @@ export const fetchDominanceChartList = createAsyncThunk('dominanceChartList', as
       cancelToken: canceler.token
     });
 
-    normalizedResponse[coinIdList[i]] = toCamelCase(response.data)
+    normalizedResponse[coinIdList[i]] = toCamelCase(response.data);
   }
 
   return normalizedResponse as CoinMarketChartList
@@ -50,7 +50,7 @@ const dominanceChartListSlice: Slice<GenericState<CoinMarketChartList>, {}, 'dom
       })
       .addCase(fetchDominanceChartList.rejected, (state, action) => {
         state.status = 'FAILED';
-        state.error = action.error.message
+        state.error = action.error.message;
       })
   },
 });

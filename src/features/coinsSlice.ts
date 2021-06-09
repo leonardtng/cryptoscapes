@@ -45,7 +45,7 @@ const coinsSlice: Slice<GenericState<Coin[]>, {}, 'coins'> = createSlice({
       })
       .addCase(fetchCoins.rejected, (state, action) => {
         state.status = 'FAILED';
-        state.error = action.error.message
+        state.error = action.error.message;
       })
   },
 });

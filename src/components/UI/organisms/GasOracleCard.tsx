@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Avatar, CardContent, CardHeader, Grid, TextField } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import CardLayout from '../molecules/CardLayout';
-import { fetchGasOracle, selectGasOracle } from '../../../features/gasOracleSlice';
+import { fetchGasOracle, selectGasOracle, setGasLimit, setSelectedGasFee } from '../../../features/gasOracleSlice';
 import { FastForwardRounded, HourglassEmptyRounded, LocalGasStationRounded, ScheduleRounded } from '@material-ui/icons';
 import GasIndicator from '../atoms/GasIndicator';
 import { selectCoins } from '../../../features/coinsSlice';
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   conditionalButtonChild: {
     '& .MuiButton-outlined': {
       height: 88,
-      border: `2px solid ${theme.palette.secondary.main}`
+      border: `2px solid ${theme.palette.secondary.main}80`
     }
   }
 }));
@@ -53,20 +53,11 @@ const GasOracleCard: React.FC = () => {
     return coin.id === 'ethereum'
   })
 
-  const [selectedGasFee, setSelectedGasFee] = useState<string | null>(null);
-  const [gasLimit, setGasLimit] = useState<number>(21000);
-
   useEffect(() => {
     if (gasOracle.value.lastBlock.length === 0 && gasOracle.status === 'IDLE') {
       dispatch(fetchGasOracle());
     }
   }, [dispatch, gasOracle.value, gasOracle.status]);
-
-  useEffect(() => {
-    if (gasOracle.value.proposeGasPrice) {
-      setSelectedGasFee(gasOracle.value.proposeGasPrice);
-    }
-  }, [gasOracle.value.proposeGasPrice]);
 
   return (
     <CardLayout>
@@ -74,9 +65,9 @@ const GasOracleCard: React.FC = () => {
         title="ETH Gas Station"
         titleTypographyProps={{ variant: 'caption', color: 'textSecondary' }}
         subheader={
-          ethereum && selectedGasFee ?
+          ethereum && gasOracle.selectedGasFee ?
             `Fee: US$${Math.round(
-              0.000000001 * ethereum.currentPrice * gasLimit * Number(selectedGasFee) * 100
+              0.000000001 * ethereum.currentPrice * gasOracle.gasLimit * Number(gasOracle.selectedGasFee) * 100
             ) / 100}` :
             <Skeleton animation="wave" height={24} width={150} />
         }
@@ -91,8 +82,8 @@ const GasOracleCard: React.FC = () => {
             className={classes.gasLimitField}
             label="Gas Limit"
             variant="outlined"
-            defaultValue={gasLimit}
-            onChange={(e) => setGasLimit(Number(e.target.value))}
+            defaultValue={gasOracle.gasLimit}
+            onChange={(e) => dispatch(setGasLimit(Number(e.target.value)))}
             type="number"
           />
         }
@@ -106,8 +97,8 @@ const GasOracleCard: React.FC = () => {
               time="< 30mins"
               icon={<HourglassEmptyRounded />}
               color={theme.palette.error.main}
-              selected={selectedGasFee === gasOracle.value.safeGasPrice}
-              onClick={() => setSelectedGasFee(gasOracle.value.safeGasPrice)}
+              selected={gasOracle.selectedGasFee === gasOracle.value.safeGasPrice}
+              onClick={() => dispatch(setSelectedGasFee(gasOracle.value.safeGasPrice))}
             />
           </Grid>
           <Grid item xs={4}>
@@ -117,8 +108,8 @@ const GasOracleCard: React.FC = () => {
               time="< 5mins"
               icon={<ScheduleRounded />}
               color={theme.palette.warning.main}
-              selected={selectedGasFee === gasOracle.value.proposeGasPrice}
-              onClick={() => setSelectedGasFee(gasOracle.value.proposeGasPrice)}
+              selected={gasOracle.selectedGasFee === gasOracle.value.proposeGasPrice}
+              onClick={() => dispatch(setSelectedGasFee(gasOracle.value.proposeGasPrice))}
             />
           </Grid>
           <Grid item xs={4}>
@@ -128,8 +119,8 @@ const GasOracleCard: React.FC = () => {
               time="< 1min"
               icon={<FastForwardRounded />}
               color={theme.palette.success.main}
-              selected={selectedGasFee === gasOracle.value.fastGasPrice}
-              onClick={() => setSelectedGasFee(gasOracle.value.fastGasPrice)}
+              selected={gasOracle.selectedGasFee === gasOracle.value.fastGasPrice}
+              onClick={() => dispatch(setSelectedGasFee(gasOracle.value.fastGasPrice))}
             />
           </Grid>
         </Grid>

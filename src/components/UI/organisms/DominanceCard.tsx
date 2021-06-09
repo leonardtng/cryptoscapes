@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   chartWrapper: {
     width: '100%',
-    height: 250
+    height: 200
   }
 }));
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Avatar, Box, Button, Typography } from '@material-ui/core'
+import { Box, Button, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab';
 
 const useStyles = makeStyles<Theme, { color: string }>((theme: Theme) => ({
@@ -20,11 +20,10 @@ const useStyles = makeStyles<Theme, { color: string }>((theme: Theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 12,
-    '& .MuiAvatar-root': {
-      height: theme.spacing(4),
-      width: theme.spacing(4),
+    '& .MuiSvgIcon-root': {
+      height: 20,
+      width: 20,
       color: (props: { color: string }) => props.color,
-      backgroundColor: 'transparent',
     },
   },
   headerContainer: {
@@ -54,9 +53,9 @@ const GasIndicator: React.FC<Props> = ({ header, price, time, icon, color, selec
   return (
     <Button className={classes.button} onClick={onClick} variant={selected ? "outlined" : 'text'}>
       <Box className={classes.flexbox}>
-        <Avatar variant="rounded">
+        {/* <Avatar variant="rounded"> */}
           {icon}
-        </Avatar>
+        {/* </Avatar> */}
         <Box className={classes.headerContainer}>
           <Typography variant="subtitle2" noWrap>{header}</Typography>
           <Typography variant="caption" noWrap>{time}</Typography>
