@@ -1,9 +1,6 @@
 import { createSlice, Slice, SliceCaseReducers } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
-
-interface AppState {
-  darkMode: boolean;
-}
+import { AppState } from '../models';
 
 interface Reducers extends SliceCaseReducers<AppState> {
   toggle: (state: AppState) => void;

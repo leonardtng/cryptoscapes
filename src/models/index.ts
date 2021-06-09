@@ -1,3 +1,4 @@
+import { AppState as AppStateInterface } from './globals/AppState';
 import { GenericState as GenericStateInterface } from './common/GenericState';
 import { Coin as CoinInterface } from './api/Coin';
 import {
@@ -5,6 +6,7 @@ import {
   CoinMarketChartList as CoinMarketChartListInterface
 } from './api/CoinMarketChart';
 
+export type AppState = AppStateInterface;
 export type GenericState<T> = GenericStateInterface<T>;
 export type Coin = CoinInterface;
 export type CoinMarketChart = CoinMarketChartInterface;
