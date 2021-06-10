@@ -3,6 +3,7 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Avatar, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
 import { Coin } from '../../../models';
 import SmallCoinChart from '../atoms/SmallCoinChart';
+import { roundDecimals } from '../../../common/helpers/roundDecimals';
 
 const useStyles = makeStyles<Theme, Coin>((theme: Theme) => ({
   ranking: {
@@ -57,9 +58,9 @@ const CoinItem: React.FC<Props> = ({ coin }) => {
       <SmallCoinChart coin={coin} dataKey={'prices'} />
       <ListItemText
         className={classes.coinPrice}
-        primary={`US$${Math.round(coin.currentPrice * 1000) / 1000}`}
+        primary={`US$${roundDecimals(coin.currentPrice, 3)}`}
         secondary={
-          `${coin.priceChangePercentage24H > 0 ? '+' : ''}${Math.round(coin.priceChangePercentage24H * 10) / 10}%`
+          `${coin.priceChangePercentage24H > 0 ? '+' : ''}${roundDecimals(coin.priceChangePercentage24H)}%`
         }
         primaryTypographyProps={{ variant: 'subtitle1', noWrap: true }}
         secondaryTypographyProps={{ variant: 'subtitle2' }}

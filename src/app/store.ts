@@ -3,6 +3,7 @@ import coinsReducer from '../features/coinsSlice';
 import coinMarketChartListReducer from '../features/coinMarketChartList';
 import dominanceChartListReducer from '../features/dominanceChartList';
 import gasOracleReducer from '../features/gasOracleSlice';
+import trendingCoinsReducer from '../features/trendingCoinsSlice';
 import appState from '../features/appStateSlice';
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
     coinMarketChartList: coinMarketChartListReducer,
     dominanceChartList: dominanceChartListReducer,
     gasOracle: gasOracleReducer,
+    trendingCoins: trendingCoinsReducer,
     appState: appState
   },
 });

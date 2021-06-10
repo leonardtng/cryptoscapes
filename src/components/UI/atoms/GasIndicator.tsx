@@ -53,9 +53,7 @@ const GasIndicator: React.FC<Props> = ({ header, price, time, icon, color, selec
   return (
     <Button className={classes.button} onClick={onClick} variant={selected ? "outlined" : 'text'}>
       <Box className={classes.flexbox}>
-        {/* <Avatar variant="rounded"> */}
-          {icon}
-        {/* </Avatar> */}
+        {icon}
         <Box className={classes.headerContainer}>
           <Typography variant="subtitle2" noWrap>{header}</Typography>
           <Typography variant="caption" noWrap>{time}</Typography>
