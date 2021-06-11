@@ -6,6 +6,7 @@ export const coinGecko = {
   coinMarketChart: (coinId: string, days: number) =>
     `/coins/${coinId}/market_chart?vs_currency=usd&days=${days}`,
   trending: `/search/trending`,
+  global: `/global`
 };
 
 export const etherscan = {

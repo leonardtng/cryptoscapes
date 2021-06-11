@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-
 const TrendingCoinsCard: React.FC = () => {
   const classes = useStyles();
   const dispatch = useAppDispatch();

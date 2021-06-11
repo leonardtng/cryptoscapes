@@ -78,7 +78,7 @@ const AppBar: React.FC = () => {
             href='https://github.com/leonardtng/'
             target='_blank'
             rel='noopener'
-            aria-label='GitHub'
+            aria-label='View on GitHub'
           >
             <GitHub />
           </IconButton>

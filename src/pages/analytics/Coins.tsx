@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { fetchGlobalCoinData, selectGlobalCoinData } from '../../features/globalCoinDataSlice';
 import TopCoinsCard from '../../components/UI/organisms/TopCoinsCard';
 import DominanceCard from '../../components/UI/organisms/DominanceCard';
 import GasOracleCard from '../../components/UI/organisms/GasOracleCard';
 import TrendingCoinsCard from '../../components/UI/organisms/TrendingCoinsCard';
-import InstitutionHoldersCard from '../../components/UI/organisms/InstitutionHoldersCard';
+import GlobalCoinDataCard from '../../components/UI/organisms/GlobalCoinDataCard';
+import BannerCardSmall from '../../components/UI/molecules/BannerCardSmall';
+
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
@@ -16,12 +20,25 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   innerWrapper: {
     height: '100%',
+    '& > .MuiGrid-item:not(:last-child)': {
+      marginBottom: theme.spacing(3)
+    }
   }
 }));
 
 const Coins: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
+  const dispatch = useAppDispatch();
+
+  const globalCoinData = useAppSelector(selectGlobalCoinData);
+
+  // Fetch globalCoinData here as used in two cards (prevent fetching twice if dispatch in card)
+  useEffect(() => {
+    if (globalCoinData.value === null && globalCoinData.status === 'IDLE') {
+      dispatch(fetchGlobalCoinData());
+    }
+  }, [dispatch, globalCoinData.value, globalCoinData.status]);
 
   return (
     <Grid
@@ -32,15 +49,15 @@ const Coins: React.FC = () => {
       justify="center"
       alignItems="stretch"
     >
-      <Grid item xs={6} md={6} lg={4} xl={3}>
+      <Grid item xs={6} md={6} lg={4}>
         <TopCoinsCard />
       </Grid>
       <Grid item xs={6} md={6} lg={4}>
         <Grid container className={classes.innerWrapper} spacing={0}>
-          <Grid item xs={12} style={{ height: 275, marginBottom: theme.spacing(3) }}>
+          <Grid item xs={12} style={{ height: 275 }}>
             <DominanceCard />
           </Grid>
-          <Grid item xs={12} style={{ height: 205, marginBottom: theme.spacing(3) }}>
+          <Grid item xs={12} style={{ height: 205 }}>
             <GasOracleCard />
           </Grid>
           <Grid item xs={12} style={{ height: `calc(100% - ${275 + 205 + theme.spacing(3) * 2}px)` }}>
@@ -48,8 +65,18 @@ const Coins: React.FC = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item lg={4} xl={5}>
-        <InstitutionHoldersCard />
+      <Grid item lg={4}>
+        <Grid container className={classes.innerWrapper} spacing={0}>
+          <Grid item xs={12} style={{ height: 85 }}>
+            <BannerCardSmall />
+          </Grid>
+          <Grid item xs={12} style={{ height: `calc(50% - ${42.5 + theme.spacing(3)}px)` }}>
+            <GlobalCoinDataCard type="marketcap" />
+          </Grid>
+          <Grid item xs={12} style={{ height: `calc(50% - ${42.5 + theme.spacing(3)}px)` }}>
+            <GlobalCoinDataCard type="volume" />
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   )
