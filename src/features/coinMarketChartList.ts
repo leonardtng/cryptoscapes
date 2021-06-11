@@ -24,7 +24,7 @@ export const fetchCoinMarketChartList = createAsyncThunk('coinMarketChartList', 
       cancelToken: canceler.token
     });
 
-    normalizedResponse[coinIdList[i]] = toCamelCase(response.data)
+    normalizedResponse[coinIdList[i]] = toCamelCase(response.data);
   }
 
   return normalizedResponse as CoinMarketChartList

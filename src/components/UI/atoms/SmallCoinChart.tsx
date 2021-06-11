@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTheme } from '@material-ui/core';
-import { Skeleton } from '@material-ui/lab';
 import { Area, AreaChart, YAxis } from 'recharts';
 import { Coin, CoinMarketChart } from '../../../models';
 import { useAppSelector } from '../../../app/hooks';
@@ -32,9 +31,7 @@ const SmallCoinChart: React.FC<Props> = ({ coin, dataKey }) => {
 
   return (
     <>
-      {!coinMarketChartList.value[coin.id] ? (
-        <Skeleton animation="wave" height={60} width={100} />
-      ) : (
+      {coinMarketChartList.value[coin.id] && 
         <AreaChart
           height={60}
           width={100}
@@ -66,7 +63,7 @@ const SmallCoinChart: React.FC<Props> = ({ coin, dataKey }) => {
             fill={`url(#${gain ? 'gain' : 'loss'})`}
           />
         </AreaChart>
-      )}
+      }
     </>
   )
 }

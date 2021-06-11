@@ -10,9 +10,6 @@ import { selectCoins } from '../../../features/coinsSlice';
 import { Coin } from '../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  headerSkeleton: {
-    margin: 16
-  },
   chartWrapper: {
     width: '100%',
     height: 200
@@ -40,14 +37,20 @@ const DominanceCard: React.FC = () => {
 
   return (
     <CardLayout>
-      {top2Coins.length === 2 ? (
-        <CardHeader
-          title={`${top2Coins[0].symbol.toUpperCase()} vs ${top2Coins[1].symbol.toUpperCase()} Dominance`}
-          titleTypographyProps={{ variant: 'body1' }}
-        />
-      ) : (
-        <Skeleton animation="wave" height={24} className={classes.headerSkeleton} />
-      )}
+      <CardHeader
+        title={
+          top2Coins.length === 2 ?
+            `${top2Coins[0].symbol.toUpperCase()} vs ${top2Coins[1].symbol.toUpperCase()} Dominance` :
+            <Skeleton animation="wave" height={24} width="60%" />
+        }
+        titleTypographyProps={{ variant: 'body1' }}
+        subheader={
+          top2Coins.length === 2 ?
+            "Market capitalization over last 30 days" :
+            <Skeleton animation="wave" height={19} width="40%" />
+        }
+        subheaderTypographyProps={{ variant: 'caption', color: 'textSecondary' }}
+      />
       <div className={classes.chartWrapper}>
         <CoinDominanceChart coinList={top2Coins} dataKey="marketCaps" />
       </div>

@@ -37,13 +37,13 @@ const Coins: React.FC = () => {
       </Grid>
       <Grid item xs={6} md={6} lg={4}>
         <Grid container className={classes.innerWrapper} spacing={0}>
-          <Grid item xs={12} style={{ height: 264, marginBottom: theme.spacing(3) }}>
+          <Grid item xs={12} style={{ height: 275, marginBottom: theme.spacing(3) }}>
             <DominanceCard />
           </Grid>
           <Grid item xs={12} style={{ height: 205, marginBottom: theme.spacing(3) }}>
             <GasOracleCard />
           </Grid>
-          <Grid item xs={12} style={{ height: `calc(100% - ${264 + 205 + theme.spacing(3) * 2}px)` }}>
+          <Grid item xs={12} style={{ height: `calc(100% - ${275 + 205 + theme.spacing(3) * 2}px)` }}>
             <TrendingCoinsCard />
           </Grid>
         </Grid>

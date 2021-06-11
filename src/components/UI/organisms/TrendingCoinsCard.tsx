@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect } from 'react';
-import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
-import { Avatar, CardHeader, Divider, List, ListItem } from '@material-ui/core';
-import { Skeleton } from '@material-ui/lab';
+import { Theme, makeStyles } from '@material-ui/core/styles';
+import { Avatar, CardHeader, Divider, List } from '@material-ui/core';
 import CardLayout from '../molecules/CardLayout';
 import { WhatshotRounded } from '@material-ui/icons';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchTrendingCoins, selectTrendingCoins } from '../../../features/trendingCoinsSlice';
 import { TrendingCoin } from '../../../models';
 import TrendingCoinItem from '../molecules/TrendingCoinItem';
+import ListItemSkeleton from '../atoms/ListItemSkeleton';
 
 const useStyles = makeStyles((theme: Theme) => ({
   avatarColor: {
@@ -15,28 +15,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.card.paper,
   },
-  coinList: {
+  trendingCoinList: {
     overflow: 'scroll',
     paddingBottom: 8
-  },
-  listItemSkeleton: {
-    height: 60,
-    '& .MuiSkeleton-circle': {
-      margin: '0 20px'
-    }
-  },
-  listTextSkeleton: {
-    width: `calc(100% - 40px - ${theme.spacing(3)}px)`,
-    '& .MuiSkeleton-text:first-child': {
-      marginBottom: 6
-    }
   }
 }));
 
 
 const TrendingCoinsCard: React.FC = () => {
   const classes = useStyles();
-  const theme = useTheme();
   const dispatch = useAppDispatch();
 
   const trendingCoins = useAppSelector(selectTrendingCoins);
@@ -61,22 +48,9 @@ const TrendingCoinsCard: React.FC = () => {
         }
       />
       <Divider />
-      <List dense disablePadding className={classes.coinList}>
+      <List dense disablePadding className={classes.trendingCoinList}>
       {trendingCoins.value.length === 0 || trendingCoins.status === 'LOADING' ? (
-          <>
-            {Array.from(Array(7).keys()).map((index: number) =>
-              <Fragment key={index}>
-                <ListItem className={classes.listItemSkeleton} disableGutters>
-                  <Skeleton animation="wave" variant="circle" height={theme.spacing(3)} width={theme.spacing(3)} />
-                  <div className={classes.listTextSkeleton}>
-                    <Skeleton animation="wave" height={12} width="80%" />
-                    <Skeleton animation="wave" height={12} width="40%" />
-                  </div>
-                </ListItem>
-                {index < 6 && <Divider />}
-              </Fragment>
-            )}
-          </>
+          <ListItemSkeleton count={7} />
         ) : (
           <>
             {trendingCoins.value.map((trendingCoin: TrendingCoin, index: number) => {
