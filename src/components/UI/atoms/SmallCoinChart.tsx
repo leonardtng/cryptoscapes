@@ -3,7 +3,7 @@ import { useTheme } from '@material-ui/core';
 import { Area, AreaChart, ResponsiveContainer, YAxis } from 'recharts';
 import { Coin, CoinMarketChart } from '../../../models';
 import { useAppSelector } from '../../../app/hooks';
-import { selectCoinMarketChartList } from '../../../features/coinMarketChartList';
+import { selectCoinMarketChartList } from '../../../features/coinMarketChartListSlice';
 
 interface ChartDataFormat {
   date: number;
@@ -32,7 +32,7 @@ const SmallCoinChart: React.FC<Props> = ({ coin, dataKey }) => {
   return (
     <>
       {coinMarketChartList.value[coin.id] &&
-        <ResponsiveContainer width="100%" height={60}>
+        <ResponsiveContainer height="100%" width="100%">
           <AreaChart
             data={formatRawData(coin.id, dataKey)}
             margin={{ top: 0, right: 8, left: 16, bottom: 0 }}

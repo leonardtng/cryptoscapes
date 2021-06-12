@@ -16,7 +16,7 @@ export interface TrendingCoinItem {
   item: TrendingCoin
 }
 
-export interface Trending {
+export interface TrendingRootObject {
   coins: TrendingCoinItem[];
   exchanges: any[];
 }

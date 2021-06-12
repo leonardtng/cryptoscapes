@@ -11,12 +11,12 @@ import { Coin } from '../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
   chartWrapper: {
-    width: '100%',
-    height: 200
+    height: 200,
+    width: '100%'
   }
 }));
 
-const DominanceCard: React.FC = () => {
+const CoinDominanceCard: React.FC = () => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
 
@@ -58,4 +58,4 @@ const DominanceCard: React.FC = () => {
   )
 }
 
-export default DominanceCard
+export default CoinDominanceCard

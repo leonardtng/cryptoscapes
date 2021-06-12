@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { fetchGlobalCoinData, selectGlobalCoinData } from '../../features/globalCoinDataSlice';
 import TopCoinsCard from '../../components/UI/organisms/TopCoinsCard';
-import DominanceCard from '../../components/UI/organisms/DominanceCard';
+import CoinDominanceCard from '../../components/UI/organisms/CoinDominanceCard';
 import GasOracleCard from '../../components/UI/organisms/GasOracleCard';
 import TrendingCoinsCard from '../../components/UI/organisms/TrendingCoinsCard';
-import GlobalCoinDataCard from '../../components/UI/organisms/GlobalCoinDataCard';
+import MarketCapCard from '../../components/UI/organisms/MarketCapCard';
 import BannerCardSmall from '../../components/UI/molecules/BannerCardSmall';
-
+import VolumeCard from '../../components/UI/organisms/VolumeCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
@@ -29,16 +27,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Coins: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const dispatch = useAppDispatch();
-
-  const globalCoinData = useAppSelector(selectGlobalCoinData);
-
-  // Fetch globalCoinData here as used in two cards (prevent fetching twice if dispatch in card)
-  useEffect(() => {
-    if (globalCoinData.value === null && globalCoinData.status === 'IDLE') {
-      dispatch(fetchGlobalCoinData());
-    }
-  }, [dispatch, globalCoinData.value, globalCoinData.status]);
 
   return (
     <Grid
@@ -55,7 +43,7 @@ const Coins: React.FC = () => {
       <Grid item xs={6} md={6} lg={4}>
         <Grid container className={classes.innerWrapper} spacing={0}>
           <Grid item xs={12} style={{ height: 275 }}>
-            <DominanceCard />
+            <CoinDominanceCard />
           </Grid>
           <Grid item xs={12} style={{ height: 205 }}>
             <GasOracleCard />
@@ -71,10 +59,10 @@ const Coins: React.FC = () => {
             <BannerCardSmall />
           </Grid>
           <Grid item xs={12} style={{ height: `calc(50% - ${42.5 + theme.spacing(3)}px)` }}>
-            <GlobalCoinDataCard type="marketcap" />
+            <MarketCapCard />
           </Grid>
           <Grid item xs={12} style={{ height: `calc(50% - ${42.5 + theme.spacing(3)}px)` }}>
-            <GlobalCoinDataCard type="volume" />
+            <VolumeCard />
           </Grid>
         </Grid>
       </Grid>

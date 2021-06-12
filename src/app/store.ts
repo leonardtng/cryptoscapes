@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import coinsReducer from '../features/coinsSlice';
-import coinMarketChartListReducer from '../features/coinMarketChartList';
+import coinMarketChartListReducer from '../features/coinMarketChartListSlice';
 import dominanceChartListReducer from '../features/dominanceChartList';
 import gasOracleReducer from '../features/gasOracleSlice';
 import trendingCoinsReducer from '../features/trendingCoinsSlice';

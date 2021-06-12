@@ -12,8 +12,8 @@ export const getTodayDate = () => {
   return `${formatNumber(date.getDate())} ${monthNames[date.getMonth()]} ${date.getFullYear()}`
 };
 
-export const convertTimestamp = (timestamp: number) => {
+export const convertTimestamp = (timestamp: number, year: boolean = false) => {
   const date = new Date(timestamp);
 
-  return `${formatNumber(date.getDate())} ${monthNames[date.getMonth()]}`
+  return `${formatNumber(date.getDate())} ${monthNames[date.getMonth()]} ${year ? date.getFullYear() : ''}`
 };

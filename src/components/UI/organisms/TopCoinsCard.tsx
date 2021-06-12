@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchCoins, selectCoins } from '../../../features/coinsSlice';
 import { Coin } from '../../../models';
 import CoinItem from '../molecules/CoinItem';
-import { fetchCoinMarketChartList, selectCoinMarketChartList } from '../../../features/coinMarketChartList';
+import { fetchCoinMarketChartList, selectCoinMarketChartList } from '../../../features/coinMarketChartListSlice';
 import CardLayout from '../molecules/CardLayout';
 import ListItemSkeleton from '../atoms/ListItemSkeleton';
 
@@ -25,6 +25,8 @@ const TopCoinsCard: React.FC = () => {
   const coins = useAppSelector(selectCoins);
   const coinMarketChartList = useAppSelector(selectCoinMarketChartList);
 
+  const top15: Coin[] = coins.value.slice(0, 15);
+
   useEffect(() => {
     if (coins.value.length === 0 && coins.status === 'IDLE') {
       dispatch(fetchCoins());
@@ -34,10 +36,10 @@ const TopCoinsCard: React.FC = () => {
   useEffect(() => {
     if (Object.keys(coinMarketChartList.value).length === 0 && coinMarketChartList.status === 'IDLE') {
       dispatch(fetchCoinMarketChartList(
-        coins.value.map((coin: Coin) => coin.id)
+        top15.map((coin: Coin) => coin.id)
       ));
     }
-  }, [dispatch, coins.value, coinMarketChartList.value, coinMarketChartList.status]);
+  }, [dispatch, top15, coinMarketChartList.value, coinMarketChartList.status]);
 
   return (
     <CardLayout>
@@ -49,11 +51,11 @@ const TopCoinsCard: React.FC = () => {
       />
       <Divider />
       <List dense disablePadding className={classes.coinList}>
-        {coins.value.length === 0 || coins.status === 'LOADING' ? (
+        {top15.length === 0 || coins.status === 'LOADING' ? (
           <ListItemSkeleton count={15} height={69} iconDimensions={theme.spacing(4)} />
         ) : (
           <>
-            {coins.value.map((coin: Coin, index: number) => {
+            {top15.map((coin: Coin, index: number) => {
               return <Fragment key={coin.id}>
                 <CoinItem coin={coin} />
                 {index < coins.value.length - 1 && <Divider />}

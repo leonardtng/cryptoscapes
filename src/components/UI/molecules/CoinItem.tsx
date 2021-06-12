@@ -32,6 +32,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     }
   },
   chartWrapper: {
+    height: 60,
     maxWidth: 160,
     minWidth: 100,
     width: 'calc(100% - 30px - 46px - 80px - 100px)',

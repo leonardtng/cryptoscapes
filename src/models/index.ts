@@ -6,9 +6,14 @@ import {
   CoinMarketChartList as CoinMarketChartListInterface
 } from './api/CoinMarketChart';
 import {
+  GasOracle as GasOracleInterface,
+  GasOracleState as GasOracleStateInterface,
+  GasOracleRootObject as GasOracleRootObjectInterface
+} from './api/GasOracle';
+import {
   TrendingCoin as TrendingCoinInterface,
   TrendingCoinItem as TrendingCoinItemInterface,
-  Trending as TrendingInterface
+  TrendingRootObject as TrendingRootObjectInterface
 } from './api/TrendingCoin';
 import {
   TotalMarketCap as TotalMarketCapInterface,
@@ -23,9 +28,12 @@ export type GenericState<T> = GenericStateInterface<T>;
 export type Coin = CoinInterface;
 export type CoinMarketChart = CoinMarketChartInterface;
 export type CoinMarketChartList = CoinMarketChartListInterface;
+export type GasOracle = GasOracleInterface;
+export type GasOracleState = GasOracleStateInterface;
+export type GasOracleRootObject = GasOracleRootObjectInterface;
 export type TrendingCoin = TrendingCoinInterface;
 export type TrendingCoinItem = TrendingCoinItemInterface;
-export type Trending = TrendingInterface;
+export type TrendingRootObject = TrendingRootObjectInterface;
 export type TotalMarketCap = TotalMarketCapInterface;
 export type TotalVolume = TotalVolumeInterface;
 export type MarketCapPercentage = MarketCapPercentageInterface;
