@@ -15,6 +15,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     alignItems: 'center',
     padding: theme.spacing(2)
   },
+  skeletonWrapper: {
+    padding: theme.spacing(2),
+  },
   content: {
     marginLeft: 8,
     '& .MuiTypography-h6': {
@@ -28,7 +31,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     display: 'flex',
     marginRight: 8,
     color: theme.palette.primary.main,
-    backgroundColor: '#111936',
+    backgroundColor: (styleProps: StyleProps) =>
+    styleProps.change >= 0 ?
+      `${theme.palette.success.main}25` :
+      `${theme.palette.error.main}25`,
     borderRadius: 8,
     '& .MuiSvgIcon-root': {
       height: theme.spacing(5),
@@ -54,10 +60,10 @@ const BannerCardSmall: React.FC = () => {
   return (
     <CardLayout>
       {globalCoinData.value === null ? (
-        <>
-          <Skeleton animation="wave" height={12} width="80%" />
-          <Skeleton animation="wave" height={12} width="40%" />
-        </>
+        <Box className={classes.skeletonWrapper}>
+          <Skeleton animation="wave" height={32} width="60%" />
+          <Skeleton animation="wave" height={21} width="80%" />
+        </Box>
       ) : (
         <Box className={classes.cardWrapper}>
           <Box className={classes.content}>

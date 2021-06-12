@@ -86,6 +86,7 @@ const CoinDominanceChart: React.FC<Props> = ({ coinList, dataKey }) => {
               dataKey="top1"
               dot={false}
               animationDuration={3000}
+              strokeWidth={2}
               stroke={theme.palette.primary.main}
               fillOpacity={1}
               fill="url(#top1)"
@@ -95,6 +96,7 @@ const CoinDominanceChart: React.FC<Props> = ({ coinList, dataKey }) => {
               dataKey="top2"
               dot={false}
               animationDuration={3000}
+              strokeWidth={2}
               stroke={theme.palette.secondary.main}
               fillOpacity={1}
               fill="url(#top2)"

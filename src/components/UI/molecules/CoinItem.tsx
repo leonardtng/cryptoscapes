@@ -21,7 +21,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     width: 80,
   },
   coinPrice: {
-    width: 80,
+    width: 100,
     textAlign: 'right',
     paddingRight: 12,
     '& .MuiTypography-subtitle2': {
@@ -30,6 +30,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
           theme.palette.success.main :
           theme.palette.error.main
     }
+  },
+  chartWrapper: {
+    maxWidth: 160,
+    minWidth: 100,
+    width: 'calc(100% - 30px - 46px - 80px - 100px)',
+    padding: '0 8px'
   }
 }));
 
@@ -59,7 +65,9 @@ const CoinItem: React.FC<Props> = ({ coin }) => {
         primaryTypographyProps={{ variant: 'subtitle1', noWrap: true }}
         secondaryTypographyProps={{ variant: 'subtitle2' }}
       />
-      <SmallCoinChart coin={coin} dataKey={'prices'} />
+      <div className={classes.chartWrapper}>
+        <SmallCoinChart coin={coin} dataKey={'prices'} />
+      </div>
       <ListItemText
         className={classes.coinPrice}
         primary={`US$${roundDecimals(coin.currentPrice, 3)}`}
