@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
+import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { CardHeader, Divider, List } from '@material-ui/core';
 import { getTodayDate } from '../../../common/helpers/dateHandler';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const TopCoinsCard: React.FC = () => {
   const classes = useStyles();
+  const theme = useTheme();
   const dispatch = useAppDispatch();
 
   const coins = useAppSelector(selectCoins);
@@ -49,7 +50,7 @@ const TopCoinsCard: React.FC = () => {
       <Divider />
       <List dense disablePadding className={classes.coinList}>
         {coins.value.length === 0 || coins.status === 'LOADING' ? (
-          <ListItemSkeleton count={15} />
+          <ListItemSkeleton count={15} height={69} iconDimensions={theme.spacing(4)} />
         ) : (
           <>
             {coins.value.map((coin: Coin, index: number) => {

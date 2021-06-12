@@ -8,7 +8,7 @@ import { selectGlobalCoinData } from '../../../features/globalCoinDataSlice';
 import { ArrowDownwardRounded, ArrowUpwardRounded } from '@material-ui/icons';
 import { roundDecimals } from '../../../common/helpers/roundDecimals';
 
-const useStyles = makeStyles<Theme, { change: number }>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   cardWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -18,8 +18,8 @@ const useStyles = makeStyles<Theme, { change: number }>((theme: Theme) => ({
   content: {
     marginLeft: 8,
     '& .MuiTypography-h6': {
-      color: (change: number) =>
-        change >= 0 ?
+      color: (styleProps: StyleProps) =>
+        styleProps.change >= 0 ?
           theme.palette.success.main :
           theme.palette.error.main
     }
@@ -33,14 +33,17 @@ const useStyles = makeStyles<Theme, { change: number }>((theme: Theme) => ({
     '& .MuiSvgIcon-root': {
       height: theme.spacing(5),
       width: theme.spacing(5),
-      color: (change: number) =>
-        change >= 0 ?
+      color: (styleProps: StyleProps) =>
+        styleProps.change >= 0 ?
           theme.palette.success.main :
           theme.palette.error.main
     }
   }
 }));
 
+interface StyleProps {
+  change: number;
+}
 
 const BannerCardSmall: React.FC = () => {
   const globalCoinData = useAppSelector(selectGlobalCoinData);

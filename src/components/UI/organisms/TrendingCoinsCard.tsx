@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
+import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Avatar, CardHeader, Divider, List } from '@material-ui/core';
 import CardLayout from '../molecules/CardLayout';
 import { WhatshotRounded } from '@material-ui/icons';
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const TrendingCoinsCard: React.FC = () => {
   const classes = useStyles();
+  const theme = useTheme();
   const dispatch = useAppDispatch();
 
   const trendingCoins = useAppSelector(selectTrendingCoins);
@@ -49,7 +50,7 @@ const TrendingCoinsCard: React.FC = () => {
       <Divider />
       <List dense disablePadding className={classes.trendingCoinList}>
       {trendingCoins.value.length === 0 || trendingCoins.status === 'LOADING' ? (
-          <ListItemSkeleton count={7} />
+          <ListItemSkeleton count={7} height={60} iconDimensions={theme.spacing(3)}/>
         ) : (
           <>
             {trendingCoins.value.map((trendingCoin: TrendingCoin, index: number) => {

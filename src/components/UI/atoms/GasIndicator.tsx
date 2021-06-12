@@ -3,7 +3,7 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Box, Button, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab';
 
-const useStyles = makeStyles<Theme, { color: string }>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   button: {
     display: 'block',
     width: '100%',
@@ -23,26 +23,29 @@ const useStyles = makeStyles<Theme, { color: string }>((theme: Theme) => ({
     '& .MuiSvgIcon-root': {
       height: 20,
       width: 20,
-      color: (props: { color: string }) => props.color,
+      color: (styleProps: StyleProps) => styleProps.color,
     },
   },
   headerContainer: {
     height: 30,
     margin: '0 2% 0 8%',
     textAlign: 'left',
-    color: (props: { color: string }) => props.color,
+    color: (styleProps: StyleProps) => styleProps.color,
     '& .MuiTypography-root': {
       lineHeight: 1.0
     }
   }
 }));
 
-interface Props {
+interface StyleProps {
+  color: string;
+}
+
+interface Props extends StyleProps {
   header: string;
   price: string;
   time: string;
   icon: JSX.Element;
-  color: string;
   selected: boolean;
   onClick: () => void;
 }

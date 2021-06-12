@@ -5,7 +5,7 @@ import { Coin } from '../../../models';
 import SmallCoinChart from '../atoms/SmallCoinChart';
 import { roundDecimals } from '../../../common/helpers/roundDecimals';
 
-const useStyles = makeStyles<Theme, Coin>((theme: Theme) => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   ranking: {
     textAlign: 'center',
     width: 30
@@ -25,20 +25,24 @@ const useStyles = makeStyles<Theme, Coin>((theme: Theme) => ({
     textAlign: 'right',
     paddingRight: 12,
     '& .MuiTypography-subtitle2': {
-      color: (coin: Coin) =>
-        coin.priceChangePercentage24H >= 0 ?
+      color: (styleProps: StyleProps) =>
+        styleProps.change >= 0 ?
           theme.palette.success.main :
           theme.palette.error.main
     }
   }
 }));
 
+interface StyleProps {
+  change: number;
+}
+
 interface Props {
   coin: Coin;
 }
 
 const CoinItem: React.FC<Props> = ({ coin }) => {
-  const classes = useStyles(coin);
+  const classes = useStyles({ change: coin.marketCapChangePercentage24H });
 
   return (
     <ListItem disableGutters>
