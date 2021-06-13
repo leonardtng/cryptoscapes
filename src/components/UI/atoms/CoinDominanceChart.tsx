@@ -41,6 +41,7 @@ interface Props {
 const CoinDominanceChart: React.FC<Props> = ({ coinList, dataKey }) => {
   const classes = useStyles();
   const theme = useTheme();
+  
   const dominanceChartList = useSelector(selectDominanceChartList);
 
   const top1 = coinList[0];
@@ -105,10 +106,6 @@ const CoinDominanceChart: React.FC<Props> = ({ coinList, dataKey }) => {
                 } else {
                   return null
                 }
-              }}
-              formatter={(value: number, name: string, props: any) => {
-                console.log(props)
-                return [`US$${shortenNumber(value)}`, name === 'top1' ? top1.name : top2.name]
               }}
             />
             <Area

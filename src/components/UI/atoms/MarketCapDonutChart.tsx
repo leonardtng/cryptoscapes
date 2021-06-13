@@ -9,7 +9,6 @@ import { Coin } from '../../../models';
 import { shortenNumber } from '../../../common/helpers/shortenNumber';
 import { roundDecimals } from '../../../common/helpers/roundDecimals';
 
-
 const useStyles = makeStyles((theme: Theme) => ({
   chartSkeleton: {
     margin: '0 16px',
