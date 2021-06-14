@@ -9,12 +9,13 @@ import { Coin } from '../../../models';
 import { Box, Typography } from '@material-ui/core';
 import { roundDecimals } from '../../../common/helpers/roundDecimals';
 import { shortenNumber } from '../../../common/helpers/shortenNumber';
+import chroma from "chroma-js";
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     height: '100%',
     width: '100%',
-    padding: theme.spacing(2),
+    padding: theme.spacing(3),
     '& .recharts-wrapper': {
       cursor: 'pointer !important',
       '& .recharts-surface': {
@@ -47,7 +48,11 @@ interface DataFormat {
   children: DataGroup[]
 }
 
-const MarketCapTreemap: React.FC = () => {
+interface Props {
+  coinsToDisplay: number; //Ideally display 58 for color consistency
+}
+
+const MarketCapTreemap: React.FC<Props> = ({ coinsToDisplay }) => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -60,7 +65,6 @@ const MarketCapTreemap: React.FC = () => {
       children: []
     }];
 
-    const coinsToDisplay = 58; // for color consistency
     const topCoins = coins.value.slice(0, coinsToDisplay);
 
     topCoins.forEach((coin: Coin) => {
@@ -81,7 +85,7 @@ const MarketCapTreemap: React.FC = () => {
     return newData
   };
 
-  const CustomizedContent: React.FC<any> = ({ depth, x, y, width, height, index, colors, coinSymbol }) => {
+  const CustomizedContent: React.FC<any> = ({ depth, x, y, width, height, index, colors, coinName, coinSymbol }) => {
     return (
       <g>
         <rect
@@ -96,15 +100,15 @@ const MarketCapTreemap: React.FC = () => {
             strokeOpacity: 1 / (depth + 1e-10),
           }}
         />
-        {index < 2 &&
+        {(index < 2 || index === coinsToDisplay) &&
           <text
-            x={x + width / 2 - 12}
+            x={index < 2 ? x + width / 2 - 12 : x + width / 2 - 25}
             y={y + height / 2 + 7}
             fill={theme.palette.text.primary}
             fontSize={16}
             fillOpacity={0.7}
           >
-            {coinSymbol}
+            {index < 2 ? coinSymbol : coinName}
           </text>
         }
       </g>
@@ -121,9 +125,16 @@ const MarketCapTreemap: React.FC = () => {
             <Treemap
               data={formatRawData(globalCoinData.value.totalMarketCap.usd)}
               dataKey="value"
-              stroke="#000000"
               fill={theme.palette.primary.main}
-              content={<CustomizedContent colors={Object.values(theme.palette.chartHues)} />}
+              content={
+                <CustomizedContent
+                  colors={
+                    chroma.scale([theme.palette.primary.main, theme.palette.secondary.main])
+                      .gamma(0.35)
+                      .colors(coinsToDisplay + 1)
+                  }
+                />
+              }
             >
               <Tooltip
                 content={({ active, payload }) => {
@@ -134,7 +145,7 @@ const MarketCapTreemap: React.FC = () => {
                       <Typography variant="body2">Market Cap: {shortenNumber(payload[0].payload.value)}</Typography>
                       <Typography variant="body2">
                         Dominance: {roundDecimals(
-                        payload[0].payload.value / globalCoinData.value.totalMarketCap.usd * 100)
+                          payload[0].payload.value / globalCoinData.value.totalMarketCap.usd * 100)
                         }%
                       </Typography>
                     </Box>

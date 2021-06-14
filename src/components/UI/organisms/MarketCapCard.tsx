@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   avatarColor: {
     marginRight: 6,
-    color: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
     backgroundColor: theme.palette.card.paper,
     borderRadius: 8
   }
@@ -41,7 +41,7 @@ const MarketCapCard: React.FC = () => {
         subheader={
           globalCoinData.value !== null ?
             `US$${shortenNumber(globalCoinData.value.totalMarketCap.usd)}` :
-            <Skeleton animation="wave" height={32} width={50} />
+            <Skeleton animation="wave" height={32} width={150} />
         }
         subheaderTypographyProps={{ variant: 'h6', color: 'textPrimary' }}
         avatar={
@@ -76,7 +76,7 @@ const MarketCapCard: React.FC = () => {
         }
       />
       <div className={classes.chartWrapper}>
-        {chartType === 'donut' ? <MarketCapDonutChart /> : <MarketCapTreemap />}
+        {chartType === 'donut' ? <MarketCapDonutChart coinsToDisplay={5} /> : <MarketCapTreemap coinsToDisplay={58} />}
       </div>
     </CardLayout>
   )

@@ -7,16 +7,16 @@ import { useAppSelector } from '../../../app/hooks';
 import { selectGlobalCoinData } from '../../../features/globalCoinDataSlice';
 import { shortenNumber } from '../../../common/helpers/shortenNumber';
 import { BarChartRounded } from '@material-ui/icons';
+import VolumeBarChart from '../atoms/VolumeBarChart';
 
 const useStyles = makeStyles((theme: Theme) => ({
   chartWrapper: {
-    height: '100%',
+    height: 'calc(100% - 84px)',
     width: '100%',
-    marginTop: -35,
   },
   avatarColor: {
     marginRight: 6,
-    color: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
     backgroundColor: theme.palette.card.paper,
     borderRadius: 8
   }
@@ -35,7 +35,7 @@ const VolumeCard: React.FC = () => {
         subheader={
           globalCoinData.value !== null ?
             `US$${shortenNumber(globalCoinData.value.totalVolume.usd)}` :
-            <Skeleton animation="wave" height={32} width={50} />
+            <Skeleton animation="wave" height={32} width={150} />
         }
         subheaderTypographyProps={{ variant: 'h6', color: 'textPrimary' }}
         avatar={
@@ -45,7 +45,7 @@ const VolumeCard: React.FC = () => {
         }
       />
       <div className={classes.chartWrapper}>
-
+        <VolumeBarChart />
       </div>
     </CardLayout>
   )

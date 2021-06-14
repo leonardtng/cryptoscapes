@@ -8,6 +8,7 @@ import { selectGlobalCoinData } from '../../../features/globalCoinDataSlice';
 import { Coin } from '../../../models';
 import { shortenNumber } from '../../../common/helpers/shortenNumber';
 import { roundDecimals } from '../../../common/helpers/roundDecimals';
+import chroma from "chroma-js";
 
 const useStyles = makeStyles((theme: Theme) => ({
   chartSkeleton: {
@@ -32,7 +33,11 @@ interface DataFormat {
   value: number;
 }
 
-const GlobalCoinDataDonutChart: React.FC = () => {
+interface Props {
+  coinsToDisplay: number;
+}
+
+const MarketCapDonutChart: React.FC<Props> = ({ coinsToDisplay }) => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -42,7 +47,6 @@ const GlobalCoinDataDonutChart: React.FC = () => {
   const formatRawData = (totalValue: number) => {
     const newData: DataFormat[] = [];
 
-    const coinsToDisplay = 5;
     const topCoins = coins.value.slice(0, coinsToDisplay);
 
     topCoins.forEach((coin: Coin) => {
@@ -84,7 +88,10 @@ const GlobalCoinDataDonutChart: React.FC = () => {
               cursor="pointer"
             >
               {formatRawData(globalCoinData.value.totalMarketCap.usd).map((data: DataFormat, index: number) => (
-                <Cell key={`cell-${index}`} fill={Object.values(theme.palette.chartHues)[index]} />
+                <Cell 
+                key={`cell-${index}`}                   
+                fill={chroma.scale([theme.palette.primary.main, theme.palette.secondary.main])
+                  .colors(coinsToDisplay + 1)[index]} />
               ))}
             </Pie>
             <Tooltip
@@ -101,4 +108,4 @@ const GlobalCoinDataDonutChart: React.FC = () => {
   )
 }
 
-export default GlobalCoinDataDonutChart
+export default MarketCapDonutChart
