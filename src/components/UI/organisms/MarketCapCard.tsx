@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { CardHeader, Tooltip } from '@material-ui/core';
+import { Avatar, CardHeader, Tooltip } from '@material-ui/core';
 import { Skeleton, ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 import CardLayout from '../molecules/CardLayout';
 import MarketCapDonutChart from '../atoms/MarketCapDonutChart';
 import { useAppSelector } from '../../../app/hooks';
 import { selectGlobalCoinData } from '../../../features/globalCoinDataSlice';
 import { shortenNumber } from '../../../common/helpers/shortenNumber';
-import { DashboardRounded, DonutLargeRounded } from '@material-ui/icons';
+import { DashboardRounded, DonutLargeRounded, PieChartRounded } from '@material-ui/icons';
 import MarketCapTreemap from '../atoms/MarketCapTreemap';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -18,6 +18,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   chartToggleButtons: {
     margin: '12px 12px 0 0'
+  },
+  avatarColor: {
+    marginRight: 6,
+    color: theme.palette.primary.main,
+    backgroundColor: theme.palette.card.paper,
+    borderRadius: 8
   }
 }));
 
@@ -38,6 +44,11 @@ const MarketCapCard: React.FC = () => {
             <Skeleton animation="wave" height={32} width={50} />
         }
         subheaderTypographyProps={{ variant: 'h6', color: 'textPrimary' }}
+        avatar={
+          <Avatar variant="rounded" className={classes.avatarColor}>
+            <PieChartRounded />
+          </Avatar>
+        }
         action={
           <ToggleButtonGroup
             size="small"
@@ -57,7 +68,7 @@ const MarketCapCard: React.FC = () => {
               </Tooltip>
             </ToggleButton>
             <ToggleButton value="treemap">
-              <Tooltip title="Treemap" placement="top">
+              <Tooltip title="Coin Map" placement="top">
                 <DashboardRounded />
               </Tooltip>
             </ToggleButton>
