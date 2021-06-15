@@ -34,7 +34,11 @@ const TopCoinsCard: React.FC = () => {
   }, [dispatch, coins.value.length, coins.status]);
 
   useEffect(() => {
-    if (Object.keys(coinMarketChartList.value).length === 0 && coinMarketChartList.status === 'IDLE') {
+    if (
+      top15.length === 15 &&
+      Object.keys(coinMarketChartList.value).length === 0 &&
+      coinMarketChartList.status === 'IDLE'
+    ) {
       dispatch(fetchCoinMarketChartList(
         top15.map((coin: Coin) => coin.id)
       ));
