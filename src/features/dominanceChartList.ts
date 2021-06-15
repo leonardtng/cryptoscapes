@@ -34,7 +34,7 @@ export const fetchDominanceChartList = createAsyncThunk('dominanceChartList', as
       normalizedResponse[coinIdList[i]] = toCamelCase(response.data);
     }
 
-    cacheWithExpiry('dominanceChart', normalizedResponse, 3600000); // Cache Period: 1 hour
+    cacheWithExpiry('dominanceChart', normalizedResponse, 600000); // Cache Period: 10 minutes
 
     return normalizedResponse as CoinMarketChartList
   }
