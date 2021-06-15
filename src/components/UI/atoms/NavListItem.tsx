@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router-dom';
+import { Page } from '../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
   navListItem: {
@@ -10,37 +11,29 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export interface NavItem {
-  label: string;
-  path: string;
-  icon: JSX.Element;
-  page: JSX.Element;
-  index: number;
-}
-
 interface Props {
-  navItem: NavItem
+  page: Page
 }
 
-const NavListItem: React.FC<Props> = ({ navItem }) => {
+const NavListItem: React.FC<Props> = ({ page }) => {
   const classes = useStyles();
   const location = useLocation();
   const history = useHistory();
 
   const handleClick = () => {
-    history.push(navItem.path)
+    history.push(page.path)
   }
 
   return (
     <ListItem
       button
       className={classes.navListItem}
-      key={navItem.index}
+      key={page.index}
       onClick={handleClick}
-      selected={navItem.path === location.pathname}
+      selected={page.path === location.pathname}
     >
-      <ListItemIcon>{navItem.icon}</ListItemIcon>
-      <ListItemText primary={navItem.label} />
+      <ListItemIcon>{page.icon}</ListItemIcon>
+      <ListItemText primary={page.label} />
     </ListItem>
   )
 }

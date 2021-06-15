@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Coins: React.FC = () => {
+const Overview: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -70,4 +70,4 @@ const Coins: React.FC = () => {
   )
 }
 
-export default Coins
+export default Overview

@@ -2,8 +2,8 @@ import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Drawer as MuiDrawer, Toolbar } from '@material-ui/core';
 import DrawerItems from '../molecules/DrawerItems';
-import { NavItem } from '../atoms/NavListItem';
 import { appBarHeight } from './AppBar';
+import { RootModule } from '../../../models/common/RootModule';
 
 export const drawerWidth = 260;
 
@@ -26,11 +26,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  navItems: NavItem[];
+  rootModule: RootModule[];
   anchor?: "bottom" | "left" | "right" | "top";
 }
 
-const Drawer: React.FC<Props> = ({ navItems, anchor }) => {
+const Drawer: React.FC<Props> = ({ rootModule, anchor }) => {
   const classes = useStyles();
 
   return (
@@ -44,7 +44,7 @@ const Drawer: React.FC<Props> = ({ navItems, anchor }) => {
     >
       <Toolbar />
       <div className={classes.drawerContainer}>
-        <DrawerItems navItems={navItems} />
+        <DrawerItems rootModule={rootModule} />
       </div>
     </MuiDrawer>
   )

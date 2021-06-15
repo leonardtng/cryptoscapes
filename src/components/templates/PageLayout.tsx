@@ -3,7 +3,7 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Route, Switch } from 'react-router-dom';
 import AppBar, { appBarHeight } from '../UI/organisms/AppBar';
 import Drawer, { drawerWidth } from '../UI/organisms/Drawer';
-import { NavItem } from '../UI/atoms/NavListItem';
+import { Page, RootModule } from '../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -22,23 +22,27 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  navItems: NavItem[];
+  rootModule: RootModule[];
 }
 
-const PageLayout: React.FC<Props> = ({ navItems }) => {
+const PageLayout: React.FC<Props> = ({ rootModule }) => {
   const classes = useStyles();
+
+  const pages = rootModule.map(
+    (moduleObject: RootModule) => moduleObject.pages
+    ).reduce((acc, page: Page[]) => acc.concat(page), []);
 
   return (
     <div className={classes.root}>
       <AppBar />
-      <Drawer navItems={navItems} />
+      <Drawer rootModule={rootModule} />
       <main className={classes.content}>
         <Switch>
-          {navItems
+          {pages
             .slice()
             .sort((a, b) => b.index - a.index)
-            .map((item: NavItem) => {
-              return <Route key={item.path} path={item.path} render={() => item.page} />
+            .map((page: Page) => {
+              return <Route key={page.path} path={page.path} render={() => page.page} />
             })}
         </Switch>
       </main>

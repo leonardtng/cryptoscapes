@@ -1,5 +1,9 @@
 import { AppState as AppStateInterface } from './globals/AppState';
 import { GenericState as GenericStateInterface } from './common/GenericState';
+import {
+  Page as PageInterface,
+  RootModule as RootModuleInterface
+} from './common/RootModule';
 import { Coin as CoinInterface } from './api/Coin';
 import {
   CoinMarketChart as CoinMarketChartInterface,
@@ -25,6 +29,8 @@ import {
 
 export type AppState = AppStateInterface;
 export type GenericState<T> = GenericStateInterface<T>;
+export type Page = PageInterface;
+export type RootModule = RootModuleInterface;
 export type Coin = CoinInterface;
 export type CoinMarketChart = CoinMarketChartInterface;
 export type CoinMarketChartList = CoinMarketChartListInterface;

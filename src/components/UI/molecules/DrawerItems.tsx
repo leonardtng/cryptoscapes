@@ -1,7 +1,9 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import NavListItem, { NavItem } from '../atoms/NavListItem';
+import NavListItem from '../atoms/NavListItem';
 import { List, ListSubheader } from '@material-ui/core';
+import { RootModule } from '../../../models/common/RootModule';
+import { Page } from '../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
   navItemsWrapper: {
@@ -20,36 +22,28 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  navItems: NavItem[];
+  rootModule: RootModule[];
 }
 
-const DrawerItems: React.FC<Props> = ({ navItems }) => {
+const DrawerItems: React.FC<Props> = ({ rootModule }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.navItemsWrapper}>
-      <List
-        subheader={
-          <ListSubheader component="div">
-            Analytics
-              </ListSubheader>
-        }
-      >
-        {navItems.slice(0, 3).map((item: NavItem) => {
-          return <NavListItem navItem={item} key={item.path} />
-        })}
-      </List>
-      <List
-        subheader={
-          <ListSubheader component="div">
-            Information
-              </ListSubheader>
-        }
-      >
-        {navItems.slice(3).map((item: NavItem) => {
-          return <NavListItem navItem={item} key={item.path} />
-        })}
-      </List>
+      {rootModule.map((moduleObject: RootModule) => {
+        return <List
+          key={moduleObject.moduleName}
+          subheader={
+            <ListSubheader component="div">
+              {moduleObject.moduleName}
+            </ListSubheader>
+          }
+        >
+          {moduleObject.pages.map((page: Page) => {
+            return <NavListItem page={page} key={page.path} />
+          })}
+        </List>
+      })}
     </div>
 
   )
