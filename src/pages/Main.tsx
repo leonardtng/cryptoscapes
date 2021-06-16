@@ -1,11 +1,13 @@
 import React from 'react';
-import { AccountBalanceRounded, DataUsageRounded, People, TrendingUpRounded } from '@material-ui/icons';
+import { AccountBalanceRounded, DataUsageRounded, People, SelectAllRounded, TollRounded, TrendingUpRounded } from '@material-ui/icons';
 import { BrowserRouter } from 'react-router-dom';
 import PageLayout from '../components/templates/PageLayout';
 import Overview from './analytics/Overview';
 import Exchanges from './analytics/Exchanges';
 import Trends from './analytics/Trends';
 import Events from './explore/Events';
+import Coins from './explore/Coins';
+import DeFi from './explore/DeFi';
 import { RootModule } from '../models';
 
 const Main: React.FC = () => {
@@ -26,6 +28,18 @@ const Main: React.FC = () => {
           icon: <TrendingUpRounded />,
           page: <Trends />,
           index: 1
+        }
+      ]
+    },
+    {
+      moduleName: 'Explore',
+      pages: [
+        {
+          label: 'Coins',
+          path: '/coins',
+          icon: <TollRounded />,
+          page: <Coins />,
+          index: 2
         },
         {
           label: 'Exchanges',
@@ -33,12 +47,14 @@ const Main: React.FC = () => {
           icon: <AccountBalanceRounded />,
           page: <Exchanges />,
           index: 2
-        }
-      ]
-    },
-    {
-      moduleName: 'Explore',
-      pages: [
+        },
+        {
+          label: 'DeFi',
+          path: '/defi',
+          icon: <SelectAllRounded />,
+          page: <DeFi />,
+          index: 2
+        },
         {
           label: 'Events',
           path: '/events',

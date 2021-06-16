@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: '0 22px',
     '& .MuiListItem-root.Mui-selected': {
       color: theme.palette.secondary.main,
-      backgroundColor: 'rgba(33, 150, 243, 0.082)',
+      backgroundColor: `${theme.palette.secondary.main}15`,
       '& .MuiListItemIcon-root': {
         color: theme.palette.secondary.main,
       }
