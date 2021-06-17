@@ -49,7 +49,7 @@ interface Props {
 }
 
 const CoinItem: React.FC<Props> = ({ coin }) => {
-  const classes = useStyles({ change: coin.marketCapChangePercentage24H });
+  const classes = useStyles({ change: coin.priceChangePercentage24H });
 
   return (
     <ListItem disableGutters>
@@ -73,7 +73,7 @@ const CoinItem: React.FC<Props> = ({ coin }) => {
         className={classes.coinPrice}
         primary={`US$${roundDecimals(coin.currentPrice, 3)}`}
         secondary={
-          `${coin.priceChangePercentage24H > 0 ? '+' : ''}${roundDecimals(coin.priceChangePercentage24H)}%`
+          `${coin.priceChangePercentage24H >= 0 ? '+' : ''}${roundDecimals(coin.priceChangePercentage24H)}%`
         }
         primaryTypographyProps={{ variant: 'subtitle1', noWrap: true }}
         secondaryTypographyProps={{ variant: 'subtitle2' }}

@@ -82,7 +82,7 @@ const BannerCardSmall: React.FC = () => {
             </Typography>
           </Box>
           <Box className={classes.icon}>
-            {change > 0 ? <ArrowUpwardRounded /> : <ArrowDownwardRounded />}
+            {change >= 0 ? <ArrowUpwardRounded /> : <ArrowDownwardRounded />}
           </Box>
         </Box>
       )}

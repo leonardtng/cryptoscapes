@@ -28,7 +28,7 @@ export const fetchTrendingCoins = createAsyncThunk('trendingCoins', async () => 
     });
 
     const normalizedResponse = toCamelCase(response.data) as TrendingRootObject;
-    cacheWithExpiry('trendingCoins', normalizedResponse, 60000);  // Cache Period: 1 minute
+    cacheWithExpiry('trendingCoins', normalizedResponse, 1200000);  // Cache Period: 20 minutes
 
     return normalizedResponse.coins.map((trendingCoinItem: TrendingCoinItem) => trendingCoinItem.item) as TrendingCoin[]
   }

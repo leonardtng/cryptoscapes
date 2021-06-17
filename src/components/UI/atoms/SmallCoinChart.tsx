@@ -18,7 +18,7 @@ interface Props {
 const SmallCoinChart: React.FC<Props> = ({ coin, dataKey }) => {
   const theme = useTheme();
   const coinMarketChartList = useAppSelector(selectCoinMarketChartList);
-  const gain = coin.priceChangePercentage24H > 0;
+  const gain = coin.priceChangePercentage24H >= 0;
 
   const formatRawData = (coinId: string, dataKey: keyof CoinMarketChart) => {
     const chartData: ChartDataFormat[] = [];

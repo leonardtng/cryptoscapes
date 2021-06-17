@@ -96,8 +96,7 @@ const MarketCapTreemap: React.FC<Props> = ({ coinsToDisplay }) => {
           style={{
             fill: colors[index % colors.length],
             stroke: theme.palette.card.default,
-            strokeWidth: 2 / (depth + 1e-10),
-            strokeOpacity: 1 / (depth + 1e-10),
+            strokeWidth: 2,
           }}
         />
         {(index < 2 || index === coinsToDisplay) &&

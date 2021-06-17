@@ -27,7 +27,7 @@ export const fetchCoins = createAsyncThunk('coins', async () => {
     });
 
     const normalizedResponse = toCamelCase(response.data);
-    cacheWithExpiry('coins', normalizedResponse, 60000);  // Cache Period: 1 minute
+    cacheWithExpiry('coins', normalizedResponse, 600000);  // Cache Period: 10 minutes
 
     return normalizedResponse as Coin[]
   }
