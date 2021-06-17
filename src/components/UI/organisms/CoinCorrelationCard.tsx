@@ -34,12 +34,13 @@ const CoinCorrelationCard: React.FC = () => {
   useEffect(() => {
     if (
       top15.length === 15 &&
-      Object.keys(coinMarketChartList.value).length === 0 &&
+      Object.keys(coinMarketChartList.value[30]).length === 0 &&
       coinMarketChartList.status === 'IDLE'
     ) {
-      dispatch(fetchCoinMarketChartList(
-        top15.map((coin: Coin) => coin.id)
-      ));
+      dispatch(fetchCoinMarketChartList({
+        coinIdList: top15.map((coin: Coin) => coin.id),
+        dayRange: 30
+      }));
     }
   }, [dispatch, top15, coinMarketChartList.value, coinMarketChartList.status]);
 
@@ -53,7 +54,7 @@ const CoinCorrelationCard: React.FC = () => {
       />
       <Divider />
       <div className={classes.chartWrapper}>
-        {top15.length === 0 || coins.status === 'LOADING' || Object.keys(coinMarketChartList.value).length === 0? (
+        {top15.length === 0 || coins.status === 'LOADING' || Object.keys(coinMarketChartList.value[30]).length === 0 ? (
           <span>Loading...</span>
         ) : (
           <CorrelationHeatmap />

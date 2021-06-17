@@ -36,12 +36,13 @@ const TopCoinsCard: React.FC = () => {
   useEffect(() => {
     if (
       top15.length === 15 &&
-      Object.keys(coinMarketChartList.value).length === 0 &&
+      Object.keys(coinMarketChartList.value[1]).length === 0 &&
       coinMarketChartList.status === 'IDLE'
     ) {
-      dispatch(fetchCoinMarketChartList(
-        top15.map((coin: Coin) => coin.id)
-      ));
+      dispatch(fetchCoinMarketChartList({
+        coinIdList: top15.map((coin: Coin) => coin.id),
+        dayRange: 1
+      }));
     }
   }, [dispatch, top15, coinMarketChartList.value, coinMarketChartList.status]);
 
@@ -55,7 +56,7 @@ const TopCoinsCard: React.FC = () => {
       />
       <Divider />
       <List dense disablePadding className={classes.coinList}>
-        {top15.length === 0 || coins.status === 'LOADING' ? (
+        {top15.length === 0 || coins.status === 'LOADING'  ? (
           <ListItemSkeleton count={15} height={69} iconDimensions={theme.spacing(4)} />
         ) : (
           <>

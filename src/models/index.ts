@@ -6,8 +6,10 @@ import {
 } from './common/RootModule';
 import { Coin as CoinInterface } from './api/Coin';
 import {
+  AvailableDayRanges as AvailableDayRangesInterface,
   CoinMarketChart as CoinMarketChartInterface,
-  CoinMarketChartList as CoinMarketChartListInterface
+  CoinMarketChartList as CoinMarketChartListInterface,
+  DominanceChartList as DominanceChartListInterface
 } from './api/CoinMarketChart';
 import {
   GasOracle as GasOracleInterface,
@@ -32,8 +34,10 @@ export type GenericState<T> = GenericStateInterface<T>;
 export type Page = PageInterface;
 export type RootModule = RootModuleInterface;
 export type Coin = CoinInterface;
+export type AvailableDayRanges = AvailableDayRangesInterface;
 export type CoinMarketChart = CoinMarketChartInterface;
 export type CoinMarketChartList = CoinMarketChartListInterface;
+export type DominanceChartList = DominanceChartListInterface;
 export type GasOracle = GasOracleInterface;
 export type GasOracleState = GasOracleStateInterface;
 export type GasOracleRootObject = GasOracleRootObjectInterface;

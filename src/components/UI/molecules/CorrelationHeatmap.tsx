@@ -50,16 +50,15 @@ const CorrelationHeatmap: React.FC = () => {
   const coins = useAppSelector(selectCoins);
   const coinMarketChartList = useAppSelector(selectCoinMarketChartList);
 
-  const top15Ids = Object.keys(coinMarketChartList.value);
+  const top15Ids = Object.keys(coinMarketChartList.value[30]);
 
   const formatRawData = (dataKey: keyof CoinMarketChart) => {
     const correlationHeatmapSeries: DataFormat[] = [];
     const fullSeries: number[][] = [];
 
-
     top15Ids.forEach((coinId: string) => {
       const chartData: number[] = [];
-      coinMarketChartList.value[coinId][dataKey]
+      coinMarketChartList.value[30][coinId][dataKey]
         .forEach((dataPair: [number, number]) => {
           chartData.push(dataPair[1]);
         });
@@ -81,21 +80,9 @@ const CorrelationHeatmap: React.FC = () => {
     return correlationHeatmapSeries
   };
 
-  // const formatRawDataSimple = (coinId: string) => {
-  //   const chartData: number[] = [];
-  //   coinMarketChartList.value[coinId]['prices']
-  //     .forEach((dataPair: [number, number]) => {
-  //       chartData.push(dataPair[1]);
-  //     });
-
-  //   return chartData
-  // }
-
-  // console.log(pearsonCorrelation([formatRawDataSimple('usd-coin'), formatRawDataSimple('bitcoin')], 0, 1))
-
   const options: ApexOptions = {
     chart: {
-      id: 'Cryptoscapes Correlation Heatmap',
+      id: 'CryptoscapesCorrelationHeatmap',
       height: 700,
       fontFamily: 'Gilroy, sans-serif',
       type: 'heatmap',

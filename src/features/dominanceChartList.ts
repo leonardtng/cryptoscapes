@@ -4,10 +4,10 @@ import { toCamelCase } from '../common/helpers/caseTransformer';
 import { RootState } from '../app/store';
 import { coinGecko as API } from '../common/endpoints';
 import { API_CONFIG as config } from '../common/constants';
-import { CoinMarketChartList, GenericState } from '../models';
+import { DominanceChartList, GenericState } from '../models';
 import { cacheWithExpiry, retrieveCache } from '../common/helpers/cacheStorageHandler';
 
-const initialState: GenericState<CoinMarketChartList> = {
+const initialState: GenericState<DominanceChartList> = {
   value: {},
   status: 'IDLE',
   param: 'key'
@@ -16,10 +16,10 @@ const initialState: GenericState<CoinMarketChartList> = {
 export const fetchDominanceChartList = createAsyncThunk('dominanceChartList', async (coinIdList: string[]) => {
   const canceler = axios.CancelToken.source();
 
-  const cachedData: CoinMarketChartList | null = retrieveCache('dominanceChart');
+  const cachedData: DominanceChartList | null = retrieveCache('dominanceChart');
 
   if (cachedData) {
-    return cachedData as CoinMarketChartList;
+    return cachedData as DominanceChartList;
   } else {
 
     const normalizedResponse = {} as any;
@@ -36,14 +36,14 @@ export const fetchDominanceChartList = createAsyncThunk('dominanceChartList', as
 
     cacheWithExpiry('dominanceChart', normalizedResponse, 900000); // Cache Period: 15 minutes
 
-    return normalizedResponse as CoinMarketChartList
+    return normalizedResponse as DominanceChartList
   }
 });
 
-export const selectDominanceChartList: (state: RootState) => GenericState<CoinMarketChartList>
+export const selectDominanceChartList: (state: RootState) => GenericState<DominanceChartList>
   = (state: RootState) => state.dominanceChartList;
 
-const dominanceChartListSlice: Slice<GenericState<CoinMarketChartList>, {}, 'dominanceChartList'> = createSlice({
+const dominanceChartListSlice: Slice<GenericState<DominanceChartList>, {}, 'dominanceChartList'> = createSlice({
   name: 'dominanceChartList',
   initialState,
   reducers: {
