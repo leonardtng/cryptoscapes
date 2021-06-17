@@ -5,6 +5,7 @@ import { GitHub } from '@material-ui/icons';
 import { drawerWidth } from './Drawer';
 import Logo from '../../../assets/images/logo.svg';
 import { useStore } from 'react-redux';
+import { RootState } from '../../../app/store';
 
 export const appBarHeight = 88;
 
@@ -49,7 +50,7 @@ const AppBar: React.FC = () => {
   const theme = useTheme();
   const store = useStore();
 
-  const [allStates, setAllStates] = useState<any>(store.getState());
+  const [allStates, setAllStates] = useState<RootState>(store.getState() as RootState);
   const [globalLoading, setGlobalLoading] = useState<boolean>(false);
 
   store.subscribe(() => {

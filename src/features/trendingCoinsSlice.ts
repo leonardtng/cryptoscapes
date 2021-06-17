@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toCamelCase } from '../common/helpers/caseTransformer';
 import { RootState } from '../app/store';
 import { coinGecko as API } from '../common/endpoints';
-import { API_CONFIG as config } from '../common/constants';
+import { API_CONFIG as config, http } from '../common/constants';
 import { GenericState, TrendingRootObject, TrendingCoin, TrendingCoinItem } from '../models';
 import { cacheWithExpiry, retrieveCache } from '../common/helpers/cacheStorageHandler';
 
@@ -21,7 +21,7 @@ export const fetchTrendingCoins = createAsyncThunk('trendingCoins', async () => 
     return cachedData.coins.map((trendingCoinItem: TrendingCoinItem) => trendingCoinItem.item) as TrendingCoin[];
   } else {
 
-    const response = await axios.request({
+    const response = await http.request({
       ...config('coinGecko'),
       url: API.trending,
       cancelToken: canceler.token

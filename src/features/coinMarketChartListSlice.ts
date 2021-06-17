@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toCamelCase } from '../common/helpers/caseTransformer';
 import { RootState } from '../app/store';
 import { coinGecko as API } from '../common/endpoints';
-import { API_CONFIG as config } from '../common/constants';
+import { API_CONFIG as config, http } from '../common/constants';
 import { AvailableDayRanges, CoinMarketChartList, GenericState } from '../models';
 import { cacheWithExpiry, retrieveCache } from '../common/helpers/cacheStorageHandler';
 
@@ -23,43 +23,46 @@ interface Params {
   dayRange: AvailableDayRanges;
 }
 
-export const fetchCoinMarketChartList = createAsyncThunk('coinMarketChartList', async (params: Params, thunk) => {
-  const canceler = axios.CancelToken.source();
-  const state: any = thunk.getState();
+export const fetchCoinMarketChartList = createAsyncThunk(
+  'coinMarketChartList',
+  async (params: Params, { getState }
+  ) => {
+    const canceler = axios.CancelToken.source();
+    const state = getState() as RootState;
 
-  const cachedData: CoinMarketChartList | null = retrieveCache(`coinMarketChartList-dayRange${params.dayRange}`);
+    const cachedData: CoinMarketChartList | null = retrieveCache(`coinMarketChartList-dayRange${params.dayRange}`);
 
-  if (cachedData) {
-    return {
-      ...state.coinMarketChartList.value,
-      [params.dayRange]: cachedData
-    } as CoinMarketChartList;
-  } else {
+    if (cachedData) {
+      return {
+        ...state.coinMarketChartList.value,
+        [params.dayRange]: cachedData
+      } as CoinMarketChartList;
+    } else {
 
-    const normalizedResponse = {} as any;
+      const normalizedResponse = {} as any;
 
-    for (var i = 0; i < params.coinIdList.length; i++) {
-      const response = await axios.request({
-        ...config('coinGecko'),
-        url: API.coinMarketChart(params.coinIdList[i], params.dayRange),
-        cancelToken: canceler.token
-      });
+      for (var i = 0; i < params.coinIdList.length; i++) {
+        const response = await http.request({
+          ...config('coinGecko'),
+          url: API.coinMarketChart(params.coinIdList[i], params.dayRange),
+          cancelToken: canceler.token
+        });
 
-      normalizedResponse[params.coinIdList[i]] = toCamelCase(response.data);
+        normalizedResponse[params.coinIdList[i]] = toCamelCase(response.data);
+      }
+
+      cacheWithExpiry(
+        `coinMarketChartList-dayRange${params.dayRange}`,
+        normalizedResponse,
+        params.dayRange > 1 ? 8.64e+7 : 3600000 // Cache Period: 1 day or 1 hour
+      );
+
+      return {
+        ...state.coinMarketChartList.value,
+        [params.dayRange]: normalizedResponse
+      } as CoinMarketChartList
     }
-
-    cacheWithExpiry(
-      `coinMarketChartList-dayRange${params.dayRange}`,
-      normalizedResponse,
-      params.dayRange > 1 ? 8.64e+7 : 3600000 // Cache Period: 1 day or 1 hour
-    );
-
-    return {
-      ...state.coinMarketChartList.value,
-      [params.dayRange]: normalizedResponse
-    } as CoinMarketChartList
-  }
-});
+  });
 
 export const selectCoinMarketChartList: (state: RootState) => GenericState<CoinMarketChartList>
   = (state: RootState) => state.coinMarketChartList;

@@ -1,5 +1,5 @@
-export const pearsonCorrelation = (prefs: any, p1: number, p2: number) => {
-  var si = [];
+export const pearsonCorrelation = (prefs: number[][], p1: number, p2: number) => {
+  var si: any = [];
 
   for (var key in prefs[p1]) {
     if (prefs[p2][key]) si.push(key);

@@ -18,5 +18,5 @@ export interface TrendingCoinItem {
 
 export interface TrendingRootObject {
   coins: TrendingCoinItem[];
-  exchanges: any[];
+  exchanges: unknown;
 }

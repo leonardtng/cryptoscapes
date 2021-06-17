@@ -17,6 +17,7 @@
     "@types/react-redux": "^7.1.16",
     "apexcharts": "^3.27.1",
     "axios": "^0.21.1",
+    "axios-rate-limit": "^1.3.0",
     "chroma-js": "^2.1.2",
     "lodash.camelcase": "^4.3.0",
     "lodash.snakecase": "^4.1.1",
