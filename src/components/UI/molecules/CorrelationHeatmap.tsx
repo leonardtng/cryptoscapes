@@ -147,12 +147,12 @@ const CorrelationHeatmap: React.FC = () => {
           },
           {
             from: 70,
-            to: 89.999999999,
-            name: 'High Correlation (<90)',
+            to: 84.999999999,
+            name: 'High Correlation (<85)',
             color: theme.palette.warning.main
           },
           {
-            from: 90,
+            from: 85,
             to: 99.999999999,
             name: 'Extreme Correlation (<99.999)',
             color: theme.palette.error.main
