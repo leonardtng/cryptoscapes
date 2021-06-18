@@ -50,7 +50,7 @@ const CorrelationHeatmap: React.FC = () => {
   const coins = useAppSelector(selectCoins);
   const coinMarketChartList = useAppSelector(selectCoinMarketChartList);
 
-  const top15Ids = Object.keys(coinMarketChartList.value[30]);
+  const top15Ids = Object.keys(coinMarketChartList.value[coinMarketChartList.selectedDayRange]);
 
   const formatRawData = (dataKey: keyof CoinMarketChart) => {
     const correlationHeatmapSeries: DataFormat[] = [];
@@ -58,7 +58,7 @@ const CorrelationHeatmap: React.FC = () => {
 
     top15Ids.forEach((coinId: string) => {
       const chartData: number[] = [];
-      coinMarketChartList.value[30][coinId][dataKey]
+      coinMarketChartList.value[coinMarketChartList.selectedDayRange][coinId][dataKey]
         .forEach((dataPair: [number, number]) => {
           chartData.push(dataPair[1]);
         });
@@ -80,10 +80,12 @@ const CorrelationHeatmap: React.FC = () => {
     return correlationHeatmapSeries
   };
 
+  const data = formatRawData('prices');
+
   const options: ApexOptions = {
     chart: {
       id: 'CryptoscapesCorrelationHeatmap',
-      height: 700,
+      height: '100%',
       fontFamily: 'Gilroy, sans-serif',
       type: 'heatmap',
       background: theme.palette.card.default,
@@ -135,12 +137,12 @@ const CorrelationHeatmap: React.FC = () => {
         colorScale: {
           ranges: [{
             from: -100,
-            to: 19.999999999,
-            name: 'Almost No Correlation (<20)',
+            to: 9.999999999,
+            name: 'Almost No Correlation (<10)',
             color: theme.palette.success.main,
           },
           {
-            from: 20,
+            from: 10,
             to: 69.999999999,
             name: 'Medium Correlation (<70)',
             color: theme.palette.info.main
@@ -156,7 +158,7 @@ const CorrelationHeatmap: React.FC = () => {
             to: 99.999999999,
             name: 'Extreme Correlation (<99.999)',
             color: theme.palette.error.main
-          }]
+          }],
         }
       }
     }
@@ -164,7 +166,7 @@ const CorrelationHeatmap: React.FC = () => {
 
   return (
     <div className={classes.container}>
-      <ReactApexChart options={options} series={formatRawData('prices')} type="heatmap" height={700} />
+      <ReactApexChart options={options} series={data} type="heatmap" height="100%" />
     </div>
   )
 }

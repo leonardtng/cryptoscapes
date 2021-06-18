@@ -1,19 +1,24 @@
-import { createAsyncThunk, createSlice, Slice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction, Slice, SliceCaseReducers } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toCamelCase } from '../common/helpers/caseTransformer';
 import { RootState } from '../app/store';
 import { coinGecko as API } from '../common/endpoints';
 import { API_CONFIG as config, http } from '../common/constants';
-import { AvailableDayRanges, CoinMarketChartList, GenericState } from '../models';
+import { AvailableDayRanges, CoinMarketChartList, CoinMarketChartListState } from '../models';
 import { cacheWithExpiry, retrieveCache } from '../common/helpers/cacheStorageHandler';
 
-const initialState: GenericState<CoinMarketChartList> = {
+interface Reducers extends SliceCaseReducers<CoinMarketChartListState> {
+  setSelectedDayRange: (state: CoinMarketChartListState, action: PayloadAction<AvailableDayRanges>) => void;
+}
+
+const initialState: CoinMarketChartListState = {
   value: {
     1: {},
     14: {},
     30: {},
     'max': {}
   },
+  selectedDayRange: 30,
   status: 'IDLE',
   param: 'key'
 };
@@ -54,7 +59,7 @@ export const fetchCoinMarketChartList = createAsyncThunk(
       cacheWithExpiry(
         `coinMarketChartList-dayRange${params.dayRange}`,
         normalizedResponse,
-        params.dayRange > 1 ? 8.64e+7 : 3600000 // Cache Period: 1 day or 1 hour
+        params.dayRange === 1 ? 3600000 : 8.64e+7 // Cache Period: 1 hour or 1 day
       );
 
       return {
@@ -64,14 +69,16 @@ export const fetchCoinMarketChartList = createAsyncThunk(
     }
   });
 
-export const selectCoinMarketChartList: (state: RootState) => GenericState<CoinMarketChartList>
+export const selectCoinMarketChartList: (state: RootState) => CoinMarketChartListState
   = (state: RootState) => state.coinMarketChartList;
 
-const coinMarketChartListSlice: Slice<GenericState<CoinMarketChartList>, {}, 'coinMarketChartList'> = createSlice({
+const coinMarketChartListSlice: Slice<CoinMarketChartListState, Reducers, 'coinMarketChartList'> = createSlice({
   name: 'coinMarketChartList',
   initialState,
   reducers: {
-
+    setSelectedDayRange: (state: CoinMarketChartListState, action: PayloadAction<AvailableDayRanges>) => {
+      state.selectedDayRange = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -88,5 +95,7 @@ const coinMarketChartListSlice: Slice<GenericState<CoinMarketChartList>, {}, 'co
       })
   },
 });
+
+export const { setSelectedDayRange } = coinMarketChartListSlice.actions;
 
 export default coinMarketChartListSlice.reducer

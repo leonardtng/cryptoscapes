@@ -8,6 +8,8 @@ import { Coin } from '../../../models';
 import { fetchCoinMarketChartList, selectCoinMarketChartList } from '../../../features/coinMarketChartListSlice';
 import CardLayout from '../molecules/CardLayout';
 import CorrelationHeatmap from '../molecules/CorrelationHeatmap';
+import DayRangeSelect from '../atoms/DayRangeSelect';
+import GridIconLoadingState from '../atoms/GridIconLoadingState';
 
 const useStyles = makeStyles((theme: Theme) => ({
   chartWrapper: {
@@ -34,15 +36,15 @@ const CoinCorrelationCard: React.FC = () => {
   useEffect(() => {
     if (
       top15.length === 15 &&
-      Object.keys(coinMarketChartList.value[30]).length === 0 &&
+      Object.keys(coinMarketChartList.value[coinMarketChartList.selectedDayRange]).length === 0 &&
       coinMarketChartList.status === 'IDLE'
     ) {
       dispatch(fetchCoinMarketChartList({
         coinIdList: top15.map((coin: Coin) => coin.id),
-        dayRange: 30
+        dayRange: coinMarketChartList.selectedDayRange
       }));
     }
-  }, [dispatch, top15, coinMarketChartList.value, coinMarketChartList.status]);
+  }, [dispatch, top15, coinMarketChartList.value, coinMarketChartList.status, coinMarketChartList.selectedDayRange]);
 
   return (
     <CardLayout>
@@ -51,11 +53,14 @@ const CoinCorrelationCard: React.FC = () => {
         subheader={`Last Updated: ${getTodayDate()}`}
         titleTypographyProps={{ variant: 'h6' }}
         subheaderTypographyProps={{ variant: 'caption' }}
+        action={<DayRangeSelect />}
       />
       <Divider />
       <div className={classes.chartWrapper}>
-        {top15.length === 0 || coins.status === 'LOADING' || Object.keys(coinMarketChartList.value[30]).length === 0 ? (
-          <span>Loading...</span>
+        {top15.length === 0 ||
+          coins.status === 'LOADING' ||
+          Object.keys(coinMarketChartList.value[coinMarketChartList.selectedDayRange]).length === 0 ? (
+          <GridIconLoadingState />
         ) : (
           <CorrelationHeatmap />
         )}

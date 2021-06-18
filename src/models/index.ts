@@ -9,7 +9,8 @@ import {
   AvailableDayRanges as AvailableDayRangesInterface,
   CoinMarketChart as CoinMarketChartInterface,
   CoinMarketChartList as CoinMarketChartListInterface,
-  DominanceChartList as DominanceChartListInterface
+  DominanceChartList as DominanceChartListInterface,
+  CoinMarketChartListState as CoinMarketChartListStateInterface
 } from './api/CoinMarketChart';
 import {
   GasOracle as GasOracleInterface,
@@ -38,6 +39,7 @@ export type AvailableDayRanges = AvailableDayRangesInterface;
 export type CoinMarketChart = CoinMarketChartInterface;
 export type CoinMarketChartList = CoinMarketChartListInterface;
 export type DominanceChartList = DominanceChartListInterface;
+export type CoinMarketChartListState = CoinMarketChartListStateInterface;
 export type GasOracle = GasOracleInterface;
 export type GasOracleState = GasOracleStateInterface;
 export type GasOracleRootObject = GasOracleRootObjectInterface;

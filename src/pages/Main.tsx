@@ -3,7 +3,7 @@ import { AccountBalanceRounded, DataUsageRounded, People, SelectAllRounded, Toll
 import { BrowserRouter } from 'react-router-dom';
 import PageLayout from '../components/templates/PageLayout';
 import Overview from './analytics/Overview';
-import Exchanges from './analytics/Exchanges';
+import Exchanges from './explore/Exchanges';
 import Trends from './analytics/Trends';
 import Events from './explore/Events';
 import Coins from './explore/Coins';

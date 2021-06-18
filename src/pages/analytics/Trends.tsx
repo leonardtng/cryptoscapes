@@ -1,7 +1,8 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { Grid, Hidden } from '@material-ui/core';
 import CoinCorrelationCard from '../../components/UI/organisms/CoinCorrelationCard';
+import InstitutionHoldersCard from '../../components/UI/organisms/InstitutionHoldersCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
@@ -24,9 +25,14 @@ const Trends: React.FC = () => {
       justify="center"
       alignItems="stretch"
     >
-      <Grid item xs={12}>
+      <Grid item xs={12} xl={9}>
         <CoinCorrelationCard />
       </Grid>
+      <Hidden lgDown>
+        <Grid item xl={3}>
+          <InstitutionHoldersCard />
+        </Grid>
+      </Hidden>
     </Grid>
   )
 }

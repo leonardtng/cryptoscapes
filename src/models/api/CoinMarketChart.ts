@@ -1,3 +1,5 @@
+import { GenericState } from ".."
+
 export type AvailableDayRanges = 1 | 14 | 30 | 'max'
 
 export interface CoinMarketChart {
@@ -14,4 +16,8 @@ export type CoinMarketChartList = {
 
 export interface DominanceChartList {
   [key: string]: CoinMarketChart;
+}
+
+export interface CoinMarketChartListState extends GenericState<CoinMarketChartList> {
+  selectedDayRange: AvailableDayRanges;
 }
