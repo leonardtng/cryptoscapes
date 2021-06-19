@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 36
   },
   divider: {
-    margin: theme.spacing(1, 0.5),
-  },
+    margin: theme.spacing(1, 0.5)
+  }
 }));
 
 const StyledToggleButtonGroup = withStyles((theme) => ({

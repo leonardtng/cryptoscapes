@@ -9,7 +9,7 @@ export const cacheWithExpiry = (key: string, data: any, expiryTime: number) => {
   try {
     localStorage.setItem(key, JSON.stringify(item));
   } catch (error) {
-    console.log('Not enough space in local storage')
+    console.log('Local Storage Full')
   }
 };
 

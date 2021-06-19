@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-
 interface DataFormat {
   name: string;
   data: number[]
