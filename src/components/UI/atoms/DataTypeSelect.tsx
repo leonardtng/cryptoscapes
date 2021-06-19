@@ -2,17 +2,16 @@ import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { FormControl, MenuItem, Select } from '@material-ui/core';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectCoinMarketChartList, setSelectedDayRange } from '../../../features/coinMarketChartListSlice';
-import { AvailableDayRanges } from '../../../models/api/CoinMarketChart';
+import { selectCoinMarketChartList, setSelectedDataType } from '../../../features/coinMarketChartListSlice';
+import { CoinMarketChart } from '../../../models/api/CoinMarketChart';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  dayRangeSelect: {
+  dataTypeSelect: {
     width: 120,
-    margin: '12px 12px 0 0',
+    margin: '12px 18px 0 0',
     borderRadius: 12,
     '& .MuiOutlinedInput-root': {
       borderRadius: 12,
-      backgroundColor: theme.palette.background.paper,
       '& .MuiOutlinedInput-input': {
         padding: '12px 26px'
       },
@@ -26,18 +25,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const DayRangeSelect: React.FC = () => {
+const DataTypeSelect: React.FC = () => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
 
   const coinMarketChartList = useAppSelector(selectCoinMarketChartList);
 
   return (
-    <FormControl variant="outlined" className={classes.dayRangeSelect}>
+    <FormControl variant="outlined" className={classes.dataTypeSelect}>
       <Select
-        value={coinMarketChartList.selectedDayRange}
+        value={coinMarketChartList.selectedDataType}
         onChange={(event: React.ChangeEvent<{ name?: string; value: unknown }>) =>
-          dispatch(setSelectedDayRange(event.target.value as AvailableDayRanges))}
+          dispatch(setSelectedDataType(event.target.value as keyof CoinMarketChart))}
         MenuProps={{
           classes: { paper: classes.menuPaper },
           anchorOrigin: {
@@ -51,13 +50,12 @@ const DayRangeSelect: React.FC = () => {
           getContentAnchorEl: null
         }}
       >
-        <MenuItem value={1}>1 Day</MenuItem>
-        <MenuItem value={14}>14 Days</MenuItem>
-        <MenuItem value={30}>30 Days</MenuItem>
-        <MenuItem value="max">Max</MenuItem>
+        <MenuItem value="prices">Price</MenuItem>
+        <MenuItem value="marketCaps">Market Cap</MenuItem>
+        <MenuItem value="totalVolumes">Total Volume</MenuItem>
       </Select>
     </FormControl>
   )
 }
 
-export default DayRangeSelect
+export default DataTypeSelect

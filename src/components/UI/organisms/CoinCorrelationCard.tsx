@@ -8,7 +8,7 @@ import { Coin } from '../../../models';
 import { fetchCoinMarketChartList, selectCoinMarketChartList } from '../../../features/coinMarketChartListSlice';
 import CardLayout from '../molecules/CardLayout';
 import CorrelationHeatmap from '../molecules/CorrelationHeatmap';
-import DayRangeSelect from '../atoms/DayRangeSelect';
+import HeatmapOptionToggleGroup from '../atoms/HeatmapOptionToggleGroup';
 import GridIconLoadingState from '../atoms/GridIconLoadingState';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -49,11 +49,11 @@ const CoinCorrelationCard: React.FC = () => {
   return (
     <CardLayout>
       <CardHeader
-        title="Coin Correlation Heatmap"
+        title="Trend Correlations"
         subheader={`Last Updated: ${getTodayDate()}`}
         titleTypographyProps={{ variant: 'h6' }}
         subheaderTypographyProps={{ variant: 'caption' }}
-        action={<DayRangeSelect />}
+        action={<HeatmapOptionToggleGroup />}
       />
       <Divider />
       <div className={classes.chartWrapper}>
