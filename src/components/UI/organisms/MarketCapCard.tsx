@@ -3,12 +3,12 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Avatar, CardHeader, Tooltip } from '@material-ui/core';
 import { Skeleton, ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 import CardLayout from '../molecules/CardLayout';
-import MarketCapDonutChart from '../atoms/MarketCapDonutChart';
+import MarketCapDonutChart from '../molecules/MarketCapDonutChart';
 import { useAppSelector } from '../../../app/hooks';
 import { selectGlobalCoinData } from '../../../features/globalCoinDataSlice';
 import { shortenNumber } from '../../../common/helpers/shortenNumber';
 import { DashboardRounded, DonutLargeRounded, PieChartRounded } from '@material-ui/icons';
-import MarketCapTreemap from '../atoms/MarketCapTreemap';
+import MarketCapTreemap from '../molecules/MarketCapTreemap';
 
 const useStyles = makeStyles((theme: Theme) => ({
   chartWrapper: {

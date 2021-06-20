@@ -79,7 +79,7 @@ const CorrelationHeatmap: React.FC = () => {
     return correlationHeatmapSeries
   };
 
-  const data = formatRawData(coinMarketChartList.selectedDataType);
+  const data: DataFormat[] = formatRawData(coinMarketChartList.selectedDataType);
 
   const options: ApexOptions = {
     chart: {

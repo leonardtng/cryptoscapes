@@ -1,7 +1,7 @@
 import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
-import { Skeleton } from '@material-ui/lab';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
+import DonutSkeleton from '../atoms/DonutSkeleton';
 import { useAppSelector } from '../../../app/hooks';
 import { selectCoins } from '../../../features/coinsSlice';
 import { selectGlobalCoinData } from '../../../features/globalCoinDataSlice';
@@ -11,10 +11,6 @@ import { roundDecimals } from '../../../common/helpers/roundDecimals';
 import chroma from "chroma-js";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  chartSkeleton: {
-    margin: '0 16px',
-    transform: 'scale(1, 0.8)',
-  },
   responsiveContainer: {
     '& .recharts-default-tooltip': {
       borderRadius: 12,
@@ -70,7 +66,7 @@ const MarketCapDonutChart: React.FC<Props> = ({ coinsToDisplay }) => {
   return (
     <>
       {coins.value.length === 0 || coins.status === 'LOADING' || globalCoinData.value === null ? (
-        <Skeleton animation="wave" height="100%" className={classes.chartSkeleton} />
+        <DonutSkeleton />
       ) : (
         <ResponsiveContainer height="100%" width="100%" className={classes.responsiveContainer}>
           <PieChart>

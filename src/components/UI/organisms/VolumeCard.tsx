@@ -7,7 +7,7 @@ import { useAppSelector } from '../../../app/hooks';
 import { selectGlobalCoinData } from '../../../features/globalCoinDataSlice';
 import { shortenNumber } from '../../../common/helpers/shortenNumber';
 import { BarChartRounded } from '@material-ui/icons';
-import VolumeBarChart from '../atoms/VolumeBarChart';
+import VolumeBarChart from '../molecules/VolumeBarChart';
 
 const useStyles = makeStyles((theme: Theme) => ({
   chartWrapper: {

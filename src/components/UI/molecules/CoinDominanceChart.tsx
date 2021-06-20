@@ -1,19 +1,15 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Box, Typography, useTheme } from '@material-ui/core'
-import { Skeleton } from '@material-ui/lab';
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useSelector } from 'react-redux';
+import ChartSkeleton from '../atoms/ChartSkeleton';
 import { Coin, CoinMarketChart } from '../../../models';
 import { shortenNumber } from '../../../common/helpers/shortenNumber';
 import { convertTimestamp } from '../../../common/helpers/dateHandler';
 import { selectDominanceChartList } from '../../../features/dominanceChartList';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  chartSkeleton: {
-    margin: '0 16px',
-    transform: 'scale(1, 0.8)',
-  },
   customTooltip: {
     borderRadius: 12,
     padding: 12,
@@ -67,7 +63,7 @@ const CoinDominanceChart: React.FC<Props> = ({ coinList, dataKey }) => {
   return (
     <>
       {coinList.length !== 2 || !dominanceChartList.value[top1.id] || !dominanceChartList.value[top2.id] ? (
-        <Skeleton animation="wave" height="100%" className={classes.chartSkeleton} />
+        <ChartSkeleton />
       ) : (
         <ResponsiveContainer height="100%" width="100%">
           <AreaChart data={formatRawData(top1.id, top2.id, dataKey)}
