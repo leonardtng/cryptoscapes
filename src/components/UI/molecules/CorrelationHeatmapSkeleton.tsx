@@ -6,7 +6,7 @@ import { selectCoins } from '../../../features/coinsSlice';
 import ReactApexChart from "react-apexcharts";
 import { Coin } from '../../../models';
 import { ApexOptions } from 'apexcharts';
-import GridIconLoadingState from '../atoms/GridIconLoadingState';
+import HeatmapLoadingProgress from '../atoms/HeatmapLoadingProgress';
 import Overlay from '../atoms/Overlay';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -82,7 +82,7 @@ const CorrelationHeatmapSkeleton: React.FC = () => {
   });
 
   return (
-    <Overlay loadingIcon={<GridIconLoadingState />}>
+    <Overlay loadingIcon={<HeatmapLoadingProgress />}>
       <Box className={classes.container}>
         <ReactApexChart options={options} series={data} type="heatmap" height="100%" />
       </Box>
