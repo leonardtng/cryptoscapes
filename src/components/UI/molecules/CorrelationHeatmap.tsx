@@ -116,6 +116,9 @@ const CorrelationHeatmap: React.FC = () => {
     colors: ["#000000"],
     xaxis: {
       categories: coins.value.slice(0, 15).map((coin: Coin) => coin.symbol.toUpperCase()),
+      tooltip: {
+        enabled: false
+      },
       labels: {
         style: {
           fontSize: `${theme.typography.subtitle2.fontSize}`
@@ -137,25 +140,25 @@ const CorrelationHeatmap: React.FC = () => {
           ranges: [{
             from: -100,
             to: 9.999999999,
-            name: 'Almost No Correlation (<10)',
+            name: 'Almost None (<10)',
             color: theme.palette.success.main,
           },
           {
             from: 10,
             to: 69.999999999,
-            name: 'Medium Correlation (<70)',
+            name: 'Medium (<70)',
             color: theme.palette.info.main
           },
           {
             from: 70,
             to: 84.999999999,
-            name: 'High Correlation (<85)',
+            name: 'High (<85)',
             color: theme.palette.warning.main
           },
           {
             from: 85,
             to: 99.999999999,
-            name: 'Extreme Correlation (<99.999)',
+            name: 'Extreme (<99.999)',
             color: theme.palette.error.main
           }],
         }

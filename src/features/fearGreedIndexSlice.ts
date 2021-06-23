@@ -4,10 +4,11 @@ import { toCamelCase } from '../common/helpers/caseTransformer';
 import { RootState } from '../app/store';
 import { alternativeMe as API } from '../common/endpoints';
 import { API_CONFIG as config } from '../common/constants';
-import { GenericState, FearGreedIndex, FearGreedIndexRootObject } from '../models';
+import { FearGreedIndex, FearGreedIndexRootObject, FearGreedIndexState } from '../models';
 
-const initialState: GenericState<FearGreedIndex[]> = {
+const initialState: FearGreedIndexState = {
   value: [],
+  today: null,
   status: 'IDLE',
 };
 
@@ -16,19 +17,20 @@ export const fetchFearGreedIndex = createAsyncThunk('fearGreedIndex', async () =
 
   const response = await axios.request({
     ...config('alternative.me'),
-    url: API.fearGreedIndex(7),
+    url: API.fearGreedIndex(30),
     cancelToken: canceler.token
   });
 
   const normalizedResponse = toCamelCase(response.data) as FearGreedIndexRootObject;
+  normalizedResponse.data.sort((a: FearGreedIndex, b: FearGreedIndex) => Number(a.timestamp) - Number(b.timestamp));
 
   return normalizedResponse.data as FearGreedIndex[]
 });
 
-export const selectFearGreedIndex: (state: RootState) => GenericState<FearGreedIndex[]>
- = (state: RootState) => state.fearGreedIndex;
+export const selectFearGreedIndex: (state: RootState) => FearGreedIndexState
+  = (state: RootState) => state.fearGreedIndex;
 
-const fearGreedIndexSlice: Slice<GenericState<FearGreedIndex[]>, {}, 'fearGreedIndex'> = createSlice({
+const fearGreedIndexSlice: Slice<FearGreedIndexState, {}, 'fearGreedIndex'> = createSlice({
   name: 'fearGreedIndex',
   initialState,
   reducers: {
@@ -42,6 +44,7 @@ const fearGreedIndexSlice: Slice<GenericState<FearGreedIndex[]>, {}, 'fearGreedI
       .addCase(fetchFearGreedIndex.fulfilled, (state, action) => {
         state.status = 'IDLE';
         state.value = action.payload;
+        state.today = action.payload[action.payload.length - 1];
       })
       .addCase(fetchFearGreedIndex.rejected, (state, action) => {
         state.status = 'FAILED';

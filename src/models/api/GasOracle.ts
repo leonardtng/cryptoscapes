@@ -7,13 +7,13 @@ export interface GasOracle {
   fastGasPrice: string;
 }
 
-export interface GasOracleState extends GenericState<GasOracle> {
-  selectedGasFee: string | null;
-  gasLimit: number;
-}
-
 export interface GasOracleRootObject {
   status: string;
   message: string;
   result: GasOracle;
+}
+
+export interface GasOracleState extends GenericState<GasOracle> {
+  selectedGasFee: string | null;
+  gasLimit: number;
 }

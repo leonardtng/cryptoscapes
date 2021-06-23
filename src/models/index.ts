@@ -14,8 +14,8 @@ import {
 } from './api/CoinMarketChart';
 import {
   GasOracle as GasOracleInterface,
-  GasOracleState as GasOracleStateInterface,
-  GasOracleRootObject as GasOracleRootObjectInterface
+  GasOracleRootObject as GasOracleRootObjectInterface,
+  GasOracleState as GasOracleStateInterface
 } from './api/GasOracle';
 import {
   TrendingCoin as TrendingCoinInterface,
@@ -32,7 +32,8 @@ import {
 import {
   FearGreedIndex as FearGreedIndexInterface,
   FearGreedIndexMetadata as FearGreedIndexMetadataInterface,
-  FearGreedIndexRootObject as FearGreedIndexRootObjectInterface
+  FearGreedIndexRootObject as FearGreedIndexRootObjectInterface,
+  FearGreedIndexState as FearGreedIndexStateInterface
 } from './api/FearGreedIndex';
 
 export type AppState = AppStateInterface;
@@ -59,3 +60,4 @@ export type GlobalCoinDataRootObject = GlobalCoinDataRootObjectInterface;
 export type FearGreedIndex = FearGreedIndexInterface;
 export type FearGreedIndexMetadata = FearGreedIndexMetadataInterface;
 export type FearGreedIndexRootObject = FearGreedIndexRootObjectInterface;
+export type FearGreedIndexState = FearGreedIndexStateInterface;

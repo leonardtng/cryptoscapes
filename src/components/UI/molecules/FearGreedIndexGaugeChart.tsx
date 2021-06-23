@@ -33,8 +33,8 @@ const FearGreedIndexGaugeChart: React.FC = () => {
         id="fear-greed-index-gauge"
         nrOfLevels={20}
         colors={[theme.palette.error.main, theme.palette.success.main]}
-        percent={fearGreedIndex.value.length === 0 || fearGreedIndex.status === 'LOADING' ?
-          0 : Number(fearGreedIndex.value[0].value) / 100}
+        percent={fearGreedIndex.today === null ?
+          0 : Number(fearGreedIndex.today.value) / 100}
       />
     </Box>
   )

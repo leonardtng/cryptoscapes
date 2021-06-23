@@ -5,7 +5,7 @@ import { Coin, CoinMarketChart } from '../../../models';
 import { useAppSelector } from '../../../app/hooks';
 import { selectCoinMarketChartList } from '../../../features/coinMarketChartListSlice';
 
-interface ChartDataFormat {
+interface DataFormat {
   date: number;
   value: number;
 }
@@ -21,7 +21,7 @@ const SmallCoinChart: React.FC<Props> = ({ coin, dataKey }) => {
   const gain = coin.priceChangePercentage24H >= 0;
 
   const formatRawData = (coinId: string, dataKey: keyof CoinMarketChart) => {
-    const chartData: ChartDataFormat[] = [];
+    const chartData: DataFormat[] = [];
     coinMarketChartList.value[1][coinId][dataKey]
       .forEach((dataPair: [number, number]) => {
         chartData.push({ date: dataPair[0], value: dataPair[1] })

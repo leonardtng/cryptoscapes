@@ -1,33 +1,25 @@
 import React, { useEffect } from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Avatar, CardContent, CardHeader, Tooltip, Typography } from '@material-ui/core';
+import { Avatar, Box, CardContent, CardHeader, Typography } from '@material-ui/core';
+import { FaceRounded } from '@material-ui/icons';
 import { Skeleton } from '@material-ui/lab';
 import CardLayout from '../molecules/CardLayout';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchFearGreedIndex, selectFearGreedIndex } from '../../../features/fearGreedIndexSlice';
+import HelpIconHeader from '../atoms/HelpIconHeader';
 import FearGreedIndexGaugeChart from '../molecules/FearGreedIndexGaugeChart';
-import { FaceRounded, HelpOutlineRounded } from '@material-ui/icons';
+import HistoricFearGreedIndexChart from '../molecules/HistoricFearGreedIndexChart';
 import MappedSemtimentIcon from '../atoms/MappedSentimentIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    '& .MuiSvgIcon-root': {
-      cursor: 'pointer',
-      marginLeft: 6,
-      height: 16,
-      width: 16
-    },
-  },
-  customTooltip: {
-    backgroundColor: theme.palette.background.default
-  },
   avatarColor: {
     marginRight: 6,
     color: theme.palette.warning.main,
     backgroundColor: theme.palette.card.paper,
     borderRadius: 8
+  },
+  contentWrapper: {
+    height: 'calc(100% - 84px) !important'
   }
 }));
 
@@ -47,31 +39,25 @@ const FearGreedIndexCard: React.FC = () => {
     <CardLayout>
       <CardHeader
         title={
-          <Typography className={classes.header} variant="body2" color="textSecondary">
-            Fear & Greed Index <Tooltip
-              title={
-                <div>
-                  <Typography variant="subtitle1" color="primary">Data Sources Breakdown:</Typography>
-                  <Typography variant="body2">- Price Volatility (25%)</Typography>
-                  <Typography variant="body2">- Market Momentum / Volume (25%)</Typography>
-                  <Typography variant="body2">- Social Media (15%)</Typography>
-                  <Typography variant="body2">- Surveys (15%)</Typography>
-                  <Typography variant="body2">- Bitcoin Dominance (10%)</Typography>
-                  <Typography variant="body2">- Google Trends (10%)</Typography>
-                </div>
-              }
-              classes={{
-                tooltip: classes.customTooltip,
-              }}
-            >
-              <HelpOutlineRounded />
-            </Tooltip>
-          </Typography>
+          <HelpIconHeader
+            title="Fear & Greed Index"
+            tooltipContent={
+              <div>
+                <Typography variant="subtitle1" color="secondary">Data Sources Breakdown:</Typography>
+                <Typography variant="body2" color="textSecondary">- Price Volatility (25%)</Typography>
+                <Typography variant="body2" color="textSecondary">- Market Momentum / Volume (25%)</Typography>
+                <Typography variant="body2" color="textSecondary">- Social Media (15%)</Typography>
+                <Typography variant="body2" color="textSecondary">- Surveys (15%)</Typography>
+                <Typography variant="body2" color="textSecondary">- Bitcoin Dominance (10%)</Typography>
+                <Typography variant="body2" color="textSecondary">- Google Trends (10%)</Typography>
+              </div>
+            }
+          />
         }
         subheader={
-          fearGreedIndex.value.length === 0 ?
+          fearGreedIndex.today === null ?
             <Skeleton animation="wave" height={32} width={150} /> :
-            `Now: ${fearGreedIndex.value[0].valueClassification}`
+            `Now: ${fearGreedIndex.today.valueClassification}`
         }
         subheaderTypographyProps={{ variant: 'h6', color: 'textPrimary' }}
         avatar={
@@ -81,8 +67,11 @@ const FearGreedIndexCard: React.FC = () => {
           </Avatar>
         }
       />
-      <CardContent>
+      <CardContent className={classes.contentWrapper}>
         <FearGreedIndexGaugeChart />
+        <Box height="calc(100% - 96px)" width="100%">
+          <HistoricFearGreedIndexChart />
+        </Box>
       </CardContent>
     </CardLayout>
   )

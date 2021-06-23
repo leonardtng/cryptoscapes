@@ -1,3 +1,5 @@
+import { GenericState } from "..";
+
 export interface FearGreedIndex {
   value: string;
   valueClassification: string;
@@ -13,4 +15,8 @@ export interface FearGreedIndexRootObject {
   name: string;
   data: FearGreedIndex[];
   metadata: FearGreedIndexMetadata;
+}
+
+export interface FearGreedIndexState extends GenericState<FearGreedIndex[]> {
+  today: FearGreedIndex | null;
 }
