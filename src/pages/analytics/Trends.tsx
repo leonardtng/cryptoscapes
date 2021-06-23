@@ -1,8 +1,9 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
+import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Grid, Hidden } from '@material-ui/core';
 import CoinCorrelationCard from '../../components/UI/organisms/CoinCorrelationCard';
-import InstitutionHoldersCard from '../../components/UI/organisms/InstitutionHoldersCard';
+import FearGreedIndexCard from '../../components/UI/organisms/FearGreedIndexCard';
+import MarketSentimentCard from '../../components/UI/organisms/MarketSentimentCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
@@ -10,11 +11,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& > .MuiGrid-item': {
       height: '100%',
     }
+  },
+  innerWrapper: {
+    height: '100%',
+    '& > .MuiGrid-item:not(:last-child)': {
+      marginBottom: theme.spacing(3)
+    }
   }
 }));
 
 const Trends: React.FC = () => {
   const classes = useStyles();
+  const theme = useTheme();
 
   return (
     <Grid
@@ -25,12 +33,19 @@ const Trends: React.FC = () => {
       justify="center"
       alignItems="stretch"
     >
-      <Grid item xs={12} xl={9}>
+      <Grid item xs={12} lg={8} xl={9}>
         <CoinCorrelationCard />
       </Grid>
-      <Hidden lgDown>
-        <Grid item xl={3}>
-          <InstitutionHoldersCard />
+      <Hidden mdDown>
+        <Grid item lg={4} xl={3}>
+          <Grid container className={classes.innerWrapper} spacing={0}>
+            <Grid item xs={12} style={{ height: `calc(50% - ${theme.spacing(3) / 2}px)` }}>
+              <FearGreedIndexCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: `calc(50% - ${theme.spacing(3) / 2}px)` }}>
+              <MarketSentimentCard />
+            </Grid>
+          </Grid>
         </Grid>
       </Hidden>
     </Grid>

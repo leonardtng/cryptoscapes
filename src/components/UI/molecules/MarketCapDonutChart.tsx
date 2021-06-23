@@ -73,13 +73,13 @@ const MarketCapDonutChart: React.FC<Props> = ({ coinsToDisplay }) => {
             <Pie
               data={formatRawData(globalCoinData.value.totalMarketCap.usd)}
               dataKey="value"
-              nameKey="coinSymbol"
+              nameKey="coinName"
               cx="50%"
               cy="50%"
               innerRadius="40%"
               outerRadius="55%"
               fill={theme.palette.primary.main}
-              label={(data: DataFormat) => data.coinName}
+              label={(data: DataFormat) => data.coinSymbol}
               paddingAngle={5}
               cursor="pointer"
             >

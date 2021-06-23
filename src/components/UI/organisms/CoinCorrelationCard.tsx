@@ -7,7 +7,7 @@ import { fetchCoins, selectCoins } from '../../../features/coinsSlice';
 import { Coin } from '../../../models';
 import { fetchCoinMarketChartList, selectCoinMarketChartList } from '../../../features/coinMarketChartListSlice';
 import CardLayout from '../molecules/CardLayout';
-import CorrelationHeatmap from './CorrelationHeatmap';
+import CorrelationHeatmap from '../molecules/CorrelationHeatmap';
 import HeatmapOptionToggleGroup from '../atoms/HeatmapOptionToggleGroup';
 import CorrelationHeatmapSkeleton from '../molecules/CorrelationHeatmapSkeleton';
 

@@ -4,8 +4,8 @@ import axios, { AxiosRequestConfig } from 'axios';
 export const http = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1500 });
 
 export const API_CONFIG:
-  (server: 'coinGecko' | 'etherscan') => AxiosRequestConfig =
-  (server: 'coinGecko' | 'etherscan') => {
+  (server: 'coinGecko' | 'etherscan' | 'alternative.me' | 'senticrypt' ) => AxiosRequestConfig =
+  (server: 'coinGecko' | 'etherscan' | 'alternative.me' | 'senticrypt') => {
     switch (server) {
       case 'coinGecko':
         return {
@@ -24,6 +24,24 @@ export const API_CONFIG:
           baseURL: 'https://api.etherscan.io',
           responseType: 'json',
           method: 'GET'
+        }
+      case 'alternative.me':
+        return {
+          baseURL: ' https://api.alternative.me',
+          responseType: 'json',
+          method: 'GET'
+        }
+      case 'senticrypt':
+        return {
+          baseURL: 'http://api.senticrypt.com/v1',
+          responseType: 'json',
+          method: 'GET',
+          headers: {
+            'X-XSS-Protection': '1; mode=block',
+            'X-Frame-Options': 'DENY',
+            'X-Content-Type-Options': 'nosniff',
+            'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
+          }
         }
     }
   }

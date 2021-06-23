@@ -19,7 +19,8 @@ const initialState: CoinMarketChartListState = {
     30: {},
     90: {},
     365: {},
-    730: {}
+    730: {},
+    'max': {}
   },
   selectedDayRange: 30,
   selectedDataType: 'prices',

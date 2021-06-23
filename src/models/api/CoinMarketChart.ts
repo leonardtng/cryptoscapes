@@ -1,6 +1,6 @@
 import { GenericState } from ".."
 
-export type AvailableDayRanges = 1 | 7 | 30 | 90 | 365 | 730
+export type AvailableDayRanges = 1 | 7 | 30 | 90 | 365 | 730 | 'max'
 
 export interface CoinMarketChart {
   marketCaps: [number, number][];
