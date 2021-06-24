@@ -4,8 +4,8 @@ import axios, { AxiosRequestConfig } from 'axios';
 export const http = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1500 });
 
 export const API_CONFIG:
-  (server: 'coinGecko' | 'etherscan' | 'alternative.me' | 'senticrypt' ) => AxiosRequestConfig =
-  (server: 'coinGecko' | 'etherscan' | 'alternative.me' | 'senticrypt') => {
+  (server: 'coinGecko' | 'etherscan' | 'alternative.me' | 'blockchain' ) => AxiosRequestConfig =
+  (server: 'coinGecko' | 'etherscan' | 'alternative.me' | 'blockchain') => {
     switch (server) {
       case 'coinGecko':
         return {
@@ -31,9 +31,9 @@ export const API_CONFIG:
           responseType: 'json',
           method: 'GET'
         }
-      case 'senticrypt':
+      case 'blockchain':
         return {
-          baseURL: 'http://api.senticrypt.com/v1',
+          baseURL: 'https://api.blockchain.info',
           responseType: 'json',
           method: 'GET',
           headers: {

@@ -7,6 +7,7 @@ import {
 import { Coin as CoinInterface } from './api/Coin';
 import {
   AvailableDayRanges as AvailableDayRangesInterface,
+  AvailableIntervals as AvailableIntervalsInterface,
   CoinMarketChart as CoinMarketChartInterface,
   CoinMarketChartList as CoinMarketChartListInterface,
   DominanceChartList as DominanceChartListInterface,
@@ -42,6 +43,7 @@ export type Page = PageInterface;
 export type RootModule = RootModuleInterface;
 export type Coin = CoinInterface;
 export type AvailableDayRanges = AvailableDayRangesInterface;
+export type AvailableIntervals = AvailableIntervalsInterface;
 export type CoinMarketChart = CoinMarketChartInterface;
 export type CoinMarketChartList = CoinMarketChartListInterface;
 export type DominanceChartList = DominanceChartListInterface;

@@ -9,6 +9,7 @@ import { fetchFearGreedIndex, selectFearGreedIndex } from '../../../features/fea
 import HelpIconHeader from '../atoms/HelpIconHeader';
 import FearGreedIndexGaugeChart from '../molecules/FearGreedIndexGaugeChart';
 import HistoricFearGreedIndexChart from '../molecules/HistoricFearGreedIndexChart';
+import ShowBitcoinCorrelationSwitch from '../atoms/ShowBitcoinCorrelationSwitch';
 import MappedSemtimentIcon from '../atoms/MappedSentimentIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -66,6 +67,7 @@ const FearGreedIndexCard: React.FC = () => {
               <FaceRounded /> : <MappedSemtimentIcon />}
           </Avatar>
         }
+        action={<ShowBitcoinCorrelationSwitch />}
       />
       <CardContent className={classes.contentWrapper}>
         <FearGreedIndexGaugeChart />

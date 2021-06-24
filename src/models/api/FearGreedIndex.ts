@@ -5,6 +5,7 @@ export interface FearGreedIndex {
   valueClassification: string;
   timestamp: string;
   timeUntilUpdate: string;
+  bitcoinPrice: number;
 }
 
 export interface FearGreedIndexMetadata {
@@ -19,4 +20,5 @@ export interface FearGreedIndexRootObject {
 
 export interface FearGreedIndexState extends GenericState<FearGreedIndex[]> {
   today: FearGreedIndex | null;
+  showBitcoinCorrelation: boolean;
 }

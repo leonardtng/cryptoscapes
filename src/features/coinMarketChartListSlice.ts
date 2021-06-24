@@ -54,7 +54,7 @@ export const fetchCoinMarketChartList = createAsyncThunk(
       for (var i = 0; i < params.coinIdList.length; i++) {
         const response = await http.request({
           ...config('coinGecko'),
-          url: API.coinMarketChart(params.coinIdList[i], params.dayRange),
+          url: API.coinMarketChart(params.coinIdList[i], params.dayRange, params.dayRange <= 30 ? 'hourly' : 'daily'),
           cancelToken: canceler.token
         });
 

@@ -7,6 +7,9 @@ import { useAppSelector } from '../../../app/hooks';
 import { selectFearGreedIndex } from '../../../features/fearGreedIndexSlice';
 import ChartSkeleton from '../atoms/ChartSkeleton';
 import { convertTimestamp } from '../../../common/helpers/dateHandler';
+import { roundDecimals } from '../../../common/helpers/roundDecimals';
+
+export const bitcoinOrange = "#f2a900";
 
 const useStyles = makeStyles((theme: Theme) => ({
   responsiveContainer: {
@@ -18,8 +21,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: 12,
     padding: 12,
     backgroundColor: `${theme.palette.background.default}dd`,
-    '& .MuiTypography-root:not(:first-child)': {
-      color: theme.palette.secondary.main
+    '& #bitcoin-tooltip': {
+      color: bitcoinOrange
     },
   }
 }));
@@ -28,6 +31,7 @@ interface DataFormat {
   date: number;
   value: number;
   classification: string;
+  bitcoinPrice: number;
 }
 
 const HistoricFearGreedIndexChart: React.FC = () => {
@@ -42,7 +46,8 @@ const HistoricFearGreedIndexChart: React.FC = () => {
       chartData.push({
         date: Number(indexData.timestamp),
         value: Number(indexData.value),
-        classification: indexData.valueClassification
+        classification: indexData.valueClassification,
+        bitcoinPrice: indexData.bitcoinPrice
       })
     })
     return chartData
@@ -59,7 +64,19 @@ const HistoricFearGreedIndexChart: React.FC = () => {
             margin={{ top: 8, right: 8, left: 8, bottom: 8 }}
           >
             <defs>
-              <linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="bitcoin-chart-gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop
+                  offset="5%"
+                  stopColor={bitcoinOrange}
+                  stopOpacity={0.2}
+                />
+                <stop
+                  offset="80%"
+                  stopColor={bitcoinOrange}
+                  stopOpacity={0}
+                />
+              </linearGradient>
+              <linearGradient id="fear-greed-chart-gradient" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
                   stopColor={theme.palette.primary.main}
@@ -73,7 +90,17 @@ const HistoricFearGreedIndexChart: React.FC = () => {
               </linearGradient>
             </defs>
             <XAxis dataKey="date" hide />
-            <YAxis domain={[(dataMin: number) => dataMin * 0.95, (dataMax: number) => dataMax * 1.05]} hide />
+            <YAxis
+              yAxisId="left"
+              domain={[(dataMin: number) => dataMin * 0.95, (dataMax: number) => dataMax * 1.05]}
+              hide
+            />
+            <YAxis
+              yAxisId="right"
+              orientation="right"
+              domain={[(dataMin: number) => dataMin * 0.95, (dataMax: number) => dataMax * 1.05]}
+              hide
+            />
             <Tooltip
               content={({ active, payload, label }) => {
                 if (active && payload && payload.length) {
@@ -81,9 +108,14 @@ const HistoricFearGreedIndexChart: React.FC = () => {
                     <Typography variant="body1">
                       {convertTimestamp(label * 1000, true)}
                     </Typography>
-                    <Typography variant="body2">
-                    {payload[0].payload.classification} ({payload[0].value}%)
+                    <Typography variant="body2" color="primary">
+                      {payload[0].payload.classification} ({payload[0].payload.value}%)
                     </Typography>
+                    {fearGreedIndex.showBitcoinCorrelation &&
+                      <Typography variant="body2" id="bitcoin-tooltip">
+                        Bitcoin Price: US${roundDecimals(payload[0].payload.bitcoinPrice, 0)}
+                      </Typography>
+                    }
                   </Box>
                 } else {
                   return null
@@ -93,13 +125,28 @@ const HistoricFearGreedIndexChart: React.FC = () => {
             <Area
               type="monotone"
               dataKey="value"
+              yAxisId="left"
               dot={false}
               animationDuration={3000}
               strokeWidth={2}
               stroke={theme.palette.primary.main}
               fillOpacity={1}
-              fill={`url(#chart-gradient)`}
+              fill={`url(#fear-greed-chart-gradient)`}
             />
+            {fearGreedIndex.showBitcoinCorrelation &&
+              <Area
+                type="monotone"
+                dataKey="bitcoinPrice"
+                yAxisId="right"
+                dot={false}
+                animationDuration={3000}
+                strokeWidth={2}
+                strokeOpacity={0.3}
+                stroke={bitcoinOrange}
+                fillOpacity={0.5}
+                fill={`url(#bitcoin-chart-gradient)`}
+              />
+            }
           </AreaChart>
         </ResponsiveContainer>
       )}
