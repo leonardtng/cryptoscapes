@@ -36,6 +36,11 @@ import {
   FearGreedIndexRootObject as FearGreedIndexRootObjectInterface,
   FearGreedIndexState as FearGreedIndexStateInterface
 } from './api/FearGreedIndex';
+import {
+  BitcoinHashRate as BitcoinHashRateInterface,
+  BitcoinHashRateRootObject as BitcoinHashRateRootObjectInterface,
+  BitcoinHashRateState as BitcoinHashRateStateInterface
+} from './api/BitcoinHashRate';
 
 export type AppState = AppStateInterface;
 export type GenericState<T> = GenericStateInterface<T>;
@@ -63,3 +68,6 @@ export type FearGreedIndex = FearGreedIndexInterface;
 export type FearGreedIndexMetadata = FearGreedIndexMetadataInterface;
 export type FearGreedIndexRootObject = FearGreedIndexRootObjectInterface;
 export type FearGreedIndexState = FearGreedIndexStateInterface;
+export type BitcoinHashRate = BitcoinHashRateInterface;
+export type BitcoinHashRateRootObject = BitcoinHashRateRootObjectInterface;
+export type BitcoinHashRateState = BitcoinHashRateStateInterface;

@@ -24,8 +24,7 @@ const initialState: CoinMarketChartListState = {
   },
   selectedDayRange: 30,
   selectedDataType: 'prices',
-  status: 'IDLE',
-  param: 'key'
+  status: 'IDLE'
 };
 
 interface Params {
@@ -86,7 +85,7 @@ const coinMarketChartListSlice: Slice<CoinMarketChartListState, Reducers, 'coinM
     },
     setSelectedDataType: (state: CoinMarketChartListState, action: PayloadAction<keyof CoinMarketChart>) => {
       state.selectedDataType = action.payload;
-    },
+    }
   },
   extraReducers: (builder) => {
     builder

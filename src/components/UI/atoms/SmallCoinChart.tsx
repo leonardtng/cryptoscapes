@@ -27,7 +27,7 @@ const SmallCoinChart: React.FC<Props> = ({ coin, dataKey }) => {
         chartData.push({ date: dataPair[0], value: dataPair[1] })
       });
     return chartData
-  }
+  };
 
   return (
     <>

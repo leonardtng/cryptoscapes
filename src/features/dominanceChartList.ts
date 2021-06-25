@@ -27,7 +27,7 @@ export const fetchDominanceChartList = createAsyncThunk('dominanceChartList', as
     for (var i = 0; i < coinIdList.length; i++) {
       const response = await http.request({
         ...config('coinGecko'),
-        url: API.coinMarketChart(coinIdList[i], 30, 'hourly'),
+        url: API.coinMarketChart(coinIdList[i], 90, 'daily'),
         cancelToken: canceler.token
       });
 

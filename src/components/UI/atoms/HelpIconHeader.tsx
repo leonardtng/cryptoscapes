@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   customTooltip: {
     backgroundColor: theme.palette.background.default,
-    borderRadius: 12
+    borderRadius: 12,
+    maxWidth: 260
   }
 }));
 

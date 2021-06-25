@@ -1,9 +1,9 @@
 import React from 'react';
 import { Theme, makeStyles, withStyles } from '@material-ui/core/styles';
 import { Switch, Tooltip } from '@material-ui/core'
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectFearGreedIndex, setShowBitcoinCorrelation } from '../../../features/fearGreedIndexSlice';
-import { bitcoinOrange } from '../molecules/HistoricFearGreedIndexChart';
+import { useAppDispatch } from '../../../app/hooks';
+import { bitcoinOrange } from '../../../common/helpers/fixedColors';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 const useStyles = makeStyles((theme: Theme) => ({
   bitcoinCorrelationSwitch: {
@@ -21,21 +21,24 @@ const CustomSwitch = withStyles({
     },
   },
   checked: {},
-  track: {},
+  track: {}
 })(Switch);
 
-const ShowBitcoinCorrelationSwitch: React.FC = () => {
+interface Props {
+  currentState: boolean;
+  toggleFunction: ActionCreatorWithPayload<boolean, string>;
+}
+
+const ShowBitcoinCorrelationSwitch: React.FC<Props> = ({ currentState, toggleFunction }) => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
 
-  const fearGreedIndex = useAppSelector(selectFearGreedIndex);
-
   return (
-    <Tooltip title={`${fearGreedIndex.showBitcoinCorrelation ? 'Hide' : 'Show'} Bitcoin Price`}>
+    <Tooltip title={`${currentState ? 'Hide' : 'Show'} Bitcoin Price`}>
       <CustomSwitch
         className={classes.bitcoinCorrelationSwitch}
-        checked={fearGreedIndex.showBitcoinCorrelation}
-        onChange={() => dispatch(setShowBitcoinCorrelation(!fearGreedIndex.showBitcoinCorrelation))}
+        checked={currentState}
+        onChange={() => dispatch(toggleFunction(!currentState))}
       />
     </Tooltip>
 

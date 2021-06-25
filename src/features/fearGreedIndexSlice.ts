@@ -61,7 +61,7 @@ const fearGreedIndexSlice: Slice<FearGreedIndexState, Reducers, 'fearGreedIndex'
   reducers: {
     setShowBitcoinCorrelation: (state: FearGreedIndexState, action: PayloadAction<boolean>) => {
       state.showBitcoinCorrelation = action.payload;
-    },
+    }
   },
   extraReducers: (builder) => {
     builder

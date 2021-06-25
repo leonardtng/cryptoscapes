@@ -5,7 +5,7 @@ import { FaceRounded } from '@material-ui/icons';
 import { Skeleton } from '@material-ui/lab';
 import CardLayout from '../molecules/CardLayout';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { fetchFearGreedIndex, selectFearGreedIndex } from '../../../features/fearGreedIndexSlice';
+import { fetchFearGreedIndex, selectFearGreedIndex, setShowBitcoinCorrelation } from '../../../features/fearGreedIndexSlice';
 import HelpIconHeader from '../atoms/HelpIconHeader';
 import FearGreedIndexGaugeChart from '../molecules/FearGreedIndexGaugeChart';
 import HistoricFearGreedIndexChart from '../molecules/HistoricFearGreedIndexChart';
@@ -67,7 +67,12 @@ const FearGreedIndexCard: React.FC = () => {
               <FaceRounded /> : <MappedSemtimentIcon />}
           </Avatar>
         }
-        action={<ShowBitcoinCorrelationSwitch />}
+        action={
+          <ShowBitcoinCorrelationSwitch
+            currentState={fearGreedIndex.showBitcoinCorrelation}
+            toggleFunction={setShowBitcoinCorrelation}
+          />
+        }
       />
       <CardContent className={classes.contentWrapper}>
         <FearGreedIndexGaugeChart />

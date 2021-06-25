@@ -6,6 +6,7 @@ import gasOracleReducer from '../features/gasOracleSlice';
 import trendingCoinsReducer from '../features/trendingCoinsSlice';
 import globalCoinDataReducer from '../features/globalCoinDataSlice';
 import fearGreedIndexReducer from '../features/fearGreedIndexSlice';
+import bitcoinHashRateReducer from '../features/bitcoinHashRateSlice';
 
 import appState from '../features/appStateSlice';
 
@@ -18,6 +19,7 @@ export const store = configureStore({
     trendingCoins: trendingCoinsReducer,
     globalCoinData: globalCoinDataReducer,
     fearGreedIndex: fearGreedIndexReducer,
+    bitcoinHashRate: bitcoinHashRateReducer,
     appState: appState
   },
 });

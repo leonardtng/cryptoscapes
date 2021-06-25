@@ -1,4 +1,4 @@
-import { createAction, createAsyncThunk, createSlice, PayloadAction, Slice, SliceCaseReducers } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction, Slice, SliceCaseReducers } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toCamelCase } from '../common/helpers/caseTransformer';
 import { RootState } from '../app/store';
@@ -48,7 +48,7 @@ const gasOracleSlice: Slice<GasOracleState, Reducers, 'gasOracle'> = createSlice
       },
       setGasLimit: (state: GasOracleState, action: PayloadAction<number>) => {
         state.gasLimit = action.payload;
-      },
+      }
     },
     extraReducers: (builder) => {
       builder
@@ -58,13 +58,7 @@ const gasOracleSlice: Slice<GasOracleState, Reducers, 'gasOracle'> = createSlice
         .addCase(fetchGasOracle.fulfilled, (state, action) => {
           state.status = 'IDLE';
           state.value = action.payload;
-
-          const getSelectedGasFee = createAction<string>('gasOracle/getSelectedGasFee');
-
-          gasOracleSlice.caseReducers.setSelectedGasFee(
-            state,
-            getSelectedGasFee(action.payload.proposeGasPrice)
-          );
+          state.selectedGasFee = action.payload.proposeGasPrice;
         })
         .addCase(fetchGasOracle.rejected, (state, action) => {
           state.status = 'FAILED';

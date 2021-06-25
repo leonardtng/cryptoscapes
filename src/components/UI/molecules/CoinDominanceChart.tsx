@@ -58,7 +58,7 @@ const CoinDominanceChart: React.FC<Props> = ({ coinList, dataKey }) => {
         }
       });
     return newData
-  }
+  };
 
   return (
     <>

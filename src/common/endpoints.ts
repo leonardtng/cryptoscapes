@@ -7,8 +7,10 @@ export const coinGecko = {
     `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`,
   coinMarketChart: (coinId: string, days: AvailableDayRanges, interval: AvailableIntervals) =>
     `/coins/${coinId}/market_chart?vs_currency=usd&days=${days}&interval=${interval}`,
-  trending: `/search/trending`,
-  global: `/global`
+  trending:
+    `/search/trending`,
+  global:
+    `/global`
 };
 
 export const etherscan = {
@@ -21,6 +23,7 @@ export const alternativeMe = {
     `/fng/?limit=${days}`
 }
 
-export const blockchain = {
-
+export const blockchainCom = {
+  bitcoinHashRate:
+    `/charts/hash-rate?daysAverageString=7D&timespan=1year&sampled=true&metadata=false&cors=true&format=json`
 }

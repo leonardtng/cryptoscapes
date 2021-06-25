@@ -2,13 +2,14 @@ import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Box, Typography, useTheme } from '@material-ui/core'
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { FearGreedIndex } from '../../../models';
 import { useAppSelector } from '../../../app/hooks';
-import { selectFearGreedIndex } from '../../../features/fearGreedIndexSlice';
 import ChartSkeleton from '../atoms/ChartSkeleton';
 import { convertTimestamp } from '../../../common/helpers/dateHandler';
-import { roundDecimals } from '../../../common/helpers/roundDecimals';
+import { selectBitcoinHashRate } from '../../../features/bitcoinHashRateSlice';
+import { shortenNumber } from '../../../common/helpers/shortenNumber';
+import { BitcoinHashRate } from '../../../models';
 import { bitcoinOrange } from '../../../common/helpers/fixedColors';
+import { roundDecimals } from '../../../common/helpers/roundDecimals';
 
 const useStyles = makeStyles((theme: Theme) => ({
   responsiveContainer: {
@@ -29,7 +30,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface DataFormat {
   date: number;
   value: number;
-  classification: string;
   bitcoinPrice: number;
 }
 
@@ -37,16 +37,15 @@ const HistoricFearGreedIndexChart: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
 
-  const fearGreedIndex = useAppSelector(selectFearGreedIndex);
+  const bitcoinHashRate = useAppSelector(selectBitcoinHashRate);
 
   const formatRawData = () => {
     const chartData: DataFormat[] = [];
-    fearGreedIndex.value.forEach((indexData: FearGreedIndex) => {
+    bitcoinHashRate.value.forEach((hashRateData: BitcoinHashRate) => {
       chartData.push({
-        date: Number(indexData.timestamp),
-        value: Number(indexData.value),
-        classification: indexData.valueClassification,
-        bitcoinPrice: indexData.bitcoinPrice
+        date: hashRateData.x,
+        value: hashRateData.y,
+        bitcoinPrice: hashRateData.bitcoinPrice
       })
     })
     return chartData
@@ -54,7 +53,7 @@ const HistoricFearGreedIndexChart: React.FC = () => {
 
   return (
     <>
-      {fearGreedIndex.value.length === 0 ? (
+      {bitcoinHashRate.value.length === 0 ? (
         <ChartSkeleton />
       ) : (
         <ResponsiveContainer height="100%" width="100%" className={classes.responsiveContainer}>
@@ -63,15 +62,15 @@ const HistoricFearGreedIndexChart: React.FC = () => {
             margin={{ top: 8, right: 4, left: 4, bottom: 8 }}
           >
             <defs>
-              <linearGradient id="fear-greed-chart-gradient" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="bitcoin-hash-rate-chart-gradient" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor={theme.palette.primary.main}
+                  stopColor={theme.palette.secondary.main}
                   stopOpacity={0.3}
                 />
                 <stop
                   offset="100%"
-                  stopColor={theme.palette.primary.main}
+                  stopColor={theme.palette.secondary.main}
                   stopOpacity={0}
                 />
               </linearGradient>
@@ -90,7 +89,7 @@ const HistoricFearGreedIndexChart: React.FC = () => {
             </defs>
             <XAxis dataKey="date" hide />
             <YAxis
-              yAxisId="fear-greed-chart"
+              yAxisId="bitcoin-hash-rate-chart"
               domain={[(dataMin: number) => dataMin * 0.95, (dataMax: number) => dataMax * 1.05]}
               hide
             />
@@ -107,10 +106,10 @@ const HistoricFearGreedIndexChart: React.FC = () => {
                     <Typography variant="body1">
                       {convertTimestamp(label * 1000, true)}
                     </Typography>
-                    <Typography variant="body2" color="primary">
-                      {payload[0].payload.classification} ({payload[0].payload.value}%)
+                    <Typography variant="body2" color="secondary">
+                      Hash Rate: {shortenNumber(payload[0].payload.value)} TH/s
                     </Typography>
-                    {fearGreedIndex.showBitcoinCorrelation &&
+                    {bitcoinHashRate.showBitcoinCorrelation &&
                       <Typography variant="body2" id="bitcoin-tooltip">
                         Bitcoin Price: US${roundDecimals(payload[0].payload.bitcoinPrice, 0)}
                       </Typography>
@@ -124,15 +123,15 @@ const HistoricFearGreedIndexChart: React.FC = () => {
             <Area
               type="monotone"
               dataKey="value"
-              yAxisId="fear-greed-chart"
+              yAxisId="bitcoin-hash-rate-chart"
               dot={false}
               animationDuration={3000}
               strokeWidth={2}
-              stroke={theme.palette.primary.main}
+              stroke={theme.palette.secondary.main}
               fillOpacity={1}
-              fill={`url(#fear-greed-chart-gradient)`}
+              fill={`url(#bitcoin-hash-rate-chart-gradient)`}
             />
-            {fearGreedIndex.showBitcoinCorrelation &&
+            {bitcoinHashRate.showBitcoinCorrelation &&
               <Area
                 type="monotone"
                 dataKey="bitcoinPrice"

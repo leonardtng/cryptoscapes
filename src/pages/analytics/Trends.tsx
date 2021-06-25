@@ -3,7 +3,7 @@ import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Grid, Hidden } from '@material-ui/core';
 import CoinCorrelationCard from '../../components/UI/organisms/CoinCorrelationCard';
 import FearGreedIndexCard from '../../components/UI/organisms/FearGreedIndexCard';
-import MarketSentimentCard from '../../components/UI/organisms/MarketSentimentCard';
+import BitcoinHashRateCard from '../../components/UI/organisms/BitcoinHashRateCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
@@ -43,7 +43,7 @@ const Trends: React.FC = () => {
               <FearGreedIndexCard />
             </Grid>
             <Grid item xs={12} style={{ height: `calc(50% - ${theme.spacing(3) / 2}px)` }}>
-              <MarketSentimentCard />
+              <BitcoinHashRateCard />
             </Grid>
           </Grid>
         </Grid>
