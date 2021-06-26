@@ -1,13 +1,13 @@
 import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
-import TopCoinsCard from '../../components/UI/organisms/TopCoinsCard';
-import CoinDominanceCard from '../../components/UI/organisms/CoinDominanceCard';
-import GasOracleCard from '../../components/UI/organisms/GasOracleCard';
-import TrendingCoinsCard from '../../components/UI/organisms/TrendingCoinsCard';
-import MarketCapCard from '../../components/UI/organisms/MarketCapCard';
-import BannerCardSmall from '../../components/UI/molecules/BannerCardSmall';
-import VolumeCard from '../../components/UI/organisms/VolumeCard';
+import TopCoinsCard from '../../components/UI/analytics/organisms/TopCoinsCard';
+import CoinDominanceCard from '../../components/UI/analytics/organisms/CoinDominanceCard';
+import GasOracleCard from '../../components/UI/analytics/organisms/GasOracleCard';
+import TrendingCoinsCard from '../../components/UI/analytics/organisms/TrendingCoinsCard';
+import MarketCapCard from '../../components/UI/analytics/organisms/MarketCapCard';
+import BannerCardSmall from '../../components/UI/analytics/molecules/BannerCardSmall';
+import VolumeCard from '../../components/UI/analytics/organisms/VolumeCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {

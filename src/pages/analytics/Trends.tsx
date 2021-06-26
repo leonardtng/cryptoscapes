@@ -1,9 +1,9 @@
 import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Grid, Hidden } from '@material-ui/core';
-import CoinCorrelationCard from '../../components/UI/organisms/CoinCorrelationCard';
-import FearGreedIndexCard from '../../components/UI/organisms/FearGreedIndexCard';
-import BitcoinHashRateCard from '../../components/UI/organisms/BitcoinHashRateCard';
+import CoinCorrelationCard from '../../components/UI/analytics/organisms/CoinCorrelationCard';
+import FearGreedIndexCard from '../../components/UI/analytics/organisms/FearGreedIndexCard';
+import BitcoinHashRateCard from '../../components/UI/analytics/organisms/BitcoinHashRateCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
