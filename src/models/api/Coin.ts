@@ -1,3 +1,20 @@
+import { GenericState } from "..";
+
+export type CoinSortingKey = 'market_cap' | 'volume'
+
+export type CoinSortOrder = 'asc' | 'desc'
+
+export interface CoinQueryParams {
+  sortingKey: CoinSortingKey,
+  sortingOrder: CoinSortOrder,
+  page: number;
+  perPage: number;
+}
+
+export interface CoinSparkline {
+  price: number[];
+}
+
 export interface Coin {
   id: string;
   symbol: string;
@@ -25,4 +42,11 @@ export interface Coin {
   atlDate: Date;
   roi?: any;
   lastUpdated: Date;
+  sparklineIn7D?: CoinSparkline;
+  priceChangePercentage24HInCurrency: number;
+  priceChangePercentage7DInCurrency: number;
+}
+
+export interface CoinListState extends GenericState<Coin[]> {
+  coinQueryParams: CoinQueryParams;
 }

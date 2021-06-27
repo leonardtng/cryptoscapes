@@ -4,7 +4,14 @@ import {
   Page as PageInterface,
   RootModule as RootModuleInterface
 } from './common/RootModule';
-import { Coin as CoinInterface } from './api/Coin';
+import { 
+  CoinSortingKey as CoinSortingKeyInterface,
+  CoinSortOrder as CoinSortingOrderInterface,
+  CoinSparkline as CoinSparklineInterface,
+  CoinQueryParams as CoinQueryParamsInterface,
+  Coin as CoinInterface,
+  CoinListState as CoinListStateInterface
+ } from './api/Coin';
 import {
   AvailableDayRanges as AvailableDayRangesInterface,
   AvailableIntervals as AvailableIntervalsInterface,
@@ -46,7 +53,12 @@ export type AppState = AppStateInterface;
 export type GenericState<T> = GenericStateInterface<T>;
 export type Page = PageInterface;
 export type RootModule = RootModuleInterface;
+export type CoinSortingKey = CoinSortingKeyInterface;
+export type CoinSortingOrder = CoinSortingOrderInterface;
+export type CoinSparkline = CoinSparklineInterface;
+export type CoinQueryParams = CoinQueryParamsInterface;
 export type Coin = CoinInterface;
+export type CoinListState = CoinListStateInterface;
 export type AvailableDayRanges = AvailableDayRangesInterface;
 export type AvailableIntervals = AvailableIntervalsInterface;
 export type CoinMarketChart = CoinMarketChartInterface;

@@ -1,10 +1,10 @@
-import { AvailableDayRanges, AvailableIntervals } from "../models";
+import { AvailableDayRanges, AvailableIntervals, CoinSortingKey, CoinSortingOrder } from "../models";
 
 const ETHERSCAN_API_KEY = process.env.REACT_APP_ETHERSCAN_API_KEY
 
 export const coinGecko = {
-  coins:
-    `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`,
+  coins: (sortingKey: CoinSortingKey, sortingOrder: CoinSortingOrder, page: number, perPage: number, sparkline: boolean) =>
+    `/coins/markets?vs_currency=usd&order=${sortingKey}_${sortingOrder}&per_page=${perPage}&page=${page}&sparkline=${sparkline}&price_change_percentage=24h,7d`,
   coinMarketChart: (coinId: string, days: AvailableDayRanges, interval: AvailableIntervals) =>
     `/coins/${coinId}/market_chart?vs_currency=usd&days=${days}&interval=${interval}`,
   trending:
