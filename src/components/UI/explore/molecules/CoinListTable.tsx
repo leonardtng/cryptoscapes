@@ -4,7 +4,7 @@ import { Avatar, Box, Table, TableBody, TableCell, TableContainer, TableRow, Typ
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { fetchCoinList, selectCoinList, setCoinQueryParams } from '../../../../features/coinListSlice';
 import { Coin, CoinQueryParams, CoinSortingKey } from '../../../../models';
-import CoinListTableHeader from '../atoms/CoinListTableHeader';
+import CoinListTableHeader, { headCells } from '../atoms/CoinListTableHeader';
 import CoinSparkline from '../atoms/CoinSparkline';
 import { roundDecimals } from '../../../../common/helpers/roundDecimals';
 import { formatNumber } from '../../../../common/helpers/formatNumber';
@@ -157,7 +157,7 @@ const CoinListTable: React.FC = () => {
               })}
               {coinList.status === 'LOADING' &&
                 <TableRow>
-                  <TableCell component="th" scope="row" colSpan={8} height={20}>
+                  <TableCell component="th" scope="row" colSpan={headCells.length}>
                     <TableFooterLoading />
                   </TableCell>
                 </TableRow>

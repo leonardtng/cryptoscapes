@@ -19,7 +19,7 @@ interface HeadCell {
   numeric: boolean;
 }
 
-const headCells: HeadCell[] = [
+export const headCells: HeadCell[] = [
   { id: 'marketCapRank', numeric: false, label: '#' },
   { id: 'name', numeric: false, label: 'Name' },
   { id: 'currentPrice', numeric: true, label: 'Price' },
