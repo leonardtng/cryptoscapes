@@ -19,7 +19,7 @@ const CoinListCard: React.FC = () => {
 
   useEffect(() => {
     if (coinList.value.length === 0 && coinList.status === 'IDLE') {
-      dispatch(fetchCoinList(coinList.coinQueryParams));
+      dispatch(fetchCoinList({ coinQueryParams: coinList.coinQueryParams, append: false }));
     }
   }, [dispatch, coinList.value, coinList.status, coinList.coinQueryParams]);
 

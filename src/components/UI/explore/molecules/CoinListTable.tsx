@@ -3,11 +3,13 @@ import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/sty
 import { Avatar, Box, Table, TableBody, TableCell, TableContainer, TableRow, Typography, Paper } from '@material-ui/core';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { fetchCoinList, selectCoinList, setCoinQueryParams } from '../../../../features/coinListSlice';
-import { Coin, CoinSortingKey } from '../../../../models';
+import { Coin, CoinQueryParams, CoinSortingKey } from '../../../../models';
 import CoinListTableHeader from '../atoms/CoinListTableHeader';
 import CoinSparkline from '../atoms/CoinSparkline';
 import { roundDecimals } from '../../../../common/helpers/roundDecimals';
 import { formatNumber } from '../../../../common/helpers/formatNumber';
+import useInfiniteScrollingObserver from '../../../../common/hooks/useInfiniteScrollingObserver';
+import TableFooterLoading from '../atoms/TableFooterLoading'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,17 +55,28 @@ const CoinListTable: React.FC = () => {
 
   const coinList = useAppSelector(selectCoinList);
 
+  const [lastRef] = useInfiniteScrollingObserver(
+    coinList.status,
+    setCoinQueryParams({
+      ...coinList.coinQueryParams,
+      page: coinList.coinQueryParams.page + 1
+    }),
+    fetchCoinList({
+      coinQueryParams: { ...coinList.coinQueryParams, page: coinList.coinQueryParams.page + 1 },
+      append: true
+    })
+  );
+
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: CoinSortingKey) => {
-    dispatch(fetchCoinList({
+    const queryParams: CoinQueryParams = {
       ...coinList.coinQueryParams,
       sortingKey: property,
-      sortingOrder: coinList.coinQueryParams.sortingOrder === 'asc' ? 'desc' : 'asc'
-    }));
-    dispatch(setCoinQueryParams({
-      ...coinList.coinQueryParams,
-      sortingKey: property,
-      sortingOrder: coinList.coinQueryParams.sortingOrder === 'asc' ? 'desc' : 'asc'
-    }))
+      sortingOrder: coinList.coinQueryParams.sortingOrder === 'asc' ? 'desc' : 'asc',
+      page: 1
+    };
+
+    dispatch(fetchCoinList({ coinQueryParams: queryParams, append: false }));
+    dispatch(setCoinQueryParams(queryParams));
   };
 
   return (
@@ -77,22 +90,23 @@ const CoinListTable: React.FC = () => {
               onRequestSort={handleRequestSort}
             />
             <TableBody>
-              {coinList.value.map((coin: Coin) => {
+              {coinList.value.map((coin: Coin, index: number) => {
                 const gain24H = coin.priceChangePercentage24HInCurrency >= 0;
                 const gain7D = coin.priceChangePercentage7DInCurrency >= 0;
                 return <TableRow
                   hover
                   tabIndex={-1}
-                  key={coin.id}
+                  key={index}
+                  ref={coinList.value.length === index + 1 ? lastRef : null}
                 >
                   <TableCell component="th" scope="row">
                     <Typography variant="subtitle2" noWrap>
-                      {coin.marketCapRank ? coin.marketCapRank : '-'}
+                      {coin.marketCapRank || '-'}
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Box display="flex" alignItems="center"  className={classes.coinNameGroup} >
-                      <Avatar src={coin.image} alt={coin.id}/>
+                    <Box display="flex" alignItems="center" className={classes.coinNameGroup} >
+                      <Avatar src={coin.image} alt={coin.id} />
                       <Typography variant="subtitle2" noWrap>
                         {coin.name}
                       </Typography>
@@ -126,12 +140,12 @@ const CoinListTable: React.FC = () => {
                   </TableCell>
                   <TableCell align="right">
                     <Typography variant="subtitle2" noWrap>
-                      ${formatNumber(coin.marketCap)}
+                      ${formatNumber(coin.marketCap || 0)}
                     </Typography>
                   </TableCell>
                   <TableCell align="right">
                     <Typography variant="subtitle2" noWrap>
-                      ${formatNumber(coin.totalVolume)}
+                      ${formatNumber(coin.totalVolume || 0)}
                     </Typography>
                   </TableCell>
                   <TableCell align="right">
@@ -141,6 +155,13 @@ const CoinListTable: React.FC = () => {
                   </TableCell>
                 </TableRow>
               })}
+              {coinList.status === 'LOADING' &&
+                <TableRow>
+                  <TableCell component="th" scope="row" colSpan={8} height={20}>
+                    <TableFooterLoading />
+                  </TableCell>
+                </TableRow>
+              }
             </TableBody>
           </Table>
         </TableContainer>

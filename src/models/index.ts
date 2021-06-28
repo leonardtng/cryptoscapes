@@ -1,5 +1,8 @@
 import { AppState as AppStateInterface } from './globals/AppState';
-import { GenericState as GenericStateInterface } from './common/GenericState';
+import { 
+  Status as StatusInterface,
+  GenericState as GenericStateInterface
+ } from './common/GenericState';
 import {
   Page as PageInterface,
   RootModule as RootModuleInterface
@@ -50,6 +53,7 @@ import {
 } from './api/BitcoinHashRate';
 
 export type AppState = AppStateInterface;
+export type Status = StatusInterface;
 export type GenericState<T> = GenericStateInterface<T>;
 export type Page = PageInterface;
 export type RootModule = RootModuleInterface;

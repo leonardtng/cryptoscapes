@@ -1,6 +1,8 @@
+export type Status = 'IDLE' | 'LOADING' | 'FAILED';
+
 export interface GenericState<T> {
   value: T;
-  status: 'IDLE' | 'LOADING' | 'FAILED';
+  status: Status;
   error?: string;
   param?: string;
 }

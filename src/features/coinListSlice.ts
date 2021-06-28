@@ -21,16 +21,21 @@ const initialState: CoinListState = {
   }
 };
 
-export const fetchCoinList = createAsyncThunk('coinList', async (coinQueryParams: CoinQueryParams) => {
+interface Params {
+  coinQueryParams: CoinQueryParams;
+  append: boolean;
+}
+
+export const fetchCoinList = createAsyncThunk('coinList', async (params: Params) => {
   const canceler = axios.CancelToken.source();
 
   const response = await http.request({
     ...config('coinGecko'),
     url: API.coins(
-      coinQueryParams.sortingKey,
-      coinQueryParams.sortingOrder,
-      coinQueryParams.page,
-      coinQueryParams.perPage,
+      params.coinQueryParams.sortingKey,
+      params.coinQueryParams.sortingOrder,
+      params.coinQueryParams.page,
+      params.coinQueryParams.perPage,
       true
     ),
     cancelToken: canceler.token
@@ -38,7 +43,7 @@ export const fetchCoinList = createAsyncThunk('coinList', async (coinQueryParams
 
   const normalizedResponse = toCamelCase(response.data);
 
-  return normalizedResponse as Coin[]
+  return { data: normalizedResponse, append: params.append } as { data: Coin[], append: boolean }
 });
 
 export const selectCoinList: (state: RootState) => CoinListState = (state: RootState) => state.coinList;
@@ -58,7 +63,7 @@ const coinListSlice: Slice<CoinListState, Reducers, 'coinList'> = createSlice({
       })
       .addCase(fetchCoinList.fulfilled, (state, action) => {
         state.status = 'IDLE';
-        state.value = action.payload;
+        state.value = action.payload.append ? [...state.value, ...action.payload.data] : action.payload.data;
       })
       .addCase(fetchCoinList.rejected, (state, action) => {
         state.status = 'FAILED';
