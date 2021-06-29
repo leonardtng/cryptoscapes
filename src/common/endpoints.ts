@@ -10,7 +10,9 @@ export const coinGecko = {
   trending:
     `/search/trending`,
   global:
-    `/global`
+    `/global`,
+  supportedCoins: 
+    `/coins/list`
 };
 
 export const etherscan = {

@@ -2,10 +2,8 @@ import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Drawer as MuiDrawer, Toolbar } from '@material-ui/core';
 import DrawerItems from '../molecules/DrawerItems';
-import { appBarHeight } from './AppBar';
 import { RootModule } from '../../../../models/common/RootModule';
-
-export const drawerWidth = 260;
+import { appBarHeight, drawerWidth } from '../../../../common/shared/dimensions';
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawer: {

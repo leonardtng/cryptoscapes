@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction, Slice, SliceCaseReducers } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { toCamelCase } from '../common/helpers/caseTransformer';
 import { RootState } from '../app/store';
 import { coinGecko as API } from '../common/endpoints';
 import { API_CONFIG as config, http } from '../common/constants';
 import { AvailableDayRanges, CoinMarketChart, CoinMarketChartList, CoinMarketChartListState } from '../models';
-import { cacheWithExpiry, retrieveCache } from '../common/helpers/cacheStorageHandler';
+import { cacheWithExpiry, retrieveCache, toCamelCase } from '../common/helpers';
 
 interface Reducers extends SliceCaseReducers<CoinMarketChartListState> {
   setSelectedDayRange: (state: CoinMarketChartListState, action: PayloadAction<AvailableDayRanges>) => void;

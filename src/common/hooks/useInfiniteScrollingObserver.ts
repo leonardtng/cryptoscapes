@@ -2,7 +2,7 @@ import { useCallback, useRef } from "react";
 import { useAppDispatch } from "../../app/hooks";
 import { Status } from "../../models";
 
-const useInfiniteScrollingObserver = (
+export const useInfiniteScrollingObserver = (
   status: Status,
   fetch: any,
   setQueryParams: any
@@ -18,11 +18,9 @@ const useInfiniteScrollingObserver = (
         dispatch(fetch);
         dispatch(setQueryParams);
       }
-    }, { threshold: 0.99 })
+    }, { threshold: 0.5 })
     if (node) observer.current.observe(node)
   }, [dispatch, fetch, setQueryParams, status]);
 
   return [lastElementRef]
 }
-
-export default useInfiniteScrollingObserver

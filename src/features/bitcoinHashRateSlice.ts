@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction, Slice, SliceCaseReducers } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { toCamelCase } from '../common/helpers/caseTransformer';
 import { RootState } from '../app/store';
 import { blockchainCom as API, coinGecko as coinAPI } from '../common/endpoints';
 import { API_CONFIG as config, http } from '../common/constants';
 import { BitcoinHashRate, BitcoinHashRateRootObject, BitcoinHashRateState, CoinMarketChart } from '../models';
-import { cacheWithExpiry, retrieveCache } from '../common/helpers/cacheStorageHandler';
+import { cacheWithExpiry, retrieveCache, toCamelCase } from '../common/helpers';
 
 interface Reducers extends SliceCaseReducers<BitcoinHashRateState> {
   setShowBitcoinCorrelation: (state: BitcoinHashRateState, action: PayloadAction<boolean>) => void;

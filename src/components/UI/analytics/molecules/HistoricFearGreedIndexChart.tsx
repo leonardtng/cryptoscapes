@@ -8,7 +8,7 @@ import { selectFearGreedIndex } from '../../../../features/fearGreedIndexSlice';
 import ChartSkeleton from '../atoms/ChartSkeleton';
 import { convertTimestamp } from '../../../../common/helpers/dateHandler';
 import { roundDecimals } from '../../../../common/helpers/roundDecimals';
-import { bitcoinOrange } from '../../../../common/helpers/fixedColors';
+import { bitcoinOrange } from '../../../../common/shared/colors';
 
 const useStyles = makeStyles((theme: Theme) => ({
   responsiveContainer: {

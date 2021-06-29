@@ -8,7 +8,7 @@ import { convertTimestamp } from '../../../../common/helpers/dateHandler';
 import { selectBitcoinHashRate } from '../../../../features/bitcoinHashRateSlice';
 import { shortenNumber } from '../../../../common/helpers/shortenNumber';
 import { BitcoinHashRate } from '../../../../models';
-import { bitcoinOrange } from '../../../../common/helpers/fixedColors';
+import { bitcoinOrange } from '../../../../common/shared/colors';
 import { roundDecimals } from '../../../../common/helpers/roundDecimals';
 
 const useStyles = makeStyles((theme: Theme) => ({

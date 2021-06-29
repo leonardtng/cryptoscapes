@@ -1,9 +1,10 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Route, Switch } from 'react-router-dom';
-import AppBar, { appBarHeight } from '../UI/baseline/organisms/AppBar';
-import Drawer, { drawerWidth } from '../UI/baseline/organisms/Drawer';
+import AppBar from '../UI/baseline/organisms/AppBar';
+import Drawer from '../UI/baseline/organisms/Drawer';
 import { Page, RootModule } from '../../models';
+import { appBarHeight, drawerWidth } from '../../common/shared/dimensions';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

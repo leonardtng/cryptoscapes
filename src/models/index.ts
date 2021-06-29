@@ -24,6 +24,9 @@ import {
   CoinMarketChartListState as CoinMarketChartListStateInterface
 } from './api/CoinMarketChart';
 import {
+  SupportedCoin as SupportedCoinInterface
+} from './api/SupportedCoin';
+import {
   GasOracle as GasOracleInterface,
   GasOracleRootObject as GasOracleRootObjectInterface,
   GasOracleState as GasOracleStateInterface
@@ -69,6 +72,7 @@ export type CoinMarketChart = CoinMarketChartInterface;
 export type CoinMarketChartList = CoinMarketChartListInterface;
 export type DominanceChartList = DominanceChartListInterface;
 export type CoinMarketChartListState = CoinMarketChartListStateInterface;
+export type SupportedCoin = SupportedCoinInterface;
 export type GasOracle = GasOracleInterface;
 export type GasOracleState = GasOracleStateInterface;
 export type GasOracleRootObject = GasOracleRootObjectInterface;

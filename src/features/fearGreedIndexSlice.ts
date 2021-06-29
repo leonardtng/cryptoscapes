@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction, Slice, SliceCaseReducers } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { toCamelCase } from '../common/helpers/caseTransformer';
+import { toCamelCase } from '../common/helpers';
 import { RootState } from '../app/store';
 import { alternativeMe as API, coinGecko as coinAPI } from '../common/endpoints';
 import { API_CONFIG as config, http } from '../common/constants';

@@ -2,7 +2,7 @@ import React from 'react';
 import { Theme, makeStyles, withStyles } from '@material-ui/core/styles';
 import { Switch, Tooltip } from '@material-ui/core'
 import { useAppDispatch } from '../../../../app/hooks';
-import { bitcoinOrange } from '../../../../common/helpers/fixedColors';
+import { bitcoinOrange } from '../../../../common/shared/colors';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 const useStyles = makeStyles((theme: Theme) => ({
