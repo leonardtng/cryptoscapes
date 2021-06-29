@@ -1,11 +1,11 @@
 import rateLimit from 'axios-rate-limit';
 import axios, { AxiosRequestConfig } from 'axios';
 
-export const http = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1500 });
 // Metered APIs: coinGecko, blockchain.com
+export const http = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1500 });
 
 export const API_CONFIG:
-  (server: 'coinGecko' | 'etherscan' | 'alternative.me' | 'blockchain.com' ) => AxiosRequestConfig =
+  (server: 'coinGecko' | 'etherscan' | 'alternative.me' | 'blockchain.com') => AxiosRequestConfig =
   (server: 'coinGecko' | 'etherscan' | 'alternative.me' | 'blockchain.com') => {
     switch (server) {
       case 'coinGecko':
@@ -39,4 +39,4 @@ export const API_CONFIG:
           method: 'GET'
         }
     }
-  }
+  };

@@ -6,7 +6,7 @@ import CardLayout from '../../../templates/CardLayout';
 import MarketCapDonutChart from '../molecules/MarketCapDonutChart';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectGlobalCoinData } from '../../../../features/globalCoinDataSlice';
-import { shortenNumber } from '../../../../common/helpers/shortenNumber';
+import { shortenNumber } from '../../../../common/helpers';
 import { DashboardRounded, DonutLargeRounded, PieChartRounded } from '@material-ui/icons';
 import MarketCapTreemap from '../molecules/MarketCapTreemap';
 

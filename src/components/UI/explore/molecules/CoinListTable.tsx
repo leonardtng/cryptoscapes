@@ -16,8 +16,7 @@ import { fetchCoinList, selectCoinList, setCoinQueryParams } from '../../../../f
 import { Coin, CoinQueryParams, CoinSortingKey } from '../../../../models';
 import CoinListTableHeader, { headCells } from '../atoms/CoinListTableHeader';
 import CoinSparkline from '../atoms/CoinSparkline';
-import { roundDecimals } from '../../../../common/helpers/roundDecimals';
-import { formatNumber } from '../../../../common/helpers/formatNumber';
+import { formatNumber, roundDecimals } from '../../../../common/helpers';
 import { useInfiniteScrollingObserver } from '../../../../common/hooks/useInfiniteScrollingObserver';
 import { selectSupportedCoins } from '../../../../features/supportedCoinsSlice';
 import { Skeleton } from '@material-ui/lab';

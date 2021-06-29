@@ -6,8 +6,7 @@ import { FearGreedIndex } from '../../../../models';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectFearGreedIndex } from '../../../../features/fearGreedIndexSlice';
 import ChartSkeleton from '../atoms/ChartSkeleton';
-import { convertTimestamp } from '../../../../common/helpers/dateHandler';
-import { roundDecimals } from '../../../../common/helpers/roundDecimals';
+import { convertTimestamp, roundDecimals } from '../../../../common/helpers';
 import { bitcoinOrange } from '../../../../common/shared/colors';
 
 const useStyles = makeStyles((theme: Theme) => ({

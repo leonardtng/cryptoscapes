@@ -1,3 +1,13 @@
+export const formatNumber = (x: number) => {
+  const parts = x.toString().split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return parts.join('.');
+};
+
+export const roundDecimals = (num: number, places: number = 2) => {
+  return Math.round(num * 10**places) / 10**places
+};
+
 export const shortenNumber = (num: number) => {
   const format = (value: number, postfix: string) => {
     const str = value.toString();

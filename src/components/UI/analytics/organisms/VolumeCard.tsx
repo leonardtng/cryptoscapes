@@ -5,7 +5,7 @@ import { Skeleton } from '@material-ui/lab';
 import CardLayout from '../../../templates/CardLayout';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectGlobalCoinData } from '../../../../features/globalCoinDataSlice';
-import { shortenNumber } from '../../../../common/helpers/shortenNumber';
+import { shortenNumber } from '../../../../common/helpers';
 import { BarChartRounded } from '@material-ui/icons';
 import VolumeBarChart from '../molecules/VolumeBarChart';
 

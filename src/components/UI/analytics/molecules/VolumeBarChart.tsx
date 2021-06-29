@@ -7,7 +7,7 @@ import { useAppSelector } from '../../../../app/hooks';
 import { selectCoins } from '../../../../features/coinsSlice';
 import { selectGlobalCoinData } from '../../../../features/globalCoinDataSlice';
 import { Coin } from '../../../../models';
-import { shortenNumber } from '../../../../common/helpers/shortenNumber';
+import { shortenNumber } from '../../../../common/helpers';
 import { useWindowSize } from '../../../../common/hooks/useWindowSize';
 import chroma from "chroma-js";
 

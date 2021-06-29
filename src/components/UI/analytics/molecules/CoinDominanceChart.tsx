@@ -5,8 +5,7 @@ import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'rec
 import { useSelector } from 'react-redux';
 import ChartSkeleton from '../atoms/ChartSkeleton';
 import { Coin, CoinMarketChart } from '../../../../models';
-import { shortenNumber } from '../../../../common/helpers/shortenNumber';
-import { convertTimestamp } from '../../../../common/helpers/dateHandler';
+import { convertTimestamp, shortenNumber } from '../../../../common/helpers';
 import { selectDominanceChartList } from '../../../../features/dominanceChartList';
 
 const useStyles = makeStyles((theme: Theme) => ({

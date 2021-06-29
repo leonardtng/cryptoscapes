@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 // import { Theme, makeStyles } from '@material-ui/core/styles';
 import { CardHeader } from '@material-ui/core';
-import { getTodayDate } from '../../../../common/helpers/dateHandler';
+import { getTodayDate } from '../../../../common/helpers';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import CardLayout from '../../../templates/CardLayout';
 import { fetchCoinList, selectCoinList } from '../../../../features/coinListSlice';

@@ -23,4 +23,4 @@ export const useInfiniteScrollingObserver = (
   }, [dispatch, fetch, setQueryParams, status]);
 
   return [lastElementRef]
-}
+};

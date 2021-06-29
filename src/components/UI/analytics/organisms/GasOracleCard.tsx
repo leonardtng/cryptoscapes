@@ -10,7 +10,7 @@ import { selectCoins } from '../../../../features/coinsSlice';
 import { Coin } from '../../../../models';
 import GasLimitTextField from '../atoms/GasLimitTextField';
 import GasIndicatorGroup from '../molecules/GasIndicatorGroup';
-import { roundDecimals } from '../../../../common/helpers/roundDecimals';
+import { roundDecimals } from '../../../../common/helpers';
 
 const useStyles = makeStyles((theme: Theme) => ({
   avatarColor: {

@@ -6,7 +6,7 @@ import CardLayout from '../../../templates/CardLayout';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { fetchGlobalCoinData, selectGlobalCoinData } from '../../../../features/globalCoinDataSlice';
 import { ArrowDownwardRounded, ArrowUpwardRounded } from '@material-ui/icons';
-import { roundDecimals } from '../../../../common/helpers/roundDecimals';
+import { roundDecimals } from '../../../../common/helpers';
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   cardWrapper: {

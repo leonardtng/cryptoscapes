@@ -37,4 +37,4 @@ export const pearsonCorrelation = (prefs: number[][], p1: number, p2: number) =>
   if (den === 0) return 0;
 
   return num / den;
-}
+};

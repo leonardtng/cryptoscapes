@@ -7,8 +7,7 @@ import { selectCoins } from '../../../../features/coinsSlice';
 import { selectGlobalCoinData } from '../../../../features/globalCoinDataSlice';
 import { Coin } from '../../../../models';
 import { Box, Typography } from '@material-ui/core';
-import { roundDecimals } from '../../../../common/helpers/roundDecimals';
-import { shortenNumber } from '../../../../common/helpers/shortenNumber';
+import { roundDecimals, shortenNumber } from '../../../../common/helpers';
 import chroma from "chroma-js";
 
 const useStyles = makeStyles((theme: Theme) => ({

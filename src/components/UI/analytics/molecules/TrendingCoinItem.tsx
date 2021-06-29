@@ -4,7 +4,7 @@ import { Avatar, ListItem, ListItemAvatar, ListItemText, Typography } from '@mat
 import { Coin, TrendingCoin } from '../../../../models';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectCoins } from '../../../../features/coinsSlice';
-import { roundDecimals } from '../../../../common/helpers/roundDecimals';
+import { roundDecimals } from '../../../../common/helpers';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   ranking: {

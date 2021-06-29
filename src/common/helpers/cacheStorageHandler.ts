@@ -28,4 +28,4 @@ export const retrieveCache = (key: string) => {
       return null
     }
     return item.value
-}
+};

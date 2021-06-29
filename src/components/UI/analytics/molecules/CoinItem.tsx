@@ -3,7 +3,7 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Avatar, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
 import { Coin } from '../../../../models';
 import SmallCoinChart from '../atoms/SmallCoinChart';
-import { roundDecimals } from '../../../../common/helpers/roundDecimals';
+import { roundDecimals } from '../../../../common/helpers';
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   ranking: {

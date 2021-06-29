@@ -6,8 +6,7 @@ import { useAppSelector } from '../../../../app/hooks';
 import { selectCoins } from '../../../../features/coinsSlice';
 import { selectGlobalCoinData } from '../../../../features/globalCoinDataSlice';
 import { Coin } from '../../../../models';
-import { shortenNumber } from '../../../../common/helpers/shortenNumber';
-import { roundDecimals } from '../../../../common/helpers/roundDecimals';
+import { roundDecimals, shortenNumber } from '../../../../common/helpers';
 import chroma from "chroma-js";
 
 const useStyles = makeStyles((theme: Theme) => ({

@@ -4,12 +4,10 @@ import { Box, Typography, useTheme } from '@material-ui/core'
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useAppSelector } from '../../../../app/hooks';
 import ChartSkeleton from '../atoms/ChartSkeleton';
-import { convertTimestamp } from '../../../../common/helpers/dateHandler';
 import { selectBitcoinHashRate } from '../../../../features/bitcoinHashRateSlice';
-import { shortenNumber } from '../../../../common/helpers/shortenNumber';
 import { BitcoinHashRate } from '../../../../models';
 import { bitcoinOrange } from '../../../../common/shared/colors';
-import { roundDecimals } from '../../../../common/helpers/roundDecimals';
+import { convertTimestamp, roundDecimals, shortenNumber } from '../../../../common/helpers';
 
 const useStyles = makeStyles((theme: Theme) => ({
   responsiveContainer: {

@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { fetchBitcoinHashRate, selectBitcoinHashRate, setShowBitcoinCorrelation } from '../../../../features/bitcoinHashRateSlice';
 import { ReactComponent as MiningIcon } from '../../../../assets/images/icons/mining-icon.svg';
 import HelpIconHeader from '../atoms/HelpIconHeader';
-import { shortenNumber } from '../../../../common/helpers/shortenNumber';
+import { shortenNumber } from '../../../../common/helpers';
 import BitcoinHashRateChart from '../molecules/BitcoinHashRateChart';
 import ShowBitcoinCorrelationSwitch from '../atoms/ShowBitcoinCorrelationSwitch';
 
