@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Box, LinearProgress, Typography, Tooltip } from '@material-ui/core';
-import { formatNumber, roundDecimals, shortenNumber } from '../../../../common/helpers';
+import { formatNumber, roundDecimals } from '../../../../common/helpers';
 import { Coin } from '../../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
