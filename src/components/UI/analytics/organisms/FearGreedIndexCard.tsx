@@ -43,7 +43,7 @@ const FearGreedIndexCard: React.FC = () => {
           <HelpIconHeader
             title="Fear & Greed Index"
             tooltipContent={
-              <div>
+              <Box>
                 <Typography variant="subtitle1" color="secondary">Data Sources Breakdown:</Typography>
                 <Typography variant="body2" color="textSecondary">- Price Volatility (25%)</Typography>
                 <Typography variant="body2" color="textSecondary">- Market Momentum / Volume (25%)</Typography>
@@ -51,7 +51,7 @@ const FearGreedIndexCard: React.FC = () => {
                 <Typography variant="body2" color="textSecondary">- Surveys (15%)</Typography>
                 <Typography variant="body2" color="textSecondary">- Bitcoin Dominance (10%)</Typography>
                 <Typography variant="body2" color="textSecondary">- Google Trends (10%)</Typography>
-              </div>
+              </Box>
             }
           />
         }

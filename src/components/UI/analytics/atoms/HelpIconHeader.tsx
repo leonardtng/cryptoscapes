@@ -31,12 +31,10 @@ const HelpIconHeader: React.FC<Props> = ({ title, tooltipContent }) => {
 
   return (
     <Typography className={classes.header} variant="body2" color="textSecondary">
-      {title} 
+      {title}
       <Tooltip
         title={tooltipContent}
-        classes={{
-          tooltip: classes.customTooltip,
-        }}
+        classes={{ tooltip: classes.customTooltip }}
       >
         <HelpOutlineRounded />
       </Tooltip>
