@@ -1,8 +1,9 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import {
   Avatar,
   Box,
+  LinearProgress,
   Table,
   TableBody,
   TableCell,
@@ -20,53 +21,73 @@ import { formatNumber, roundDecimals } from '../../../../common/helpers';
 import { useInfiniteScrollingObserver } from '../../../../common/hooks/useInfiniteScrollingObserver';
 import { selectSupportedCoins } from '../../../../features/supportedCoinsSlice';
 import { Skeleton } from '@material-ui/lab';
+import { useHistory } from 'react-router';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      height: 'calc(100% - 83px)',
-      width: '100%',
-      overflowY: 'scroll',
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    height: 'calc(100% - 83px)',
+    width: '100%',
+    overflowY: 'scroll',
+  },
+  paper: {
+    height: '100%',
+    width: '100%',
+    backgroundColor: theme.palette.card.default
+  },
+  table: {
+    height: '100%'
+  },
+  tableContainer: {
+    height: '100%',
+    '& .MuiTableBody-root .MuiTableRow-root': {
+      height: 83,
     },
-    paper: {
-      height: '100%',
-      width: '100%',
-      backgroundColor: theme.palette.card.default
+    '& .MuiTableBody-root .MuiTableRow-root:last-child .MuiTableCell-root': {
+      borderBottom: 'none'
     },
-    table: {
-      height: '100%',
-      minWidth: 750
+    '& .MuiTableBody-root .MuiTableRow-root:hover .MuiTableCell-root': {
+      backgroundColor: theme.palette.card.paper
     },
-    tableContainer: {
-      height: '100%',
-      '& .MuiTableBody-root .MuiTableRow-root': {
-        height: 83
-      },
-      '& .MuiTableBody-root .MuiTableRow-root:last-child .MuiTableCell-root': {
-        borderBottom: 'none'
-      }
+  },
+  stickyColumn: {
+    position: 'sticky',
+    left: 0,
+    zIndex: 2,
+    backgroundColor: theme.palette.card.default
+  },
+  coinNameGroup: {
+    '& .MuiAvatar-root': {
+      height: theme.spacing(4),
+      width: theme.spacing(4),
+      marginRight: 16
     },
-    coinNameGroup: {
-      '& .MuiAvatar-root': {
-        height: theme.spacing(4),
-        width: theme.spacing(4),
-        marginRight: 16
-      },
-      '& .MuiTypography-root:last-child': {
-        marginLeft: 16
-      }
-    },
-    chartWrapper: {
-      height: 50,
-      width: 150,
-      float: 'right'
+    '& .MuiTypography-root:last-child': {
+      marginLeft: 10
     }
-  }),
-);
+  },
+  progressBar: {
+    marginTop: theme.spacing(1),
+    width: '84%',
+    float: 'right',
+    borderRadius: 12,
+    height: 6,
+    minWidth: 150,
+    '& .MuiLinearProgress-bar': {
+      borderRadius: 12
+    }
+  },
+  chartWrapper: {
+    height: 50,
+    width: 150,
+    float: 'right'
+  }
+}));
 
 const CoinListTable: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
+
+  const history = useHistory();
   const dispatch = useAppDispatch();
 
   const coinList = useAppSelector(selectCoinList);
@@ -125,17 +146,17 @@ const CoinListTable: React.FC = () => {
                     const gain24H = coin.priceChangePercentage24HInCurrency >= 0;
                     const gain7D = coin.priceChangePercentage7DInCurrency >= 0;
                     return <TableRow
-                      hover
                       tabIndex={-1}
                       key={index}
                       ref={coinList.value.length === index + 1 ? lastRef : null}
+                      onClick={() => history.push(`/coins/${coin.id}`)}
                     >
-                      <TableCell component="th" scope="row">
+                      <TableCell component="th" scope="row" className={classes.stickyColumn}>
                         <Typography variant="subtitle2" noWrap>
                           {coin.marketCapRank || '-'}
                         </Typography>
                       </TableCell>
-                      <TableCell>
+                      <TableCell id="sticky-column" className={classes.stickyColumn} style={{ left: 67 }}>
                         <Box display="flex" alignItems="center" className={classes.coinNameGroup} >
                           <Avatar src={coin.image} alt={coin.id} />
                           <Typography variant="subtitle2" noWrap>
@@ -178,6 +199,19 @@ const CoinListTable: React.FC = () => {
                         <Typography variant="subtitle2" noWrap>
                           ${formatNumber(coin.totalVolume || 0)}
                         </Typography>
+                      </TableCell>
+                      <TableCell align="right">
+                        <Typography variant="subtitle2" noWrap>
+                          {formatNumber(roundDecimals(coin.circulatingSupply || 0, 0))} {coin.symbol.toUpperCase()}
+                        </Typography>
+                        {coin.totalSupply && coin.circulatingSupply < coin.totalSupply &&
+                          <LinearProgress
+                            className={classes.progressBar}
+                            variant="determinate"
+                            color="secondary"
+                            value={coin.circulatingSupply / coin.totalSupply * 100}
+                          />
+                        }
                       </TableCell>
                       <TableCell align="right">
                         <div className={classes.chartWrapper}>

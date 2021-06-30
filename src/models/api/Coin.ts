@@ -32,8 +32,8 @@ export interface Coin {
   marketCapChange24H: number;
   marketCapChangePercentage24H: number;
   circulatingSupply: number;
-  totalSupply: number;
-  maxSupply: number;
+  totalSupply: number | null;
+  maxSupply: number | null;
   ath: number;
   athChangePercentage: number;
   athDate: Date;

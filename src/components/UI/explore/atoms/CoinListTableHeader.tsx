@@ -1,17 +1,18 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import { TableCell, TableHead, TableRow, TableSortLabel, Typography } from '@material-ui/core';
 import { Coin, CoinSortingKey, CoinSortingOrder } from '../../../../models';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      '& .MuiTableCell-stickyHeader': {
-        backgroundColor: theme.palette.card.default
-      }
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    '& .MuiTableCell-stickyHeader': {
+      backgroundColor: theme.palette.card.default
     }
-  }),
-);
+  },
+  stickyColumn: {
+    zIndex: 3
+  }
+}));
 
 interface HeadCell {
   id: keyof Coin;
@@ -27,6 +28,7 @@ export const headCells: HeadCell[] = [
   { id: 'priceChangePercentage7DInCurrency', numeric: true, label: '7d %' },
   { id: 'marketCap', numeric: true, label: 'Market Cap' },
   { id: 'totalVolume', numeric: true, label: 'Volume (24h)' },
+  { id: 'circulatingSupply', numeric: true, label: 'Circulating Supply' },
   { id: 'sparklineIn7D', numeric: true, label: 'Last 7 Days' },
 ];
 
@@ -67,11 +69,13 @@ const CoinListTableHeader: React.FC<CoinListTableHeaderProps> = ({ order, orderB
   return (
     <TableHead className={classes.root}>
       <TableRow>
-        {headCells.map((headCell) => (
+        {headCells.map((headCell: HeadCell, index: number) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             sortDirection={sortingId === headCell.id ? order : false}
+            className={index < 2 ? classes.stickyColumn : undefined}
+            style={{ left: index === 0 ? 0 : index === 1 ? 67 : 'auto' }}
           >
             <TableSortLabel
               disabled={headCell.id !== 'marketCap' && headCell.id !== 'totalVolume'}
