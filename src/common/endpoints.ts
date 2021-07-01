@@ -3,8 +3,8 @@ import { AvailableDayRanges, AvailableIntervals, CoinSortingKey, CoinSortingOrde
 const ETHERSCAN_API_KEY = process.env.REACT_APP_ETHERSCAN_API_KEY;
 
 export const coinGecko = {
-  coins: (sortingKey: CoinSortingKey, sortingOrder: CoinSortingOrder, page: number, perPage: number, sparkline: boolean) =>
-    `/coins/markets?vs_currency=usd&order=${sortingKey}_${sortingOrder}&per_page=${perPage}&page=${page}&sparkline=${sparkline}&price_change_percentage=24h,7d`,
+  coins: (sortingKey: CoinSortingKey, sortingOrder: CoinSortingOrder, page: number, perPage: number, sparkline: boolean, category: string) =>
+    `/coins/markets?vs_currency=usd&order=${sortingKey}_${sortingOrder}&per_page=${perPage}&page=${page}&sparkline=${sparkline}&price_change_percentage=24h,7d${category ? `&category=${category}` : ''}`,
   coinMarketChart: (coinId: string, days: AvailableDayRanges, interval: AvailableIntervals) =>
     `/coins/${coinId}/market_chart?vs_currency=usd&days=${days}&interval=${interval}`,
   trending:
@@ -12,7 +12,9 @@ export const coinGecko = {
   global:
     `/global`,
   supportedCoins: 
-    `/coins/list`
+    `/coins/list`,
+  categories:
+    `/coins/categories/list`
 };
 
 export const etherscan = {

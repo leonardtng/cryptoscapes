@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction, Slice, SliceCaseReducers } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { toCamelCase } from '../common/helpers';
+import { cacheWithExpiry, retrieveCache, toCamelCase } from '../common/helpers';
 import { RootState } from '../app/store';
 import { coinGecko as API } from '../common/endpoints';
 import { API_CONFIG as config, http } from '../common/constants';
@@ -8,6 +8,8 @@ import { Coin, CoinListState, CoinQueryParams } from '../models';
 
 interface Reducers extends SliceCaseReducers<CoinListState> {
   setCoinQueryParams: (state: CoinListState, action: PayloadAction<CoinQueryParams>) => void;
+  addCoinListTableColumn: (state: CoinListState, action: PayloadAction<keyof Coin>) => void;
+  removeCoinListTableColumn: (state: CoinListState, action: PayloadAction<keyof Coin>) => void;
 }
 
 const initialState: CoinListState = {
@@ -17,8 +19,18 @@ const initialState: CoinListState = {
     sortingKey: 'market_cap',
     sortingOrder: 'desc',
     page: 1,
-    perPage: 30
-  }
+    perPage: 30,
+    category: ''
+  },
+  coinListTableColumns: retrieveCache('coinListTableColumns') || [
+    'priceChangePercentage24HInCurrency',
+    'priceChangePercentage7DInCurrency',
+    'marketCap',
+    'totalVolume',
+    'circulatingSupply',
+    'sparklineIn7D'
+  ],
+  hasMore: true
 };
 
 interface Params {
@@ -36,7 +48,8 @@ export const fetchCoinList = createAsyncThunk('coinList', async (params: Params)
       params.coinQueryParams.sortingOrder,
       params.coinQueryParams.page,
       params.coinQueryParams.perPage,
-      true
+      true,
+      params.coinQueryParams.category
     ),
     cancelToken: canceler.token
   });
@@ -54,6 +67,16 @@ const coinListSlice: Slice<CoinListState, Reducers, 'coinList'> = createSlice({
   reducers: {
     setCoinQueryParams: (state: CoinListState, action: PayloadAction<CoinQueryParams>) => {
       state.coinQueryParams = action.payload;
+    },
+    addCoinListTableColumn: (state: CoinListState, action: PayloadAction<keyof Coin>) => {
+      state.coinListTableColumns.push(action.payload);
+      cacheWithExpiry('coinListTableColumns', state.coinListTableColumns, 10e+11)
+    },
+    removeCoinListTableColumn: (state: CoinListState, action: PayloadAction<keyof Coin>) => {
+      state.coinListTableColumns = state.coinListTableColumns.filter((item: keyof Coin) => {
+        return item !== action.payload
+      })
+      cacheWithExpiry('coinListTableColumns', state.coinListTableColumns, 10e+11)
     }
   },
   extraReducers: (builder) => {
@@ -64,6 +87,7 @@ const coinListSlice: Slice<CoinListState, Reducers, 'coinList'> = createSlice({
       .addCase(fetchCoinList.fulfilled, (state, action) => {
         state.status = 'IDLE';
         state.value = action.payload.append ? [...state.value, ...action.payload.data] : action.payload.data;
+        action.payload.data.length === 0 ? state.hasMore = false : state.hasMore = true;
       })
       .addCase(fetchCoinList.rejected, (state, action) => {
         state.status = 'FAILED';
@@ -72,6 +96,6 @@ const coinListSlice: Slice<CoinListState, Reducers, 'coinList'> = createSlice({
   },
 });
 
-export const { setCoinQueryParams } = coinListSlice.actions;
+export const { setCoinQueryParams, addCoinListTableColumn, removeCoinListTableColumn } = coinListSlice.actions;
 
 export default coinListSlice.reducer;

@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   chartWrapper: {
     height: 50,
-    width: 150,
+    width: 180,
     float: 'right'
   }
 }));
@@ -56,6 +56,10 @@ const CoinListTable: React.FC = () => {
   const coinList = useAppSelector(selectCoinList);
   const supportedCoins = useAppSelector(selectSupportedCoins);
 
+  const hasMore = !(coinList.value.length === supportedCoins.value.length || !coinList.hasMore);
+  const numberOfCols =
+    coinList.coinListTableColumns.length + headCells.reduce((a, b) => a + (!b.customisable ? 1 : 0), 0);
+
   const [lastRef] = useInfiniteScrollingObserver(
     coinList.status,
     setCoinQueryParams({
@@ -65,7 +69,8 @@ const CoinListTable: React.FC = () => {
     fetchCoinList({
       coinQueryParams: { ...coinList.coinQueryParams, page: coinList.coinQueryParams.page + 1 },
       append: true
-    })
+    }),
+    hasMore
   );
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: CoinSortingKey) => {
@@ -90,11 +95,11 @@ const CoinListTable: React.FC = () => {
             onRequestSort={handleRequestSort}
           />
           <TableBody>
-            {coinList.value.length === 0 ? (
+            {coinList.value.length === 0 && coinList.status === 'LOADING' ? (
               <>
                 {Array.from(Array(coinList.coinQueryParams.perPage).keys()).map((index: number) => {
                   return <TableRow tabIndex={-1} key={index}>
-                    {Array.from(Array(headCells.length).keys()).map((index: number) => {
+                    {Array.from(Array(numberOfCols).keys()).map((index: number) => {
                       return <TableCell key={index}>
                         <Skeleton />
                       </TableCell>
@@ -126,7 +131,13 @@ const CoinListTable: React.FC = () => {
                         ${coin.currentPrice}
                       </Typography>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell
+                      align="right"
+                      style={{
+                        display: coinList.coinListTableColumns.includes('priceChangePercentage24HInCurrency') ?
+                          'table-cell' : 'none'
+                      }}
+                    >
                       <Typography
                         variant="subtitle2"
                         style={{ color: gain24H ? theme.palette.success.main : theme.palette.error.main }}
@@ -135,7 +146,13 @@ const CoinListTable: React.FC = () => {
                         {gain24H ? '+' : ''}{roundDecimals(coin.priceChangePercentage24HInCurrency)}%
                       </Typography>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell
+                      align="right"
+                      style={{
+                        display: coinList.coinListTableColumns.includes('priceChangePercentage7DInCurrency') ?
+                          'table-cell' : 'none'
+                      }}
+                    >
                       <Typography
                         variant="subtitle2"
                         style={{ color: gain7D ? theme.palette.success.main : theme.palette.error.main }}
@@ -144,29 +161,53 @@ const CoinListTable: React.FC = () => {
                         {gain7D ? '+' : ''}{roundDecimals(coin.priceChangePercentage7DInCurrency)}%
                       </Typography>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell
+                      align="right"
+                      style={{
+                        display: coinList.coinListTableColumns.includes('marketCap') ?
+                          'table-cell' : 'none'
+                      }}
+                    >
                       <Typography variant="subtitle2" noWrap>
                         ${formatNumber(coin.marketCap || 0)}
                       </Typography>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell
+                      align="right"
+                      style={{
+                        display: coinList.coinListTableColumns.includes('totalVolume') ?
+                          'table-cell' : 'none'
+                      }}
+                    >
                       <Typography variant="subtitle2" noWrap>
                         ${formatNumber(coin.totalVolume || 0)}
                       </Typography>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell
+                      align="right"
+                      style={{
+                        display: coinList.coinListTableColumns.includes('circulatingSupply') ?
+                          'table-cell' : 'none'
+                      }}
+                    >
                       <CirculatingSupplyCell coin={coin} />
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell
+                      align="right"
+                      style={{
+                        display: coinList.coinListTableColumns.includes('sparklineIn7D') ?
+                          'table-cell' : 'none'
+                      }}
+                    >
                       <div className={classes.chartWrapper}>
                         <CoinSparkline data={coin.sparklineIn7D?.price || []} gain={gain7D} />
                       </div>
                     </TableCell>
                   </TableRow>
                 })}
-                {coinList.value.length !== supportedCoins.value.length && coinList.value.length !== 0 &&
+                {hasMore && coinList.value.length !== 0 &&
                   <TableRow>
-                    {Array.from(Array(headCells.length).keys()).map((index: number) => {
+                    {Array.from(Array(numberOfCols).keys()).map((index: number) => {
                       return <TableCell key={index}>
                         <Skeleton />
                       </TableCell>

@@ -1,21 +1,22 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import coinsReducer from '../features/coinsSlice';
 import coinListReducer from '../features/coinListSlice';
-import supportedCoinsReducer from '../features/supportedCoinsSlice';
+import coinCategoriesReducer from '../features/coinCategoriesSlice';
 import coinMarketChartListReducer from '../features/coinMarketChartListSlice';
+import supportedCoinsReducer from '../features/supportedCoinsSlice';
 import dominanceChartListReducer from '../features/dominanceChartList';
 import gasOracleReducer from '../features/gasOracleSlice';
 import trendingCoinsReducer from '../features/trendingCoinsSlice';
 import globalCoinDataReducer from '../features/globalCoinDataSlice';
 import fearGreedIndexReducer from '../features/fearGreedIndexSlice';
 import bitcoinHashRateReducer from '../features/bitcoinHashRateSlice';
-
 import appState from '../features/appStateSlice';
 
 export const store = configureStore({
   reducer: {
     coins: coinsReducer,
     coinList: coinListReducer,
+    coinCategories: coinCategoriesReducer,
     coinMarketChartList: coinMarketChartListReducer,
     supportedCoins: supportedCoinsReducer,
     dominanceChartList: dominanceChartListReducer,

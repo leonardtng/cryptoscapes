@@ -16,6 +16,9 @@ import {
   CoinListState as CoinListStateInterface
  } from './api/Coin';
 import {
+  CoinCategory as CoinCategoryInterface
+} from './api/CoinCategory';
+import {
   AvailableDayRanges as AvailableDayRangesInterface,
   AvailableIntervals as AvailableIntervalsInterface,
   CoinMarketChart as CoinMarketChartInterface,
@@ -68,6 +71,7 @@ export type Coin = CoinInterface;
 export type CoinListState = CoinListStateInterface;
 export type AvailableDayRanges = AvailableDayRangesInterface;
 export type AvailableIntervals = AvailableIntervalsInterface;
+export type CoinCategory = CoinCategoryInterface;
 export type CoinMarketChart = CoinMarketChartInterface;
 export type CoinMarketChartList = CoinMarketChartListInterface;
 export type DominanceChartList = DominanceChartListInterface;

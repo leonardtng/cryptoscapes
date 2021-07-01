@@ -9,6 +9,7 @@ export interface CoinQueryParams {
   sortingOrder: CoinSortOrder,
   page: number;
   perPage: number;
+  category: string;
 }
 
 export interface CoinSparkline {
@@ -31,7 +32,7 @@ export interface Coin {
   priceChangePercentage24H: number;
   marketCapChange24H: number;
   marketCapChangePercentage24H: number;
-  circulatingSupply: number;
+  circulatingSupply: number | null;
   totalSupply: number | null;
   maxSupply: number | null;
   ath: number;
@@ -49,4 +50,6 @@ export interface Coin {
 
 export interface CoinListState extends GenericState<Coin[]> {
   coinQueryParams: CoinQueryParams;
+  coinListTableColumns: (keyof Coin)[];
+  hasMore: boolean;
 }

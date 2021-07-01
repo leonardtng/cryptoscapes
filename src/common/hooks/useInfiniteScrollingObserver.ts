@@ -5,7 +5,8 @@ import { Status } from "../../models";
 export const useInfiniteScrollingObserver = (
   status: Status,
   fetch: any,
-  setQueryParams: any
+  setQueryParams: any,
+  hasMore: boolean
 ) => {
   const dispatch = useAppDispatch();
 
@@ -14,13 +15,13 @@ export const useInfiniteScrollingObserver = (
     if (status === 'LOADING') return
     if (observer.current) observer.current.disconnect()
     observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) {
+      if (entries[0].isIntersecting && hasMore) {
         dispatch(fetch);
         dispatch(setQueryParams);
       }
     }, { threshold: 0.5 })
     if (node) observer.current.observe(node)
-  }, [dispatch, fetch, setQueryParams, status]);
+  }, [dispatch, fetch, setQueryParams, hasMore, status]);
 
   return [lastElementRef]
 };

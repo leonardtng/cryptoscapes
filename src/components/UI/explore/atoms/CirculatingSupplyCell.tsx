@@ -38,26 +38,28 @@ interface Props {
 const CirculatingSupplyCell: React.FC<Props> = ({ coin }) => {
   const classes = useStyles();
 
+  const circulatingSupply = coin.circulatingSupply || 0;
+
   return (
     <Tooltip
       interactive
       title={
         <Box>
-          {coin.totalSupply && coin.circulatingSupply < coin.totalSupply &&
+          {coin.totalSupply && circulatingSupply < coin.totalSupply &&
             <Box>
               <Box display="flex" justifyContent="space-between">
                 <Typography variant="body2" color="textSecondary" align="justify">
                   Percentage
                 </Typography>
                 <Typography variant="body2" color="textSecondary" align="justify">
-                  {roundDecimals(coin.circulatingSupply / coin.totalSupply * 100, 2)}%
+                  {roundDecimals(circulatingSupply / coin.totalSupply * 100, 2)}%
                 </Typography>
               </Box>
               <LinearProgress
                 className={classes.tooltipProgressBar}
                 variant="determinate"
                 color="secondary"
-                value={coin.circulatingSupply / coin.totalSupply * 100}
+                value={circulatingSupply / coin.totalSupply * 100}
               />
             </Box>
           }
@@ -66,7 +68,7 @@ const CirculatingSupplyCell: React.FC<Props> = ({ coin }) => {
               Circulating Supply
             </Typography>
             <Typography variant="body2" color="textSecondary" align="justify" gutterBottom>
-              {formatNumber(coin.circulatingSupply)} {coin.symbol.toUpperCase()}
+              {formatNumber(circulatingSupply)} {coin.symbol.toUpperCase()}
             </Typography>
           </Box>
           <Box display="flex" justifyContent="space-between">
@@ -74,7 +76,7 @@ const CirculatingSupplyCell: React.FC<Props> = ({ coin }) => {
               Total Supply
             </Typography>
             <Typography variant="body2" color="textSecondary" align="justify" gutterBottom>
-              {coin.totalSupply && coin.circulatingSupply < coin.totalSupply ?
+              {coin.totalSupply && circulatingSupply < coin.totalSupply ?
                 formatNumber(coin.totalSupply) : '∞'} {coin.symbol.toUpperCase()}
             </Typography>
           </Box>
@@ -86,12 +88,12 @@ const CirculatingSupplyCell: React.FC<Props> = ({ coin }) => {
         <Typography variant="subtitle2" noWrap>
           {formatNumber(roundDecimals(coin.circulatingSupply || 0, 0))} {coin.symbol.toUpperCase()}
         </Typography>
-        {coin.totalSupply && coin.circulatingSupply < coin.totalSupply &&
+        {coin.totalSupply && circulatingSupply < coin.totalSupply &&
           <LinearProgress
             className={classes.progressBar}
             variant="determinate"
             color="secondary"
-            value={coin.circulatingSupply / coin.totalSupply * 100}
+            value={circulatingSupply / coin.totalSupply * 100}
           />
         }
       </Box>

@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { TableCell, TableHead, TableRow, TableSortLabel, Typography } from '@material-ui/core';
 import { Coin, CoinSortingKey, CoinSortingOrder } from '../../../../models';
+import { useAppSelector } from '../../../../app/hooks';
+import { selectCoinList } from '../../../../features/coinListSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -14,22 +16,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-interface HeadCell {
+export interface HeadCell {
   id: keyof Coin;
   label: string;
   numeric: boolean;
+  customisable: boolean;
 }
 
 export const headCells: HeadCell[] = [
-  { id: 'marketCapRank', numeric: false, label: '#' },
-  { id: 'name', numeric: false, label: 'Name' },
-  { id: 'currentPrice', numeric: true, label: 'Price' },
-  { id: 'priceChangePercentage24HInCurrency', numeric: true, label: '24h %' },
-  { id: 'priceChangePercentage7DInCurrency', numeric: true, label: '7d %' },
-  { id: 'marketCap', numeric: true, label: 'Market Cap' },
-  { id: 'totalVolume', numeric: true, label: 'Volume (24h)' },
-  { id: 'circulatingSupply', numeric: true, label: 'Circulating Supply' },
-  { id: 'sparklineIn7D', numeric: true, label: 'Last 7 Days' },
+  { id: 'marketCapRank', numeric: false, label: '#', customisable: false },
+  { id: 'name', numeric: false, label: 'Name', customisable: false },
+  { id: 'currentPrice', numeric: true, label: 'Price', customisable: false  },
+  { id: 'priceChangePercentage24HInCurrency', numeric: true, label: '24h %', customisable: true },
+  { id: 'priceChangePercentage7DInCurrency', numeric: true, label: '7d %', customisable: true },
+  { id: 'marketCap', numeric: true, label: 'Market Cap', customisable: true },
+  { id: 'totalVolume', numeric: true, label: 'Volume (24h)', customisable: true },
+  { id: 'circulatingSupply', numeric: true, label: 'Circulating Supply', customisable: true },
+  { id: 'sparklineIn7D', numeric: true, label: 'Last 7 Days', customisable: true },
 ];
 
 interface CoinListTableHeaderProps {
@@ -40,6 +43,7 @@ interface CoinListTableHeaderProps {
 
 const CoinListTableHeader: React.FC<CoinListTableHeaderProps> = ({ order, orderBy, onRequestSort }) => {
   const classes = useStyles();
+  const coinList = useAppSelector(selectCoinList);
 
   const idToSort: (property: keyof Coin) => CoinSortingKey = (property: keyof Coin) => {
     switch (property) {
@@ -69,7 +73,9 @@ const CoinListTableHeader: React.FC<CoinListTableHeaderProps> = ({ order, orderB
   return (
     <TableHead className={classes.root}>
       <TableRow>
-        {headCells.map((headCell: HeadCell, index: number) => (
+        {headCells
+        .filter((headCell: HeadCell) => coinList.coinListTableColumns.includes(headCell.id) || !headCell.customisable)
+        .map((headCell: HeadCell, index: number) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
