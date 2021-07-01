@@ -1,19 +1,32 @@
 import React from 'react';
+import { Theme, makeStyles } from '@material-ui/core/styles';
 import {
   Checkbox,
   Dialog,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  IconButton,
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Typography
 } from '@material-ui/core';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { selectCoinList, addCoinListTableColumn, removeCoinListTableColumn } from '../../../../features/coinListSlice';
 import { HeadCell, headCells } from './CoinListTableHeader';
 import { Coin } from '../../../../models';
+import { CloseRounded } from '@material-ui/icons';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  }
+}));
 
 interface Props {
   open: boolean;
@@ -21,6 +34,7 @@ interface Props {
 }
 
 const CustomiseTable: React.FC<Props> = ({ open, toggleClose }) => {
+  const classes = useStyles();
   const dispatch = useAppDispatch();
 
   const coinList = useAppSelector(selectCoinList);
@@ -35,7 +49,12 @@ const CustomiseTable: React.FC<Props> = ({ open, toggleClose }) => {
 
   return (
     <Dialog open={open} onBackdropClick={() => toggleClose()}>
-      <DialogTitle>Customise Table</DialogTitle>
+      <DialogTitle>
+        <Typography variant="h6">Customise Table</Typography>
+        <IconButton aria-label="close" className={classes.closeButton} onClick={toggleClose}>
+          <CloseRounded />
+        </IconButton>
+      </DialogTitle>
       <DialogContent>
         <DialogContentText>
           Add and remove metrics which you want to see in the table.
