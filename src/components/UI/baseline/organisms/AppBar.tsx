@@ -3,9 +3,9 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import { AppBar as MuiAppBar, Toolbar } from '@material-ui/core';
 import { useAppDispatch } from '../../../../app/hooks';
 import { fetchSupportedCoins } from '../../../../features/supportedCoinsSlice';
-import MainLogo from '../atoms/MainLogo';
 import SideUtils from '../molecules/SideUtils';
 import { appBarHeight } from '../../../../common/shared/dimensions';
+import AppBarActions from '../molecules/AppBarActions';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -29,7 +29,7 @@ const AppBar: React.FC = () => {
   return (
     <MuiAppBar position="fixed" className={classes.appBar} color="transparent">
       <Toolbar>
-        <MainLogo />
+        <AppBarActions />
         <SideUtils />
       </Toolbar>
     </MuiAppBar>
