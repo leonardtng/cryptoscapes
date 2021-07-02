@@ -77,9 +77,7 @@ const VolumeBarChart: React.FC = () => {
               margin={{ top: 0, right: 30, left: 0, bottom: 0 }}
             >
               <XAxis dataKey="coinSymbol" />
-              <YAxis
-                tickFormatter={tick => shortenNumber(tick)}
-              />
+              <YAxis tickFormatter={tick => shortenNumber(tick)} />
               <Tooltip
                 content={({ active, payload, label }) => {
                   if (active && payload && payload.length) {

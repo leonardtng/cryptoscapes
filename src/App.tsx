@@ -52,16 +52,25 @@ const App: React.FC = () => {
         main: '#2196F3',
       },
       background: {
-        default: '#121937',
-        paper: '#1a223f',
+        default: '#030614', //12172F
+        paper: '#0a0f23', // 051327
       },
       text: {
-        primary: '#FFFFFF',
+        primary: '#D7DCEC',
         secondary: '#8492c4'
       },
       card: {
-        default: '#212946', // #202940
+        default: '#12172F', // 12172F
         paper: '#29314F'
+      },
+      success: {
+        main: '#00C853'
+      },
+      error: {
+        main: '#D9534F' // D84315
+      },
+      warning: {
+        main: '#FFC107'
       }
     },
     ...common
@@ -71,17 +80,21 @@ const App: React.FC = () => {
     palette: {
       type: 'light',
       primary: {
-        main: '#913f9e',
+        main: '#7C4DFF',
       },
       secondary: {
-        main: '#240093',
+        main: '#2196F3',
       },
       background: {
-        default: 'rgb(17, 25, 54)',
-        paper: 'rgb(33, 41, 70)',
+        default: '#121937',
+        paper: '#1a223f',
+      },
+      text: {
+        primary: '#FFFFFF',
+        secondary: '#8492c4'
       },
       card: {
-        default: '#212946',
+        default: '#212946', // #202940
         paper: '#29314F'
       }
     },

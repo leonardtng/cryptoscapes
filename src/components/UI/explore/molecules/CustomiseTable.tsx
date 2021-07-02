@@ -57,7 +57,7 @@ const CustomiseTable: React.FC = () => {
           />
         }
         <Button
-          variant="contained"
+          variant="outlined"
           size="small"
           color="primary"
           className={classes.customiseButton}

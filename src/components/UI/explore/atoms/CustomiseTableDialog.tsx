@@ -49,7 +49,7 @@ const CustomiseTable: React.FC<Props> = ({ open, toggleClose }) => {
 
   return (
     <Dialog open={open} onBackdropClick={() => toggleClose()}>
-      <DialogTitle>
+      <DialogTitle disableTypography>
         <Typography variant="h6">Customise Table</Typography>
         <IconButton aria-label="close" className={classes.closeButton} onClick={toggleClose}>
           <CloseRounded />
