@@ -21,7 +21,7 @@ export const fetchCoins = createAsyncThunk('coins', async () => {
   } else {
     const response = await http.request({
       ...config('coinGecko'),
-      url: API.coins('market_cap', 'desc', 1, 100, false, ''),
+      url: API.coins('market_cap', 'desc', 1, 250, false, ''),
       cancelToken: canceler.token
     });
 

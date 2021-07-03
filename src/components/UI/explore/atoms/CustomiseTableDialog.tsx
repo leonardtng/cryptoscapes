@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'absolute',
     right: theme.spacing(1),
     top: theme.spacing(1),
-    color: theme.palette.grey[500],
+    color: theme.palette.grey[500]
   }
 }));
 
@@ -48,7 +48,7 @@ const CustomiseTable: React.FC<Props> = ({ open, toggleClose }) => {
   }
 
   return (
-    <Dialog open={open} onBackdropClick={() => toggleClose()}>
+    <Dialog open={open} onBackdropClick={toggleClose}>
       <DialogTitle disableTypography>
         <Typography variant="h6">Customise Table</Typography>
         <IconButton aria-label="close" className={classes.closeButton} onClick={toggleClose}>

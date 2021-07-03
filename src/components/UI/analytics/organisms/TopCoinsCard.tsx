@@ -3,7 +3,7 @@ import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { CardHeader, Divider, List } from '@material-ui/core';
 import { getTodayDate } from '../../../../common/helpers';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import { fetchCoins, selectCoins } from '../../../../features/coinsSlice';
+import { selectCoins } from '../../../../features/coinsSlice';
 import { Coin } from '../../../../models';
 import CoinItem from '../molecules/CoinItem';
 import { fetchCoinMarketChartList, selectCoinMarketChartList } from '../../../../features/coinMarketChartListSlice';
@@ -26,12 +26,6 @@ const TopCoinsCard: React.FC = () => {
   const coinMarketChartList = useAppSelector(selectCoinMarketChartList);
 
   const top15: Coin[] = coins.value.slice(0, 15);
-
-  useEffect(() => {
-    if (coins.value.length === 0 && coins.status === 'IDLE') {
-      dispatch(fetchCoins());
-    }
-  }, [dispatch, coins.value.length, coins.status]);
 
   useEffect(() => {
     if (

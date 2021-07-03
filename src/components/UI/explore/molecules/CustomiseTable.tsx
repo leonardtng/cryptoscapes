@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Box, Button, Chip, IconButton, Menu, MenuItem } from '@material-ui/core';
-import { FilterListRounded, TuneRounded } from '@material-ui/icons';
+import { FilterListRounded, TableChartRounded } from '@material-ui/icons';
 import CustomiseTableDialog from '../atoms/CustomiseTableDialog';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { selectCoinCategories } from '../../../../features/coinCategoriesSlice';
@@ -61,7 +61,7 @@ const CustomiseTable: React.FC = () => {
           size="small"
           color="primary"
           className={classes.customiseButton}
-          startIcon={<TuneRounded />}
+          startIcon={<TableChartRounded />}
           onClick={() => setOpen(true)}
         >
           Customise
