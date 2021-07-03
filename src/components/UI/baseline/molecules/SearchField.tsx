@@ -62,7 +62,8 @@ const SearchField: React.FC = () => {
           filterOptions={(coinList: SupportedCoin[] | Coin[], state) => coinList.filter(
             (coinItem: SupportedCoin | Coin) =>
               coinItem.symbol.includes(state.inputValue.toLowerCase()) ||
-              coinItem.name.toLowerCase().includes(state.inputValue.toLowerCase())
+              coinItem.name.toLowerCase().includes(state.inputValue.toLowerCase()) ||
+              coinItem.id.includes(state.inputValue.toLowerCase())
           )}
           renderInput={(params) => (
             <TextField
