@@ -24,13 +24,16 @@ const NavListItem: React.FC<Props> = ({ page }) => {
     history.push(page.path)
   }
 
+  const pathGroup =
+    /(.+)\//.exec(location.pathname) === null ? location.pathname : /(.+)\//.exec(location.pathname)![1];
+
   return (
     <ListItem
       button
       className={classes.navListItem}
       key={page.index}
       onClick={handleClick}
-      selected={page.path === location.pathname}
+      selected={pathGroup === page.path}
     >
       <ListItemIcon>{page.icon}</ListItemIcon>
       <ListItemText primary={page.label} />

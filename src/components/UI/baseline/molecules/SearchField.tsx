@@ -43,11 +43,13 @@ const SearchField: React.FC = () => {
   const coins = useAppSelector(selectCoins);
   const supportedCoins = useAppSelector(selectSupportedCoins);
 
+  const [value, setValue] = useState<Coin | SupportedCoin | null>(null);
   const [open, setOpen] = useState<boolean>(false);
   const [onlySearchTop, setOnlySearchTop] = useState<boolean>(true);
 
   const handleOnChange = (event: React.ChangeEvent<{}>, coinItem: any) => {
     if (coinItem) history.push(coinItem.id && `/coins/${coinItem.id}`);
+    setValue(null); // This makes it possible to reselect the same value again if the input field is not cleared
   };
 
   return (
@@ -55,6 +57,9 @@ const SearchField: React.FC = () => {
       <Box width="400px">
         <Autocomplete
           freeSolo
+          clearOnBlur
+          clearOnEscape
+          value={value}
           className={classes.searchField}
           options={onlySearchTop ? coins.value : supportedCoins.value}
           getOptionLabel={(coinItem: SupportedCoin | Coin) => coinItem.name || ''}
