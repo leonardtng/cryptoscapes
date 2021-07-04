@@ -1,9 +1,18 @@
 import React from 'react';
+import { Theme, makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core';
 import { Area, AreaChart, ResponsiveContainer, YAxis } from 'recharts';
 import { Coin, CoinMarketChart } from '../../../../models';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectCoinMarketChartList } from '../../../../features/coinMarketChartListSlice';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  responsiveContainer: {
+    '& .recharts-surface': {
+      cursor: 'pointer'
+    }
+  }
+}));
 
 interface DataFormat {
   date: number;
@@ -16,7 +25,9 @@ interface Props {
 }
 
 const SmallCoinChart: React.FC<Props> = ({ coin, dataKey }) => {
+  const classes = useStyles();
   const theme = useTheme();
+
   const coinMarketChartList = useAppSelector(selectCoinMarketChartList);
   const gain = coin.priceChangePercentage24H >= 0;
 
@@ -32,7 +43,7 @@ const SmallCoinChart: React.FC<Props> = ({ coin, dataKey }) => {
   return (
     <>
       {coinMarketChartList.value[1][coin.id] &&
-        <ResponsiveContainer height="100%" width="100%">
+        <ResponsiveContainer height="100%" width="100%" className={classes.responsiveContainer}>
           <AreaChart
             data={formatRawData(coin.id, dataKey)}
             margin={{ top: 0, right: 8, left: 16, bottom: 0 }}

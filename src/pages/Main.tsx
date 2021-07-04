@@ -5,9 +5,10 @@ import PageLayout from '../components/templates/PageLayout';
 import Overview from './analytics/Overview';
 import Exchanges from './explore/Exchanges';
 import Trends from './analytics/Trends';
-import Events from './explore/Events';
 import Coins from './explore/Coins';
+import CoinDetails from './explore/CoinDetails';
 import DeFi from './explore/DeFi';
+import Events from './explore/Events';
 import { RootModule } from '../models';
 
 const Main: React.FC = () => {
@@ -39,28 +40,33 @@ const Main: React.FC = () => {
           path: '/coins',
           icon: <TollRounded />,
           page: <Coins />,
-          index: 2
+          index: 2,
+          subpage: {
+            path: 'coinId',
+            page: <CoinDetails />
+          }
         },
         {
           label: 'Exchanges',
           path: '/exchanges',
           icon: <AccountBalanceRounded />,
           page: <Exchanges />,
-          index: 2
+          index: 3
+
         },
         {
           label: 'DeFi',
           path: '/defi',
           icon: <SelectAllRounded />,
           page: <DeFi />,
-          index: 2
+          index: 4
         },
         {
           label: 'Events',
           path: '/events',
           icon: <People />,
           page: <Events />,
-          index: 2
+          index: 5
         }
       ]
     }

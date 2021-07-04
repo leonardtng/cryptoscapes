@@ -31,7 +31,7 @@ const PageLayout: React.FC<Props> = ({ rootModule }) => {
 
   const pages = rootModule.map(
     (moduleObject: RootModule) => moduleObject.pages
-    ).reduce((acc, page: Page[]) => acc.concat(page), []);
+  ).reduce((acc, page: Page[]) => acc.concat(page), []);
 
   return (
     <div className={classes.root}>
@@ -40,10 +40,23 @@ const PageLayout: React.FC<Props> = ({ rootModule }) => {
       <main className={classes.content}>
         <Switch>
           {pages
+            .filter((page: Page) => page.subpage)
+            .map((page: Page) => {
+              return <Route
+                key={`${page.path}/:${page.subpage?.path}`}
+                path={`${page.path}/:${page.subpage?.path}`}
+                render={() => page.subpage?.page}
+              />
+            })}
+          {pages
             .slice()
             .sort((a, b) => b.index - a.index)
             .map((page: Page) => {
-              return <Route key={page.path} path={page.path} render={() => page.page} />
+              return <Route
+                key={page.path}
+                path={page.path}
+                render={() => page.page}
+              />
             })}
         </Switch>
       </main>

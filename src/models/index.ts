@@ -4,6 +4,7 @@ import {
   GenericState as GenericStateInterface
  } from './common/GenericState';
 import {
+  Subpage as SubpageInterface,
   Page as PageInterface,
   RootModule as RootModuleInterface
 } from './common/RootModule';
@@ -61,6 +62,7 @@ import {
 export type AppState = AppStateInterface;
 export type Status = StatusInterface;
 export type GenericState<T> = GenericStateInterface<T>;
+export type Subpage = SubpageInterface;
 export type Page = PageInterface;
 export type RootModule = RootModuleInterface;
 export type CoinSortingKey = CoinSortingKeyInterface;

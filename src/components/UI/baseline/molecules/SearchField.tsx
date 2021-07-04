@@ -14,12 +14,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   searchField: {
     paddingLeft: 32,
     '& .MuiTextField-root': {
-      height: 50,
+      height: 46,
       margin: '8px 0',
       '& .MuiOutlinedInput-root': {
         height: '100%',
         borderRadius: 12,
-        padding: '6px 16px'
+        padding: '6px 16px',
+        '& .MuiOutlinedInput-notchedOutline': {
+          borderWidth: 2
+        }
       }
     }
   },

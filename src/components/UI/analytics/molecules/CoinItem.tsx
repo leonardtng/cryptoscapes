@@ -4,6 +4,7 @@ import { Avatar, ListItem, ListItemAvatar, ListItemText, Typography } from '@mat
 import { Coin } from '../../../../models';
 import SmallCoinChart from '../atoms/SmallCoinChart';
 import { roundDecimals } from '../../../../common/helpers';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   ranking: {
@@ -50,9 +51,10 @@ interface Props {
 
 const CoinItem: React.FC<Props> = ({ coin }) => {
   const classes = useStyles({ change: coin.priceChangePercentage24H });
+  const history = useHistory();
 
   return (
-    <ListItem disableGutters>
+    <ListItem disableGutters button onClick={() => history.push(`/coins/${coin.id}`)}>
       <div className={classes.ranking}>
         <Typography variant="body2">{coin.marketCapRank}</Typography>
       </div>

@@ -31,7 +31,6 @@ const NavListItem: React.FC<Props> = ({ page }) => {
     <ListItem
       button
       className={classes.navListItem}
-      key={page.index}
       onClick={handleClick}
       selected={pathGroup === page.path}
     >
