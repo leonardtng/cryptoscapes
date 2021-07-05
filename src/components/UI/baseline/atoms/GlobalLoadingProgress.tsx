@@ -3,6 +3,7 @@ import { useTheme } from '@material-ui/core/styles';
 import { CircularProgress, Typography } from '@material-ui/core';
 import { useStore } from 'react-redux';
 import { RootState } from '../../../../app/store';
+import UpdateDataButton from './UpdateDataButton';
 
 const GlobalLoadingProgress: React.FC = () => {
   const theme = useTheme();
@@ -27,7 +28,7 @@ const GlobalLoadingProgress: React.FC = () => {
       </>
     )
   } else {
-    return null
+    return <UpdateDataButton />
   }
 }
 

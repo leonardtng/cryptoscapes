@@ -1,7 +1,7 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Dialog,
-DialogContent,
+  DialogContent,
   DialogContentText,
   DialogTitle,
   FormControlLabel,

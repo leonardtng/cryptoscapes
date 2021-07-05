@@ -11,6 +11,8 @@ export const coinGecko = {
     `/search/trending`,
   global:
     `/global`,
+  coinDetails: (coinId: string) =>
+    `/coins/${coinId}`,
   supportedCoins: 
     `/coins/list`,
   categories:
