@@ -1,7 +1,7 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-import GlobalLoadingProgress from '../atoms/GlobalLoadingProgress';
+import GlobalLoadingProgress from './GlobalLoadingProgress';
 import GitHubButton from '../atoms/GitHubButton';
 
 const useStyles = makeStyles((theme: Theme) => ({

@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { CardHeader } from '@material-ui/core';
+import { CardContent, CardHeader } from '@material-ui/core';
 import { useAppDispatch } from '../../../../app/hooks';
 import CardLayout from '../../../templates/CardLayout';
 import { fetchCoinDetails } from '../../../../features/coinDetailsSlice';
 import CoinDetailsHeader from '../molecules/CoinDetailsHeader';
+import CoinDataCardGroup from '../molecules/CoinDataCardGroup';
 
 interface Props {
   coinId: string;
@@ -18,9 +19,10 @@ const CoinDetailsCard: React.FC<Props> = ({ coinId }) => {
 
   return (
     <CardLayout>
-      <CardHeader
-        title={<CoinDetailsHeader />}
-      />
+      <CardHeader title={<CoinDetailsHeader />} />
+      <CardContent>
+        <CoinDataCardGroup />
+      </CardContent>
     </CardLayout>
   )
 }

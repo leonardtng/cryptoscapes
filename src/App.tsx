@@ -61,7 +61,7 @@ const App: React.FC = () => {
       },
       card: {
         default: '#12172F', // 12172F
-        paper: '#29314F'
+        paper: '#1F2747' // 29314F
       },
       success: {
         main: '#00C853'

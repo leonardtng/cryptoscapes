@@ -8,7 +8,7 @@ import { fetchCoinList, selectCoinList, setCoinQueryParams } from '../../../../f
 import { selectSupportedCoins } from '../../../../features/supportedCoinsSlice';
 import CoinListTableHeader, { headCells } from '../atoms/CoinListTableHeader';
 import CoinNameCell from '../atoms/CoinNameCell';
-import CirculatingSupplyCell from '../atoms/CirculatingSupplyCell';
+import CirculatingSupplyCell from './CirculatingSupplyCell';
 import CoinSparkline from '../atoms/CoinSparkline';
 import { Coin, CoinQueryParams, CoinSortingKey } from '../../../../models';
 import { formatNumber, roundDecimals } from '../../../../common/helpers';

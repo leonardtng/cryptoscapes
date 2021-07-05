@@ -1,25 +1,13 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Box, LinearProgress, Typography, Tooltip } from '@material-ui/core';
 import { formatNumber, roundDecimals } from '../../../../common/helpers';
-import { Coin } from '../../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
   customTooltip: {
     backgroundColor: theme.palette.background.default,
     borderRadius: 12,
     minWidth: 335
-  },
-  progressBar: {
-    marginTop: theme.spacing(1),
-    width: '84%',
-    float: 'right',
-    borderRadius: 12,
-    height: 6,
-    minWidth: 150,
-    '& .MuiLinearProgress-bar': {
-      borderRadius: 12
-    }
   },
   tooltipProgressBar: {
     borderRadius: 12,
@@ -32,34 +20,35 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  coin: Coin
+  coinSymbol: string;
+  circulatingSupply: number;
+  totalSupply: number;
+  children: ReactElement<any, any>;
 }
 
-const CirculatingSupplyCell: React.FC<Props> = ({ coin }) => {
+const CirculatingSupplyTooltip: React.FC<Props> = ({ coinSymbol, circulatingSupply, totalSupply, children }) => {
   const classes = useStyles();
-
-  const circulatingSupply = coin.circulatingSupply || 0;
 
   return (
     <Tooltip
       interactive
       title={
         <Box>
-          {coin.totalSupply && circulatingSupply < coin.totalSupply &&
+          {circulatingSupply < totalSupply &&
             <Box>
               <Box display="flex" justifyContent="space-between">
                 <Typography variant="body2" color="textSecondary" align="justify">
                   Percentage
                 </Typography>
                 <Typography variant="body2" color="textSecondary" align="justify">
-                  {roundDecimals(circulatingSupply / coin.totalSupply * 100, 2)}%
+                  {roundDecimals(circulatingSupply / totalSupply * 100, 2)}%
                 </Typography>
               </Box>
               <LinearProgress
                 className={classes.tooltipProgressBar}
                 variant="determinate"
                 color="secondary"
-                value={circulatingSupply / coin.totalSupply * 100}
+                value={circulatingSupply / totalSupply * 100}
               />
             </Box>
           }
@@ -68,7 +57,7 @@ const CirculatingSupplyCell: React.FC<Props> = ({ coin }) => {
               Circulating Supply
             </Typography>
             <Typography variant="body2" color="textSecondary" align="justify" gutterBottom>
-              {formatNumber(circulatingSupply)} {coin.symbol.toUpperCase()}
+              {formatNumber(circulatingSupply)} {coinSymbol}
             </Typography>
           </Box>
           <Box display="flex" justifyContent="space-between">
@@ -76,29 +65,17 @@ const CirculatingSupplyCell: React.FC<Props> = ({ coin }) => {
               Total Supply
             </Typography>
             <Typography variant="body2" color="textSecondary" align="justify" gutterBottom>
-              {coin.totalSupply && circulatingSupply < coin.totalSupply ?
-                formatNumber(coin.totalSupply) : '∞'} {coin.symbol.toUpperCase()}
+              {circulatingSupply < totalSupply ?
+                formatNumber(totalSupply) : '∞'} {coinSymbol}
             </Typography>
           </Box>
         </Box>
       }
       classes={{ tooltip: classes.customTooltip }}
     >
-      <Box>
-        <Typography variant="subtitle2" noWrap>
-          {formatNumber(roundDecimals(coin.circulatingSupply || 0, 0))} {coin.symbol.toUpperCase()}
-        </Typography>
-        {coin.totalSupply && circulatingSupply < coin.totalSupply &&
-          <LinearProgress
-            className={classes.progressBar}
-            variant="determinate"
-            color="secondary"
-            value={circulatingSupply / coin.totalSupply * 100}
-          />
-        }
-      </Box>
+      {children}
     </Tooltip>
   );
 }
 
-export default CirculatingSupplyCell
+export default CirculatingSupplyTooltip

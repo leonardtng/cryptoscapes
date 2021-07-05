@@ -1,6 +1,6 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 import { GitHub } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -19,15 +19,17 @@ const GitHubButton: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <IconButton
-      className={classes.githubButton}
-      href='https://github.com/leonardtng/'
-      target='_blank'
-      rel='noopener noreferrer'
-      aria-label='View on GitHub'
-    >
-      <GitHub />
-    </IconButton>
+    <Tooltip title="View project on GitHub">
+      <IconButton
+        className={classes.githubButton}
+        href='https://github.com/leonardtng/'
+        target='_blank'
+        rel='noopener noreferrer'
+        aria-label='View on GitHub'
+      >
+        <GitHub />
+      </IconButton>
+    </Tooltip>
   )
 }
 

@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: theme.spacing(8),
     marginRight: 16
   },
+  gutterBottom: {
+    marginBottom: 6
+  },
   coinSymbol: {
     marginLeft: 16,
     padding: '0 6px',
@@ -59,8 +62,8 @@ const CoinDetailsHeader: React.FC = () => {
         <Box display="flex" alignItems="center" padding={2}>
           <Skeleton variant="circle" className={classes.avatarLarge} />
           <Box>
-            <Skeleton height={44} width={250} />
-            <Skeleton height={27} width={350} />
+            <Skeleton height={41} width={250} className={classes.gutterBottom} />
+            <Skeleton height={24} width={350} />
           </Box>
         </Box>
       ) : (
@@ -125,7 +128,8 @@ const CoinDetailsHeader: React.FC = () => {
                       className={classes.progressBar}
                       variant="determinate"
                       color="secondary"
-                      value={coinDetails.value.marketData.low24H.usd / coinDetails.value.marketData.high24H.usd * 100}
+                      value={(coinDetails.value.marketData.currentPrice.usd - coinDetails.value.marketData.low24H.usd)
+                        / (coinDetails.value.marketData.high24H.usd - coinDetails.value.marketData.low24H.usd) * 100}
                     />
                     <Typography variant="subtitle2" color="textSecondary">
                       High: ${coinDetails.value.marketData.high24H.usd}
