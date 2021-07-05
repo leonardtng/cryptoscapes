@@ -21,7 +21,8 @@ const initialState: CoinMarketChartListState = {
     730: {},
     'max': {}
   },
-  selectedDayRange: 30,
+  selectedDayRange: 90,
+  // selectedDayRange: 30,
   selectedDataType: 'prices',
   status: 'IDLE'
 };
@@ -52,7 +53,8 @@ export const fetchCoinMarketChartList = createAsyncThunk(
       for (var i = 0; i < params.coinIdList.length; i++) {
         const response = await http.request({
           ...config('coinGecko'),
-          url: API.coinMarketChart(params.coinIdList[i], params.dayRange, params.dayRange <= 30 ? 'hourly' : 'daily'),
+          url: API.coinMarketChart(params.coinIdList[i], params.dayRange, params.dayRange < 30 ? 'hourly' : 'daily'),
+          // url: API.coinMarketChart(params.coinIdList[i], params.dayRange, params.dayRange <= 30 ? 'hourly' : 'daily'),
           cancelToken: canceler.token
         });
 
