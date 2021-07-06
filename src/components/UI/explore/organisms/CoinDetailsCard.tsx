@@ -17,6 +17,8 @@ const CoinDetailsCard: React.FC<Props> = ({ coinId }) => {
     dispatch(fetchCoinDetails(coinId));
   }, [dispatch, coinId]);
 
+  // TABS: 'Chart' 'Info' 'Social' 'Sentiment'
+
   return (
     <CardLayout>
       <CardHeader title={<CoinDetailsHeader />} />

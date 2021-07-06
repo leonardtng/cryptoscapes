@@ -128,7 +128,7 @@ const CoinDetailsHeader: React.FC = () => {
                 </Box>
               </Box>
               <Box display="flex" alignItems="center">
-                <Box >
+                <Box>
                   <Box width="100%" display="flex" alignItems="center" justifyContent="flex-end" marginBottom="6px">
                     <Typography variant="h4">${formatNumber(coinDetails.value.marketData.currentPrice.usd)}</Typography>
                     <Typography
@@ -143,21 +143,23 @@ const CoinDetailsHeader: React.FC = () => {
                       {roundDecimals(coinDetails.value.marketData.priceChangePercentage24H)}%
                     </Typography>
                   </Box>
-                  <Box display="flex" alignItems="center">
-                    <Typography variant="subtitle2" color="textSecondary">
-                      Low: ${formatNumber(coinDetails.value.marketData.low24H.usd)}
-                    </Typography>
-                    <LinearProgress
-                      className={classes.progressBar}
-                      variant="determinate"
-                      color="secondary"
-                      value={(coinDetails.value.marketData.currentPrice.usd - coinDetails.value.marketData.low24H.usd)
-                        / (coinDetails.value.marketData.high24H.usd - coinDetails.value.marketData.low24H.usd) * 100}
-                    />
-                    <Typography variant="subtitle2" color="textSecondary">
-                      High: ${formatNumber(coinDetails.value.marketData.high24H.usd)}
-                    </Typography>
-                  </Box>
+                  {coinDetails.value.marketData.low24H.usd && coinDetails.value.marketData.high24H.usd &&
+                    <Box display="flex" alignItems="center">
+                      <Typography variant="subtitle2" color="textSecondary">
+                        Low: ${formatNumber(coinDetails.value.marketData.low24H.usd)}
+                      </Typography>
+                      <LinearProgress
+                        className={classes.progressBar}
+                        variant="determinate"
+                        color="secondary"
+                        value={(coinDetails.value.marketData.currentPrice.usd - coinDetails.value.marketData.low24H.usd)
+                          / (coinDetails.value.marketData.high24H.usd - coinDetails.value.marketData.low24H.usd) * 100}
+                      />
+                      <Typography variant="subtitle2" color="textSecondary">
+                        High: ${formatNumber(coinDetails.value.marketData.high24H.usd)}
+                      </Typography>
+                    </Box>
+                  }
                 </Box>
               </Box>
             </Box>

@@ -169,7 +169,7 @@ const CoinListTable: React.FC = () => {
                       }}
                     >
                       <Typography variant="subtitle2" noWrap>
-                        ${formatNumber(coin.marketCap || 0)}
+                        ${formatNumber(coin.marketCap)}
                       </Typography>
                     </TableCell>
                     <TableCell
@@ -180,7 +180,7 @@ const CoinListTable: React.FC = () => {
                       }}
                     >
                       <Typography variant="subtitle2" noWrap>
-                        ${formatNumber(coin.totalVolume || 0)}
+                        ${formatNumber(coin.totalVolume)}
                       </Typography>
                     </TableCell>
                     <TableCell
