@@ -44,7 +44,7 @@ const CoinDataCardGroup: React.FC = () => {
       {coinDetails.status === "LOADING" ? (
         <Box display="flex" justifyContent="space-between" padding="16px">
           {Array.from(Array(4).keys()).map((index: number) =>
-            <Paper className={classes.detailsSurface}>
+            <Paper key={index} className={classes.detailsSurface}>
               <Box height="100%" padding="18px 24px">
                 <Skeleton height={32} width="80%" className={classes.gutterBottom} />
                 <Skeleton height={24} width="40%" />

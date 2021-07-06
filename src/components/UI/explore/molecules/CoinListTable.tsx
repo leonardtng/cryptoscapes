@@ -95,7 +95,7 @@ const CoinListTable: React.FC = () => {
             onRequestSort={handleRequestSort}
           />
           <TableBody>
-            {coinList.value.length === 0 && coinList.status === 'LOADING' ? (
+            {coinList.status === 'LOADING' ? (
               <>
                 {Array.from(Array(coinList.coinQueryParams.perPage).keys()).map((index: number) => {
                   return <TableRow tabIndex={-1} key={index}>

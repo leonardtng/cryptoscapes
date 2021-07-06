@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { AppBar as MuiAppBar, Toolbar } from '@material-ui/core';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import { fetchSupportedCoins, selectSupportedCoins } from '../../../../features/supportedCoinsSlice';
 import SideUtils from '../molecules/SideUtils';
 import { appBarHeight } from '../../../../common/shared/dimensions';
 import AppBarActions from '../molecules/AppBarActions';
 import { fetchCoins, selectCoins } from '../../../../features/coinsSlice';
+import { fetchSupportedCoins, selectSupportedCoins } from '../../../../features/supportedCoinsSlice';
+import { fetchCoinCategories, selectCoinCategories } from '../../../../features/coinCategoriesSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -25,6 +26,7 @@ const AppBar: React.FC = () => {
 
   const coins = useAppSelector(selectCoins);
   const supportedCoins = useAppSelector(selectSupportedCoins);
+  const coinCategories = useAppSelector(selectCoinCategories);
 
   useEffect(() => {
     if (coins.value.length === 0 && coins.status === 'IDLE') {
@@ -37,6 +39,12 @@ const AppBar: React.FC = () => {
       dispatch(fetchSupportedCoins());
     }
   }, [dispatch, supportedCoins.status, supportedCoins.value.length]);
+
+  useEffect(() => {
+    if (coinCategories.value.length === 0 && coinCategories.status === 'IDLE') {
+      dispatch(fetchCoinCategories());
+    }
+  }, [dispatch, coinCategories.value, coinCategories.status]);
 
   return (
     <MuiAppBar position="fixed" className={classes.appBar} color="transparent">

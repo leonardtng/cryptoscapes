@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Avatar, Box, Chip, LinearProgress, Link, Typography } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
-import { useAppSelector } from '../../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { selectCoinDetails } from '../../../../features/coinDetailsSlice';
 import { formatNumber, roundDecimals } from '../../../../common/helpers';
 import CoinCategoriesDialog from '../atoms/CoinCategoriesDialog';
+import { CoinCategory, CoinQueryParams } from '../../../../models';
+import { fetchCoinList, selectCoinList, setCoinQueryParams } from '../../../../features/coinListSlice';
+import { selectCoinCategories } from '../../../../features/coinCategoriesSlice';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme: Theme) => ({
   coinDetailsHeader: {
@@ -53,8 +57,33 @@ const CoinDetailsHeader: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const history = useHistory();
+  const dispatch = useAppDispatch();
+
+  const coinList = useAppSelector(selectCoinList);
+  const coinCategories = useAppSelector(selectCoinCategories);
   const coinDetails = useAppSelector(selectCoinDetails);
-  const [open, setOpen] = useState<boolean>(false);
+
+  const [categoriesOpen, setCategoriesOpen] = useState<boolean>(false);
+
+  const handleClickCategory = (categoryName: string) => {
+    const queryParams: CoinQueryParams = {
+      ...coinList.coinQueryParams,
+      page: 1,
+      category: coinCategories.value.find((category: CoinCategory) => category.name === categoryName)?.categoryId || ''
+    };
+
+    dispatch(setCoinQueryParams(queryParams));
+    dispatch(fetchCoinList({ coinQueryParams: queryParams, append: false }));
+
+    history.push('/coins');
+  };
+
+  const calculateProgress = (current: number, low: number, high: number) => {
+    if (current <= low) return 0
+    if (current >= high) return 100
+    return (current - low) / (high - low) * 100
+  };
 
   return (
     <>
@@ -118,12 +147,24 @@ const CoinDetailsHeader: React.FC = () => {
                       </Typography>
                     }
                     {coinDetails.value.categories.slice(0, 2).map((category: string) => (
-                      <Chip key={category} className={classes.chip} label={category} size="small" color="primary" />
+                      <Chip
+                        key={category}
+                        className={classes.chip}
+                        label={category}
+                        size="small"
+                        color="primary"
+                        clickable
+                        onClick={() => handleClickCategory(category)}
+                      />
                     ))}
                     {coinDetails.value.categories.length > 2 &&
-                      <Chip label="View All" size="small" clickable onClick={() => setOpen(true)} />
+                      <Chip label="View All" size="small" clickable onClick={() => setCategoriesOpen(true)} />
                     }
-                    <CoinCategoriesDialog open={open} toggleClose={() => setOpen(false)} />
+                    <CoinCategoriesDialog
+                      open={categoriesOpen}
+                      toggleClose={() => setCategoriesOpen(false)}
+                      handleClickCategory={handleClickCategory} 
+                      />
                   </Box>
                 </Box>
               </Box>
@@ -146,17 +187,24 @@ const CoinDetailsHeader: React.FC = () => {
                   {coinDetails.value.marketData.low24H.usd && coinDetails.value.marketData.high24H.usd &&
                     <Box display="flex" alignItems="center">
                       <Typography variant="subtitle2" color="textSecondary">
-                        Low: ${formatNumber(coinDetails.value.marketData.low24H.usd)}
+                        Low: ${formatNumber(Math.min(
+                          coinDetails.value.marketData.low24H.usd, coinDetails.value.marketData.currentPrice.usd))}
                       </Typography>
                       <LinearProgress
                         className={classes.progressBar}
                         variant="determinate"
                         color="secondary"
-                        value={(coinDetails.value.marketData.currentPrice.usd - coinDetails.value.marketData.low24H.usd)
-                          / (coinDetails.value.marketData.high24H.usd - coinDetails.value.marketData.low24H.usd) * 100}
+                        value={
+                          calculateProgress(
+                            coinDetails.value.marketData.currentPrice.usd,
+                            coinDetails.value.marketData.low24H.usd,
+                            coinDetails.value.marketData.high24H.usd
+                          )
+                        }
                       />
                       <Typography variant="subtitle2" color="textSecondary">
-                        High: ${formatNumber(coinDetails.value.marketData.high24H.usd)}
+                        High: ${formatNumber(Math.max(
+                          coinDetails.value.marketData.high24H.usd, coinDetails.value.marketData.currentPrice.usd))}
                       </Typography>
                     </Box>
                   }

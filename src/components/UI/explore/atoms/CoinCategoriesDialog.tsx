@@ -27,9 +27,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {
   open: boolean;
   toggleClose: () => void;
+  handleClickCategory: (category: string) => void;
 }
 
-const CoinCategoriesDialog: React.FC<Props> = ({ open, toggleClose }) => {
+const CoinCategoriesDialog: React.FC<Props> = ({ open, toggleClose, handleClickCategory }) => {
   const classes = useStyles();
 
   const coinDetails = useAppSelector(selectCoinDetails);
@@ -46,7 +47,14 @@ const CoinCategoriesDialog: React.FC<Props> = ({ open, toggleClose }) => {
         {coinDetails.value &&
           <>
             {coinDetails.value.categories.map((category: string) => (
-              <Chip key={category} className={classes.chip} label={category} color="primary" />
+              <Chip
+                key={category}
+                className={classes.chip}
+                label={category}
+                color="primary"
+                clickable
+                onClick={() => handleClickCategory(category)}
+              />
             ))}
           </>
         }
