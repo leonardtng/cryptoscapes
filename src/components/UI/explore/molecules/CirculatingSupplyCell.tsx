@@ -27,24 +27,24 @@ const CirculatingSupplyCell: React.FC<Props> = ({ coin }) => {
   const classes = useStyles();
 
   const circulatingSupply = coin.circulatingSupply || 0;
-  const totalSupply = coin.totalSupply || 0;
+  const maxSupply = coin.maxSupply || 0;
 
   return (
     <CirculatingSupplyTooltip
       coinSymbol={coin.symbol.toUpperCase()}
       circulatingSupply={circulatingSupply}
-      totalSupply={totalSupply}
+      maxSupply={maxSupply}
     >
       <Box>
         <Typography variant="subtitle2" noWrap>
           {formatNumber(roundDecimals(circulatingSupply, 0))} {coin.symbol.toUpperCase()}
         </Typography>
-        {circulatingSupply < totalSupply &&
+        {circulatingSupply < maxSupply &&
           <LinearProgress
             className={classes.progressBar}
             variant="determinate"
             color="secondary"
-            value={circulatingSupply / totalSupply * 100}
+            value={circulatingSupply / maxSupply * 100}
           />
         }
       </Box>

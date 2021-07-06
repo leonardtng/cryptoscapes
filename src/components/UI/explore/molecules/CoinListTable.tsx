@@ -128,7 +128,7 @@ const CoinListTable: React.FC = () => {
                     </TableCell>
                     <TableCell align="right">
                       <Typography variant="subtitle2" noWrap>
-                        ${coin.currentPrice}
+                        ${formatNumber(coin.currentPrice)}
                       </Typography>
                     </TableCell>
                     <TableCell

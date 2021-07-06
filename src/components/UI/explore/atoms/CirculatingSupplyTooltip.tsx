@@ -22,11 +22,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface Props {
   coinSymbol: string;
   circulatingSupply: number;
-  totalSupply: number;
+  maxSupply: number;
   children: ReactElement<any, any>;
 }
 
-const CirculatingSupplyTooltip: React.FC<Props> = ({ coinSymbol, circulatingSupply, totalSupply, children }) => {
+const CirculatingSupplyTooltip: React.FC<Props> = ({ coinSymbol, circulatingSupply, maxSupply, children }) => {
   const classes = useStyles();
 
   return (
@@ -34,21 +34,21 @@ const CirculatingSupplyTooltip: React.FC<Props> = ({ coinSymbol, circulatingSupp
       interactive
       title={
         <Box>
-          {circulatingSupply < totalSupply &&
+          {circulatingSupply <= maxSupply &&
             <Box>
               <Box display="flex" justifyContent="space-between">
                 <Typography variant="body2" color="textSecondary" align="justify">
                   Percentage
                 </Typography>
                 <Typography variant="body2" color="textSecondary" align="justify">
-                  {roundDecimals(circulatingSupply / totalSupply * 100, 2)}%
+                  {roundDecimals(circulatingSupply / maxSupply * 100, 2)}%
                 </Typography>
               </Box>
               <LinearProgress
                 className={classes.tooltipProgressBar}
                 variant="determinate"
                 color="secondary"
-                value={circulatingSupply / totalSupply * 100}
+                value={circulatingSupply / maxSupply * 100}
               />
             </Box>
           }
@@ -62,11 +62,11 @@ const CirculatingSupplyTooltip: React.FC<Props> = ({ coinSymbol, circulatingSupp
           </Box>
           <Box display="flex" justifyContent="space-between">
             <Typography variant="body2" color="textSecondary" align="justify" gutterBottom>
-              Total Supply
+              Max Supply
             </Typography>
             <Typography variant="body2" color="textSecondary" align="justify" gutterBottom>
-              {circulatingSupply < totalSupply ?
-                formatNumber(totalSupply) : '∞'} {coinSymbol}
+              {circulatingSupply <= maxSupply ?
+                formatNumber(maxSupply) : '∞'} {coinSymbol}
             </Typography>
           </Box>
         </Box>

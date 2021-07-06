@@ -31,7 +31,7 @@ const App: React.FC = () => {
       }
     },
     typography: {
-      fontFamily: "'Gilroy', sans-serif !important",
+      fontFamily: "'Gilroy', sans-serif !important", // Kanit Jost Quicksand
     },
     overrides: {
       MuiCssBaseline: {

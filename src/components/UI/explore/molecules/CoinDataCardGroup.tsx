@@ -4,7 +4,7 @@ import { Box, Paper, Typography } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { useSelector } from 'react-redux';
 import { selectCoinDetails } from '../../../../features/coinDetailsSlice';
-import { formatNumber } from '../../../../common/helpers';
+import { formatNumber, roundDecimals } from '../../../../common/helpers';
 import CirculatingSupplyTooltip from '../atoms/CirculatingSupplyTooltip';
 import { HelpOutlineRounded } from '@material-ui/icons';
 
@@ -37,7 +37,7 @@ const CoinDataCardGroup: React.FC = () => {
   const coinDetails = useSelector(selectCoinDetails);
 
   const circulatingSupply = coinDetails.value?.marketData.circulatingSupply || 0;
-  const totalSupply = coinDetails.value?.marketData.totalSupply || 0;
+  const maxSupply = coinDetails.value?.marketData.maxSupply || 0;
 
   return (
     <>
@@ -66,7 +66,7 @@ const CoinDataCardGroup: React.FC = () => {
                       Market Cap
                     </Typography>
                     <Typography variant="body1" color="textSecondary" className={classes.marketCapRank} >
-                      #{coinDetails.value.marketCapRank}
+                      #{coinDetails.value.marketCapRank || ' -'}
                     </Typography>
                   </Box>
                 </Box>
@@ -84,7 +84,7 @@ const CoinDataCardGroup: React.FC = () => {
               <Paper className={classes.detailsSurface}>
                 <Box height="100%" padding="18px 24px">
                   <Typography variant="h6" className={classes.gutterBottom}>
-                    {formatNumber(circulatingSupply)} {coinDetails.value.symbol.toUpperCase()}
+                    {formatNumber(roundDecimals(circulatingSupply, 0))} {coinDetails.value.symbol.toUpperCase()}
                   </Typography>
                   <Box display="flex" alignItems="center" className={classes.supplyCard}>
                     <Typography variant="body1" color="textSecondary">
@@ -93,7 +93,7 @@ const CoinDataCardGroup: React.FC = () => {
                     <CirculatingSupplyTooltip
                       coinSymbol={coinDetails.value.symbol.toUpperCase()}
                       circulatingSupply={circulatingSupply}
-                      totalSupply={totalSupply}
+                      maxSupply={maxSupply}
                     >
                       <HelpOutlineRounded />
                     </CirculatingSupplyTooltip>
@@ -103,16 +103,18 @@ const CoinDataCardGroup: React.FC = () => {
               <Paper className={classes.detailsSurface}>
                 <Box height="100%" padding="18px 24px">
                   <Typography variant="h6" className={classes.gutterBottom}>
-                    {totalSupply ? formatNumber(totalSupply) : '∞'} {coinDetails.value.symbol.toUpperCase()}
+                    {maxSupply ?
+                      formatNumber(roundDecimals(maxSupply, 0))
+                      : '∞'} {coinDetails.value.symbol.toUpperCase()}
                   </Typography>
                   <Box display="flex" alignItems="center" className={classes.supplyCard}>
                     <Typography variant="body1" color="textSecondary">
-                      Total Supply
+                      Max Supply
                     </Typography>
                     <CirculatingSupplyTooltip
                       coinSymbol={coinDetails.value.symbol.toUpperCase()}
                       circulatingSupply={circulatingSupply}
-                      totalSupply={totalSupply}
+                      maxSupply={maxSupply}
                     >
                       <HelpOutlineRounded />
                     </CirculatingSupplyTooltip>

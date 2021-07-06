@@ -4,7 +4,7 @@ import { Avatar, ListItem, ListItemAvatar, ListItemText, Typography } from '@mat
 import { Coin, TrendingCoin } from '../../../../models';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectCoins } from '../../../../features/coinsSlice';
-import { roundDecimals } from '../../../../common/helpers';
+import { formatNumber, roundDecimals } from '../../../../common/helpers';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   ranking: {
@@ -61,8 +61,8 @@ const TrendingCoinItem: React.FC<Props> = ({ trendingCoin }) => {
       <ListItemText
         className={classes.coinPrice}
         primary={bitcoin &&
-          `US$${roundDecimals(trendingCoin.priceBtc * bitcoin?.currentPrice)
-          || roundDecimals(trendingCoin.priceBtc * bitcoin?.currentPrice, 8)}`}
+          `US$${formatNumber(roundDecimals(trendingCoin.priceBtc * bitcoin?.currentPrice))
+          || formatNumber(roundDecimals(trendingCoin.priceBtc * bitcoin?.currentPrice, 8))}`}
         primaryTypographyProps={{ variant: 'subtitle2', noWrap: true }}
       />
     </ListItem>

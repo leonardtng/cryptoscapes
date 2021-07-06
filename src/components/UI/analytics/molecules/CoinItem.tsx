@@ -3,7 +3,7 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Avatar, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
 import { Coin } from '../../../../models';
 import SmallCoinChart from '../atoms/SmallCoinChart';
-import { roundDecimals } from '../../../../common/helpers';
+import { formatNumber, roundDecimals } from '../../../../common/helpers';
 import { useHistory } from 'react-router';
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -73,7 +73,7 @@ const CoinItem: React.FC<Props> = ({ coin }) => {
       </div>
       <ListItemText
         className={classes.coinPrice}
-        primary={`US$${roundDecimals(coin.currentPrice, 3)}`}
+        primary={`US$${formatNumber(roundDecimals(coin.currentPrice, 3))}`}
         secondary={
           `${coin.priceChangePercentage24H >= 0 ? '+' : ''}${roundDecimals(coin.priceChangePercentage24H)}%`
         }

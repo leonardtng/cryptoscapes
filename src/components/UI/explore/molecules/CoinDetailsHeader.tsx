@@ -4,7 +4,7 @@ import { Avatar, Box, Chip, LinearProgress, Link, Typography } from '@material-u
 import { Skeleton } from '@material-ui/lab';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectCoinDetails } from '../../../../features/coinDetailsSlice';
-import { roundDecimals } from '../../../../common/helpers';
+import { formatNumber, roundDecimals } from '../../../../common/helpers';
 import CoinCategoriesDialog from '../atoms/CoinCategoriesDialog';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -84,16 +84,39 @@ const CoinDetailsHeader: React.FC = () => {
                     </Typography>
                   </Box>
                   <Box display="flex" alignItems="center" >
-                    <Typography variant="body1" className={classes.link}>
-                      <Link href={coinDetails.value.links.homepage[0]} target="_blank" rel='noopener noreferrer'>
-                        Website
-                      </Link>
-                    </Typography>
-                    <Typography variant="body1" className={classes.link}>
-                      <Link href={coinDetails.value.links.blockchainSite[0]} target="_blank" rel='noopener noreferrer'>
-                        Blockchain
-                      </Link>
-                    </Typography>
+                    {coinDetails.value.links.homepage[0] &&
+                      <Typography variant="body1" className={classes.link}>
+                        <Link
+                          href={coinDetails.value.links.homepage[0]}
+                          target="_blank"
+                          rel='noopener noreferrer'
+                        >
+                          Website
+                        </Link>
+                      </Typography>
+                    }
+                    {coinDetails.value.links.blockchainSite[0] &&
+                      <Typography variant="body1" className={classes.link}>
+                        <Link
+                          href={coinDetails.value.links.blockchainSite[0]}
+                          target="_blank"
+                          rel='noopener noreferrer'
+                        >
+                          Blockchain
+                        </Link>
+                      </Typography>
+                    }
+                    {coinDetails.value.links.officialForumUrl[0] &&
+                      <Typography variant="body1" className={classes.link}>
+                        <Link
+                          href={coinDetails.value.links.officialForumUrl[0]}
+                          target="_blank"
+                          rel='noopener noreferrer'
+                        >
+                          Forum
+                        </Link>
+                      </Typography>
+                    }
                     {coinDetails.value.categories.slice(0, 2).map((category: string) => (
                       <Chip key={category} className={classes.chip} label={category} size="small" color="primary" />
                     ))}
@@ -107,7 +130,7 @@ const CoinDetailsHeader: React.FC = () => {
               <Box display="flex" alignItems="center">
                 <Box >
                   <Box width="100%" display="flex" alignItems="center" justifyContent="flex-end" marginBottom="6px">
-                    <Typography variant="h4">${coinDetails.value.marketData.currentPrice.usd}</Typography>
+                    <Typography variant="h4">${formatNumber(coinDetails.value.marketData.currentPrice.usd)}</Typography>
                     <Typography
                       variant="h6"
                       className={classes.priceChange}
@@ -122,7 +145,7 @@ const CoinDetailsHeader: React.FC = () => {
                   </Box>
                   <Box display="flex" alignItems="center">
                     <Typography variant="subtitle2" color="textSecondary">
-                      Low: ${coinDetails.value.marketData.low24H.usd}
+                      Low: ${formatNumber(coinDetails.value.marketData.low24H.usd)}
                     </Typography>
                     <LinearProgress
                       className={classes.progressBar}
@@ -132,7 +155,7 @@ const CoinDetailsHeader: React.FC = () => {
                         / (coinDetails.value.marketData.high24H.usd - coinDetails.value.marketData.low24H.usd) * 100}
                     />
                     <Typography variant="subtitle2" color="textSecondary">
-                      High: ${coinDetails.value.marketData.high24H.usd}
+                      High: ${formatNumber(coinDetails.value.marketData.high24H.usd)}
                     </Typography>
                   </Box>
                 </Box>
