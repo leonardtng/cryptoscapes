@@ -81,8 +81,8 @@ const coinListSlice: Slice<CoinListState, Reducers, 'coinList'> = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCoinList.pending, (state) => {
-        state.status = 'LOADING';
+      .addCase(fetchCoinList.pending, (state, action) => {
+        state.status = action.meta.arg.append ? 'LOADING MORE' : 'LOADING';
       })
       .addCase(fetchCoinList.fulfilled, (state, action) => {
         state.status = 'IDLE';

@@ -12,7 +12,7 @@ export const useInfiniteScrollingObserver = (
 
   const observer: React.MutableRefObject<any> = useRef();
   const lastElementRef = useCallback(node => {
-    if (status === 'LOADING') return
+    if (status === 'LOADING MORE') return
     if (observer.current) observer.current.disconnect()
     observer.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting && hasMore) {
