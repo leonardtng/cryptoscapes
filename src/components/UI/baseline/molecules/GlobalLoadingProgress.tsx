@@ -17,7 +17,9 @@ const GlobalLoadingProgress: React.FC = () => {
   });
 
   useEffect(() => {
-    setGlobalLoading(!!Object.values(allStates).find((item: any) => item.status === 'LOADING'));
+    setGlobalLoading(!!Object.values(allStates).find((item: any) =>
+      item.status === 'LOADING' || item.status === 'LOADING MORE')
+    );
   }, [allStates]);
 
   if (globalLoading) {
