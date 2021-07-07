@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: 8
   },
   contentWrapper: {
-    height: 'calc(100% - 84px) !important'
+    flex: 1
   }
 }));
 
@@ -57,7 +57,7 @@ const FearGreedIndexCard: React.FC = () => {
         }
         subheader={
           fearGreedIndex.today === null ?
-            <Skeleton animation="wave" height={32} width={150} /> :
+            <Skeleton height={32} width={150} /> :
             `Now: ${fearGreedIndex.today.valueClassification}`
         }
         subheaderTypographyProps={{ variant: 'h6', color: 'textPrimary' }}

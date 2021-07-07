@@ -31,7 +31,7 @@ const DonutSkeleton = () => {
 
   return (
     <Box className={classes.skeletonContainer}>
-      <Skeleton animation="wave" variant="circle" height={150} width={150} />
+      <Skeleton variant="circle" height={150} width={150} />
       <div className={classes.circle}/>
       <div className={classes.lineGap} style={{transform: 'rotate(20deg) translateY(14px)'}}/>
       <div className={classes.lineGap} style={{transform: 'rotate(140deg) translateY(14px)'}}/>

@@ -13,7 +13,7 @@ import CorrelationHeatmapSkeleton from '../../../skeletons/CorrelationHeatmapSke
 
 const useStyles = makeStyles((theme: Theme) => ({
   chartWrapper: {
-    height: 'calc(100% - 83px)',
+    flex: 1,
     width: '100%'
   }
 }));

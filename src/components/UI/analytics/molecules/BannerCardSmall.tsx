@@ -68,8 +68,8 @@ const BannerCardSmall: React.FC = () => {
     <CardLayout>
       {globalCoinData.value === null ? (
         <Box className={classes.skeletonWrapper}>
-          <Skeleton animation="wave" height={32} width="60%" />
-          <Skeleton animation="wave" height={21} width="80%" />
+          <Skeleton height={32} width="60%" />
+          <Skeleton height={21} width="80%" />
         </Box>
       ) : (
         <Box className={classes.cardWrapper}>

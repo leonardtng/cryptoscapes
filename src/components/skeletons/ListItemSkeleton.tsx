@@ -35,10 +35,10 @@ const ListItemSkeleton: React.FC<Props> = ({ count, height, iconDimensions }) =>
       {Array.from(Array(count).keys()).map((index: number) =>
         <Fragment key={index}>
           <ListItem className={classes.listItemSkeleton} disableGutters>
-            <Skeleton animation="wave" variant="circle" height={iconDimensions} width={iconDimensions} />
+            <Skeleton variant="circle" height={iconDimensions} width={iconDimensions} />
             <div className={classes.listTextSkeleton}>
-              <Skeleton animation="wave" height={12} width="80%" />
-              <Skeleton animation="wave" height={12} width="40%" />
+              <Skeleton height={12} width="80%" />
+              <Skeleton height={12} width="40%" />
             </div>
           </ListItem>
           {index < (count -1) && <Divider />}

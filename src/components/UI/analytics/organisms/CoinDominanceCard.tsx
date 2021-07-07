@@ -41,13 +41,13 @@ const CoinDominanceCard: React.FC = () => {
         title={
           top2Coins.length === 2 ?
             `${top2Coins[0].symbol.toUpperCase()} vs ${top2Coins[1].symbol.toUpperCase()} Dominance` :
-            <Skeleton animation="wave" height={24} width="60%" />
+            <Skeleton height={24} width="60%" />
         }
         titleTypographyProps={{ variant: 'body1' }}
         subheader={
           top2Coins.length === 2 ?
             "Market capitalization over last 90 days" :
-            <Skeleton animation="wave" height={19} width="40%" />
+            <Skeleton height={19} width="40%" />
         }
         subheaderTypographyProps={{ variant: 'caption', color: 'textSecondary' }}
       />

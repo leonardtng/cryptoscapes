@@ -116,7 +116,7 @@ const MarketCapTreemap: React.FC<Props> = ({ coinsToDisplay }) => {
   return (
     <>
       {coins.value.length === 0 || coins.status === 'LOADING' || globalCoinData.value === null ? (
-        <Skeleton animation="wave" height="100%" className={classes.chartSkeleton} />
+        <Skeleton height="100%" className={classes.chartSkeleton} />
       ) : (
         <Box className={classes.container}>
           <ResponsiveContainer width="100%" height="100%">

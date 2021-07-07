@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: 8
   },
   contentWrapper: {
-    height: 'calc(100% - 84px) !important'
+    flex: 1
   }
 }));
 
@@ -51,7 +51,7 @@ const BitcoinHashRateCard: React.FC = () => {
         subheader={
           bitcoinHashRate.today !== null ?
             `${shortenNumber(bitcoinHashRate.today.y)} TH/s` :
-            <Skeleton animation="wave" height={32} width={150} />
+            <Skeleton height={32} width={150} />
         }
         subheaderTypographyProps={{ variant: 'h6', color: 'textPrimary' }}
         avatar={

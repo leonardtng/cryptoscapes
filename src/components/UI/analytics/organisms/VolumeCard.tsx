@@ -11,7 +11,7 @@ import VolumeBarChart from '../molecules/VolumeBarChart';
 
 const useStyles = makeStyles((theme: Theme) => ({
   chartWrapper: {
-    height: 'calc(100% - 84px)',
+    flex: 1,
     width: '100%',
   },
   avatarColor: {
@@ -35,7 +35,7 @@ const VolumeCard: React.FC = () => {
         subheader={
           globalCoinData.value !== null ?
             `US$${shortenNumber(globalCoinData.value.totalVolume.usd)}` :
-            <Skeleton animation="wave" height={32} width={150} />
+            <Skeleton height={32} width={150} />
         }
         subheaderTypographyProps={{ variant: 'h6', color: 'textPrimary' }}
         avatar={

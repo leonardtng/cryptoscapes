@@ -26,11 +26,11 @@ const ChartSkeleton = () => {
   return (
     <Box className={classes.skeletonContainer}>
       <Box className={classes.skeletonBody}>
-        <Skeleton animation="wave" variant="rect" height={25} width={15} />
-        <Skeleton animation="wave" variant="rect" height={40} width={15} />
-        <Skeleton animation="wave" variant="rect" height={59} width={15} />
-        <Skeleton animation="wave" variant="rect" height={78} width={15} />
-        <Skeleton animation="wave" variant="rect" height={47} width={15} />
+        <Skeleton variant="rect" height={25} width={15} />
+        <Skeleton variant="rect" height={40} width={15} />
+        <Skeleton variant="rect" height={59} width={15} />
+        <Skeleton variant="rect" height={78} width={15} />
+        <Skeleton variant="rect" height={47} width={15} />
       </Box>
     </Box>
   )

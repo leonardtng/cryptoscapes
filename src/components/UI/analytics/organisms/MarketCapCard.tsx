@@ -12,7 +12,7 @@ import MarketCapTreemap from '../molecules/MarketCapTreemap';
 
 const useStyles = makeStyles((theme: Theme) => ({
   chartWrapper: {
-    height: 'calc(100% - 84px + 20px)',
+    flex: 1,
     width: '100%',
     marginTop: -20
   },
@@ -41,7 +41,7 @@ const MarketCapCard: React.FC = () => {
         subheader={
           globalCoinData.value !== null ?
             `US$${shortenNumber(globalCoinData.value.totalMarketCap.usd)}` :
-            <Skeleton animation="wave" height={32} width={150} />
+            <Skeleton height={32} width={150} />
         }
         subheaderTypographyProps={{ variant: 'h6', color: 'textPrimary' }}
         avatar={

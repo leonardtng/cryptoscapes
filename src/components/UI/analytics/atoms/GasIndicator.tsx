@@ -65,7 +65,7 @@ const GasIndicator: React.FC<Props> = ({ header, price, time, icon, color, selec
       {price ? (
         <Typography variant="body1" noWrap>{price} Gwei</Typography>
       ) : (
-        <Skeleton animation="wave" height={24} width="50%" />
+        <Skeleton height={24} width="50%" />
       )}
     </Button>
   )

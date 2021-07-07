@@ -16,7 +16,7 @@ import { useInfiniteScrollingObserver } from '../../../../common/hooks/useInfini
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: 'calc(100% - 83px)',
+    flex: 1,
     width: '100%',
     overflowY: 'scroll'
   },

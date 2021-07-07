@@ -32,20 +32,20 @@ const CoinDataTabs: React.FC = () => {
             <Tab label="Charts" value="charts" />
             <Tab label="Market Data" value="marketData" />
             <Tab label="Social" value="social" />
-            <Tab label="Sentiment" value="sentiment"/>
+            <Tab label="Sentiment" value="sentiment" />
           </Tabs>
         </AppBar>
       </Box>
       <TabPanel value={value} index="charts">
         <CoinDetailsChart />
       </TabPanel>
-      <TabPanel value={value} index="marketData">
+      <TabPanel value={value} index="marketData" {...{ padding: 3 }}>
         Market Data
       </TabPanel>
-      <TabPanel value={value} index="social">
+      <TabPanel value={value} index="social" {...{ padding: 3 }}>
         Social
       </TabPanel>
-      <TabPanel value={value} index="sentiment">
+      <TabPanel value={value} index="sentiment" {...{ padding: 3 }}>
         Sentiment
       </TabPanel>
     </>

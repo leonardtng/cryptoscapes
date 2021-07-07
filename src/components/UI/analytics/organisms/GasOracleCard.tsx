@@ -50,7 +50,7 @@ const GasOracleCard: React.FC = () => {
         subheader={
           ethereum && gasOracle.selectedGasFee ?
             `Fee: US$${roundDecimals(calculateTransactionFee(ethereum))}` :
-            <Skeleton animation="wave" height={24} width={150} />
+            <Skeleton height={24} width={150} />
         }
         subheaderTypographyProps={{ variant: 'body1', color: 'textPrimary' }}
         avatar={
