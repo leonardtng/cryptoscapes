@@ -20,13 +20,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
+  children: ReactElement<any, any>;
   coinSymbol: string;
   circulatingSupply: number;
   maxSupply: number;
-  children: ReactElement<any, any>;
 }
 
-const CirculatingSupplyTooltip: React.FC<Props> = ({ coinSymbol, circulatingSupply, maxSupply, children }) => {
+const CirculatingSupplyTooltip: React.FC<Props> = ({ children, coinSymbol, circulatingSupply, maxSupply }) => {
   const classes = useStyles();
 
   return (

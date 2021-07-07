@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { fetchTrendingCoins, selectTrendingCoins } from '../../../../features/trendingCoinsSlice';
 import { TrendingCoin } from '../../../../models';
 import TrendingCoinItem from '../molecules/TrendingCoinItem';
-import ListItemSkeleton from '../atoms/ListItemSkeleton';
+import ListItemSkeleton from '../../../skeletons/ListItemSkeleton';
 import FireIcon from '../atoms/FireIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({

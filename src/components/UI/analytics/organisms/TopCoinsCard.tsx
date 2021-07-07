@@ -9,7 +9,7 @@ import { Coin } from '../../../../models';
 import CoinItem from '../molecules/CoinItem';
 import { fetchCoinMarketChartList, selectCoinMarketChartList } from '../../../../features/coinMarketChartListSlice';
 import CardLayout from '../../../templates/CardLayout';
-import ListItemSkeleton from '../atoms/ListItemSkeleton';
+import ListItemSkeleton from '../../../skeletons/ListItemSkeleton';
 import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme: Theme) => ({

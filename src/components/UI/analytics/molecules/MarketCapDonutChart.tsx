@@ -1,7 +1,7 @@
 import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
-import DonutSkeleton from '../atoms/DonutSkeleton';
+import DonutSkeleton from '../../../skeletons/DonutSkeleton';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectCoins } from '../../../../features/coinsSlice';
 import { selectGlobalCoinData } from '../../../../features/globalCoinDataSlice';

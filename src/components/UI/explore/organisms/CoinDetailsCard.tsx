@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react';
-import { CardContent, CardHeader } from '@material-ui/core';
-import { useAppDispatch } from '../../../../app/hooks';
+// import { CardHeader } from '@material-ui/core';
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import CardLayout from '../../../templates/CardLayout';
 import { fetchCoinDetails } from '../../../../features/coinDetailsSlice';
 import CoinDetailsHeader from '../molecules/CoinDetailsHeader';
 import CoinDataCardGroup from '../molecules/CoinDataCardGroup';
+import CoinDataTabs from '../molecules/CoinDataTabs';
+import {
+  fetchCoinDetailsMarketChart,
+  selectCoinDetailsMarketChart
+} from '../../../../features/coinDetailsMarketChartSlice';
 
 interface Props {
   coinId: string;
@@ -13,18 +18,21 @@ interface Props {
 const CoinDetailsCard: React.FC<Props> = ({ coinId }) => {
   const dispatch = useAppDispatch();
 
+  const coinDetailsMarketChart = useAppSelector(selectCoinDetailsMarketChart);
+
   useEffect(() => {
     dispatch(fetchCoinDetails(coinId));
   }, [dispatch, coinId]);
 
-  // TABS: 'Chart' 'Info' 'Social' 'Sentiment'
+  useEffect(() => {
+    dispatch(fetchCoinDetailsMarketChart({ coinId: coinId, dayRange: coinDetailsMarketChart.selectedDayRange }));
+  }, [dispatch, coinId, coinDetailsMarketChart.selectedDayRange]);
 
   return (
     <CardLayout>
-      <CardHeader title={<CoinDetailsHeader />} />
-      <CardContent>
-        <CoinDataCardGroup />
-      </CardContent>
+      <CoinDetailsHeader />
+      <CoinDataCardGroup />
+      <CoinDataTabs />
     </CardLayout>
   )
 }

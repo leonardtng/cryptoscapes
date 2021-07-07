@@ -3,7 +3,7 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Box, Typography, useTheme } from '@material-ui/core'
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useAppSelector } from '../../../../app/hooks';
-import ChartSkeleton from '../atoms/ChartSkeleton';
+import ChartSkeleton from '../../../skeletons/ChartSkeleton';
 import { selectBitcoinHashRate } from '../../../../features/bitcoinHashRateSlice';
 import { BitcoinHashRate } from '../../../../models';
 import { bitcoinOrange } from '../../../../common/shared/colors';

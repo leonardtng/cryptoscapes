@@ -4,6 +4,7 @@ import coinListReducer from '../features/coinListSlice';
 import coinCategoriesReducer from '../features/coinCategoriesSlice';
 import coinMarketChartListReducer from '../features/coinMarketChartListSlice';
 import coinDetailsReducer from '../features/coinDetailsSlice';
+import coinDetailsMarketChartReducer from '../features/coinDetailsMarketChartSlice';
 import supportedCoinsReducer from '../features/supportedCoinsSlice';
 import dominanceChartListReducer from '../features/dominanceChartList';
 import gasOracleReducer from '../features/gasOracleSlice';
@@ -20,6 +21,7 @@ export const store = configureStore({
     coinCategories: coinCategoriesReducer,
     coinMarketChartList: coinMarketChartListReducer,
     coinDetails: coinDetailsReducer,
+    coinDetailsMarketChart: coinDetailsMarketChartReducer, 
     supportedCoins: supportedCoinsReducer,
     dominanceChartList: dominanceChartListReducer,
     gasOracle: gasOracleReducer,

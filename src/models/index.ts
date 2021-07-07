@@ -25,7 +25,8 @@ import {
   CoinMarketChart as CoinMarketChartInterface,
   CoinMarketChartList as CoinMarketChartListInterface,
   DominanceChartList as DominanceChartListInterface,
-  CoinMarketChartListState as CoinMarketChartListStateInterface
+  CoinMarketChartListState as CoinMarketChartListStateInterface,
+  CoinDetailsMarketChartState as CoinDetailsMarketChartStateInterface
 } from './api/CoinMarketChart';
 import {
   CoinDetails as CoinDetailsInterface,
@@ -82,6 +83,7 @@ export type CoinMarketChart = CoinMarketChartInterface;
 export type CoinMarketChartList = CoinMarketChartListInterface;
 export type DominanceChartList = DominanceChartListInterface;
 export type CoinMarketChartListState = CoinMarketChartListStateInterface;
+export type CoinDetailsMarketChartState = CoinDetailsMarketChartStateInterface;
 export type CoinDetails = CoinDetailsInterface;
 export type CoinDetailsState = CoinDetailsStateInterface;
 export type SupportedCoin = SupportedCoinInterface;

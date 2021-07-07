@@ -88,7 +88,7 @@ const CoinDetailsHeader: React.FC = () => {
   return (
     <>
       {coinDetails.status === "LOADING" ? (
-        <Box display="flex" alignItems="center" padding={2}>
+        <Box display="flex" alignItems="center" padding={3}>
           <Skeleton variant="circle" className={classes.avatarLarge} />
           <Box>
             <Skeleton height={41} width={250} className={classes.gutterBottom} />
@@ -98,7 +98,7 @@ const CoinDetailsHeader: React.FC = () => {
       ) : (
         <>
           {coinDetails.value && (
-            <Box display="flex" justifyContent="space-between" padding={2}>
+            <Box display="flex" justifyContent="space-between" padding={3}>
               <Box display="flex" alignItems="center">
                 <Avatar
                   src={coinDetails.value.image.large}

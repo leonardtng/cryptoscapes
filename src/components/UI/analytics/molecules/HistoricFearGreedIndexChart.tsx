@@ -5,7 +5,7 @@ import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'rec
 import { FearGreedIndex } from '../../../../models';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectFearGreedIndex } from '../../../../features/fearGreedIndexSlice';
-import ChartSkeleton from '../atoms/ChartSkeleton';
+import ChartSkeleton from '../../../skeletons/ChartSkeleton';
 import { convertTimestamp, roundDecimals } from '../../../../common/helpers';
 import { bitcoinOrange } from '../../../../common/shared/colors';
 

@@ -64,4 +64,4 @@ const dominanceChartListSlice: Slice<GenericState<DominanceChartList>, {}, 'domi
   },
 });
 
-export default dominanceChartListSlice.reducer
+export default dominanceChartListSlice.reducer;

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-import { useAppSelector } from '../../../../app/hooks';
-import { selectCoins } from '../../../../features/coinsSlice';
+import { useAppSelector } from '../../app/hooks';
+import { selectCoins } from '../../features/coinsSlice';
 import ReactApexChart from "react-apexcharts";
-import { Coin } from '../../../../models';
+import { Coin } from '../../models';
 import { ApexOptions } from 'apexcharts';
-import HeatmapLoadingProgress from '../atoms/HeatmapLoadingProgress';
-import Overlay from '../atoms/Overlay';
+import HeatmapLoadingProgress from '../UI/analytics/atoms/HeatmapLoadingProgress';
+import Overlay from '../UI/analytics/atoms/Overlay';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {

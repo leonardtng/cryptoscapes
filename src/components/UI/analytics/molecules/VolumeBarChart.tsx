@@ -2,7 +2,7 @@ import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Typography } from '@material-ui/core';
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import ChartSkeleton from '../atoms/ChartSkeleton';
+import ChartSkeleton from '../../../skeletons/ChartSkeleton';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectCoins } from '../../../../features/coinsSlice';
 import { selectGlobalCoinData } from '../../../../features/globalCoinDataSlice';

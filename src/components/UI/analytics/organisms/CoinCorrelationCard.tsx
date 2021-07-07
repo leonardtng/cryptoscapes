@@ -9,7 +9,7 @@ import { fetchCoinMarketChartList, selectCoinMarketChartList } from '../../../..
 import CardLayout from '../../../templates/CardLayout';
 import CorrelationHeatmap from '../molecules/CorrelationHeatmap';
 import HeatmapOptionToggleGroup from '../atoms/HeatmapOptionToggleGroup';
-import CorrelationHeatmapSkeleton from '../molecules/CorrelationHeatmapSkeleton';
+import CorrelationHeatmapSkeleton from '../../../skeletons/CorrelationHeatmapSkeleton';
 
 const useStyles = makeStyles((theme: Theme) => ({
   chartWrapper: {

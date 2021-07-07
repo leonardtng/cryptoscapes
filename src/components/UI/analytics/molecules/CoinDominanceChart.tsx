@@ -3,7 +3,7 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Box, Typography, useTheme } from '@material-ui/core'
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useSelector } from 'react-redux';
-import ChartSkeleton from '../atoms/ChartSkeleton';
+import ChartSkeleton from '../../../skeletons/ChartSkeleton';
 import { Coin, CoinMarketChart } from '../../../../models';
 import { convertTimestamp, shortenNumber } from '../../../../common/helpers';
 import { selectDominanceChartList } from '../../../../features/dominanceChartList';

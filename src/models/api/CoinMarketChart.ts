@@ -24,3 +24,8 @@ export interface CoinMarketChartListState extends GenericState<CoinMarketChartLi
   selectedDayRange: AvailableDayRanges;
   selectedDataType: keyof CoinMarketChart;
 }
+
+export interface CoinDetailsMarketChartState extends GenericState<CoinMarketChart> {
+  selectedDayRange: AvailableDayRanges;
+  selectedDataType: keyof CoinMarketChart;
+}

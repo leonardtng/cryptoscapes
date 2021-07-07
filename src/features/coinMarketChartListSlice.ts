@@ -34,8 +34,7 @@ interface Params {
 
 export const fetchCoinMarketChartList = createAsyncThunk(
   'coinMarketChartList',
-  async (params: Params, { getState }
-  ) => {
+  async (params: Params, { getState }) => {
     const canceler = axios.CancelToken.source();
     const state = getState() as RootState;
 
@@ -106,4 +105,4 @@ const coinMarketChartListSlice: Slice<CoinMarketChartListState, Reducers, 'coinM
 
 export const { setSelectedDayRange, setSelectedDataType } = coinMarketChartListSlice.actions;
 
-export default coinMarketChartListSlice.reducer
+export default coinMarketChartListSlice.reducer;
