@@ -15,8 +15,8 @@ import {
 } from '@material-ui/core';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { selectCoinList, addCoinListTableColumn, removeCoinListTableColumn } from '../../../../features/coinListSlice';
-import { HeadCell, headCells } from './CoinListTableHeader';
-import { Coin } from '../../../../models';
+import { headCells } from './CoinListTableHeader';
+import { Coin, CoinListTableHeadCell } from '../../../../models';
 import { CloseRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -61,8 +61,8 @@ const CustomiseTable: React.FC<Props> = ({ open, toggleClose }) => {
         </DialogContentText>
         <List>
           {headCells
-            .filter((headCell: HeadCell) => headCell.customisable)
-            .map((headCell: HeadCell, index: number) => {
+            .filter((headCell: CoinListTableHeadCell) => headCell.customisable)
+            .map((headCell: CoinListTableHeadCell, index: number) => {
               return <ListItem key={index} dense button onClick={() => handleToggle(headCell.id)}>
                 <ListItemIcon>
                   <Checkbox

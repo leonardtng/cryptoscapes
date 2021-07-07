@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { TableCell, TableHead, TableRow, TableSortLabel, Typography } from '@material-ui/core';
-import { Coin, CoinSortingKey, CoinSortingOrder } from '../../../../models';
+import { Coin, CoinListTableHeadCell, CoinSortingKey, CoinSortingOrder } from '../../../../models';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectCoinList } from '../../../../features/coinListSlice';
 
@@ -16,14 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export interface HeadCell {
-  id: keyof Coin;
-  label: string;
-  numeric: boolean;
-  customisable: boolean;
-}
-
-export const headCells: HeadCell[] = [
+export const headCells: CoinListTableHeadCell[] = [
   { id: 'marketCapRank', numeric: false, label: '#', customisable: false },
   { id: 'name', numeric: false, label: 'Name', customisable: false },
   { id: 'currentPrice', numeric: true, label: 'Price', customisable: false  },
@@ -74,8 +67,9 @@ const CoinListTableHeader: React.FC<CoinListTableHeaderProps> = ({ order, orderB
     <TableHead className={classes.root}>
       <TableRow>
         {headCells
-        .filter((headCell: HeadCell) => coinList.coinListTableColumns.includes(headCell.id) || !headCell.customisable)
-        .map((headCell: HeadCell, index: number) => (
+        .filter((headCell: CoinListTableHeadCell) => 
+        coinList.coinListTableColumns.includes(headCell.id) || !headCell.customisable)
+        .map((headCell: CoinListTableHeadCell, index: number) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}

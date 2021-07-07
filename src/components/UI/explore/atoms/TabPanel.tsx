@@ -1,11 +1,11 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
-import { TabValues } from '../molecules/CoinDataTabs';
+import { CoinDetailsTabValues } from '../../../../models';
 
 interface Props {
   children?: React.ReactNode;
-  index: TabValues;
-  value: TabValues;
+  index: CoinDetailsTabValues;
+  value: CoinDetailsTabValues;
 }
 
 const TabPanel: React.FC<Props> = ({ children, value, index, ...other }) => {

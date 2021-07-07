@@ -63,6 +63,12 @@ import {
   BitcoinHashRateRootObject as BitcoinHashRateRootObjectInterface,
   BitcoinHashRateState as BitcoinHashRateStateInterface
 } from './api/BitcoinHashRate';
+import {
+  CoinDetailsTabValues as CoinDetailsTabValuesInterface
+} from './UI/TabValues';
+import {
+  CoinListTableHeadCell as CoinListTableHeadCellInterface
+} from './UI/HeadCells';
 
 export type AppState = AppStateInterface;
 export type Status = StatusInterface;
@@ -105,3 +111,5 @@ export type FearGreedIndexState = FearGreedIndexStateInterface;
 export type BitcoinHashRate = BitcoinHashRateInterface;
 export type BitcoinHashRateRootObject = BitcoinHashRateRootObjectInterface;
 export type BitcoinHashRateState = BitcoinHashRateStateInterface;
+export type CoinDetailsTabValues = CoinDetailsTabValuesInterface;
+export type CoinListTableHeadCell = CoinListTableHeadCellInterface;

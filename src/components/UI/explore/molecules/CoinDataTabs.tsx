@@ -3,6 +3,7 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Box, Tab, Tabs } from '@material-ui/core';
 import TabPanel from '../atoms/TabPanel';
 import CoinDetailsChart from '../atoms/CoinDetailsChart';
+import { CoinDetailsTabValues } from '../../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
   tabBar: {
@@ -15,13 +16,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export type TabValues = 'charts' | 'marketData' | 'social' | 'sentiment';
-
 const CoinDataTabs: React.FC = () => {
   const classes = useStyles();
-  const [value, setValue] = useState<TabValues>('charts');
+  const [value, setValue] = useState<CoinDetailsTabValues>('charts');
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: TabValues) => {
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: CoinDetailsTabValues) => {
     setValue(newValue);
   };
 
@@ -30,10 +29,10 @@ const CoinDataTabs: React.FC = () => {
       <Box padding={3}>
         <AppBar className={classes.tabBar} position="static" color="transparent">
           <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-            <Tab label="Charts" />
-            <Tab label="Market Data" />
-            <Tab label="Social" />
-            <Tab label="Sentiment" />
+            <Tab label="Charts" value="charts" />
+            <Tab label="Market Data" value="marketData" />
+            <Tab label="Social" value="social" />
+            <Tab label="Sentiment" value="sentiment"/>
           </Tabs>
         </AppBar>
       </Box>
