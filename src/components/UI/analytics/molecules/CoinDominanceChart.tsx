@@ -1,6 +1,6 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Box, Typography, useTheme } from '@material-ui/core'
+import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
+import { Box, Typography } from '@material-ui/core'
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useSelector } from 'react-redux';
 import ChartSkeleton from '../../../skeletons/ChartSkeleton';
@@ -36,7 +36,7 @@ interface Props {
 const CoinDominanceChart: React.FC<Props> = ({ coinList, dataKey }) => {
   const classes = useStyles();
   const theme = useTheme();
-  
+
   const dominanceChartList = useSelector(selectDominanceChartList);
 
   const top1 = coinList[0];
@@ -77,14 +77,10 @@ const CoinDominanceChart: React.FC<Props> = ({ coinList, dataKey }) => {
                 <stop offset="95%" stopColor={theme.palette.secondary.main} stopOpacity={0} />
               </linearGradient>
             </defs>
-            <XAxis
-              dataKey="date"
-              tickFormatter={tick => convertTimestamp(tick)}
-            />
-            <YAxis
-              tickFormatter={tick => shortenNumber(tick)}
-            />
+            <XAxis dataKey="date" tickFormatter={tick => convertTimestamp(tick)} />
+            <YAxis tickFormatter={tick => shortenNumber(tick)} />
             <Tooltip
+              cursor={{ stroke: theme.palette.text.secondary }}
               content={({ active, payload, label }) => {
                 if (active && payload && payload.length) {
                   return <Box className={classes.customTooltip}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { useHistory } from 'react-router';

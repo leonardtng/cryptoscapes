@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import { Area, AreaChart, ResponsiveContainer, YAxis } from 'recharts';
 
 interface DataFormat {

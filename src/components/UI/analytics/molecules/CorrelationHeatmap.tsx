@@ -1,11 +1,10 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
+import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectCoinMarketChartList } from '../../../../features/coinMarketChartListSlice';
 import { Coin, CoinMarketChart } from '../../../../models';
 import ReactApexChart from "react-apexcharts";
 import { selectCoins } from '../../../../features/coinsSlice';
-import { useTheme } from '@material-ui/core';
 import { ApexOptions } from 'apexcharts';
 import { pearsonCorrelation, roundDecimals } from '../../../../common/helpers';
 

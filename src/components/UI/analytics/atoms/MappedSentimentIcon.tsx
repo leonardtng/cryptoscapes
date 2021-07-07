@@ -1,4 +1,5 @@
-import { useTheme } from '@material-ui/core';
+import React from 'react';
+import { useTheme } from '@material-ui/core/styles';
 import {
   FaceRounded,
   SentimentDissatisfiedRounded,

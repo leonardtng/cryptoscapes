@@ -17,7 +17,7 @@ const initialState: CoinDetailsMarketChartState = {
     prices: [],
     totalVolumes: []
   },
-  selectedDayRange: 7,
+  selectedDayRange: 1,
   selectedDataType: 'prices',
   status: 'IDLE'
 };

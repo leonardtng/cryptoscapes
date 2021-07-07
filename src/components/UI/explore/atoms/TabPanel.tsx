@@ -13,6 +13,7 @@ const TabPanel: React.FC<Props> = ({ children, value, index, ...other }) => {
   return (
     <Box
       flex="1"
+      position="relative"
       role="tabpanel"
       hidden={value !== index}
       {...other}

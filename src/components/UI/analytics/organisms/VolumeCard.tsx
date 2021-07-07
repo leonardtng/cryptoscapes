@@ -34,7 +34,8 @@ const VolumeCard: React.FC = () => {
         titleTypographyProps={{ variant: 'body2', color: 'textSecondary' }}
         subheader={
           globalCoinData.value !== null ?
-            `US$${shortenNumber(globalCoinData.value.totalVolume.usd)}` :
+            `${globalCoinData.value.totalVolume.usd < 0 ?
+              '-' : ''}US$${shortenNumber(globalCoinData.value.totalVolume.usd)}` :
             <Skeleton height={32} width={150} />
         }
         subheaderTypographyProps={{ variant: 'h6', color: 'textPrimary' }}

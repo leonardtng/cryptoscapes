@@ -1,6 +1,6 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Box, Typography, useTheme } from '@material-ui/core'
+import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
+import { Box, Typography } from '@material-ui/core'
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { FearGreedIndex } from '../../../../models';
 import { useAppSelector } from '../../../../app/hooks';
@@ -100,6 +100,7 @@ const HistoricFearGreedIndexChart: React.FC = () => {
               hide
             />
             <Tooltip
+              cursor={{ stroke: theme.palette.text.secondary }}
               content={({ active, payload, label }) => {
                 if (active && payload && payload.length) {
                   return <Box className={classes.customTooltip}>

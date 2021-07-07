@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Box, Tab, Tabs } from '@material-ui/core';
 import TabPanel from '../atoms/TabPanel';
-import CoinDetailsChart from '../atoms/CoinDetailsChart';
+import CoinDetailsChart from './CoinDetailsChart';
 import { CoinDetailsTabValues } from '../../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -39,13 +39,13 @@ const CoinDataTabs: React.FC = () => {
       <TabPanel value={value} index="charts">
         <CoinDetailsChart />
       </TabPanel>
-      <TabPanel value={value} index="marketData" {...{ padding: 3 }}>
+      <TabPanel value={value} index="marketData" {...{ paddingLeft: 3, paddingRight: 3 }}>
         Market Data
       </TabPanel>
-      <TabPanel value={value} index="social" {...{ padding: 3 }}>
+      <TabPanel value={value} index="social" {...{ paddingLeft: 3, paddingRight: 3 }}>
         Social
       </TabPanel>
-      <TabPanel value={value} index="sentiment" {...{ padding: 3 }}>
+      <TabPanel value={value} index="sentiment" {...{ paddingLeft: 3, paddingRight: 3 }}>
         Sentiment
       </TabPanel>
     </>

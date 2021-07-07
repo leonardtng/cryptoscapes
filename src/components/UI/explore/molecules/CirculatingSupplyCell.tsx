@@ -35,7 +35,7 @@ const CirculatingSupplyCell: React.FC<Props> = ({ coin }) => {
       circulatingSupply={circulatingSupply}
       maxSupply={maxSupply}
     >
-      <Box>
+      <Box maxWidth={200}>
         <Typography variant="subtitle2" noWrap>
           {formatNumber(roundDecimals(circulatingSupply, 0))} {coin.symbol.toUpperCase()}
         </Typography>

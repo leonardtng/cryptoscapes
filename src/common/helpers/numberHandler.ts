@@ -10,6 +10,8 @@ export const roundDecimals = (num: number, places: number = 2) => {
 };
 
 export const shortenNumber = (num: number) => {
+  let rawNum: number =  Math.abs(num);
+
   const format = (value: number, postfix: string) => {
     const str = value.toString();
     let decimalPoint = 0;
@@ -28,17 +30,17 @@ export const shortenNumber = (num: number) => {
     TRILLION: 1000000000000
   };
 
-  if (num >= limits.TRILLION) {
-    return format(num / limits.TRILLION, 'T');
+  if (rawNum >= limits.TRILLION) {
+    return format(rawNum / limits.TRILLION, 'T');
   }
-  if (num >= limits.BILLION) {
-    return format(num / limits.BILLION, 'B');
+  if (rawNum >= limits.BILLION) {
+    return format(rawNum / limits.BILLION, 'B');
   }
-  if (num >= limits.MILLION) {
-    return format(num / limits.MILLION, 'M');
+  if (rawNum >= limits.MILLION) {
+    return format(rawNum / limits.MILLION, 'M');
   }
-  if (num >= limits.THOUSAND) {
-    return format(num / limits.THOUSAND, 'K');
+  if (rawNum >= limits.THOUSAND) {
+    return format(rawNum / limits.THOUSAND, 'K');
   }
 
   return num.toFixed(0);

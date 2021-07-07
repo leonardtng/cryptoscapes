@@ -1,33 +1,22 @@
 import React from 'react';
 import { Theme, makeStyles, withStyles } from '@material-ui/core/styles';
-import { Divider, Paper } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
+import { AvailableDayRanges, CoinMarketChart } from '../../../../models';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import { selectCoinMarketChartList, setSelectedDataType, setSelectedDayRange } from '../../../../features/coinMarketChartListSlice';
-import { AvailableDayRanges } from '../../../../models/api/CoinMarketChart';
-import { CoinMarketChart } from '../../../../models';
+import { selectCoinDetailsMarketChart, setSelectedDataType, setSelectedDayRange } from '../../../../features/coinDetailsMarketChartSlice';
 import { toggleButtonsHeight } from '../../../../common/shared/dimensions';
+import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  paper: {
-    display: 'flex',
-    margin: '16px 16px 0 0',
-    flexWrap: 'wrap',
-    border: `1px solid ${theme.palette.divider}`,
-    '& #data-type .MuiToggleButton-root.Mui-selected': {
-      backgroundColor: `${theme.palette.primary.main}25`,
-      color: theme.palette.primary.main
-    },
-    '& #date-range .MuiToggleButton-root.Mui-selected': {
-      backgroundColor: `${theme.palette.secondary.main}25`,
-      color: theme.palette.secondary.main
-    }
-  },
   toggleButtonGroup: {
-    height: toggleButtonsHeight
-  },
-  divider: {
-    margin: theme.spacing(1, 0.5)
+    // '& #data-type .MuiToggleButton-root.Mui-selected': {
+    //   backgroundColor: `${theme.palette.primary.main}25`,
+    //   color: theme.palette.primary.main
+    // },
+    // '& #date-range .MuiToggleButton-root.Mui-selected': {
+    //   backgroundColor: `${theme.palette.secondary.main}25`,
+    //   color: theme.palette.secondary.main
+    // }
   }
 }));
 
@@ -44,18 +33,27 @@ const StyledToggleButtonGroup = withStyles((theme) => ({
   },
 }))(ToggleButtonGroup);
 
-const HeatmapOptionToggleGroup: React.FC = () => {
+const ChartOptionToggleGroup: React.FC = () => {
   const classes = useStyles();
-  const dispatch = useAppDispatch();
 
-  const coinMarketChartList = useAppSelector(selectCoinMarketChartList);
+  const dispatch = useAppDispatch();
+  const coinDetailsMarketChart = useAppSelector(selectCoinDetailsMarketChart);
 
   return (
-    <Paper elevation={0} className={classes.paper}>
+    <Box
+      position="absolute"
+      display="flex"
+      justifyContent="space-between"
+      width="100%"
+      height={toggleButtonsHeight}
+      paddingLeft={3}
+      paddingRight={3}
+      zIndex={1}
+      className={classes.toggleButtonGroup}
+    >
       <StyledToggleButtonGroup
-        className={classes.toggleButtonGroup}
         id="data-type"
-        value={coinMarketChartList.selectedDataType}
+        value={coinDetailsMarketChart.selectedDataType}
         exclusive
         onChange={
           (event: React.MouseEvent<HTMLElement>, newDataType: keyof CoinMarketChart | null): void => {
@@ -74,11 +72,9 @@ const HeatmapOptionToggleGroup: React.FC = () => {
           Volume
         </ToggleButton>
       </StyledToggleButtonGroup>
-      <Divider flexItem orientation="vertical" className={classes.divider} />
       <StyledToggleButtonGroup
-        className={classes.toggleButtonGroup}
         id="date-range"
-        value={coinMarketChartList.selectedDayRange}
+        value={coinDetailsMarketChart.selectedDayRange}
         exclusive
         onChange={
           (event: React.MouseEvent<HTMLElement>, newDayRange: AvailableDayRanges | null): void => {
@@ -105,9 +101,12 @@ const HeatmapOptionToggleGroup: React.FC = () => {
         <ToggleButton value={730}>
           2Y
         </ToggleButton>
+        <ToggleButton value="max">
+          Max
+        </ToggleButton>
       </StyledToggleButtonGroup>
-    </Paper>
+    </Box>
   )
 }
 
-export default HeatmapOptionToggleGroup
+export default ChartOptionToggleGroup

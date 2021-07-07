@@ -1,6 +1,5 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import { useTheme } from '@material-ui/core';
+import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Area, AreaChart, ResponsiveContainer, YAxis } from 'recharts';
 import { Coin, CoinMarketChart } from '../../../../models';
 import { useAppSelector } from '../../../../app/hooks';
