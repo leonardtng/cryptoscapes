@@ -87,7 +87,121 @@ const CoinDetailsHeader: React.FC = () => {
 
   return (
     <>
-      {coinDetails.status === "LOADING" ? (
+      {coinDetails.value && coinDetails.status !== "LOADING" ? (
+        <Box display="flex" justifyContent="space-between" padding={3}>
+          <Box display="flex" alignItems="center">
+            <Avatar
+              src={coinDetails.value.image.large}
+              alt={coinDetails.value.id}
+              className={classes.avatarLarge}
+            />
+            <Box>
+              <Box display="flex" alignItems="center" marginBottom="6px">
+                <Typography variant="h4">{coinDetails.value.name}</Typography>
+                <Typography variant="body1" color="textSecondary" className={classes.coinSymbol} >
+                  {coinDetails.value.symbol.toUpperCase()}
+                </Typography>
+              </Box>
+              <Box display="flex" alignItems="center" >
+                {coinDetails.value.links.homepage[0] &&
+                  <Typography variant="body1" className={classes.link}>
+                    <Link
+                      href={coinDetails.value.links.homepage[0]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Website
+                    </Link>
+                  </Typography>
+                }
+                {coinDetails.value.links.blockchainSite[0] &&
+                  <Typography variant="body1" className={classes.link}>
+                    <Link
+                      href={coinDetails.value.links.blockchainSite[0]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Blockchain
+                    </Link>
+                  </Typography>
+                }
+                {coinDetails.value.links.officialForumUrl[0] &&
+                  <Typography variant="body1" className={classes.link}>
+                    <Link
+                      href={coinDetails.value.links.officialForumUrl[0]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Forum
+                    </Link>
+                  </Typography>
+                }
+                {coinDetails.value.categories.slice(0, 2).map((category: string) => (
+                  <Chip
+                    key={category}
+                    className={classes.chip}
+                    label={category}
+                    size="small"
+                    color="primary"
+                    clickable
+                    onClick={() => handleClickCategory(category)}
+                  />
+                ))}
+                {coinDetails.value.categories.length > 2 &&
+                  <Chip label="View All" size="small" clickable onClick={() => setCategoriesOpen(true)} />
+                }
+                <CoinCategoriesDialog
+                  open={categoriesOpen}
+                  toggleClose={() => setCategoriesOpen(false)}
+                  handleClickCategory={handleClickCategory}
+                />
+              </Box>
+            </Box>
+          </Box>
+          <Box display="flex" alignItems="center">
+            <Box>
+              <Box width="100%" display="flex" alignItems="center" justifyContent="flex-end" marginBottom="6px">
+                <Typography variant="h4">${formatNumber(coinDetails.value.marketData.currentPrice.usd)}</Typography>
+                <Typography
+                  variant="h6"
+                  className={classes.priceChange}
+                  style={{
+                    color: coinDetails.value.marketData.priceChangePercentage24H >= 0 ?
+                      theme.palette.success.main : theme.palette.error.main
+                  }}
+                >
+                  {coinDetails.value.marketData.priceChangePercentage24H >= 0 ? '+' : ''}
+                  {roundDecimals(coinDetails.value.marketData.priceChangePercentage24H)}%
+                </Typography>
+              </Box>
+              {coinDetails.value.marketData.low24H.usd && coinDetails.value.marketData.high24H.usd &&
+                <Box display="flex" alignItems="center">
+                  <Typography variant="subtitle2" color="textSecondary">
+                    Low: ${formatNumber(Math.min(
+                      coinDetails.value.marketData.low24H.usd, coinDetails.value.marketData.currentPrice.usd))}
+                  </Typography>
+                  <LinearProgress
+                    className={classes.progressBar}
+                    variant="determinate"
+                    color="secondary"
+                    value={
+                      calculateProgress(
+                        coinDetails.value.marketData.currentPrice.usd,
+                        coinDetails.value.marketData.low24H.usd,
+                        coinDetails.value.marketData.high24H.usd
+                      )
+                    }
+                  />
+                  <Typography variant="subtitle2" color="textSecondary">
+                    High: ${formatNumber(Math.max(
+                      coinDetails.value.marketData.high24H.usd, coinDetails.value.marketData.currentPrice.usd))}
+                  </Typography>
+                </Box>
+              }
+            </Box>
+          </Box>
+        </Box>
+      ) : (
         <Box display="flex" alignItems="center" padding={3}>
           <Skeleton variant="circle" className={classes.avatarLarge} />
           <Box>
@@ -95,124 +209,6 @@ const CoinDetailsHeader: React.FC = () => {
             <Skeleton height={24} width={350} />
           </Box>
         </Box>
-      ) : (
-        <>
-          {coinDetails.value && (
-            <Box display="flex" justifyContent="space-between" padding={3}>
-              <Box display="flex" alignItems="center">
-                <Avatar
-                  src={coinDetails.value.image.large}
-                  alt={coinDetails.value.id}
-                  className={classes.avatarLarge}
-                />
-                <Box>
-                  <Box display="flex" alignItems="center" marginBottom="6px">
-                    <Typography variant="h4">{coinDetails.value.name}</Typography>
-                    <Typography variant="body1" color="textSecondary" className={classes.coinSymbol} >
-                      {coinDetails.value.symbol.toUpperCase()}
-                    </Typography>
-                  </Box>
-                  <Box display="flex" alignItems="center" >
-                    {coinDetails.value.links.homepage[0] &&
-                      <Typography variant="body1" className={classes.link}>
-                        <Link
-                          href={coinDetails.value.links.homepage[0]}
-                          target="_blank"
-                          rel='noopener noreferrer'
-                        >
-                          Website
-                        </Link>
-                      </Typography>
-                    }
-                    {coinDetails.value.links.blockchainSite[0] &&
-                      <Typography variant="body1" className={classes.link}>
-                        <Link
-                          href={coinDetails.value.links.blockchainSite[0]}
-                          target="_blank"
-                          rel='noopener noreferrer'
-                        >
-                          Blockchain
-                        </Link>
-                      </Typography>
-                    }
-                    {coinDetails.value.links.officialForumUrl[0] &&
-                      <Typography variant="body1" className={classes.link}>
-                        <Link
-                          href={coinDetails.value.links.officialForumUrl[0]}
-                          target="_blank"
-                          rel='noopener noreferrer'
-                        >
-                          Forum
-                        </Link>
-                      </Typography>
-                    }
-                    {coinDetails.value.categories.slice(0, 2).map((category: string) => (
-                      <Chip
-                        key={category}
-                        className={classes.chip}
-                        label={category}
-                        size="small"
-                        color="primary"
-                        clickable
-                        onClick={() => handleClickCategory(category)}
-                      />
-                    ))}
-                    {coinDetails.value.categories.length > 2 &&
-                      <Chip label="View All" size="small" clickable onClick={() => setCategoriesOpen(true)} />
-                    }
-                    <CoinCategoriesDialog
-                      open={categoriesOpen}
-                      toggleClose={() => setCategoriesOpen(false)}
-                      handleClickCategory={handleClickCategory} 
-                      />
-                  </Box>
-                </Box>
-              </Box>
-              <Box display="flex" alignItems="center">
-                <Box>
-                  <Box width="100%" display="flex" alignItems="center" justifyContent="flex-end" marginBottom="6px">
-                    <Typography variant="h4">${formatNumber(coinDetails.value.marketData.currentPrice.usd)}</Typography>
-                    <Typography
-                      variant="h6"
-                      className={classes.priceChange}
-                      style={{
-                        color: coinDetails.value.marketData.priceChangePercentage24H >= 0 ?
-                          theme.palette.success.main : theme.palette.error.main
-                      }}
-                    >
-                      {coinDetails.value.marketData.priceChangePercentage24H >= 0 ? '+' : ''}
-                      {roundDecimals(coinDetails.value.marketData.priceChangePercentage24H)}%
-                    </Typography>
-                  </Box>
-                  {coinDetails.value.marketData.low24H.usd && coinDetails.value.marketData.high24H.usd &&
-                    <Box display="flex" alignItems="center">
-                      <Typography variant="subtitle2" color="textSecondary">
-                        Low: ${formatNumber(Math.min(
-                          coinDetails.value.marketData.low24H.usd, coinDetails.value.marketData.currentPrice.usd))}
-                      </Typography>
-                      <LinearProgress
-                        className={classes.progressBar}
-                        variant="determinate"
-                        color="secondary"
-                        value={
-                          calculateProgress(
-                            coinDetails.value.marketData.currentPrice.usd,
-                            coinDetails.value.marketData.low24H.usd,
-                            coinDetails.value.marketData.high24H.usd
-                          )
-                        }
-                      />
-                      <Typography variant="subtitle2" color="textSecondary">
-                        High: ${formatNumber(Math.max(
-                          coinDetails.value.marketData.high24H.usd, coinDetails.value.marketData.currentPrice.usd))}
-                      </Typography>
-                    </Box>
-                  }
-                </Box>
-              </Box>
-            </Box>
-          )}
-        </>
       )}
     </>
   )

@@ -24,7 +24,7 @@ const GitHubButton: React.FC = () => {
         className={classes.githubButton}
         href='https://github.com/leonardtng/'
         target='_blank'
-        rel='noopener noreferrer'
+        rel="noopener noreferrer"
         aria-label='View on GitHub'
       >
         <GitHub />

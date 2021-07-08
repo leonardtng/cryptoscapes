@@ -80,7 +80,6 @@ const CoinDetailsChart: React.FC = () => {
               <Tooltip
                 cursor={{ stroke: theme.palette.text.secondary }}
                 content={({ active, payload, label }) => {
-                  console.log(label)
                   if (active && payload && payload.length) {
                     return <Box className={classes.customTooltip}>
                       <Typography variant="body1">
