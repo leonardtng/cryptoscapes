@@ -3,7 +3,8 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Box, Tab, Tabs } from '@material-ui/core';
 import TabPanel from '../atoms/TabPanel';
 import CoinDetailsChart from './CoinDetailsChart';
-import CoinMarketDataSection from './CoinMarketDataSection';
+import CoinDescription from '../atoms/CoinDescription';
+import CoinStatisticsWrapper from './CoinStatisticsWrapper';
 import { CoinDetailsTabValues } from '../../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -41,7 +42,8 @@ const CoinDataTabs: React.FC = () => {
         <CoinDetailsChart />
       </TabPanel>
       <TabPanel value={value} index="marketData" {...{ paddingLeft: 3, paddingRight: 3, overflow: 'scroll' }}>
-        <CoinMarketDataSection />
+        <CoinDescription />
+        <CoinStatisticsWrapper />
       </TabPanel>
       <TabPanel value={value} index="social" {...{ paddingLeft: 3, paddingRight: 3 }}>
         Social

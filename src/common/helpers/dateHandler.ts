@@ -17,3 +17,9 @@ export const convertTimestamp = (timestamp: number, year: boolean = false) => {
 
   return `${formatDay(date.getDate())} ${monthNames[date.getMonth()]} ${year ? date.getFullYear() : ''}`
 };
+
+export const convertIsoString = (IsoString: string) => {
+  const date = new Date(IsoString);
+
+  return `${formatDay(date.getDate())} ${monthNames[date.getMonth()]} ${date.getFullYear()}`
+}

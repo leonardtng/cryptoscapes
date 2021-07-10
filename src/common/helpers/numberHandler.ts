@@ -1,6 +1,8 @@
-export const formatNumber = (x: number | null) => {
+export const formatNumber = (x: number | null, removeNegativeSign: boolean = false) => {
   if (x === null) return '0'
-  const parts = x.toString().split('.');
+  let num: number = x;
+  if (removeNegativeSign) num = Math.abs(x); 
+  let parts = num.toString().split('.');
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   return parts.join('.');
 };

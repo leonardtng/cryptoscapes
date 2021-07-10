@@ -6,10 +6,12 @@ import { useAppSelector } from '../../../../app/hooks';
 import { selectCoinDetails } from '../../../../features/coinDetailsSlice';
 import { ExpandMoreRounded } from '@material-ui/icons';
 
+const SECTION_HEIGHT = 120;
+
 const useStyles = makeStyles((theme: Theme) => ({
   descriptionContainerLess: {
     position: 'relative',
-    maxHeight: 120,
+    maxHeight: SECTION_HEIGHT,
     overflow: 'hidden',
     '&:before': {
       content: '""',
@@ -64,12 +66,12 @@ const CoinDescription: React.FC = () => {
       setReadMore(false);
       setHeightThreshold(false);
     } else {
-      setHeightThreshold((descriptionRef.current?.offsetHeight || 0) >= 120);
+      setHeightThreshold((descriptionRef.current?.offsetHeight || 0) >= SECTION_HEIGHT);
     };
   }, [coinDetails.status]);
 
   return (
-    <>
+    <Box marginBottom={5} paddingLeft={1} paddingRight={1}>
       {coinDetails.value && coinDetails.status !== 'LOADING' ? (
         <>
           {coinDetails.value.description.en.length > 0 &&
@@ -112,7 +114,7 @@ const CoinDescription: React.FC = () => {
           <Skeleton height={24} width="60%" />
         </Box>
       )}
-    </>
+    </Box>
   )
 }
 
