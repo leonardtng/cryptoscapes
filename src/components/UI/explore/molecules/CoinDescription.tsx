@@ -71,11 +71,11 @@ const CoinDescription: React.FC = () => {
   }, [coinDetails.status]);
 
   return (
-    <Box marginBottom={5} paddingLeft={2} paddingRight={2}>
+    <>
       {coinDetails.value && coinDetails.status !== 'LOADING' ? (
         <>
           {coinDetails.value.description.en.length > 0 &&
-            <Box>
+            <Box marginBottom={5} paddingLeft={2} paddingRight={2}>
               <Typography variant="h6" gutterBottom>What is {coinDetails.value.name}?</Typography>
               <div
                 ref={descriptionRef}
@@ -114,7 +114,7 @@ const CoinDescription: React.FC = () => {
           <Skeleton height={24} width="60%" />
         </Box>
       )}
-    </Box>
+    </>
   )
 }
 

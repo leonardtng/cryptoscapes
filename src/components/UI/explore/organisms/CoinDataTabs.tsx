@@ -6,6 +6,7 @@ import CoinDetailsChart from '../molecules/CoinDetailsChart';
 import CoinDescription from '../molecules/CoinDescription';
 import CoinStatisticsWrapper from '../molecules/CoinStatisticsWrapper';
 import CoinSocialStats from '../molecules/CoinSocialStats';
+import DeveloperStats from '../molecules/DeveloperStats';
 import { CoinDetailsTabValues } from '../../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -46,11 +47,11 @@ const CoinDataTabs: React.FC = () => {
         <CoinDescription />
         <CoinStatisticsWrapper />
       </TabPanelLayout>
-      <TabPanelLayout value={value} index="community" {...{ paddingLeft: 3, paddingRight: 3 }}>
+      <TabPanelLayout value={value} index="community" {...{ paddingLeft: 3, paddingRight: 3, overflow: 'scroll' }}>
         <CoinSocialStats />
       </TabPanelLayout>
-      <TabPanelLayout value={value} index="developer" {...{ paddingLeft: 3, paddingRight: 3 }}>
-        Developer
+      <TabPanelLayout value={value} index="developer" {...{ paddingLeft: 3, paddingRight: 3, overflow: 'scroll' }}>
+        <DeveloperStats />
       </TabPanelLayout>
     </>
   )

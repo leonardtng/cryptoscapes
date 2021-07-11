@@ -1,6 +1,6 @@
 export interface TrendingCoin {
   id: string;
-  coin_id: number;
+  coinId: number;
   name: string;
   symbol: string;
   marketCapRank: number;

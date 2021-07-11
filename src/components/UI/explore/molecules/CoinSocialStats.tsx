@@ -5,7 +5,7 @@ import { useAppSelector } from '../../../../app/hooks';
 import { selectCoinDetails } from '../../../../features/coinDetailsSlice';
 import LargeProgressCard from '../atoms/LargeProgressCard';
 import SocialCard from '../atoms/SocialCard';
-import RedditDataSection from '../atoms/RedditDataSection';
+import StatsNumberSection from '../atoms/StatsNumberSection';
 import { Facebook, Reddit, Twitter } from '@material-ui/icons';
 import { formatNumber } from '../../../../common/helpers';
 
@@ -39,24 +39,24 @@ const CoinSocialStats: React.FC = () => {
           iconColor="#FF4500"
           link={coinDetails.value?.links.subredditUrl || null}
         >
-          <Box flex="1" textAlign="center">
+          <Box flex="1">
             <Box height="50%" display="flex" justifyContent="space-evenly" alignItems="center">
-              <RedditDataSection
+              <StatsNumberSection
                 title="Total Subscribers"
                 value={coinDetails.value?.communityData.redditSubscribers}
               />
-              <RedditDataSection
-                title="Average Posts (48H)"
+              <StatsNumberSection
+                title="Average Posts"
                 value={coinDetails.value?.communityData.redditAveragePosts48H}
               />
             </Box>
             <Box height="50%" display="flex" justifyContent="space-evenly" alignItems="center">
-              <RedditDataSection
-                title="Active Accounts (48H)"
+              <StatsNumberSection
+                title="Active Accounts"
                 value={coinDetails.value?.communityData.redditAccountsActive48H}
               />
-              <RedditDataSection
-                title="Average Comments (48H)"
+              <StatsNumberSection
+                title="Average Comments"
                 value={coinDetails.value?.communityData.redditAverageComments48H}
               />
             </Box>

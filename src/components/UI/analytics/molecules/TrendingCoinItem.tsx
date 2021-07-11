@@ -5,6 +5,7 @@ import { Coin, TrendingCoin } from '../../../../models';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectCoins } from '../../../../features/coinsSlice';
 import { formatNumber, roundDecimals } from '../../../../common/helpers';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   ranking: {
@@ -36,6 +37,7 @@ interface Props {
 
 const TrendingCoinItem: React.FC<Props> = ({ trendingCoin }) => {
   const classes = useStyles();
+  const history = useHistory();
 
   const coins = useAppSelector(selectCoins);
 
@@ -44,7 +46,7 @@ const TrendingCoinItem: React.FC<Props> = ({ trendingCoin }) => {
   });
 
   return (
-    <ListItem>
+    <ListItem  button onClick={() => history.push(`/coins/${trendingCoin.id}`)}>
       <div className={classes.ranking}>
         <Typography variant="body2">{trendingCoin.marketCapRank}</Typography>
       </div>

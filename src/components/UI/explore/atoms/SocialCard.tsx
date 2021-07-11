@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Avatar, Box, Card, CardContent, CardHeader, Link, Typography } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
@@ -76,13 +76,13 @@ const SocialCard: React.FC<Props> = ({ rows = 1, title, icon, iconColor, link, c
         <Card className={classes.statsCard}>
           <CardContent>
             <Skeleton height={32} width={250} className={classes.gutterBottom} />
-            <Skeleton height={24} width="90%" />
-            {rows > 1 &&
-              <>
+            {Array.from(Array(rows).keys()).map((index: number) =>
+              <Fragment key={index}>
+                <Skeleton height={24} width="90%" />
                 <Skeleton height={24} width="100%" />
-                <Skeleton height={24} width="60%" />
-              </>
-            }
+                <Skeleton height={24} width="60%" className={classes.gutterBottom} />
+              </Fragment>
+            )}
           </CardContent>
         </Card>
       )}
