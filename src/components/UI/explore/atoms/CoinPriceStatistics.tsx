@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Card, CardContent, CardHeader, List, ListItem, ListItemText, ListSubheader } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
@@ -202,7 +202,7 @@ const CoinPriceStatistics: React.FC = () => {
         <Card className={classes.statsCard}>
           <CardHeader
             title={`${coinDetails.value.name} Price Statistics`}
-            titleTypographyProps={{ variant: 'h6', color: 'textPrimary' }}
+            titleTypographyProps={{ variant: 'h6' }}
           />
           <List className={classes.dataList} subheader={<li />} dense>
             {coinStats.map((section, index: number) => (
@@ -228,9 +228,13 @@ const CoinPriceStatistics: React.FC = () => {
         <Card className={classes.statsCard}>
           <CardContent>
             <Skeleton height={32} width={250} className={classes.gutterBottom} />
-            <Skeleton height={24} width="90%" />
-            <Skeleton height={24} width="100%" />
-            <Skeleton height={24} width="60%" />
+            {Array.from(Array(5).keys()).map((index: number) =>
+              <Fragment key={index}>
+                <Skeleton height={24} width="90%" />
+                <Skeleton height={24} width="100%" />
+                <Skeleton height={24} width="60%" className={classes.gutterBottom} />
+              </Fragment>
+            )}
           </CardContent>
         </Card>
       )}

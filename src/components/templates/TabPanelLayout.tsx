@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
-import { CoinDetailsTabValues } from '../../../../models';
+import { CoinDetailsTabValues } from '../../models';
 
 interface Props {
   children?: React.ReactNode;
@@ -8,8 +8,7 @@ interface Props {
   value: CoinDetailsTabValues;
 }
 
-const TabPanel: React.FC<Props> = ({ children, value, index, ...other }) => {
-
+const TabPanelLayout: React.FC<Props> = ({ children, value, index, ...other }) => {
   return (
     <Box
       flex="1"
@@ -27,4 +26,4 @@ const TabPanel: React.FC<Props> = ({ children, value, index, ...other }) => {
   );
 }
 
-export default TabPanel
+export default TabPanelLayout

@@ -33,9 +33,9 @@ const TrendingCoinsCard: React.FC = () => {
     <CardLayout>
       <CardHeader
         title="Trending"
-        titleTypographyProps={{ variant: 'body1', color: 'textPrimary' }}
+        titleTypographyProps={{ variant: 'body1' }}
         subheader="Top-7 searched on CoinGecko"
-        subheaderTypographyProps={{ variant: 'caption', color: 'textSecondary' }}
+        subheaderTypographyProps={{ variant: 'caption' }}
         avatar={<FireIcon />}
       />
       <Divider />

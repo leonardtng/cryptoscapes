@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-// import { CardHeader } from '@material-ui/core';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import CardLayout from '../../../templates/CardLayout';
 import { fetchCoinDetails } from '../../../../features/coinDetailsSlice';
 import CoinDetailsHeader from '../molecules/CoinDetailsHeader';
 import CoinDataCardGroup from '../molecules/CoinDataCardGroup';
-import CoinDataTabs from '../molecules/CoinDataTabs';
+import CoinDataTabs from './CoinDataTabs';
 import {
   fetchCoinDetailsMarketChart,
   selectCoinDetailsMarketChart

@@ -6,7 +6,7 @@ import { useAppSelector } from '../../../../app/hooks';
 import { selectCoinDetails } from '../../../../features/coinDetailsSlice';
 import { ExpandMoreRounded } from '@material-ui/icons';
 
-const SECTION_HEIGHT = 120;
+const SECTION_HEIGHT = 150;
 
 const useStyles = makeStyles((theme: Theme) => ({
   descriptionContainerLess: {
@@ -71,7 +71,7 @@ const CoinDescription: React.FC = () => {
   }, [coinDetails.status]);
 
   return (
-    <Box marginBottom={5} paddingLeft={1} paddingRight={1}>
+    <Box marginBottom={5} paddingLeft={2} paddingRight={2}>
       {coinDetails.value && coinDetails.status !== 'LOADING' ? (
         <>
           {coinDetails.value.description.en.length > 0 &&

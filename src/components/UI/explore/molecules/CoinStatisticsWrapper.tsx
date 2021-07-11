@@ -19,9 +19,6 @@ const CoinStatisticsWrapper: React.FC = () => {
   return (
     <Box marginBottom={5} paddingLeft={1} paddingRight={1}>
       <Grid container spacing={3}>
-        <Grid item xs={6} xl={4}>
-          <CoinPriceStatistics />
-        </Grid>
         <Grid item xs={3} xl={4}>
           <Grid container className={classes.innerWrapper} spacing={0}>
             <Grid item xs={12}>
@@ -41,6 +38,9 @@ const CoinStatisticsWrapper: React.FC = () => {
               <CoinGaugeChart title="CoinGecko Score" type="coinGeckoScore" />
             </Grid>
           </Grid>
+        </Grid>
+        <Grid item xs={6} xl={4}>
+          <CoinPriceStatistics />
         </Grid>
       </Grid>
     </Box>

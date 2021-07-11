@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Box, Tab, Tabs } from '@material-ui/core';
-import TabPanel from '../atoms/TabPanel';
-import CoinDetailsChart from './CoinDetailsChart';
-import CoinDescription from '../atoms/CoinDescription';
-import CoinStatisticsWrapper from './CoinStatisticsWrapper';
+import TabPanelLayout from '../../../templates/TabPanelLayout';
+import CoinDetailsChart from '../molecules/CoinDetailsChart';
+import CoinDescription from '../molecules/CoinDescription';
+import CoinStatisticsWrapper from '../molecules/CoinStatisticsWrapper';
+import CoinSocialStats from '../molecules/CoinSocialStats';
 import { CoinDetailsTabValues } from '../../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -30,27 +31,27 @@ const CoinDataTabs: React.FC = () => {
     <>
       <Box padding={3}>
         <AppBar className={classes.tabBar} position="static" color="transparent">
-          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          <Tabs value={value} onChange={handleChange}>
             <Tab label="Charts" value="charts" />
             <Tab label="Market Data" value="marketData" />
-            <Tab label="Social" value="social" />
-            <Tab label="Sentiment" value="sentiment" />
+            <Tab label="Community" value="community" />
+            <Tab label="Developer" value="developer" />
           </Tabs>
         </AppBar>
       </Box>
-      <TabPanel value={value} index="charts">
+      <TabPanelLayout value={value} index="charts">
         <CoinDetailsChart />
-      </TabPanel>
-      <TabPanel value={value} index="marketData" {...{ paddingLeft: 3, paddingRight: 3, overflow: 'scroll' }}>
+      </TabPanelLayout>
+      <TabPanelLayout value={value} index="marketData" {...{ paddingLeft: 3, paddingRight: 3, overflow: 'scroll' }}>
         <CoinDescription />
         <CoinStatisticsWrapper />
-      </TabPanel>
-      <TabPanel value={value} index="social" {...{ paddingLeft: 3, paddingRight: 3 }}>
-        Social
-      </TabPanel>
-      <TabPanel value={value} index="sentiment" {...{ paddingLeft: 3, paddingRight: 3 }}>
-        Sentiment
-      </TabPanel>
+      </TabPanelLayout>
+      <TabPanelLayout value={value} index="community" {...{ paddingLeft: 3, paddingRight: 3 }}>
+        <CoinSocialStats />
+      </TabPanelLayout>
+      <TabPanelLayout value={value} index="developer" {...{ paddingLeft: 3, paddingRight: 3 }}>
+        Developer
+      </TabPanelLayout>
     </>
   )
 }

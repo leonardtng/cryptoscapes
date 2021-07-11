@@ -1,6 +1,6 @@
 import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
-import { Box, Card, CardContent, CardHeader, Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import GaugeChart from 'react-gauge-chart';
 import { useAppSelector } from '../../../../app/hooks';
@@ -8,11 +8,7 @@ import { selectCoinDetails } from '../../../../features/coinDetailsSlice';
 import { coinDetailsGaugeHeight } from '../../../../common/shared/dimensions';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  statsCard: {
-    height: coinDetailsGaugeHeight,
-    borderRadius: 12,
-    display: 'flex',
-    flexDirection: 'column',
+  gaugeSurface: {
     '& #fear-greed-index-gauge': {
       width: '200px !important',
       '& svg': {
@@ -46,42 +42,31 @@ const CoinGaugeChart: React.FC<Props> = ({ title, type }) => {
       case ('liquidityScore'):
         return coinDetails.value?.liquidityScore
       case ('publicInterestScore'):
-        return coinDetails.value?.publicInterestScore
+        const score = coinDetails.value?.publicInterestScore || 0;
+        return score > 1 ? score : score * 100
     }
   };
 
   return (
-    <>
+    <Box height={coinDetailsGaugeHeight} display="flex" flexDirection="column" alignItems="center" padding={2}>
       {coinDetails.value && coinDetails.status !== 'LOADING' ? (
-        <Card className={classes.statsCard}>
-          <CardHeader
-            title={title}
-            titleTypographyProps={{ variant: 'h6', color: 'textPrimary' }}
-          />
-          <Box display="flex" alignItems="center" justifyContent="center" flex="1">
-            {gaugeData() !== null ? (
-              <GaugeChart
-                id="fear-greed-index-gauge"
-                nrOfLevels={20}
-                colors={[theme.palette.error.main, theme.palette.success.main]}
-                percent={Number(gaugeData() || 0) / 100}
-              />
-            ) : (
-              <Typography variant="body1" color="textSecondary">No Data Available</Typography>
-            )}
-          </Box>
-        </Card>
+        <Typography variant="h6" align="center">{title}</Typography>
       ) : (
-        <Card className={classes.statsCard}>
-          <CardContent>
-            <Skeleton height={32} width="40%" className={classes.gutterBottom} />
-            <Skeleton height={24} width="90%" />
-            <Skeleton height={24} width="100%" />
-            <Skeleton height={24} width="60%" />
-          </CardContent>
-        </Card>
+        <Skeleton height={32} width="60%" className={classes.gutterBottom} />
       )}
-    </>
+      <Box display="flex" alignItems="center" justifyContent="center" flex="1" className={classes.gaugeSurface}>
+        {gaugeData() !== null ? (
+          <GaugeChart
+            id="fear-greed-index-gauge"
+            nrOfLevels={20}
+            colors={[theme.palette.error.main, theme.palette.success.main]}
+            percent={coinDetails.value && coinDetails.status !== 'LOADING' ? Number(gaugeData() || 0) / 100 : 0}
+          />
+        ) : (
+          <Typography variant="body1" color="textSecondary">No Data Available</Typography>
+        )}
+      </Box>
+    </Box>
   )
 }
 
