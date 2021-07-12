@@ -51,7 +51,7 @@ const LargeProgressCard: React.FC<Props> = ({ title, value }) => {
           justifyContent="center"
         >
           <Typography variant="h5" component="div" color="textSecondary">
-            {`${coinDetails.status === 'LOADING' ? 0 : roundDecimals(value)}%`}
+            {coinDetails.status === 'LOADING' || value === 0 ? '-' : `${roundDecimals(value)}%`}
           </Typography>
         </Box>
       </Box>

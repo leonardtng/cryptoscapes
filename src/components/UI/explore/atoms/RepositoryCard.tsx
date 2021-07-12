@@ -145,10 +145,12 @@ const RepositoryCard: React.FC = () => {
             <Grid item xs={6}>
               <Box height="100%" display="flex" flexDirection="column">
                 <Box paddingLeft={3} paddingRight={3}>
-                  <Typography variant="body2" color="textSecondary" align="center">Commit Activity</Typography>
+                  <Typography variant="body2" color="textSecondary" align="center">
+                    Commit Activity (4 Weeks)
+                  </Typography>
                   <List dense>
                     <ListItem>
-                      <ListItemText primary="Commit Count (4 Weeks)" />
+                      <ListItemText primary="Total Count" />
                       <ListItemText
                         primary={coinDetails.value.developerData.commitCount4Weeks || '-'}
                         primaryTypographyProps={{ align: 'right' }}
