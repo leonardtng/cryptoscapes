@@ -8,6 +8,7 @@ import AppBarActions from '../molecules/AppBarActions';
 import { fetchCoins, selectCoins } from '../../../../features/coinsSlice';
 import { fetchSupportedCoins, selectSupportedCoins } from '../../../../features/supportedCoinsSlice';
 import { fetchCoinCategories, selectCoinCategories } from '../../../../features/coinCategoriesSlice';
+import { useCleanReduxState } from '../../../../common/hooks/useCleanReduxState';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -45,6 +46,8 @@ const AppBar: React.FC = () => {
       dispatch(fetchCoinCategories());
     }
   }, [dispatch, coinCategories.value, coinCategories.status]);
+
+  useCleanReduxState();
 
   return (
     <MuiAppBar position="fixed" className={classes.appBar} color="transparent">

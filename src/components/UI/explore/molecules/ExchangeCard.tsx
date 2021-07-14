@@ -61,11 +61,10 @@ const ExchangeCard: React.FC<Props> = ({ exchange }) => {
     return coin.id === 'bitcoin'
   });
 
-
   const mapTrustColor = () => {
-    if (exchange.trustScore < 5) return theme.palette.error.main
-    if (exchange.trustScore < 8) return theme.palette.warning.main
-    return theme.palette.success.main
+    if (exchange.trustScore > 7) return theme.palette.success.main
+    if (exchange.trustScore > 4) return theme.palette.warning.main
+    return theme.palette.error.main
   }
 
   return (
@@ -101,7 +100,7 @@ const ExchangeCard: React.FC<Props> = ({ exchange }) => {
       />
       <CardContent>
         <Box textAlign="center">
-          <Typography variant="h5" style={{ color: mapTrustColor() }}>{exchange.trustScore}</Typography>
+          <Typography variant="h5" style={{ color: mapTrustColor() }}>{exchange.trustScore || 0}</Typography>
           <Typography variant="body2" color="textSecondary">Trust Score</Typography>
         </Box>
       </CardContent>

@@ -10,6 +10,7 @@ interface Reducers extends SliceCaseReducers<CoinListState> {
   setCoinQueryParams: (state: CoinListState, action: PayloadAction<CoinQueryParams>) => void;
   addCoinListTableColumn: (state: CoinListState, action: PayloadAction<keyof Coin>) => void;
   removeCoinListTableColumn: (state: CoinListState, action: PayloadAction<keyof Coin>) => void;
+  clearCoinListValue: (state: CoinListState) => void;
 }
 
 const initialState: CoinListState = {
@@ -77,6 +78,11 @@ const coinListSlice: Slice<CoinListState, Reducers, 'coinList'> = createSlice({
         return item !== action.payload
       })
       cacheWithExpiry('coinListTableColumns', state.coinListTableColumns, 10e+11)
+    },
+    clearCoinListValue: (state: CoinListState) => {
+      state.value = state.value.slice(0, state.coinQueryParams.perPage);
+      state.coinQueryParams.page = 1;
+      state.hasMore = true;
     }
   },
   extraReducers: (builder) => {
@@ -96,6 +102,11 @@ const coinListSlice: Slice<CoinListState, Reducers, 'coinList'> = createSlice({
   },
 });
 
-export const { setCoinQueryParams, addCoinListTableColumn, removeCoinListTableColumn } = coinListSlice.actions;
+export const { 
+  setCoinQueryParams, 
+  addCoinListTableColumn, 
+  removeCoinListTableColumn, 
+  clearCoinListValue 
+} = coinListSlice.actions;
 
 export default coinListSlice.reducer;

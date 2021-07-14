@@ -8,6 +8,7 @@ import { Exchange, ExchangeListState, ExchangeQueryParams } from '../models';
 
 interface Reducers extends SliceCaseReducers<ExchangeListState> {
   setExchangeQueryParams: (state: ExchangeListState, action: PayloadAction<ExchangeQueryParams>) => void;
+  clearExchangeListValue: (state: ExchangeListState) => void;
 }
 
 const initialState: ExchangeListState = {
@@ -48,6 +49,11 @@ const exchangeListSlice: Slice<ExchangeListState, Reducers, 'exchangeList'> = cr
     setExchangeQueryParams: (state: ExchangeListState, action: PayloadAction<ExchangeQueryParams>) => {
       state.exchangeQueryParams = action.payload;
     },
+    clearExchangeListValue: (state: ExchangeListState) => {
+      state.value = state.value.slice(0, state.exchangeQueryParams.perPage);
+      state.exchangeQueryParams.page = 1;
+      state.hasMore = true;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -66,6 +72,6 @@ const exchangeListSlice: Slice<ExchangeListState, Reducers, 'exchangeList'> = cr
   },
 });
 
-export const { setExchangeQueryParams } = exchangeListSlice.actions;
+export const { setExchangeQueryParams, clearExchangeListValue } = exchangeListSlice.actions;
 
 export default exchangeListSlice.reducer;

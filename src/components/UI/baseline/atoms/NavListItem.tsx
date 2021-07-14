@@ -21,7 +21,7 @@ const NavListItem: React.FC<Props> = ({ page }) => {
   const history = useHistory();
 
   const handleClick = () => {
-    history.push(page.path)
+    history.push(page.path);
   }
 
   const pathGroup =
