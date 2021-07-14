@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.card.default,
     height: '100%',
     borderRadius: 12,
+    border: `1px solid ${theme.palette.background.default}`,
     '& ::-webkit-scrollbar': {
       display: 'none',
     },

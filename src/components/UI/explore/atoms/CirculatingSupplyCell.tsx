@@ -3,7 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Box, LinearProgress, Typography } from '@material-ui/core';
 import { formatNumber, roundDecimals } from '../../../../common/helpers';
 import { Coin } from '../../../../models';
-import CirculatingSupplyTooltip from '../atoms/CirculatingSupplyTooltip'
+import CirculatingSupplyTooltip from './CirculatingSupplyTooltip'
 
 const useStyles = makeStyles((theme: Theme) => ({
   progressBar: {

@@ -13,10 +13,12 @@ export const coinGecko = {
     `/global`,
   coinDetails: (coinId: string) =>
     `/coins/${coinId}`,
-  supportedCoins: 
+  supportedCoins:
     `/coins/list`,
   categories:
-    `/coins/categories/list`
+    `/coins/categories/list`,
+  exchanges:
+    `/exchanges?per_page=20`
 };
 
 export const etherscan = {
