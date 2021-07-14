@@ -12,10 +12,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     backgroundColor: theme.palette.card.default,
     border: `1px solid ${theme.palette.background.default}`,
-    borderRadius: 12
+    borderRadius: 12,
+    '& .MuiCardHeader-content': {
+      overflow: 'hidden'
+    }
   },
   titleWrapper: {
-    maxWidth: 'calc(100% - 105px)',
     '& a': {
       color: theme.palette.text.primary
     }
@@ -65,7 +67,7 @@ const ExchangeCard: React.FC<Props> = ({ exchange }) => {
     if (exchange.trustScore > 7) return theme.palette.success.main
     if (exchange.trustScore > 4) return theme.palette.warning.main
     return theme.palette.error.main
-  }
+  };
 
   return (
     <Card className={classes.card} elevation={0}>
@@ -83,7 +85,7 @@ const ExchangeCard: React.FC<Props> = ({ exchange }) => {
                 </Link>
               </Typography>
             </Tooltip>
-            <Typography variant="body1" color="textSecondary" noWrap className={classes.trustScoreRank} >
+            <Typography variant="body1" color="textSecondary" className={classes.trustScoreRank} >
               #{exchange.trustScoreRank}
             </Typography>
           </Box>
