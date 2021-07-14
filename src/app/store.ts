@@ -11,6 +11,8 @@ import gasOracleReducer from '../features/gasOracleSlice';
 import trendingCoinsReducer from '../features/trendingCoinsSlice';
 import globalCoinDataReducer from '../features/globalCoinDataSlice';
 import exchangeListReducer from '../features/exchangeListSlice';
+import exchangeVolumeChartReducer from '../features/exchangeVolumeChartSlice';
+
 import fearGreedIndexReducer from '../features/fearGreedIndexSlice';
 import bitcoinHashRateReducer from '../features/bitcoinHashRateSlice';
 import appState from '../features/appStateSlice';
@@ -29,6 +31,7 @@ export const store = configureStore({
     trendingCoins: trendingCoinsReducer,
     globalCoinData: globalCoinDataReducer,
     exchangeList: exchangeListReducer,
+    exchangeVolumeChart: exchangeVolumeChartReducer,
     fearGreedIndex: fearGreedIndexReducer,
     bitcoinHashRate: bitcoinHashRateReducer,
     appState: appState

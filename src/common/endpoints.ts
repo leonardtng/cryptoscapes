@@ -1,4 +1,10 @@
-import { AvailableDayRanges, AvailableIntervals, CoinSortingKey, CoinSortingOrder } from "../models";
+import {
+  AvailableDayRanges,
+  AvailableIntervals,
+  CoinSortingKey,
+  CoinSortingOrder,
+  ExchangeVolumeChartDayRanges
+} from "../models";
 
 const ETHERSCAN_API_KEY = process.env.REACT_APP_ETHERSCAN_API_KEY;
 
@@ -19,8 +25,8 @@ export const coinGecko = {
     `/coins/categories/list`,
   exchanges: (page: number, perPage: number) =>
     `/exchanges?per_page=${perPage}&page=${page}`,
-  supportedExchanges:
-    `/exchanges/list`
+  exchangeVolumeChart: (exchangeId: string, days: ExchangeVolumeChartDayRanges) =>
+    `/exchanges/${exchangeId}/volume_chart?days=${days}`
 };
 
 export const etherscan = {

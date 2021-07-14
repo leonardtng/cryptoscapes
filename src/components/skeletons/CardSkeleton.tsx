@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   skeletonContent: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: '32px !important'
   }
 }));
 
@@ -25,6 +26,7 @@ const CardSkeleton: React.FC = () => {
   return (
     <Card className={classes.skeletonContainer}>
       <CardHeader
+        disableTypography
         title={<Skeleton height={32} width="60%" />}
         subheader={<Skeleton height={21} width="40%" />}
         avatar={<Skeleton variant="circle" height={theme.spacing(4)} width={theme.spacing(4)} />}

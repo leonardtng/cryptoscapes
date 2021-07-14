@@ -58,8 +58,9 @@ import {
   ExchangeListState as ExchangeListStateInterface
 } from './api/Exchange';
 import {
-  SupportedExchange as SupportedExchangeInterface
-} from './api/SupportedExchange';
+  ExchangeVolumeChartDayRanges as ExchangeVolumeChartDayRangesInterface,
+  ExchangeVolumeChartState as ExchangeVolumeChartStateInterface
+} from './api/ExchangeVolumeChart';
 import {
   FearGreedIndex as FearGreedIndexInterface,
   FearGreedIndexMetadata as FearGreedIndexMetadataInterface,
@@ -115,7 +116,8 @@ export type GlobalCoinDataRootObject = GlobalCoinDataRootObjectInterface;
 export type ExchangeQueryParams = ExchangeQueryParamsInterface;
 export type Exchange = ExchangeInterface;
 export type ExchangeListState = ExchangeListStateInterface;
-export type SupportedExchange = SupportedExchangeInterface;
+export type ExchangeVolumeChartDayRanges = ExchangeVolumeChartDayRangesInterface;
+export type ExchangeVolumeChartState = ExchangeVolumeChartStateInterface;
 export type FearGreedIndex = FearGreedIndexInterface;
 export type FearGreedIndexMetadata = FearGreedIndexMetadataInterface;
 export type FearGreedIndexRootObject = FearGreedIndexRootObjectInterface;

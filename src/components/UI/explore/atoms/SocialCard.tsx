@@ -46,6 +46,7 @@ const SocialCard: React.FC<Props> = ({ rows = 1, title, icon, iconColor, link, c
       {coinDetails.value && coinDetails.status !== 'LOADING' ? (
         <Card className={classes.statsCard}>
           <CardHeader
+            disableTypography
             title={
               <Box display="flex" alignItems="center">
                 {link ? (

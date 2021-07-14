@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
-import { Avatar, Box, Card, CardContent, CardHeader, Link, Tooltip, Typography } from '@material-ui/core';
+import { Avatar, Box, Card, CardActionArea, CardContent, CardHeader, Link, Tooltip, Typography } from '@material-ui/core';
 import { Coin, Exchange } from '../../../../models';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectCoins } from '../../../../features/coinsSlice';
 import { shortenNumber } from '../../../../common/helpers';
+import ExchangeVolumeDialog from '../atoms/ExchangeVolumeDialog';
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
@@ -58,6 +59,7 @@ const ExchangeCard: React.FC<Props> = ({ exchange }) => {
   const theme = useTheme();
 
   const coins = useAppSelector(selectCoins);
+  const [volumeOpen, setVolumeOpen] = useState<boolean>(false);
 
   const bitcoin: Coin | undefined = coins.value.find((coin: Coin) => {
     return coin.id === 'bitcoin'
@@ -71,41 +73,45 @@ const ExchangeCard: React.FC<Props> = ({ exchange }) => {
 
   return (
     <Card className={classes.card} elevation={0}>
-      <CardHeader
-        title={
-          <Box display="flex" alignItems="center">
-            <Tooltip title={exchange.name} placement="top" classes={{ tooltip: classes.customTooltip }}>
-              <Typography variant="h6" noWrap className={classes.titleWrapper}>
-                <Link
-                  href={exchange.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {exchange.name}
-                </Link>
+      <CardActionArea onClick={() => setVolumeOpen(true)}>
+        <CardHeader
+          disableTypography
+          title={
+            <Box display="flex" alignItems="center">
+              <Tooltip title={exchange.name} placement="top" classes={{ tooltip: classes.customTooltip }}>
+                <Typography variant="h6" noWrap className={classes.titleWrapper}>
+                  <Link
+                    href={exchange.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {exchange.name}
+                  </Link>
+                </Typography>
+              </Tooltip>
+              <Typography variant="body1" color="textSecondary" className={classes.trustScoreRank} >
+                #{exchange.trustScoreRank}
+              </Typography>
+            </Box>
+          }
+          subheader={
+            <Tooltip title="Total Volume (24H)" placement="bottom" classes={{ tooltip: classes.customTooltip }}>
+              <Typography variant="subtitle2" color="textSecondary" noWrap className={classes.volumeWrapper}>
+                {bitcoin ?
+                  `US$${shortenNumber(exchange.tradeVolume24HBtc * bitcoin.currentPrice)}` : '-'}
               </Typography>
             </Tooltip>
-            <Typography variant="body1" color="textSecondary" className={classes.trustScoreRank} >
-              #{exchange.trustScoreRank}
-            </Typography>
+          }
+          avatar={<Avatar src={exchange.image} alt={exchange.name} className={classes.avatarColor} variant="rounded" />}
+        />
+        <CardContent>
+          <Box textAlign="center" paddingBottom="16px">
+            <Typography variant="h5" style={{ color: mapTrustColor() }}>{exchange.trustScore || 0}</Typography>
+            <Typography variant="body2" color="textSecondary">Trust Score</Typography>
           </Box>
-        }
-        subheader={
-          <Tooltip title="Total Volume (24H)" placement="bottom" classes={{ tooltip: classes.customTooltip }}>
-            <Typography variant="subtitle2" color="textSecondary" noWrap className={classes.volumeWrapper}>
-              {bitcoin ?
-                `US$${shortenNumber(exchange.tradeVolume24HBtc * bitcoin.currentPrice)}` : '-'}
-            </Typography>
-          </Tooltip>
-        }
-        avatar={<Avatar src={exchange.image} alt={exchange.name} className={classes.avatarColor} variant="rounded" />}
-      />
-      <CardContent>
-        <Box textAlign="center">
-          <Typography variant="h5" style={{ color: mapTrustColor() }}>{exchange.trustScore || 0}</Typography>
-          <Typography variant="body2" color="textSecondary">Trust Score</Typography>
-        </Box>
-      </CardContent>
+        </CardContent>
+      </CardActionArea>
+      <ExchangeVolumeDialog open={volumeOpen} toggleClose={() => setVolumeOpen(false)} exchange={exchange} />
     </Card>
   )
 }
