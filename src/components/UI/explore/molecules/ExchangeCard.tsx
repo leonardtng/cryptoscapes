@@ -1,6 +1,6 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Box, Card, CardHeader } from '@material-ui/core';
+import { Card, CardHeader } from '@material-ui/core';
 import { Exchange } from '../../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -21,14 +21,12 @@ const ExchangeCard: React.FC<Props> = ({ exchange }) => {
   const classes = useStyles();
 
   return (
-    <Box height="200px" width="25%" padding={1}>
-      <Card className={classes.card} elevation={0}>
-        <CardHeader
-          title={exchange.name}
-          titleTypographyProps={{ variant: 'h6' }}
-        />
-      </Card>
-    </Box>
+    <Card className={classes.card} elevation={0}>
+      <CardHeader
+        title={exchange.name}
+        titleTypographyProps={{ variant: 'h6' }}
+      />
+    </Card>
   )
 }
 

@@ -1,3 +1,10 @@
+import { GenericState } from "..";
+
+export interface ExchangeQueryParams {
+  page: number;
+  perPage: number;
+}
+
 export interface Exchange {
   id: string;
   name: string;
@@ -11,4 +18,9 @@ export interface Exchange {
   trustScoreRank: number;
   tradeVolume24HBtc: number;
   tradeVolume24HBtcNormalized: number;
+}
+
+export interface ExchangeListState extends GenericState<Exchange[]> {
+  exchangeQueryParams: ExchangeQueryParams;
+  hasMore: boolean;
 }

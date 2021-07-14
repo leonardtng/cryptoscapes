@@ -26,7 +26,7 @@ export const fetchSupportedCoins = createAsyncThunk('supportedCoins', async () =
     });
 
     const normalizedResponse = toCamelCase(response.data);
-    cacheWithExpiry('supportedCoins', normalizedResponse, 8.64e+7);  // Cache Period: 10 minutes
+    cacheWithExpiry('supportedCoins', normalizedResponse, 8.64e+7);  // Cache Period: 1 day
 
     return normalizedResponse as SupportedCoin[]
   }

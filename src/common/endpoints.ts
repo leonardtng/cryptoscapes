@@ -17,8 +17,10 @@ export const coinGecko = {
     `/coins/list`,
   categories:
     `/coins/categories/list`,
-  exchanges:
-    `/exchanges?per_page=20`
+  exchanges: (page: number, perPage: number) =>
+    `/exchanges?per_page=${perPage}&page=${page}`,
+  supportedExchanges:
+    `/exchanges/list`
 };
 
 export const etherscan = {

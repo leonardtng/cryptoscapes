@@ -53,8 +53,13 @@ import {
   GlobalCoinDataRootObject as GlobalCoinDataRootObjectInterface
 } from './api/GlobalCoinData';
 import {
-  Exchange as ExchangeInterface
+  Exchange as ExchangeInterface,
+  ExchangeQueryParams as ExchangeQueryParamsInterface,
+  ExchangeListState as ExchangeListStateInterface
 } from './api/Exchange';
+import {
+  SupportedExchange as SupportedExchangeInterface
+} from './api/SupportedExchange';
 import {
   FearGreedIndex as FearGreedIndexInterface,
   FearGreedIndexMetadata as FearGreedIndexMetadataInterface,
@@ -107,7 +112,10 @@ export type TotalVolume = TotalVolumeInterface;
 export type MarketCapPercentage = MarketCapPercentageInterface;
 export type GlobalCoinData = GlobalCoinDataInterface;
 export type GlobalCoinDataRootObject = GlobalCoinDataRootObjectInterface;
+export type ExchangeQueryParams = ExchangeQueryParamsInterface;
 export type Exchange = ExchangeInterface;
+export type ExchangeListState = ExchangeListStateInterface;
+export type SupportedExchange = SupportedExchangeInterface;
 export type FearGreedIndex = FearGreedIndexInterface;
 export type FearGreedIndexMetadata = FearGreedIndexMetadataInterface;
 export type FearGreedIndexRootObject = FearGreedIndexRootObjectInterface;
