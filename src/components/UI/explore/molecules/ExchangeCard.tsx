@@ -1,7 +1,10 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Card, CardHeader } from '@material-ui/core';
-import { Exchange } from '../../../../models';
+import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
+import { Avatar, Box, Card, CardContent, CardHeader, Link, Tooltip, Typography } from '@material-ui/core';
+import { Coin, Exchange } from '../../../../models';
+import { useAppSelector } from '../../../../app/hooks';
+import { selectCoins } from '../../../../features/coinsSlice';
+import { shortenNumber } from '../../../../common/helpers';
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
@@ -11,6 +14,37 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: `1px solid ${theme.palette.background.default}`,
     borderRadius: 12
   },
+  titleWrapper: {
+    maxWidth: 'calc(100% - 105px)',
+    '& a': {
+      color: theme.palette.text.primary
+    }
+  },
+  volumeWrapper: {
+    width: 'fit-content',
+    cursor: 'pointer'
+  },
+  customTooltip: {
+    backgroundColor: theme.palette.background.default,
+    borderRadius: 8,
+    marginTop: 4,
+  },
+  trustScoreRank: {
+    marginLeft: 10,
+    padding: '0 6px',
+    borderRadius: 6,
+    backgroundColor: theme.palette.card.paper
+  },
+  avatarColor: {
+    height: theme.spacing(4),
+    width: theme.spacing(4),
+    backgroundColor: theme.palette.card.paper,
+    borderRadius: 8,
+    padding: 4,
+    '& .MuiAvatar-img': {
+      borderRadius: 8
+    }
+  }
 }));
 
 interface Props {
@@ -19,13 +53,56 @@ interface Props {
 
 const ExchangeCard: React.FC<Props> = ({ exchange }) => {
   const classes = useStyles();
+  const theme = useTheme();
+
+  const coins = useAppSelector(selectCoins);
+
+  const bitcoin: Coin | undefined = coins.value.find((coin: Coin) => {
+    return coin.id === 'bitcoin'
+  });
+
+
+  const mapTrustColor = () => {
+    if (exchange.trustScore < 5) return theme.palette.error.main
+    if (exchange.trustScore < 8) return theme.palette.warning.main
+    return theme.palette.success.main
+  }
 
   return (
     <Card className={classes.card} elevation={0}>
       <CardHeader
-        title={exchange.name}
-        titleTypographyProps={{ variant: 'h6' }}
+        title={
+          <Box display="flex" alignItems="center">
+            <Typography variant="h6" noWrap className={classes.titleWrapper}>
+              <Link
+                href={exchange.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {exchange.name}
+              </Link>
+            </Typography>
+            <Typography variant="body1" color="textSecondary" noWrap className={classes.trustScoreRank} >
+              #{exchange.trustScoreRank}
+            </Typography>
+          </Box>
+        }
+        subheader={
+          <Tooltip title="Total Volume (24H)" placement="bottom" classes={{ tooltip: classes.customTooltip }}>
+            <Typography variant="subtitle2" color="textSecondary" noWrap className={classes.volumeWrapper}>
+              {bitcoin ?
+                `US$${shortenNumber(exchange.tradeVolume24HBtc * bitcoin.currentPrice)}` : '-'}
+            </Typography>
+          </Tooltip>
+        }
+        avatar={<Avatar src={exchange.image} alt={exchange.name} className={classes.avatarColor} variant="rounded" />}
       />
+      <CardContent>
+        <Box textAlign="center">
+          <Typography variant="h5" style={{ color: mapTrustColor() }}>{exchange.trustScore}</Typography>
+          <Typography variant="body2" color="textSecondary">Trust Score</Typography>
+        </Box>
+      </CardContent>
     </Card>
   )
 }

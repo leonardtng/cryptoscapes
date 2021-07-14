@@ -25,7 +25,7 @@ const CoinNameCell: React.FC<Props> = ({ coin }) => {
 
   return (
     <Box display="flex" alignItems="center" className={classes.coinNameGroup} maxWidth={250} >
-      <Avatar src={coin.image} alt={coin.id} />
+      <Avatar src={coin.image} alt={coin.name} />
       <Typography variant="subtitle2" noWrap>
         {coin.name}
       </Typography>

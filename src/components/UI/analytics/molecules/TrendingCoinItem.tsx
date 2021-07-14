@@ -51,7 +51,7 @@ const TrendingCoinItem: React.FC<Props> = ({ trendingCoin }) => {
         <Typography variant="body2">{trendingCoin.marketCapRank}</Typography>
       </div>
       <ListItemAvatar className={classes.listItemAvatar}>
-        <Avatar src={trendingCoin.large} alt={trendingCoin.id} className={classes.avatarSmall} />
+        <Avatar src={trendingCoin.large} alt={trendingCoin.name} className={classes.avatarSmall} />
       </ListItemAvatar>
       <ListItemText
         className={classes.coinLabelText}

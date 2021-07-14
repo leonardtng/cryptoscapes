@@ -33,7 +33,7 @@ const ExchangeCardList: React.FC = () => {
   return (
     <Box display="flex" flexWrap="wrap">
       {exchangeList.value.map((exchange: Exchange, index: number) => {
-        return <Box key={index} height="200px" width="25%" padding={1}>
+        return <Box key={index} width="25%" padding={1}>
           <ExchangeCard exchange={exchange} />
           {exchangeList.value.length === index + 1  && <div ref={lastRef} />}
         </Box>

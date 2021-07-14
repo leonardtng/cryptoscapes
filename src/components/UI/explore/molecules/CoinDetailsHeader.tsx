@@ -92,7 +92,7 @@ const CoinDetailsHeader: React.FC = () => {
           <Box display="flex" alignItems="center">
             <Avatar
               src={coinDetails.value.image.large}
-              alt={coinDetails.value.id}
+              alt={coinDetails.value.name}
               className={classes.avatarLarge}
             />
             <Box>
