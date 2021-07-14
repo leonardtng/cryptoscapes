@@ -5,6 +5,7 @@ import { fetchExchangeList, selectExchangeList, setExchangeQueryParams } from '.
 import { Exchange } from '../../../../models';
 import ExchangeCard from '../molecules/ExchangeCard';
 import { useInfiniteScrollingObserver } from '../../../../common/hooks/useInfiniteScrollingObserver';
+import CardSkeleton from '../../../skeletons/CardSkeleton';
 
 const ExchangeCardList: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -32,12 +33,33 @@ const ExchangeCardList: React.FC = () => {
 
   return (
     <Box display="flex" flexWrap="wrap">
-      {exchangeList.value.map((exchange: Exchange, index: number) => {
-        return <Box key={index} width="25%" padding={1}>
-          <ExchangeCard exchange={exchange} />
-          {exchangeList.value.length === index + 1  && <div ref={lastRef} />}
-        </Box>
-      })}
+      {exchangeList.status === 'LOADING' ? (
+        <>
+          {Array.from(Array(exchangeList.exchangeQueryParams.perPage).keys()).map((index: number) => {
+            return <Box key={index} width="25%" padding={1}>
+              <CardSkeleton />
+            </Box>
+          })}
+        </>
+      ) : (
+        <>
+          {exchangeList.value.map((exchange: Exchange, index: number) => {
+            return <Box key={index} width="25%" padding={1}>
+              <ExchangeCard exchange={exchange} />
+              {exchangeList.value.length === index + 1 && <div ref={lastRef} />}
+            </Box>
+          })}
+          {exchangeList.hasMore && exchangeList.value.length !== 0 &&
+            <>
+              {Array.from(Array(4).keys()).map((index: number) => {
+                return <Box key={index} width="25%" padding={1}>
+                  <CardSkeleton />
+                </Box>
+              })}
+            </>
+          }
+        </>
+      )}
     </Box >
   )
 }

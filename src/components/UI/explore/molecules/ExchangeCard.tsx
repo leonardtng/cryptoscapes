@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   customTooltip: {
     backgroundColor: theme.palette.background.default,
     borderRadius: 8,
-    marginTop: 4,
+    margin: '4px 0 0'
   },
   trustScoreRank: {
     marginLeft: 10,
@@ -73,15 +73,17 @@ const ExchangeCard: React.FC<Props> = ({ exchange }) => {
       <CardHeader
         title={
           <Box display="flex" alignItems="center">
-            <Typography variant="h6" noWrap className={classes.titleWrapper}>
-              <Link
-                href={exchange.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {exchange.name}
-              </Link>
-            </Typography>
+            <Tooltip title={exchange.name} placement="top" classes={{ tooltip: classes.customTooltip }}>
+              <Typography variant="h6" noWrap className={classes.titleWrapper}>
+                <Link
+                  href={exchange.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {exchange.name}
+                </Link>
+              </Typography>
+            </Tooltip>
             <Typography variant="body1" color="textSecondary" noWrap className={classes.trustScoreRank} >
               #{exchange.trustScoreRank}
             </Typography>

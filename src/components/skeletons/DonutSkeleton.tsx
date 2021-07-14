@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const DonutSkeleton = () => {
+const DonutSkeleton: React.FC = () => {
   const classes = useStyles();
 
   return (

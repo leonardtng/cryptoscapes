@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const ChartSkeleton = () => {
+const ChartSkeleton: React.FC = () => {
   const classes = useStyles();
 
   return (
