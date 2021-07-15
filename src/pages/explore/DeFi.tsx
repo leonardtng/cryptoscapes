@@ -1,5 +1,5 @@
 import React from 'react';
-import InProgress from '../error/InProgress';
+import InProgress from '../../components/templates/InProgressLayout';
 
 const DeFi: React.FC = () => {
 

@@ -11,7 +11,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     }
   },
   listTextSkeleton: {
-    width: (styleProps: StyleProps) =>  `calc(100% - 40px - ${styleProps.iconDimensions}px)`,
+    width: (styleProps: StyleProps) => `calc(100% - 40px - ${styleProps.iconDimensions}px)`,
     '& .MuiSkeleton-text:first-child': {
       marginBottom: 6
     }
@@ -41,7 +41,7 @@ const ListItemSkeleton: React.FC<Props> = ({ count, height, iconDimensions }) =>
               <Skeleton height={12} width="40%" />
             </div>
           </ListItem>
-          {index < (count -1) && <Divider />}
+          {index < (count - 1) && <Divider />}
         </Fragment>
       )}
     </>

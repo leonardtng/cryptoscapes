@@ -26,7 +26,9 @@ export const coinGecko = {
   exchanges: (page: number, perPage: number) =>
     `/exchanges?per_page=${perPage}&page=${page}`,
   exchangeVolumeChart: (exchangeId: string, days: ExchangeVolumeChartDayRanges) =>
-    `/exchanges/${exchangeId}/volume_chart?days=${days}`
+    `/exchanges/${exchangeId}/volume_chart?days=${days}`,
+  companies: (coinId: 'bitcoin' | 'ethereum') =>
+    `/companies/public_treasury/${coinId}`
 };
 
 export const etherscan = {

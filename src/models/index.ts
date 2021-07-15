@@ -62,6 +62,11 @@ import {
   ExchangeVolumeChartState as ExchangeVolumeChartStateInterface
 } from './api/ExchangeVolumeChart';
 import {
+  Company as CompanyInterface,
+  CompanyRootObject as CompanyRootObjectInterface,
+  CompanyFullData as CompanyFullDataInterface
+} from './api/Company';
+import {
   FearGreedIndex as FearGreedIndexInterface,
   FearGreedIndexMetadata as FearGreedIndexMetadataInterface,
   FearGreedIndexRootObject as FearGreedIndexRootObjectInterface,
@@ -118,6 +123,9 @@ export type Exchange = ExchangeInterface;
 export type ExchangeListState = ExchangeListStateInterface;
 export type ExchangeVolumeChartDayRanges = ExchangeVolumeChartDayRangesInterface;
 export type ExchangeVolumeChartState = ExchangeVolumeChartStateInterface;
+export type Company = CompanyInterface;
+export type CompanyRootObject = CompanyRootObjectInterface;
+export type CompanyFullData = CompanyFullDataInterface;
 export type FearGreedIndex = FearGreedIndexInterface;
 export type FearGreedIndexMetadata = FearGreedIndexMetadataInterface;
 export type FearGreedIndexRootObject = FearGreedIndexRootObjectInterface;

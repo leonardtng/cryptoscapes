@@ -12,7 +12,7 @@ import trendingCoinsReducer from '../features/trendingCoinsSlice';
 import globalCoinDataReducer from '../features/globalCoinDataSlice';
 import exchangeListReducer from '../features/exchangeListSlice';
 import exchangeVolumeChartReducer from '../features/exchangeVolumeChartSlice';
-
+import companiesReducer from '../features/companiesSlice';
 import fearGreedIndexReducer from '../features/fearGreedIndexSlice';
 import bitcoinHashRateReducer from '../features/bitcoinHashRateSlice';
 import appState from '../features/appStateSlice';
@@ -32,6 +32,7 @@ export const store = configureStore({
     globalCoinData: globalCoinDataReducer,
     exchangeList: exchangeListReducer,
     exchangeVolumeChart: exchangeVolumeChartReducer,
+    companies: companiesReducer,
     fearGreedIndex: fearGreedIndexReducer,
     bitcoinHashRate: bitcoinHashRateReducer,
     appState: appState

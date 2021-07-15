@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@material-ui/core';
 import WorkInProgress from '../../assets/images/illustrations/work-in-progress.svg';
 
-const InProgress: React.FC = () => {
+const InProgressLayout: React.FC = () => {
   return (
     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="100%" width="100%">
       <Typography variant="h5">Stay Tuned!</Typography>
@@ -14,4 +14,4 @@ const InProgress: React.FC = () => {
   )
 }
 
-export default InProgress
+export default InProgressLayout

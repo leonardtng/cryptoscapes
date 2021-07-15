@@ -20,7 +20,8 @@ const removeList = [
   'coins',
   'globalCoinData',
   'dominanceChart',
-  'trendingCoins'
+  'trendingCoins',
+  'companies'
 ]
 
 const UpdateDataButton: React.FC = () => {
