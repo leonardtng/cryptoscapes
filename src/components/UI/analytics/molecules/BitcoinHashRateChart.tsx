@@ -57,7 +57,7 @@ const HistoricFearGreedIndexChart: React.FC = () => {
         <ResponsiveContainer height="100%" width="100%" className={classes.responsiveContainer}>
           <AreaChart
             data={formatRawData()}
-            margin={{ top: 8, right: 4, left: 4, bottom: 8 }}
+            margin={{ top: 8, right: 1, left: 1, bottom: 8 }}
           >
             <defs>
               <linearGradient id="bitcoin-hash-rate-chart-gradient" x1="0" y1="0" x2="0" y2="1">

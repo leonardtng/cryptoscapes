@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: 8
   },
   contentWrapper: {
-    flex: 1
+    flex: 1,
+    padding: '16px 0 24px'
   }
 }));
 

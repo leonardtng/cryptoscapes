@@ -20,7 +20,7 @@ const initialState: CoinListState = {
     sortingKey: 'market_cap',
     sortingOrder: 'desc',
     page: 1,
-    perPage: 30,
+    perPage: 20,
     category: ''
   },
   coinListTableColumns: retrieveCache('coinListTableColumns') || [

@@ -4,7 +4,7 @@ const News: React.FC = () => {
 
   return (
     <div>
-      Events
+      News
     </div>
   )
 }
