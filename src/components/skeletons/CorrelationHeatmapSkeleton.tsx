@@ -6,8 +6,8 @@ import { selectCoins } from '../../features/coinsSlice';
 import ReactApexChart from "react-apexcharts";
 import { Coin } from '../../models';
 import { ApexOptions } from 'apexcharts';
-import HeatmapLoadingProgress from '../UI/analytics/atoms/HeatmapLoadingProgress';
-import Overlay from '../UI/analytics/atoms/Overlay';
+import HeatmapLoadingProgress from '../UI/trends/atoms/HeatmapLoadingProgress';
+import Overlay from '../UI/trends/atoms/Overlay';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {

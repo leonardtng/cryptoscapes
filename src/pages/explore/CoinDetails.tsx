@@ -2,7 +2,7 @@ import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import { useParams } from 'react-router';
-import CoinDetailsCard from '../../components/UI/explore/organisms/CoinDetailsCard';
+import CoinDetailsCard from '../../components/UI/coins/organisms/CoinDetailsCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {

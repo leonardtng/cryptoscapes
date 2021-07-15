@@ -1,7 +1,7 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
-import ExchangeCardList from '../../components/UI/explore/organisms/ExchangeCardList';
+import ExchangeCardList from '../../components/UI/exchanges/organisms/ExchangeCardList';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
