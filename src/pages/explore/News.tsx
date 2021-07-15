@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Events: React.FC = () => {
+const News: React.FC = () => {
 
   return (
     <div>
@@ -9,4 +9,4 @@ const Events: React.FC = () => {
   )
 }
 
-export default Events
+export default News

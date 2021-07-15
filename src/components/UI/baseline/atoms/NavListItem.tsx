@@ -22,7 +22,7 @@ const NavListItem: React.FC<Props> = ({ page }) => {
 
   const handleClick = () => {
     history.push(page.path);
-  }
+  };
 
   const pathGroup =
     /(.+)\//.exec(location.pathname) === null ? location.pathname : /(.+)\//.exec(location.pathname)![1];
