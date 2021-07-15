@@ -17,7 +17,7 @@ export const API_CONFIG:
             'X-XSS-Protection': '1; mode=block',
             'X-Frame-Options': 'DENY',
             'X-Content-Type-Options': 'nosniff',
-            'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
+            'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload'
           }
         }
       case 'etherscan':

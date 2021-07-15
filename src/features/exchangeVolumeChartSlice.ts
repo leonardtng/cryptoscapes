@@ -13,7 +13,7 @@ interface Reducers extends SliceCaseReducers<ExchangeVolumeChartState> {
 const initialState: ExchangeVolumeChartState = {
   value: [],
   status: 'IDLE',
-  selectedDayRange: 1
+  selectedDayRange: 30
 };
 
 interface Params {
@@ -32,7 +32,7 @@ export const fetchExchangeVolumeChart = createAsyncThunk('exchangeVolumeChart', 
 
   const normalizedResponse = toCamelCase(response.data);
 
-  return normalizedResponse as [number, number][]
+  return normalizedResponse as [number, string][]
 });
 
 export const selectExchangeVolumeChart: (state: RootState) => ExchangeVolumeChartState

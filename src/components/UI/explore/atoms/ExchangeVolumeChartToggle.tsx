@@ -53,6 +53,12 @@ const ExchangeVolumeChartToggle: React.FC = () => {
         <ToggleButton value={30}>
           1M
         </ToggleButton>
+        <ToggleButton value={90}>
+          3M
+        </ToggleButton>
+        <ToggleButton value={365}>
+          1Y
+        </ToggleButton>
       </StyledToggleButtonGroup>
     </Box>
   )

@@ -65,8 +65,8 @@ const ExchangeVolumeDialog: React.FC<Props> = ({ open, toggleClose, exchange }) 
 
   const formatRawData = () => {
     const chartData: DataFormat[] = [];
-    exchangeVolumeChart.value.forEach((dataPair: [number, number]) => {
-      chartData.push({ date: dataPair[0], value: dataPair[1] })
+    exchangeVolumeChart.value.forEach((dataPair: [number, string]) => {
+      chartData.push({ date: dataPair[0], value: Number(dataPair[1]) });
     });
     return chartData
   };
