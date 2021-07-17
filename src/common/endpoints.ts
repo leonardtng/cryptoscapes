@@ -1,10 +1,12 @@
+import snakeCase from 'lodash.snakecase';
 import {
   AvailableDayRanges,
   AvailableIntervals,
   CoinSortingKey,
   CoinSortingOrder,
-  ExchangeVolumeChartDayRanges
-} from "../models";
+  ExchangeVolumeChartDayRanges,
+  StatusUpdateCategory
+} from '../models';
 
 export const coinGecko = {
   coins: (sortingKey: CoinSortingKey, sortingOrder: CoinSortingOrder, page: number, perPage: number, sparkline: boolean, category: string) =>
@@ -27,8 +29,8 @@ export const coinGecko = {
     `/exchanges/${exchangeId}/volume_chart?days=${days}`,
   companies: (coinId: 'bitcoin' | 'ethereum') =>
     `/companies/public_treasury/${coinId}`,
-  statusUpdates: (page: number, perPage: number) =>
-  `/status_updates?per_page=${perPage}&page=${page}`
+  statusUpdates: (page: number, perPage: number, category: StatusUpdateCategory) =>
+    `/status_updates?per_page=${perPage}&page=${page}&category=${snakeCase(category)}`
 };
 
 export const etherchain = {

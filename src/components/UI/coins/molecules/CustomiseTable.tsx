@@ -37,8 +37,8 @@ const CustomiseTable: React.FC = () => {
 
     dispatch(fetchCoinList({ coinQueryParams: queryParams, append: false }));
     dispatch(setCoinQueryParams(queryParams));
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   return (
     <>

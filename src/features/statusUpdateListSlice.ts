@@ -16,7 +16,8 @@ const initialState: StatusUpdateListState = {
   status: 'IDLE',
   statusUpdateQueryParams: {
     page: 1,
-    perPage: 50
+    perPage: 50,
+    category: 'general'
   },
   hasMore: true
 };
@@ -31,7 +32,11 @@ export const fetchStatusUpdateList = createAsyncThunk('statusUpdateList', async 
 
   const response = await http.request({
     ...config('coinGecko'),
-    url: API.statusUpdates(params.statusUpdateQueryParams.page, params.statusUpdateQueryParams.perPage),
+    url: API.statusUpdates(
+      params.statusUpdateQueryParams.page,
+      params.statusUpdateQueryParams.perPage,
+      params.statusUpdateQueryParams.category
+    ),
     cancelToken: canceler.token
   });
 

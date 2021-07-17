@@ -77,6 +77,8 @@ import {
   BitcoinHashRateState as BitcoinHashRateStateInterface
 } from './api/BitcoinHashRate';
 import {
+  StatusUpdateCategory as StatusUpdateCategoryInterface,
+  StatusUpdateCategoryMenuItem as StatusUpdateCategoryMenuItemInterface,
   StatusUpdateQueryParams as StatusUpdateQueryParamsInterface,
   StatusUpdateImage as StatusUpdateImageInterface,
   StatusUpdateProject as StatusUpdateProjectInterface,
@@ -139,6 +141,8 @@ export type FearGreedIndexState = FearGreedIndexStateInterface;
 export type BitcoinHashRate = BitcoinHashRateInterface;
 export type BitcoinHashRateRootObject = BitcoinHashRateRootObjectInterface;
 export type BitcoinHashRateState = BitcoinHashRateStateInterface;
+export type StatusUpdateCategoryMenuItem = StatusUpdateCategoryMenuItemInterface;
+export type StatusUpdateCategory = StatusUpdateCategoryInterface;
 export type StatusUpdateQueryParams = StatusUpdateQueryParamsInterface;
 export type StatusUpdateImage = StatusUpdateImageInterface;
 export type StatusUpdateProject = StatusUpdateProjectInterface;

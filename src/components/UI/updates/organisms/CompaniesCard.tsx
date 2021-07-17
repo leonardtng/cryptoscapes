@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   coinAvatar: {
     marginRight: 6
   },
-  trendingCoinList: {
+  companyList: {
     overflow: 'scroll',
     paddingBottom: 8
   }
@@ -58,7 +58,7 @@ const CompaniesCard: React.FC<Props> = ({ coinId }) => {
         }
       />
       <Divider />
-      <List dense disablePadding className={classes.trendingCoinList}>
+      <List dense disablePadding className={classes.companyList}>
         {!companiesData || companies.status === 'LOADING' || !coinData ? (
           <ListItemSkeleton count={7} height={60} iconDimensions={theme.spacing(3)} />
         ) : (

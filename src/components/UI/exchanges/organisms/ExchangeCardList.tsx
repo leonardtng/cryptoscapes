@@ -24,7 +24,10 @@ const ExchangeCardList: React.FC = () => {
       page: exchangeList.exchangeQueryParams.page + 1
     }),
     fetchExchangeList({
-      exchangeQueryParams: { ...exchangeList.exchangeQueryParams, page: exchangeList.exchangeQueryParams.page + 1 },
+      exchangeQueryParams: {
+        ...exchangeList.exchangeQueryParams,
+        page: exchangeList.exchangeQueryParams.page + 1
+      },
       append: true
     }),
     exchangeList.hasMore

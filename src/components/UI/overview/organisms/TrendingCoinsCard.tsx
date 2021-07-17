@@ -45,7 +45,7 @@ const TrendingCoinsCard: React.FC = () => {
         ) : (
           <>
             {trendingCoins.value.map((trendingCoin: TrendingCoin, index: number) => {
-              return <Fragment key={trendingCoin.id}>
+              return <Fragment key={index}>
                 <TrendingCoinItem trendingCoin={trendingCoin} />
                 {index < trendingCoins.value.length - 1 && <Divider />}
               </Fragment>

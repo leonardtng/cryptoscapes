@@ -43,7 +43,7 @@ const CompanyItem: React.FC<Props> = ({ company, index, coinSymbol }) => {
   const valueChange = (company.totalCurrentValueUsd - company.totalEntryValueUsd) / company.totalEntryValueUsd * 100;
 
   return (
-    <ListItem >
+    <ListItem>
       <Typography variant="body1" color="textSecondary" className={classes.ranking}>
         #{index + 1}
       </Typography>
@@ -55,8 +55,13 @@ const CompanyItem: React.FC<Props> = ({ company, index, coinSymbol }) => {
         secondaryTypographyProps={{ variant: 'caption' }}
       />
       <ListItemText
+        disableTypography
         className={classes.companyHoldings}
-        primary={`${formatNumber(roundDecimals(company.totalHoldings))} ${coinSymbol}`}
+        primary={
+          <Typography variant="subtitle2" noWrap>
+            {formatNumber(roundDecimals(company.totalHoldings))} {coinSymbol}
+          </Typography>
+        }
         secondary={
           <Tooltip
             title={
@@ -84,8 +89,6 @@ const CompanyItem: React.FC<Props> = ({ company, index, coinSymbol }) => {
             </Typography>
           </Tooltip>
         }
-        primaryTypographyProps={{ variant: 'subtitle2', noWrap: true }}
-        secondaryTypographyProps={{ variant: 'caption' }}
       />
     </ListItem>
   )

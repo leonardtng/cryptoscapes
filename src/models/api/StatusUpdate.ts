@@ -1,8 +1,24 @@
 import { GenericState } from "..";
 
+export type StatusUpdateCategory =
+  'general'
+  | 'milestone'
+  | 'partnership'
+  | 'exchangeListing'
+  | 'softwareRelease'
+  | 'fundMovement'
+  | 'newListings'
+  | 'event'
+
+export interface StatusUpdateCategoryMenuItem {
+  categoryId: StatusUpdateCategory,
+  label: string;
+}
+
 export interface StatusUpdateQueryParams {
   page: number;
   perPage: number;
+  category: StatusUpdateCategory;
 }
 
 export interface StatusUpdateImage {
@@ -22,7 +38,7 @@ export interface StatusUpdateProject {
 export interface StatusUpdate {
   description: string;
   category: string;
-  createdAt: Date;
+  createdAt: string;
   user: string;
   userTitle: string;
   pin: boolean;

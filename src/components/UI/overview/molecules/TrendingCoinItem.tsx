@@ -19,7 +19,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
   avatarSmall: {
     height: theme.spacing(3),
-    width: theme.spacing(3),
+    width: theme.spacing(3)
   },
   coinLabelText: {
     width: 80,
