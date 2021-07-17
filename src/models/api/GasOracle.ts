@@ -1,19 +1,13 @@
 import { GenericState } from "..";
 
 export interface GasOracle {
-  lastBlock: string;
-  safeGasPrice: string;
-  proposeGasPrice: string;
-  fastGasPrice: string;
+  safeLow: number;
+  standard: number;
+  fast: number;
+  fastest: number;
 }
 
-export interface GasOracleRootObject {
-  status: string;
-  message: string;
-  result: GasOracle;
-}
-
-export interface GasOracleState extends GenericState<GasOracle> {
-  selectedGasFee: string | null;
+export interface GasOracleState extends GenericState<GasOracle | null> {
+  selectedGasFee: number | null;
   gasLimit: number;
 }

@@ -37,7 +37,6 @@ import {
 } from './api/SupportedCoin';
 import {
   GasOracle as GasOracleInterface,
-  GasOracleRootObject as GasOracleRootObjectInterface,
   GasOracleState as GasOracleStateInterface
 } from './api/GasOracle';
 import {
@@ -78,6 +77,14 @@ import {
   BitcoinHashRateState as BitcoinHashRateStateInterface
 } from './api/BitcoinHashRate';
 import {
+  StatusUpdateQueryParams as StatusUpdateQueryParamsInterface,
+  StatusUpdateImage as StatusUpdateImageInterface,
+  StatusUpdateProject as StatusUpdateProjectInterface,
+  StatusUpdate as StatusUpdateInterface,
+  StatusUpdateRootObject as StatusUpdateRootObjectInterface,
+  StatusUpdateListState as StatusUpdateListStateInterface
+} from './api/StatusUpdate';
+import {
   CoinDetailsTabValues as CoinDetailsTabValuesInterface
 } from './UI/TabValues';
 import {
@@ -109,7 +116,6 @@ export type CoinDetailsState = CoinDetailsStateInterface;
 export type SupportedCoin = SupportedCoinInterface;
 export type GasOracle = GasOracleInterface;
 export type GasOracleState = GasOracleStateInterface;
-export type GasOracleRootObject = GasOracleRootObjectInterface;
 export type TrendingCoin = TrendingCoinInterface;
 export type TrendingCoinItem = TrendingCoinItemInterface;
 export type TrendingRootObject = TrendingRootObjectInterface;
@@ -133,5 +139,11 @@ export type FearGreedIndexState = FearGreedIndexStateInterface;
 export type BitcoinHashRate = BitcoinHashRateInterface;
 export type BitcoinHashRateRootObject = BitcoinHashRateRootObjectInterface;
 export type BitcoinHashRateState = BitcoinHashRateStateInterface;
+export type StatusUpdateQueryParams = StatusUpdateQueryParamsInterface;
+export type StatusUpdateImage = StatusUpdateImageInterface;
+export type StatusUpdateProject = StatusUpdateProjectInterface;
+export type StatusUpdate = StatusUpdateInterface;
+export type StatusUpdateRootObject = StatusUpdateRootObjectInterface;
+export type StatusUpdateListState = StatusUpdateListStateInterface;
 export type CoinDetailsTabValues = CoinDetailsTabValuesInterface;
 export type CoinListTableHeadCell = CoinListTableHeadCellInterface;

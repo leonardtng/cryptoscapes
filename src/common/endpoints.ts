@@ -6,8 +6,6 @@ import {
   ExchangeVolumeChartDayRanges
 } from "../models";
 
-const ETHERSCAN_API_KEY = process.env.REACT_APP_ETHERSCAN_API_KEY;
-
 export const coinGecko = {
   coins: (sortingKey: CoinSortingKey, sortingOrder: CoinSortingOrder, page: number, perPage: number, sparkline: boolean, category: string) =>
     `/coins/markets?vs_currency=usd&order=${sortingKey}_${sortingOrder}&per_page=${perPage}&page=${page}&sparkline=${sparkline}&price_change_percentage=24h,7d${category ? `&category=${category}` : ''}`,
@@ -28,12 +26,14 @@ export const coinGecko = {
   exchangeVolumeChart: (exchangeId: string, days: ExchangeVolumeChartDayRanges) =>
     `/exchanges/${exchangeId}/volume_chart?days=${days}`,
   companies: (coinId: 'bitcoin' | 'ethereum') =>
-    `/companies/public_treasury/${coinId}`
+    `/companies/public_treasury/${coinId}`,
+  statusUpdates: (page: number, perPage: number) =>
+  `/status_updates?per_page=${perPage}&page=${page}`
 };
 
-export const etherscan = {
+export const etherchain = {
   gasOracle:
-    `/api?module=gastracker&action=gasoracle&apikey=${ETHERSCAN_API_KEY}`
+    `/gasPriceOracle`
 };
 
 export const alternativeMe = {

@@ -14,7 +14,7 @@ import Exchanges from './explore/Exchanges';
 import Trends from './analytics/Trends';
 import Coins from './explore/Coins';
 import CoinDetails from './explore/CoinDetails';
-import News from './explore/News';
+import Updates from './explore/Updates';
 import DeFi from './explore/DeFi';
 import { RootModule } from '../models';
 
@@ -62,10 +62,10 @@ const Main: React.FC = () => {
 
         },
         {
-          label: 'News',
-          path: '/news',
+          label: 'Updates',
+          path: '/updates',
           icon: <LibraryBooks />,
-          page: <News />,
+          page: <Updates />,
           index: 4
         },
         {

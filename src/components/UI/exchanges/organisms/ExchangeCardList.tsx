@@ -9,7 +9,6 @@ import CardSkeleton from '../../../skeletons/CardSkeleton';
 
 const ExchangeCardList: React.FC = () => {
   const dispatch = useAppDispatch();
-
   const exchangeList = useAppSelector(selectExchangeList);
 
   useEffect(() => {

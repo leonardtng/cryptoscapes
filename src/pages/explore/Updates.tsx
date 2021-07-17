@@ -3,8 +3,8 @@ import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Grid, Hidden } from '@material-ui/core';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchCompanies, selectCompanies } from '../../features/companiesSlice';
-import NewsFeedCard from '../../components/UI/news/organisms/NewsFeedCard';
-import CompaniesCard from '../../components/UI/news/organisms/CompaniesCard';
+import StatusUpdateListCard from '../../components/UI/updates/organisms/StatusUpdateListCard';
+import CompaniesCard from '../../components/UI/updates/organisms/CompaniesCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const News: React.FC = () => {
+const Updates: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -44,7 +44,7 @@ const News: React.FC = () => {
       alignItems="stretch"
     >
       <Grid item xs={12} lg={8} xl={9}>
-        <NewsFeedCard />
+        <StatusUpdateListCard />
       </Grid>
       <Hidden mdDown>
         <Grid item lg={4} xl={3}>
@@ -62,4 +62,4 @@ const News: React.FC = () => {
   )
 }
 
-export default News
+export default Updates

@@ -43,7 +43,7 @@ interface StyleProps {
 
 interface Props extends StyleProps {
   header: string;
-  price: string;
+  price: number;
   time: string;
   icon: JSX.Element;
   selected: boolean;

@@ -15,6 +15,7 @@ import exchangeVolumeChartReducer from '../features/exchangeVolumeChartSlice';
 import companiesReducer from '../features/companiesSlice';
 import fearGreedIndexReducer from '../features/fearGreedIndexSlice';
 import bitcoinHashRateReducer from '../features/bitcoinHashRateSlice';
+import statusUpdateListReducer from '../features/statusUpdateListSlice';
 import appState from '../features/appStateSlice';
 
 export const store = configureStore({
@@ -35,6 +36,7 @@ export const store = configureStore({
     companies: companiesReducer,
     fearGreedIndex: fearGreedIndexReducer,
     bitcoinHashRate: bitcoinHashRateReducer,
+    statusUpdateList: statusUpdateListReducer,
     appState: appState
   },
 });

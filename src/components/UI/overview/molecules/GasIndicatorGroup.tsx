@@ -28,39 +28,43 @@ const GasIndicatorGroup: React.FC = () => {
 
   const gasOracle = useAppSelector(selectGasOracle);
 
+  const safeLow = gasOracle.value ? gasOracle.value.safeLow : 0;
+  const standard = gasOracle.value ? gasOracle.value.standard : 0;
+  const fast = gasOracle.value ? gasOracle.value.fast : 0;
+
   return (
     <Grid container spacing={2} className={classes.conditionalButtonChild}>
     <Grid item xs={4}>
       <GasIndicator
         header="Slow"
-        price={gasOracle.value.safeGasPrice}
+        price={safeLow}
         time="< 30mins"
         icon={<HourglassEmptyRounded />}
         color={theme.palette.error.main}
-        selected={gasOracle.selectedGasFee === gasOracle.value.safeGasPrice}
-        onClick={() => dispatch(setSelectedGasFee(gasOracle.value.safeGasPrice))}
+        selected={gasOracle.selectedGasFee === safeLow}
+        onClick={() => dispatch(setSelectedGasFee(safeLow))}
       />
     </Grid>
     <Grid item xs={4}>
       <GasIndicator
         header="Normal"
-        price={gasOracle.value.proposeGasPrice}
+        price={standard}
         time="< 5mins"
         icon={<ScheduleRounded />}
         color={theme.palette.warning.main}
-        selected={gasOracle.selectedGasFee === gasOracle.value.proposeGasPrice}
-        onClick={() => dispatch(setSelectedGasFee(gasOracle.value.proposeGasPrice))}
+        selected={gasOracle.selectedGasFee === standard}
+        onClick={() => dispatch(setSelectedGasFee(standard))}
       />
     </Grid>
     <Grid item xs={4}>
       <GasIndicator
         header="Fast"
-        price={gasOracle.value.fastGasPrice}
+        price={fast}
         time="< 1min"
         icon={<FastForwardRounded />}
         color={theme.palette.success.main}
-        selected={gasOracle.selectedGasFee === gasOracle.value.fastGasPrice}
-        onClick={() => dispatch(setSelectedGasFee(gasOracle.value.fastGasPrice))}
+        selected={gasOracle.selectedGasFee === fast}
+        onClick={() => dispatch(setSelectedGasFee(fast))}
       />
     </Grid>
   </Grid>

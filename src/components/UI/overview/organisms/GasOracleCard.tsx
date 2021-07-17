@@ -37,7 +37,7 @@ const GasOracleCard: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!gasOracle.value.lastBlock && gasOracle.status === 'IDLE') {
+    if (!gasOracle.value && gasOracle.status === 'IDLE') {
       dispatch(fetchGasOracle());
     }
   }, [dispatch, gasOracle.value, gasOracle.status]);
