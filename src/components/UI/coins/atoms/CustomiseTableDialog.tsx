@@ -20,6 +20,9 @@ import { Coin, CoinListTableHeadCell } from '../../../../models';
 import { CloseRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  dialogPaper: {
+    borderRadius: 12
+  },
   closeButton: {
     position: 'absolute',
     right: theme.spacing(1),
@@ -48,7 +51,7 @@ const CustomiseTable: React.FC<Props> = ({ open, toggleClose }) => {
   }
 
   return (
-    <Dialog open={open} onBackdropClick={toggleClose}>
+    <Dialog classes={{ paper: classes.dialogPaper }} open={open} onBackdropClick={toggleClose}>
       <DialogTitle disableTypography>
         <Typography variant="h6">Customise Table</Typography>
         <IconButton aria-label="close" className={classes.closeButton} onClick={toggleClose}>

@@ -12,6 +12,9 @@ import { Dialog,
 import { CloseRounded, WarningRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  dialogPaper: {
+    borderRadius: 12
+  },
   closeButton: {
     position: 'absolute',
     right: theme.spacing(1),
@@ -44,7 +47,7 @@ const SearchOptionsDialog: React.FC<Props> = ({ open, toggleClose, checked, togg
   const classes = useStyles();
 
   return (
-    <Dialog open={open} onBackdropClick={toggleClose} maxWidth="xs">
+    <Dialog classes={{ paper: classes.dialogPaper }} open={open} onBackdropClick={toggleClose} maxWidth="xs">
       <DialogTitle disableTypography>
         <Typography variant="h6">Search Options</Typography>
         <IconButton aria-label="close" className={classes.closeButton} onClick={toggleClose}>

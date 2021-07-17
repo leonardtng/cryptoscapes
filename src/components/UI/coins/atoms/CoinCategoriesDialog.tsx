@@ -13,6 +13,9 @@ import { useAppSelector } from '../../../../app/hooks';
 import { selectCoinDetails } from '../../../../features/coinDetailsSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  dialogPaper: {
+    borderRadius: 12
+  },
   closeButton: {
     position: 'absolute',
     right: theme.spacing(1),
@@ -36,7 +39,7 @@ const CoinCategoriesDialog: React.FC<Props> = ({ open, toggleClose, handleClickC
   const coinDetails = useAppSelector(selectCoinDetails);
 
   return (
-    <Dialog open={open} onBackdropClick={toggleClose} maxWidth="xs">
+    <Dialog classes={{ paper: classes.dialogPaper }} open={open} onBackdropClick={toggleClose} maxWidth="xs">
       <DialogTitle disableTypography>
         <Typography variant="h6">Categories</Typography>
         <IconButton aria-label="close" className={classes.closeButton} onClick={toggleClose}>

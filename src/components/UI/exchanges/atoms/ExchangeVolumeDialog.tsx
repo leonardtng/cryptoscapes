@@ -19,6 +19,9 @@ import ChartSkeleton from '../../../skeletons/ChartSkeleton';
 import { Exchange } from '../../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
+  dialogPaper: {
+    borderRadius: 12
+  },
   closeButton: {
     position: 'absolute',
     right: theme.spacing(1),
@@ -78,7 +81,7 @@ const ExchangeVolumeDialog: React.FC<Props> = ({ open, toggleClose, exchange }) 
   }, [dispatch, exchange.id, exchangeVolumeChart.selectedDayRange, open]);
 
   return (
-    <Dialog open={open} onBackdropClick={toggleClose}>
+    <Dialog classes={{ paper: classes.dialogPaper }} open={open} onBackdropClick={toggleClose}>
       <DialogTitle disableTypography>
         <Typography variant="h6">{exchange.name} Trading Volume</Typography>
         <IconButton aria-label="close" className={classes.closeButton} onClick={toggleClose}>
