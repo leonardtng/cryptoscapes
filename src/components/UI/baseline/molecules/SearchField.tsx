@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Box, IconButton, InputAdornment, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { useHistory } from 'react-router';
-import { useAppSelector } from '../../../../app/hooks';
-import { selectSupportedCoins } from '../../../../features/supportedCoinsSlice';
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
+import { fetchSupportedCoins, selectSupportedCoins } from '../../../../features/supportedCoinsSlice';
 import { Coin, SupportedCoin } from '../../../../models';
 import { SearchRounded, TuneRounded } from '@material-ui/icons';
 import { selectCoins } from '../../../../features/coinsSlice';
@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const SearchField: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useAppDispatch();
 
   const coins = useAppSelector(selectCoins);
   const supportedCoins = useAppSelector(selectSupportedCoins);
@@ -54,6 +55,12 @@ const SearchField: React.FC = () => {
     if (coinItem) history.push(coinItem.id && `/coins/${coinItem.id}`);
     setValue(null); // This makes it possible to reselect the same value again if the input field is not cleared
   };
+
+  useEffect(() => {
+    if (supportedCoins.value.length === 0 && supportedCoins.status === 'IDLE' && !onlySearchTop) {
+      dispatch(fetchSupportedCoins());
+    }
+  }, [dispatch, onlySearchTop, supportedCoins.status, supportedCoins.value.length]);
 
   return (
     <Box display="flex" alignItems="center">

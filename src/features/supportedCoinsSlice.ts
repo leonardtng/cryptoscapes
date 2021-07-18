@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice, Slice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { cacheWithExpiry, retrieveCache, toCamelCase } from '../common/helpers';
 import { RootState } from '../app/store';
 import { coinGecko as API } from '../common/endpoints';
 import { API_CONFIG as config, http } from '../common/constants';
 import { GenericState, SupportedCoin } from '../models';
+import { toCamelCase } from '../common/helpers';
 
 const initialState: GenericState<SupportedCoin[]> = {
   value: [],
@@ -14,22 +14,15 @@ const initialState: GenericState<SupportedCoin[]> = {
 export const fetchSupportedCoins = createAsyncThunk('supportedCoins', async () => {
   const canceler = axios.CancelToken.source();
 
-  const cachedData: SupportedCoin[] | null = retrieveCache('supportedCoins');
+  const response = await http.request({
+    ...config('coinGecko'),
+    url: API.supportedCoins,
+    cancelToken: canceler.token
+  });
 
-  if (cachedData) {
-    return cachedData as SupportedCoin[];
-  } else {
-    const response = await http.request({
-      ...config('coinGecko'),
-      url: API.supportedCoins,
-      cancelToken: canceler.token
-    });
+  const normalizedResponse = toCamelCase(response.data);
 
-    const normalizedResponse = toCamelCase(response.data);
-    cacheWithExpiry('supportedCoins', normalizedResponse, 8.64e+7);  // Cache Period: 1 day
-
-    return normalizedResponse as SupportedCoin[]
-  }
+  return normalizedResponse as SupportedCoin[]
 });
 
 export const selectSupportedCoins: (state: RootState) => GenericState<SupportedCoin[]>

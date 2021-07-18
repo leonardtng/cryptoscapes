@@ -5,7 +5,6 @@ import { Skeleton } from '@material-ui/lab';
 import { useHistory } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { fetchCoinList, selectCoinList, setCoinQueryParams } from '../../../../features/coinListSlice';
-import { selectSupportedCoins } from '../../../../features/supportedCoinsSlice';
 import CoinListTableHeader, { headCells } from '../atoms/CoinListTableHeader';
 import CoinNameCell from '../atoms/CoinNameCell';
 import CirculatingSupplyCell from '../atoms/CirculatingSupplyCell';
@@ -54,9 +53,7 @@ const CoinListTable: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const coinList = useAppSelector(selectCoinList);
-  const supportedCoins = useAppSelector(selectSupportedCoins);
 
-  const hasMore = !(coinList.value.length === supportedCoins.value.length || !coinList.hasMore);
   const numberOfCols =
     coinList.coinListTableColumns.length + headCells.reduce((a, b) => a + (!b.customisable ? 1 : 0), 0);
 
@@ -70,7 +67,7 @@ const CoinListTable: React.FC = () => {
       coinQueryParams: { ...coinList.coinQueryParams, page: coinList.coinQueryParams.page + 1 },
       append: true
     }),
-    hasMore
+    coinList.hasMore
   );
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: CoinSortingKey) => {
@@ -205,7 +202,7 @@ const CoinListTable: React.FC = () => {
                     </TableCell>
                   </TableRow>
                 })}
-                {hasMore && coinList.value.length !== 0 &&
+                {coinList.hasMore && coinList.value.length !== 0 &&
                   <TableRow>
                     {Array.from(Array(numberOfCols).keys()).map((index: number) => {
                       return <TableCell key={index}>

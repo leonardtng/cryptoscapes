@@ -6,7 +6,6 @@ import SideUtils from '../molecules/SideUtils';
 import { appBarHeight } from '../../../../common/shared/dimensions';
 import AppBarActions from '../molecules/AppBarActions';
 import { fetchCoins, selectCoins } from '../../../../features/coinsSlice';
-import { fetchSupportedCoins, selectSupportedCoins } from '../../../../features/supportedCoinsSlice';
 import { fetchCoinCategories, selectCoinCategories } from '../../../../features/coinCategoriesSlice';
 import { useCleanReduxState } from '../../../../common/hooks/useCleanReduxState';
 
@@ -26,7 +25,6 @@ const AppBar: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const coins = useAppSelector(selectCoins);
-  const supportedCoins = useAppSelector(selectSupportedCoins);
   const coinCategories = useAppSelector(selectCoinCategories);
 
   useEffect(() => {
@@ -34,12 +32,6 @@ const AppBar: React.FC = () => {
       dispatch(fetchCoins());
     }
   }, [dispatch, coins.status, coins.value.length]);
-
-  useEffect(() => {
-    if (supportedCoins.value.length === 0 && supportedCoins.status === 'IDLE') {
-      dispatch(fetchSupportedCoins());
-    }
-  }, [dispatch, supportedCoins.status, supportedCoins.value.length]);
 
   useEffect(() => {
     if (coinCategories.value.length === 0 && coinCategories.status === 'IDLE') {
