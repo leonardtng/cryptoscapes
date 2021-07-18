@@ -7,20 +7,22 @@ import StatusUpdateDialog from '../atoms/StatusUpdateDialog';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   timeFromNow: {
-    width: 42,
+    width: 24,
     textAlign: 'center',
+    marginRight: 6
   },
   listItemAvatar: {
     minWidth: 46,
     display: 'flex',
     justifyContent: 'center',
-    marginRight: 8
+    marginRight: 6
   },
   avatarSmall: {
     height: theme.spacing(3),
     width: theme.spacing(3)
   },
   statusUpdateDescription: {
+    flex: 1,
     paddingRight: 8
   }
 }));

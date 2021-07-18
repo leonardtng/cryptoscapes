@@ -32,7 +32,7 @@ export const getTimeFromNow = (IsoString: string) => {
 
   const diff = now.getTime() - date.getTime();
 
-  if (diff < 3.6e+6) return `${roundDecimals(diff / 60000, 0)}min`
+  if (diff < 3.6e+6) return `${roundDecimals(diff / 60000, 0)}m`
   if (diff < 8.64e+7) return `${roundDecimals(diff / 3.6e+6, 0)}h`
   return `${roundDecimals(diff / 8.64e+7, 0)}d`
 };
