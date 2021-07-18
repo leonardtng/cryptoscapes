@@ -24,6 +24,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.secondary.main,
     backgroundColor: theme.palette.card.paper,
     borderRadius: 8
+  },
+  customTooltip: {
+    backgroundColor: theme.palette.card.paper,
+    borderRadius: 8,
+    padding: 6
   }
 }));
 
@@ -63,12 +68,12 @@ const MarketCapCard: React.FC = () => {
               }}
           >
             <ToggleButton value="donut">
-              <Tooltip title="Donut Chart" placement="top">
+              <Tooltip title="Donut Chart" placement="top" classes={{ tooltip: classes.customTooltip }}>
                 <DonutLargeRounded />
               </Tooltip>
             </ToggleButton>
             <ToggleButton value="treemap">
-              <Tooltip title="Coin Map" placement="top">
+              <Tooltip title="Coin Map" placement="top" classes={{ tooltip: classes.customTooltip }}>
                 <DashboardRounded />
               </Tooltip>
             </ToggleButton>

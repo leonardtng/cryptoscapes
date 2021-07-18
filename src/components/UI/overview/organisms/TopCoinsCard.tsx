@@ -54,7 +54,7 @@ const TopCoinsCard: React.FC = () => {
   return (
     <CardLayout>
       <CardHeader
-        title="Top Coins"
+        title="Top Cryptocurrencies"
         subheader={`Last Updated: ${getTodayDate()}`}
         titleTypographyProps={{ variant: 'h6' }}
         subheaderTypographyProps={{ variant: 'caption' }}

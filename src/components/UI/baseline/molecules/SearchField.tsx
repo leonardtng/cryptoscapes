@@ -84,7 +84,7 @@ const SearchField: React.FC = () => {
             <TextField
               {...params}
               size="small"
-              placeholder="Search Coin"
+              placeholder="Search"
               margin="normal"
               variant="outlined"
               InputProps={{
