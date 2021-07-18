@@ -1,24 +1,11 @@
 import React from 'react';
-import { Theme, makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 import { AvailableDayRanges, CoinMarketChart } from '../../../../models';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { selectCoinDetailsMarketChart, setSelectedDataType, setSelectedDayRange } from '../../../../features/coinDetailsMarketChartSlice';
 import { toggleButtonsHeight } from '../../../../common/shared/dimensions';
 import { Box } from '@material-ui/core';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  toggleButtonGroup: {
-    // '& #data-type .MuiToggleButton-root.Mui-selected': {
-    //   backgroundColor: `${theme.palette.primary.main}25`,
-    //   color: theme.palette.primary.main
-    // },
-    // '& #date-range .MuiToggleButton-root.Mui-selected': {
-    //   backgroundColor: `${theme.palette.secondary.main}25`,
-    //   color: theme.palette.secondary.main
-    // }
-  }
-}));
 
 const StyledToggleButtonGroup = withStyles((theme) => ({
   grouped: {
@@ -34,8 +21,6 @@ const StyledToggleButtonGroup = withStyles((theme) => ({
 }))(ToggleButtonGroup);
 
 const ChartOptionToggleGroup: React.FC = () => {
-  const classes = useStyles();
-
   const dispatch = useAppDispatch();
   const coinDetailsMarketChart = useAppSelector(selectCoinDetailsMarketChart);
 
@@ -49,10 +34,8 @@ const ChartOptionToggleGroup: React.FC = () => {
       paddingLeft={3}
       paddingRight={3}
       zIndex={1}
-      className={classes.toggleButtonGroup}
     >
       <StyledToggleButtonGroup
-        id="data-type"
         value={coinDetailsMarketChart.selectedDataType}
         exclusive
         onChange={
@@ -73,7 +56,6 @@ const ChartOptionToggleGroup: React.FC = () => {
         </ToggleButton>
       </StyledToggleButtonGroup>
       <StyledToggleButtonGroup
-        id="date-range"
         value={coinDetailsMarketChart.selectedDayRange}
         exclusive
         onChange={

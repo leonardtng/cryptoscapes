@@ -60,7 +60,7 @@ const App: React.FC = () => {
         secondary: '#8492c4'
       },
       card: {
-        default: '#12172F', // 12172F
+        default: '#12172F', // 202940
         paper: '#1F2747' // 29314F
       },
       success: {
@@ -86,16 +86,16 @@ const App: React.FC = () => {
         main: '#2196F3',
       },
       background: {
-        default: '#121937',
-        paper: '#1a223f',
+        default: '#FFFFFF',
+        paper: '#e4e7ec',
       },
       text: {
-        primary: '#FFFFFF',
-        secondary: '#8492c4'
+        primary: '#212121',
+        secondary: '#616161'
       },
       card: {
-        default: '#212946', // #202940
-        paper: '#29314F'
+        default: '#FFFFFF', 
+        paper: '#E4E7EC'
       }
     },
     ...common

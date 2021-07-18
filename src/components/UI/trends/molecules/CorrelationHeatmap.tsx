@@ -1,6 +1,7 @@
 import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { useAppSelector } from '../../../../app/hooks';
+import { selectAppState } from '../../../../features/appStateSlice';
 import { selectCoinMarketChartList } from '../../../../features/coinMarketChartListSlice';
 import { Coin, CoinMarketChart } from '../../../../models';
 import ReactApexChart from "react-apexcharts";
@@ -44,6 +45,7 @@ const CorrelationHeatmap: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const appState = useAppSelector(selectAppState);
   const coins = useAppSelector(selectCoins);
   const coinMarketChartList = useAppSelector(selectCoinMarketChartList);
 
@@ -91,7 +93,7 @@ const CorrelationHeatmap: React.FC = () => {
       }
     },
     theme: {
-      mode: 'dark'
+      mode: appState.darkMode ? 'dark' : 'light'
     },
     tooltip: {
       custom: (data) => {

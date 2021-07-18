@@ -1,9 +1,9 @@
-import { createSlice, Slice, SliceCaseReducers } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Slice, SliceCaseReducers } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 import { AppState } from '../models';
 
 interface Reducers extends SliceCaseReducers<AppState> {
-  toggle: (state: AppState) => void;
+  setDarkMode: (state: AppState, action: PayloadAction<boolean>) => void;
 }
 
 const initialState: AppState = { darkMode: true };
@@ -14,13 +14,12 @@ const appStateSlice: Slice<AppState, Reducers, 'theme'> = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    toggle: (state: AppState) => {
-      const currentValue = state.darkMode;
-      state.darkMode = currentValue ? false : true;
+    setDarkMode: (state: AppState, action: PayloadAction<boolean>) => {
+      state.darkMode = action.payload;
     }
   },
 });
 
-export const { toggle } = appStateSlice.actions;
+export const { setDarkMode } = appStateSlice.actions;
 
 export default appStateSlice.reducer;

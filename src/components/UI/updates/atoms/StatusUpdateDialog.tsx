@@ -4,7 +4,7 @@ import DialogLayout from '../../../templates/DialogLayout';
 import { StatusUpdate } from '../../../../models';
 import { convertIsoString } from '../../../../common/helpers';
 import { Box, Button, Link } from '@material-ui/core';
-import { OpenInNew } from '@material-ui/icons';
+import { OpenInNewRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) => ({
   link: {
@@ -44,9 +44,9 @@ const StatusUpdateDialog: React.FC<Props> = ({ open, toggleClose, statusUpdate }
       maxWidth="xs"
     >
       {statusUpdate.description.includes('https://') &&
-        <Box paddingTop={1} marginBottom={2} display="flex" justifyContent="center">
+        <Box paddingTop={1} paddingBottom={2} display="flex" justifyContent="center">
           <Link href={link} target="_blank" rel="noopener noreferrer" className={classes.link}>
-            <Button variant="contained" color="primary">View <OpenInNew /></Button>
+            <Button variant="contained" color="primary">View <OpenInNewRounded /></Button>
           </Link>
         </Box>
       }

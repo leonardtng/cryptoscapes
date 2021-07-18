@@ -21,6 +21,7 @@ const LargeProgressCard: React.FC<Props> = ({ title, value }) => {
   const theme = useTheme();
 
   const coinDetails = useAppSelector(selectCoinDetails);
+  const correctedValue = value > 100 ? 100 : value;
 
   const getColor = () => {
     if (value < 30) return theme.palette.error.main
@@ -35,7 +36,7 @@ const LargeProgressCard: React.FC<Props> = ({ title, value }) => {
         <CircularProgress
           className={classes.progressCircle}
           variant="determinate"
-          value={coinDetails.status === 'LOADING' ? 0 : value}
+          value={coinDetails.status === 'LOADING' ? 0 : correctedValue}
           size={200}
           thickness={5}
           style={{ color: getColor() }}
@@ -51,7 +52,7 @@ const LargeProgressCard: React.FC<Props> = ({ title, value }) => {
           justifyContent="center"
         >
           <Typography variant="h5" component="div" color="textSecondary">
-            {coinDetails.status === 'LOADING' || value === 0 ? '-' : `${roundDecimals(value)}%`}
+            {coinDetails.status === 'LOADING' || correctedValue === 0 ? '-' : `${roundDecimals(correctedValue)}%`}
           </Typography>
         </Box>
       </Box>

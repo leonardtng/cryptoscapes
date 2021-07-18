@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   avatarColor: {
-    color: '#ffffff',
+    color: theme.palette.text.primary,
     backgroundColor: 'transparent',
     borderRadius: 8
   },

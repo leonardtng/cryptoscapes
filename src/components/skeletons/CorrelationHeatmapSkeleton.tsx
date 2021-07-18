@@ -2,6 +2,7 @@ import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { useAppSelector } from '../../app/hooks';
+import { selectAppState } from '../../features/appStateSlice';
 import { selectCoins } from '../../features/coinsSlice';
 import ReactApexChart from "react-apexcharts";
 import { Coin } from '../../models';
@@ -22,6 +23,7 @@ const CorrelationHeatmapSkeleton: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const appState = useAppSelector(selectAppState);
   const coins = useAppSelector(selectCoins);
 
   const options: ApexOptions = {
@@ -36,7 +38,7 @@ const CorrelationHeatmapSkeleton: React.FC = () => {
       }
     },
     theme: {
-      mode: 'dark'
+      mode: appState.darkMode ? 'dark' : 'light'
     },
     tooltip: {
       custom: (data) => {

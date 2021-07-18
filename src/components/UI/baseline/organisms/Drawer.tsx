@@ -2,6 +2,7 @@ import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Drawer as MuiDrawer, Toolbar } from '@material-ui/core';
 import DrawerItems from '../molecules/DrawerItems';
+import DrawerFooter from '../molecules/DrawerFooter';
 import { RootModule } from '../../../../models/common/RootModule';
 import { appBarHeight, drawerWidth } from '../../../../common/shared/dimensions';
 
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     background: 'transparent'
   },
   drawerContainer: {
-    overflow: 'auto',
+    overflow: 'auto'
   },
 }));
 
@@ -43,6 +44,7 @@ const Drawer: React.FC<Props> = ({ rootModule, anchor }) => {
       <Toolbar />
       <div className={classes.drawerContainer}>
         <DrawerItems rootModule={rootModule} />
+        <DrawerFooter />
       </div>
     </MuiDrawer>
   )
