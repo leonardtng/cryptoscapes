@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   content: {
     flexGrow: 1,
     height: `calc(100vh - ${appBarHeight}px)`,
-    width: `calc(100% - ${drawerWidth}px)`,
+    width: `calc(100% - ${drawerWidth}px - 20px)`,
     backgroundColor: theme.palette.background.paper,
     marginTop: appBarHeight,
     marginRight: 20,

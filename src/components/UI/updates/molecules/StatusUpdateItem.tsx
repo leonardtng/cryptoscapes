@@ -21,7 +21,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     width: theme.spacing(3)
   },
   statusUpdateDescription: {
-    width: 0,
     paddingRight: 8
   }
 }));
