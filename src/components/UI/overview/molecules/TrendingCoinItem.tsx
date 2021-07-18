@@ -46,7 +46,7 @@ const TrendingCoinItem: React.FC<Props> = ({ trendingCoin }) => {
   });
 
   return (
-    <ListItem  button onClick={() => history.push(`/coins/${trendingCoin.id}`)}>
+    <ListItem button onClick={() => history.push(`/coins/${trendingCoin.id}`)}>
       <div className={classes.ranking}>
         <Typography variant="body2">{trendingCoin.marketCapRank}</Typography>
       </div>

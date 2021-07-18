@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Avatar, ListItem, ListItemAvatar, ListItemText, Tooltip, Typography } from '@material-ui/core';
+import { Avatar, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
 import { StatusUpdate } from '../../../../models';
 import { getTimeFromNow } from '../../../../common/helpers';
+import StatusUpdateDialog from '../atoms/StatusUpdateDialog';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   timeFromNow: {
@@ -22,14 +23,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   statusUpdateDescription: {
     width: 0,
     paddingRight: 8
-  },
-  customTooltip: {
-    backgroundColor: theme.palette.background.default,
-    borderRadius: 8,
-    margin: '4px 0 0'
-  },
-  tooltipWrapper: {
-    cursor: 'pointer'
   }
 }));
 
@@ -39,46 +32,31 @@ interface Props {
 
 const StatusUpdateItem: React.FC<Props> = ({ statusUpdate }) => {
   const classes = useStyles();
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <ListItem>
-      <Typography variant="body2" color="textSecondary" className={classes.timeFromNow}>
-        {getTimeFromNow(statusUpdate.createdAt)}
-      </Typography>
-      <ListItemAvatar className={classes.listItemAvatar}>
-        <Avatar
-          src={statusUpdate.project.image.large}
-          alt={statusUpdate.project.name}
-          className={classes.avatarSmall}
+    <>
+      <ListItem button onClick={() => setOpen(true)}>
+        <Typography variant="body2" color="textSecondary" className={classes.timeFromNow}>
+          {getTimeFromNow(statusUpdate.createdAt)}
+        </Typography>
+        <ListItemAvatar className={classes.listItemAvatar}>
+          <Avatar
+            src={statusUpdate.project.image.large}
+            alt={statusUpdate.project.name}
+            className={classes.avatarSmall}
+          />
+        </ListItemAvatar>
+        <ListItemText
+          className={classes.statusUpdateDescription}
+          primary={statusUpdate.description}
+          secondary={statusUpdate.project.name}
+          primaryTypographyProps={{ variant: 'subtitle2', noWrap: true }}
+          secondaryTypographyProps={{ variant: 'caption' }}
         />
-      </ListItemAvatar>
-      <ListItemText
-        disableTypography
-        className={classes.statusUpdateDescription}
-        primary={
-          <Tooltip
-            interactive
-            title={
-              <Typography variant="body2" color="textSecondary">
-                {statusUpdate.description}
-              </Typography>
-            }
-            placement="bottom"
-            classes={{ tooltip: classes.customTooltip }}
-            className={classes.tooltipWrapper}
-          >
-            <Typography variant="subtitle2" noWrap>
-              {statusUpdate.description}
-            </Typography>
-          </Tooltip>
-        }
-        secondary={
-          <Typography variant="caption">
-            {statusUpdate.project.name}
-          </Typography>
-        }
-      />
-    </ListItem>
+      </ListItem>
+      <StatusUpdateDialog open={open} toggleClose={() => setOpen(false)} statusUpdate={statusUpdate} />
+    </>
   )
 }
 

@@ -52,11 +52,7 @@ const SocialCard: React.FC<Props> = ({ rows = 1, title, icon, iconColor, link, c
                 {link ? (
                   <>
                     <Typography variant="h6" className={classes.link}>
-                      <Link
-                        href={link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <Link href={link} target="_blank" rel="noopener noreferrer">
                         {title}
                       </Link>
                     </Typography>

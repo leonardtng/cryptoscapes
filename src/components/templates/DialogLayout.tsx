@@ -19,6 +19,7 @@ interface Props {
   open: boolean;
   toggleClose: () => void;
   title: string;
+  subheader?: string;
   contentText?: JSX.Element | string;
   maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
   dialogContentStyles?: string;
@@ -30,6 +31,7 @@ const DialogLayout: React.FC<Props> = (
     open,
     toggleClose,
     title,
+    subheader,
     contentText,
     maxWidth = 'sm',
     ...other
@@ -41,6 +43,9 @@ const DialogLayout: React.FC<Props> = (
     <Dialog classes={{ paper: classes.dialogPaper }} open={open} onBackdropClick={toggleClose} maxWidth={maxWidth}>
       <DialogTitle disableTypography>
         <Typography variant="h6">{title}</Typography>
+        {subheader &&
+          <Typography variant="caption" color="textSecondary">{subheader}</Typography>
+        }
         <IconButton aria-label="close" className={classes.closeButton} onClick={toggleClose}>
           <CloseRounded />
         </IconButton>
