@@ -1,26 +1,10 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Dialog,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  FormControlLabel,
-  IconButton,
-  Switch,
-  Typography
-} from '@material-ui/core';
-import { CloseRounded, WarningRounded } from '@material-ui/icons';
+import { FormControlLabel, Switch } from '@material-ui/core';
+import { WarningRounded } from '@material-ui/icons';
+import DialogLayout from '../../../templates/DialogLayout';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  dialogPaper: {
-    borderRadius: 12
-  },
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500]
-  },
   toggleSwitch: {
     width: '100%',
     justifyContent: 'space-between',
@@ -47,32 +31,31 @@ const SearchOptionsDialog: React.FC<Props> = ({ open, toggleClose, checked, togg
   const classes = useStyles();
 
   return (
-    <Dialog classes={{ paper: classes.dialogPaper }} open={open} onBackdropClick={toggleClose} maxWidth="xs">
-      <DialogTitle disableTypography>
-        <Typography variant="h6">Search Options</Typography>
-        <IconButton aria-label="close" className={classes.closeButton} onClick={toggleClose}>
-          <CloseRounded />
-        </IconButton>
-      </DialogTitle>
-      <DialogContent>
-        <DialogContentText>
+    <DialogLayout
+      open={open}
+      toggleClose={toggleClose}
+      title="Search Options"
+      contentText={
+        <>
           <WarningRounded className={classes.warningIcon} />
           Disabling some of these options may result in performance issues.
-        </DialogContentText>
-        <FormControlLabel
-          className={classes.toggleSwitch}
-          control={
-            <Switch
-              checked={checked}
-              onChange={toggleChange}
-              color="primary"
-            />
-          }
-          label="Search only top 250 coins"
-          labelPlacement="start"
-        />
-      </DialogContent>
-    </Dialog>
+        </>
+      }
+      maxWidth="xs"
+    >
+      <FormControlLabel
+        className={classes.toggleSwitch}
+        control={
+          <Switch
+            checked={checked}
+            onChange={toggleChange}
+            color="primary"
+          />
+        }
+        label="Search only top 250 coins"
+        labelPlacement="start"
+      />
+    </DialogLayout>
   )
 }
 
