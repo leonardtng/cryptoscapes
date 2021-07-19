@@ -63,6 +63,9 @@ const App: React.FC = () => {
         default: '#12172F', // 202940
         paper: '#1F2747' // 29314F
       },
+      gauge: {
+        needle: '#464A4F'
+      },
       success: {
         main: '#00C853'
       },
@@ -71,7 +74,7 @@ const App: React.FC = () => {
       },
       warning: {
         main: '#FFC107'
-      }
+      },
     },
     ...common
   });
@@ -94,8 +97,11 @@ const App: React.FC = () => {
         secondary: '#616161'
       },
       card: {
-        default: '#FFFFFF', 
-        paper: '#E4E7EC'
+        default: '#FBFDFF', 
+        paper: '#E8EBF0'
+      },
+      gauge: {
+        needle: '#C0C8D2'
       }
     },
     ...common

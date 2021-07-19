@@ -33,9 +33,9 @@ export const coinGecko = {
     `/status_updates?per_page=${perPage}&page=${page}&category=${snakeCase(category)}`
 };
 
-export const etherchain = {
+export const gasNow = {
   gasOracle:
-    `/gasPriceOracle`
+    `/gas/price`
 };
 
 export const alternativeMe = {
