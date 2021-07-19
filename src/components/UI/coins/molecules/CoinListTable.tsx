@@ -12,12 +12,14 @@ import CoinSparkline from '../atoms/CoinSparkline';
 import { Coin, CoinQueryParams, CoinSortingKey } from '../../../../models';
 import { formatNumber, roundDecimals } from '../../../../common/helpers';
 import { useInfiniteScrollingObserver } from '../../../../common/hooks/useInfiniteScrollingObserver';
+import { useScrollToTop } from '../../../../common/hooks/useScrollToTop';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flex: 1,
     width: '100%',
-    overflowY: 'scroll'
+    overflowY: 'scroll',
+    position: 'relative'
   },
   tableContainer: {
     height: '100%',
@@ -82,9 +84,11 @@ const CoinListTable: React.FC = () => {
     dispatch(setCoinQueryParams(queryParams));
   };
 
+  const { FloatingButton, target, top } = useScrollToTop();
+  
   return (
     <div className={classes.root}>
-      <TableContainer className={classes.tableContainer}>
+      <TableContainer className={classes.tableContainer} ref={target}>
         <Table stickyHeader>
           <CoinListTableHeader
             order={coinList.coinQueryParams.sortingOrder}
@@ -112,7 +116,7 @@ const CoinListTable: React.FC = () => {
                   return <TableRow
                     tabIndex={-1}
                     key={index}
-                    ref={coinList.value.length === index + 1 ? lastRef : null}
+                    ref={index === 0 ? top : coinList.value.length === index + 1 ? lastRef : null}
                     onClick={() => history.push(`/coins/${coin.id}`)}
                   >
                     <TableCell component="th" scope="row" className={classes.stickyColumn}>
@@ -216,6 +220,7 @@ const CoinListTable: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <FloatingButton size="medium" color="secondary" />
     </div>
   );
 }

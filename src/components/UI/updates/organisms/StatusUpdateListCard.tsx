@@ -14,6 +14,7 @@ import ListItemSkeleton from '../../../skeletons/ListItemSkeleton';
 import { StatusUpdate } from '../../../../models';
 import StatusUpdateItem from '../molecules/StatusUpdateItem';
 import { useInfiniteScrollingObserver } from '../../../../common/hooks/useInfiniteScrollingObserver';
+import { useScrollToTop } from '../../../../common/hooks/useScrollToTop';
 
 const useStyles = makeStyles((theme: Theme) => ({
   statusUpdateList: {
@@ -53,6 +54,8 @@ const StatusUpdateListCard: React.FC = () => {
     statusUpdateList.hasMore
   );
 
+  const { FloatingButton, target, top } = useScrollToTop();
+
   return (
     <CardLayout>
       <CardHeader
@@ -63,7 +66,7 @@ const StatusUpdateListCard: React.FC = () => {
         action={<FilterStatusUpdateList />}
       />
       <Divider />
-      <List dense disablePadding className={classes.statusUpdateList}>
+      <List dense disablePadding className={classes.statusUpdateList} ref={target}>
         {statusUpdateList.value.length === 0 || statusUpdateList.status === 'LOADING' ? (
           <ListItemSkeleton
             count={statusUpdateList.statusUpdateQueryParams.perPage}
@@ -75,8 +78,7 @@ const StatusUpdateListCard: React.FC = () => {
             {statusUpdateList.value.map((statusUpdate: StatusUpdate, index: number) => {
               return <Fragment key={index}>
                 <StatusUpdateItem statusUpdate={statusUpdate} />
-                <Divider />
-                {statusUpdateList.value.length === index + 1 && <div ref={lastRef} />}
+                <Divider ref={index === 0 ? top : statusUpdateList.value.length === index + 1 ? lastRef : null} />
               </Fragment>
             })}
             {statusUpdateList.hasMore && statusUpdateList.value.length !== 0 &&
@@ -89,6 +91,7 @@ const StatusUpdateListCard: React.FC = () => {
           </>
         )}
       </List>
+      <FloatingButton size="medium" color="secondary" />
     </CardLayout >
   )
 }

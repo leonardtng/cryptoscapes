@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   card: {
     display: 'flex',
     flexFlow: 'column',
+    position: 'relative',
     backgroundColor: theme.palette.card.default,
     height: '100%',
     borderRadius: 12,
