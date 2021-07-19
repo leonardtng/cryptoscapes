@@ -3,21 +3,14 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import DialogLayout from '../../../templates/DialogLayout';
 import { StatusUpdate } from '../../../../models';
 import { convertIsoString } from '../../../../common/helpers';
-import { Box, Button, Link } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 import { OpenInNewRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  link: {
+  linkButton: {
     width: '100%',
-    '& .MuiButton-root': {
-      width: '100%'
-    },
-    '&:hover': {
-      textDecoration: 'none'
-    },
     '& .MuiSvgIcon-root': {
-      marginLeft: 6,
-      fontSize: '1em'
+      fontSize: '1.1em'
     }
   }
 }));
@@ -45,9 +38,17 @@ const StatusUpdateDialog: React.FC<Props> = ({ open, toggleClose, statusUpdate }
     >
       {statusUpdate.description.includes('https://') &&
         <Box paddingTop={1} paddingBottom={2} display="flex" justifyContent="center">
-          <Link href={link} target="_blank" rel="noopener noreferrer" className={classes.link}>
-            <Button variant="contained" color="primary">View <OpenInNewRounded /></Button>
-          </Link>
+          <Button
+            variant="contained"
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            color="primary"
+            className={classes.linkButton}
+            endIcon={<OpenInNewRounded />}
+          >
+            View
+          </Button>
         </Box>
       }
     </DialogLayout>

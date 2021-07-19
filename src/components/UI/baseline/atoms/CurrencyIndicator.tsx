@@ -1,14 +1,10 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Box, Tooltip, Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { LanguageRounded } from '@material-ui/icons';
+import TooltipBasicLayout from '../../../templates/TooltipBasicLayout';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  customTooltip: {
-    backgroundColor: theme.palette.card.paper,
-    borderRadius: 8,
-    padding: 8
-  },
   contentWrapper: {
     cursor: 'pointer'
   },
@@ -21,12 +17,12 @@ const CurrencyIndicator: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <Tooltip title="Prices are displayed in US dollars" classes={{ tooltip: classes.customTooltip }}>
+    <TooltipBasicLayout title="Prices are displayed in US dollars">
       <Box width="50%" display="flex" alignItems="center" justifyContent="center" className={classes.contentWrapper}>
         <LanguageRounded className={classes.currencyIcon} />
         <Typography variant="body1">USD</Typography>
       </Box>
-    </Tooltip>
+    </TooltipBasicLayout>
   )
 }
 

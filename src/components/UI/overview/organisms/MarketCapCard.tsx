@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Avatar, CardHeader, Tooltip } from '@material-ui/core';
+import { Avatar, CardHeader } from '@material-ui/core';
 import { Skeleton, ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 import CardLayout from '../../../templates/CardLayout';
 import MarketCapDonutChart from '../molecules/MarketCapDonutChart';
@@ -9,6 +9,7 @@ import { selectGlobalCoinData } from '../../../../features/globalCoinDataSlice';
 import { shortenNumber } from '../../../../common/helpers';
 import { DashboardRounded, DonutLargeRounded, PieChartRounded } from '@material-ui/icons';
 import MarketCapTreemap from '../molecules/MarketCapTreemap';
+import TooltipBasicLayout from '../../../templates/TooltipBasicLayout';
 
 const useStyles = makeStyles((theme: Theme) => ({
   chartWrapper: {
@@ -24,11 +25,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.secondary.main,
     backgroundColor: theme.palette.card.paper,
     borderRadius: 8
-  },
-  customTooltip: {
-    backgroundColor: theme.palette.card.paper,
-    borderRadius: 8,
-    padding: 6
   }
 }));
 
@@ -68,14 +64,14 @@ const MarketCapCard: React.FC = () => {
               }}
           >
             <ToggleButton value="donut">
-              <Tooltip title="Donut Chart" placement="top" classes={{ tooltip: classes.customTooltip }}>
+              <TooltipBasicLayout title="Donut Chart" placement="top">
                 <DonutLargeRounded />
-              </Tooltip>
+              </TooltipBasicLayout>
             </ToggleButton>
             <ToggleButton value="treemap">
-              <Tooltip title="Coin Map" placement="top" classes={{ tooltip: classes.customTooltip }}>
+              <TooltipBasicLayout title="Coin Map" placement="top">
                 <DashboardRounded />
-              </Tooltip>
+              </TooltipBasicLayout>
             </ToggleButton>
           </ToggleButtonGroup>
         }

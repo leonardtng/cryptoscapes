@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { IconButton, Tooltip } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 import { GitHub } from '@material-ui/icons';
+import AboutDialog from './AboutDialog';
+import TooltipBasicLayout from '../../../templates/TooltipBasicLayout';
 
 const useStyles = makeStyles((theme: Theme) => ({
   githubButton: {
@@ -17,19 +19,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const GitHubButton: React.FC = () => {
   const classes = useStyles();
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <Tooltip title="View project on GitHub">
-      <IconButton
-        className={classes.githubButton}
-        href='https://github.com/leonardtng/'
-        target='_blank'
-        rel="noopener noreferrer"
-        aria-label='View on GitHub'
-      >
-        <GitHub />
-      </IconButton>
-    </Tooltip>
+    <>
+      <TooltipBasicLayout title="View project details">
+        <IconButton className={classes.githubButton} onClick={() => setOpen(true)}>
+          <GitHub />
+        </IconButton>
+      </TooltipBasicLayout>
+      <AboutDialog open={open} toggleClose={() => setOpen(false)} />
+    </>
   )
 }
 

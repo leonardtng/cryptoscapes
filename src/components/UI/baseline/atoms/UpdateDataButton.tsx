@@ -1,7 +1,8 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
-import { IconButton, Tooltip } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 import { RefreshRounded } from '@material-ui/icons';
+import TooltipBasicLayout from '../../../templates/TooltipBasicLayout';
 
 const useStyles = makeStyles((theme: Theme) => ({
   updateDataButton: {
@@ -35,7 +36,7 @@ const UpdateDataButton: React.FC = () => {
   }
 
   return (
-    <Tooltip title="Update data">
+    <TooltipBasicLayout title="Update data">
       <IconButton
         className={classes.updateDataButton}
         onClick={reloadDashboard}
@@ -43,7 +44,7 @@ const UpdateDataButton: React.FC = () => {
       >
         <RefreshRounded />
       </IconButton>
-    </Tooltip>
+    </TooltipBasicLayout>
   )
 }
 

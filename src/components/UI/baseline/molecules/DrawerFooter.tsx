@@ -8,7 +8,6 @@ import { selectCoins } from '../../../../features/coinsSlice';
 
 const DrawerFooter: React.FC = () => {
   const coins = useAppSelector(selectCoins);
-
   const top2Coins = coins.value.slice(0, 2);
 
   return (
@@ -16,7 +15,6 @@ const DrawerFooter: React.FC = () => {
       position="absolute"
       bottom={0}
       width="100%"
-
       padding="0 22px 12px"
     >
       <Box display="flex" alignItems="center" paddingBottom={2}>
