@@ -28,7 +28,7 @@ export const fetchFearGreedIndex = createAsyncThunk('fearGreedIndex', async () =
 
   const dayRange: AvailableDayRanges = 30
 
-  const response = await axios.request({
+  const response = await http.request({
     ...config('alternative.me'),
     url: API.fearGreedIndex(dayRange),
     cancelToken: canceler.token

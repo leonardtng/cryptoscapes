@@ -6,7 +6,7 @@ interface Reducers extends SliceCaseReducers<AppState> {
   setDarkMode: (state: AppState, action: PayloadAction<boolean>) => void;
 }
 
-const initialState: AppState = { darkMode: true };
+const initialState: AppState = { darkMode: localStorage.getItem('mode') === 'light' ? false : true };
 
 export const selectAppState: (state: RootState) => AppState = (state: RootState) => state.appState;
 
@@ -15,6 +15,7 @@ const appStateSlice: Slice<AppState, Reducers, 'theme'> = createSlice({
   initialState,
   reducers: {
     setDarkMode: (state: AppState, action: PayloadAction<boolean>) => {
+      action.payload ? localStorage.removeItem('mode') : localStorage.setItem('mode', 'light');
       state.darkMode = action.payload;
     }
   },

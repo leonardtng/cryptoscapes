@@ -22,7 +22,8 @@ const removeList = [
   'dominanceChart',
   'trendingCoins',
   'companies',
-  'bitcoinHashRate'
+  'bitcoinHashRate',
+  'coinListTableColumns'
 ]
 
 const UpdateDataButton: React.FC = () => {

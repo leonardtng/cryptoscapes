@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction, Slice, SliceCaseReducers } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { cacheWithExpiry, retrieveCache, roundDecimals, toCamelCase } from '../common/helpers';
 import { RootState } from '../app/store';
 import { gasNow as API } from '../common/endpoints';
 import { API_CONFIG as config, http } from '../common/constants';
 import { GasOracle, GasOracleRootObject, GasOracleState } from '../models';
+import { cacheWithExpiry, retrieveCache, roundDecimals, toCamelCase } from '../common/helpers';
 
 interface Reducers extends SliceCaseReducers<GasOracleState> {
   setSelectedGasFee: (state: GasOracleState, action: PayloadAction<number>) => void;
@@ -40,7 +40,7 @@ export const fetchGasOracle = createAsyncThunk('gasOracle', async () => {
     normalizedResponse.data.fast = roundDecimals(normalizedResponse.data.fast / 10e8, 0);
     normalizedResponse.data.rapid = roundDecimals(normalizedResponse.data.rapid / 10e8, 0);
 
-    cacheWithExpiry('gasOracle', normalizedResponse.data, 900000); // Cache Period: 15 minutes
+    cacheWithExpiry('gasOracle', normalizedResponse.data, 300000); // Cache Period: 5 minutes
 
     return normalizedResponse.data as GasOracle
   }
