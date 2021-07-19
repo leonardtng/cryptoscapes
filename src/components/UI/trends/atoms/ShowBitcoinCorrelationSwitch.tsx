@@ -1,9 +1,10 @@
 import React from 'react';
 import { Theme, makeStyles, withStyles } from '@material-ui/core/styles';
-import { Switch, Tooltip } from '@material-ui/core'
+import { Switch } from '@material-ui/core'
 import { useAppDispatch } from '../../../../app/hooks';
 import { bitcoinOrange } from '../../../../common/shared/colors';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import TooltipBasicLayout from '../../../templates/TooltipBasicLayout';
 
 const useStyles = makeStyles((theme: Theme) => ({
   bitcoinCorrelationSwitch: {
@@ -34,13 +35,13 @@ const ShowBitcoinCorrelationSwitch: React.FC<Props> = ({ currentState, toggleFun
   const dispatch = useAppDispatch();
 
   return (
-    <Tooltip title={`${currentState ? 'Hide' : 'Show'} Bitcoin Price`}>
+    <TooltipBasicLayout title={`${currentState ? 'Hide' : 'Show'} Bitcoin Price`}>
       <CustomSwitch
         className={classes.bitcoinCorrelationSwitch}
         checked={currentState}
         onChange={() => dispatch(toggleFunction(!currentState))}
       />
-    </Tooltip>
+    </TooltipBasicLayout>
 
   )
 }

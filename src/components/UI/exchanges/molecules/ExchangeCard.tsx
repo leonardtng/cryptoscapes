@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
-import { Avatar, Box, Card, CardActionArea, CardContent, CardHeader, Link, Tooltip, Typography } from '@material-ui/core';
+import { Avatar, Box, Card, CardActionArea, CardContent, CardHeader, Link, Typography } from '@material-ui/core';
 import { Coin, Exchange } from '../../../../models';
 import { useAppSelector } from '../../../../app/hooks';
 import { selectCoins } from '../../../../features/coinsSlice';
 import { shortenNumber } from '../../../../common/helpers';
 import ExchangeVolumeDialog from '../atoms/ExchangeVolumeDialog';
+import TooltipBasicLayout from '../../../templates/TooltipBasicLayout';
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
@@ -27,9 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: 'fit-content',
     cursor: 'pointer'
   },
-  customTooltip: {
-    backgroundColor: theme.palette.background.default,
-    borderRadius: 8,
+  customTooltipStyles: {
     margin: '4px 0 0'
   },
   trustScoreRank: {
@@ -78,7 +77,7 @@ const ExchangeCard: React.FC<Props> = ({ exchange }) => {
           disableTypography
           title={
             <Box display="flex" alignItems="center">
-              <Tooltip title={exchange.name} placement="top" classes={{ tooltip: classes.customTooltip }}>
+              <TooltipBasicLayout title={exchange.name} placement="top" additionalStyles={classes.customTooltipStyles}>
                 <Typography variant="h6" noWrap className={classes.titleWrapper}>
                   <Link
                     href={exchange.url}
@@ -88,19 +87,19 @@ const ExchangeCard: React.FC<Props> = ({ exchange }) => {
                     {exchange.name}
                   </Link>
                 </Typography>
-              </Tooltip>
+              </TooltipBasicLayout>
               <Typography variant="body1" color="textSecondary" className={classes.trustScoreRank} >
                 #{exchange.trustScoreRank}
               </Typography>
             </Box>
           }
           subheader={
-            <Tooltip title="Total Volume (24H)" placement="bottom" classes={{ tooltip: classes.customTooltip }}>
+            <TooltipBasicLayout title="Total Volume (24H)" additionalStyles={classes.customTooltipStyles}>
               <Typography variant="subtitle2" color="textSecondary" noWrap className={classes.volumeWrapper}>
                 {bitcoin ?
                   `US$${shortenNumber(exchange.tradeVolume24HBtc * bitcoin.currentPrice)}` : '-'}
               </Typography>
-            </Tooltip>
+            </TooltipBasicLayout>
           }
           avatar={<Avatar src={exchange.image} alt={exchange.name} className={classes.avatarColor} variant="rounded" />}
         />
