@@ -19,7 +19,7 @@ const CoinListCard: React.FC = () => {
   }, [dispatch, coinList.value, coinList.status, coinList.coinQueryParams]);
 
   return (
-    <CardLayout minWidth={600}>
+    <CardLayout minWidth={850}>
       <CardHeader
         title="Cryptocurrency Prices by Market Cap"
         subheader={`Last Updated: ${getTodayDate()}`}

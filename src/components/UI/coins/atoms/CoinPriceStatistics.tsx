@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: 12,
     display: 'flex',
     flexDirection: 'column',
+    boxShadow: 'none'
   },
   gutterBottom: {
     marginBottom: 6
@@ -38,7 +39,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const CoinPriceStatistics: React.FC = () => {
+interface Props {
+  hideTitle?: boolean;
+}
+
+const CoinPriceStatistics: React.FC<Props> = ({ hideTitle }) => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -200,10 +205,12 @@ const CoinPriceStatistics: React.FC = () => {
     <>
       {coinDetails.value && coinDetails.status !== 'LOADING' ? (
         <Card className={classes.statsCard}>
-          <CardHeader
-            title={`${coinDetails.value.name} Price Statistics`}
-            titleTypographyProps={{ variant: 'h6' }}
-          />
+          {!hideTitle &&
+            <CardHeader
+              title={`${coinDetails.value.name} Price Statistics`}
+              titleTypographyProps={{ variant: 'h6' }}
+            />
+          }
           <List className={classes.dataList} subheader={<li />} dense>
             {coinStats.map((section, index: number) => (
               <li key={index} className={classes.listSubheaderWrapper}>

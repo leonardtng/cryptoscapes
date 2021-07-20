@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   chip: {
+    marginTop: 12,
     marginRight: 8
   },
   priceChange: {
@@ -102,54 +103,63 @@ const CoinDetailsHeader: React.FC = () => {
                   {coinDetails.value.symbol.toUpperCase()}
                 </Typography>
               </Box>
-              <Box display="flex" alignItems="center" >
-                {coinDetails.value.links.homepage[0] &&
-                  <Typography variant="body1" className={classes.link}>
-                    <Link
-                      href={coinDetails.value.links.homepage[0]}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Website
-                    </Link>
-                  </Typography>
-                }
-                {coinDetails.value.links.blockchainSite[0] &&
-                  <Typography variant="body1" className={classes.link}>
-                    <Link
-                      href={coinDetails.value.links.blockchainSite[0]}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Blockchain
-                    </Link>
-                  </Typography>
-                }
-                {coinDetails.value.links.officialForumUrl[0] &&
-                  <Typography variant="body1" className={classes.link}>
-                    <Link
-                      href={coinDetails.value.links.officialForumUrl[0]}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Forum
-                    </Link>
-                  </Typography>
-                }
-                {coinDetails.value.categories.slice(0, 2).map((category: string) => (
-                  <Chip
-                    key={category}
-                    className={classes.chip}
-                    label={category}
-                    size="small"
-                    color="primary"
-                    clickable
-                    onClick={() => handleClickCategory(category)}
-                  />
-                ))}
-                {coinDetails.value.categories.length > 2 &&
-                  <Chip label="View All" size="small" clickable onClick={() => setCategoriesOpen(true)} />
-                }
+              <Box display="flex" alignItems="center" flexWrap="wrap" marginTop="-12px">
+                <Box display="flex" alignItems="center" marginTop="12px">
+                  {coinDetails.value.links.homepage[0] &&
+                    <Typography variant="body1" className={classes.link}>
+                      <Link
+                        href={coinDetails.value.links.homepage[0]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Website
+                      </Link>
+                    </Typography>
+                  }
+                  {coinDetails.value.links.blockchainSite[0] &&
+                    <Typography variant="body1" className={classes.link}>
+                      <Link
+                        href={coinDetails.value.links.blockchainSite[0]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Blockchain
+                      </Link>
+                    </Typography>
+                  }
+                  {coinDetails.value.links.officialForumUrl[0] &&
+                    <Typography variant="body1" className={classes.link}>
+                      <Link
+                        href={coinDetails.value.links.officialForumUrl[0]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Forum
+                      </Link>
+                    </Typography>
+                  }
+                </Box>
+                <Box>
+                  {coinDetails.value.categories.slice(0, 2).map((category: string) => (
+                    <Chip
+                      key={category}
+                      className={classes.chip}
+                      label={category}
+                      size="small"
+                      color="primary"
+                      clickable
+                      onClick={() => handleClickCategory(category)}
+                    />
+                  ))}
+                  {coinDetails.value.categories.length > 2 &&
+                    <Chip
+                      className={classes.chip}
+                      label="View All"
+                      size="small"
+                      clickable
+                      onClick={() => setCategoriesOpen(true)} />
+                  }
+                </Box>
                 <CoinCategoriesDialog
                   open={categoriesOpen}
                   toggleClose={() => setCategoriesOpen(false)}
@@ -175,8 +185,8 @@ const CoinDetailsHeader: React.FC = () => {
                 </Typography>
               </Box>
               {coinDetails.value.marketData.low24H.usd && coinDetails.value.marketData.high24H.usd &&
-                <Box display="flex" alignItems="center">
-                  <Typography variant="subtitle2" color="textSecondary">
+                <Box display="flex" alignItems="center" justifyContent="flex-end">
+                  <Typography variant="subtitle2" color="textSecondary" noWrap>
                     Low: ${formatNumber(Math.min(
                       coinDetails.value.marketData.low24H.usd, coinDetails.value.marketData.currentPrice.usd))}
                   </Typography>
@@ -192,7 +202,7 @@ const CoinDetailsHeader: React.FC = () => {
                       )
                     }
                   />
-                  <Typography variant="subtitle2" color="textSecondary">
+                  <Typography variant="subtitle2" color="textSecondary" noWrap>
                     High: ${formatNumber(Math.max(
                       coinDetails.value.marketData.high24H.usd, coinDetails.value.marketData.currentPrice.usd))}
                   </Typography>

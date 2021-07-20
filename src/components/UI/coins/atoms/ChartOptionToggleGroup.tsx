@@ -5,7 +5,7 @@ import { AvailableDayRanges, CoinMarketChart } from '../../../../models';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { selectCoinDetailsMarketChart, setSelectedDataType, setSelectedDayRange } from '../../../../features/coinDetailsMarketChartSlice';
 import { toggleButtonsHeight } from '../../../../common/shared/dimensions';
-import { Box } from '@material-ui/core';
+import { Box, Hidden } from '@material-ui/core';
 
 const StyledToggleButtonGroup = withStyles((theme) => ({
   grouped: {
@@ -17,6 +17,9 @@ const StyledToggleButtonGroup = withStyles((theme) => ({
     '&:first-child': {
       borderRadius: theme.shape.borderRadius,
     },
+    [theme.breakpoints.down('sm')]: {
+      margin: 0,
+    }
   },
 }))(ToggleButtonGroup);
 
@@ -35,26 +38,28 @@ const ChartOptionToggleGroup: React.FC = () => {
       paddingRight={3}
       zIndex={1}
     >
-      <StyledToggleButtonGroup
-        value={coinDetailsMarketChart.selectedDataType}
-        exclusive
-        onChange={
-          (event: React.MouseEvent<HTMLElement>, newDataType: keyof CoinMarketChart | null): void => {
-            if (newDataType !== null) {
-              dispatch(setSelectedDataType(newDataType));
-            };
-          }}
-      >
-        <ToggleButton value="prices">
-          Price
-        </ToggleButton>
-        <ToggleButton value="marketCaps">
-          Market Cap
-        </ToggleButton>
-        <ToggleButton value="totalVolumes">
-          Volume
-        </ToggleButton>
-      </StyledToggleButtonGroup>
+      <Hidden smDown>
+        <StyledToggleButtonGroup
+          value={coinDetailsMarketChart.selectedDataType}
+          exclusive
+          onChange={
+            (event: React.MouseEvent<HTMLElement>, newDataType: keyof CoinMarketChart | null): void => {
+              if (newDataType !== null) {
+                dispatch(setSelectedDataType(newDataType));
+              };
+            }}
+        >
+          <ToggleButton value="prices">
+            Price
+          </ToggleButton>
+          <ToggleButton value="marketCaps">
+            Market Cap
+          </ToggleButton>
+          <ToggleButton value="totalVolumes">
+            Volume
+          </ToggleButton>
+        </StyledToggleButtonGroup>
+      </Hidden>
       <StyledToggleButtonGroup
         value={coinDetailsMarketChart.selectedDayRange}
         exclusive

@@ -22,7 +22,6 @@ interface Props {
   subheader?: string;
   contentText?: JSX.Element | string;
   maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
-  dialogContentStyles?: string;
 }
 
 const DialogLayout: React.FC<Props> = (

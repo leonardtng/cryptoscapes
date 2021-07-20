@@ -9,6 +9,9 @@ import {
   fetchCoinDetailsMarketChart,
   selectCoinDetailsMarketChart
 } from '../../../../features/coinDetailsMarketChartSlice';
+import { Box, Hidden } from '@material-ui/core';
+import CoinDetailsChart from '../molecules/CoinDetailsChart';
+import MobileCoinDetailsHeader from '../molecules/MobileCoinDetailsHeader';
 
 interface Props {
   coinId: string;
@@ -29,9 +32,17 @@ const CoinDetailsCard: React.FC<Props> = ({ coinId }) => {
 
   return (
     <CardLayout>
-      <CoinDetailsHeader />
-      <CoinDataCardGroup />
-      <CoinDataTabs />
+      <Hidden xsDown>
+        <CoinDetailsHeader />
+        <CoinDataCardGroup />
+        <CoinDataTabs />
+      </Hidden>
+      <Hidden smUp>
+        <MobileCoinDetailsHeader />
+        <Box flex="1">
+          <CoinDetailsChart />
+        </Box>
+      </Hidden>
     </CardLayout>
   )
 }
