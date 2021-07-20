@@ -2,8 +2,6 @@ import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Box, IconButton } from '@material-ui/core';
 import { MenuRounded } from '@material-ui/icons';
-import { useAppDispatch } from '../../../../app/hooks';
-import { toggleMobileDrawerOpen } from '../../../../features/appStateSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   menuButton: {
@@ -16,17 +14,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const AppBarActions: React.FC = () => {
+interface Props {
+  handleDrawerToggle: () => void;
+}
+
+const AppBarActions: React.FC<Props> = ({ handleDrawerToggle }) => {
   const classes = useStyles();
-  const dispatch = useAppDispatch();
 
   return (
     <Box display="flex">
-      <IconButton
-        className={classes.menuButton}
-        onClick={() => dispatch(toggleMobileDrawerOpen(true))}
-        color="primary"
-      >
+      <IconButton className={classes.menuButton} onClick={handleDrawerToggle} color="primary">
         <MenuRounded />
       </IconButton>
     </Box>

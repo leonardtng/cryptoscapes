@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Hidden } from '@material-ui/core';
 import { Route, Switch } from 'react-router-dom';
@@ -38,6 +38,12 @@ interface Props {
 const PageLayout: React.FC<Props> = ({ rootModule }) => {
   const classes = useStyles();
 
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
   const pages = rootModule.map(
     (moduleObject: RootModule) => moduleObject.pages
   ).reduce((acc, page: Page[]) => acc.concat(page), []);
@@ -49,8 +55,8 @@ const PageLayout: React.FC<Props> = ({ rootModule }) => {
         <Drawer rootModule={rootModule} />
       </Hidden>
       <Hidden mdUp>
-        <MobileAppBar />
-        <MobileDrawer rootModule={rootModule} />
+        <MobileAppBar handleDrawerToggle={handleDrawerToggle} />
+        <MobileDrawer mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} rootModule={rootModule} />
       </Hidden>
       <main className={classes.content}>
         <Switch>

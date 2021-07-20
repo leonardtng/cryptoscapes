@@ -20,7 +20,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const MobileAppBar: React.FC = () => {
+interface Props {
+  handleDrawerToggle: () => void;
+}
+
+const MobileAppBar: React.FC<Props> = ({ handleDrawerToggle }) => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
 
@@ -44,7 +48,7 @@ const MobileAppBar: React.FC = () => {
   return (
     <MuiAppBar position="fixed" className={classes.appBar} color="transparent">
       <Toolbar>
-        <MobileAppBarActions />
+        <MobileAppBarActions handleDrawerToggle={handleDrawerToggle} />
         <SideUtils />
       </Toolbar>
     </MuiAppBar>

@@ -4,13 +4,9 @@ import { AppState } from '../models';
 
 interface Reducers extends SliceCaseReducers<AppState> {
   setDarkMode: (state: AppState, action: PayloadAction<boolean>) => void;
-  toggleMobileDrawerOpen: (state: AppState, action: PayloadAction<boolean>) => void;
 }
 
-const initialState: AppState = { 
-  darkMode: localStorage.getItem('mode') === 'light' ? false : true,
-  mobileDrawerOpen: false
-};
+const initialState: AppState = { darkMode: localStorage.getItem('mode') === 'light' ? false : true };
 
 export const selectAppState: (state: RootState) => AppState = (state: RootState) => state.appState;
 
@@ -21,13 +17,10 @@ const appStateSlice: Slice<AppState, Reducers, 'theme'> = createSlice({
     setDarkMode: (state: AppState, action: PayloadAction<boolean>) => {
       action.payload ? localStorage.removeItem('mode') : localStorage.setItem('mode', 'light');
       state.darkMode = action.payload;
-    },
-    toggleMobileDrawerOpen: (state: AppState, action: PayloadAction<boolean>) => {
-      state.mobileDrawerOpen = action.payload;
     }
   },
 });
 
-export const { setDarkMode, toggleMobileDrawerOpen } = appStateSlice.actions;
+export const { setDarkMode } = appStateSlice.actions;
 
 export default appStateSlice.reducer;

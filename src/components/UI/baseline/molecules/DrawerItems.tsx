@@ -23,9 +23,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface Props {
   rootModule: RootModule[];
+  handleDrawerToggle?: () => void;
 }
 
-const DrawerItems: React.FC<Props> = ({ rootModule }) => {
+const DrawerItems: React.FC<Props> = ({ rootModule, handleDrawerToggle }) => {
   const classes = useStyles();
 
   return (
@@ -40,7 +41,7 @@ const DrawerItems: React.FC<Props> = ({ rootModule }) => {
           }
         >
           {moduleObject.pages.map((page: Page) => {
-            return <NavListItem page={page} key={page.path} />
+            return <NavListItem key={page.path} page={page} handleDrawerToggle={handleDrawerToggle} />
           })}
         </List>
       })}

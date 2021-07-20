@@ -3,8 +3,6 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Page } from '../../../../models';
-import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import { selectAppState, toggleMobileDrawerOpen } from '../../../../features/appStateSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   navListItem: {
@@ -14,20 +12,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-  page: Page
+  page: Page;
+  handleDrawerToggle?: () => void;
 }
 
-const NavListItem: React.FC<Props> = ({ page }) => {
+const NavListItem: React.FC<Props> = ({ page, handleDrawerToggle }) => {
   const classes = useStyles();
-  const dispatch = useAppDispatch();
 
   const location = useLocation();
   const history = useHistory();
 
-  const appState = useAppSelector(selectAppState);
-
   const handleClick = () => {
-    if (appState.mobileDrawerOpen) dispatch(toggleMobileDrawerOpen(false));
+    if (handleDrawerToggle) handleDrawerToggle();
     history.push(page.path);
   };
 

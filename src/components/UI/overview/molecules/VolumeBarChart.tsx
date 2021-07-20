@@ -45,9 +45,9 @@ const VolumeBarChart: React.FC = () => {
 
   const windowSize = useWindowSize();
   const coinsToDisplay =
-    windowSize.width > theme.breakpoints.values.md ? windowSize.width / 250 : 
-    windowSize.width > theme.breakpoints.values.sm ? windowSize.width / 150 : 
-    windowSize.width / 80
+    windowSize.width < theme.breakpoints.values.sm ? windowSize.width / 80 : 
+    windowSize.width < theme.breakpoints.values.md ? windowSize.width / 150 : 
+    windowSize.width / 250
 
   const formatRawData = () => {
     const newData: DataFormat[] = [];

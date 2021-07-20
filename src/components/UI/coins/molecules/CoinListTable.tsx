@@ -1,6 +1,6 @@
 import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@material-ui/core';
+import { Hidden, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { useHistory } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
@@ -38,7 +38,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'sticky',
     left: 0,
     zIndex: 2,
-    backgroundColor: theme.palette.card.default
+    backgroundColor: theme.palette.card.default,
+    [theme.breakpoints.down('xs')]: {
+      position: 'relative',
+      left: 'auto !important'
+    }
   },
   chartWrapper: {
     height: 50,
@@ -69,7 +73,8 @@ const CoinListTable: React.FC = () => {
       coinQueryParams: { ...coinList.coinQueryParams, page: coinList.coinQueryParams.page + 1 },
       append: true
     }),
-    coinList.hasMore
+    coinList.hasMore,
+    0.1
   );
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: CoinSortingKey) => {
@@ -85,7 +90,7 @@ const CoinListTable: React.FC = () => {
   };
 
   const { FloatingButton, target, top } = useScrollToTop();
-  
+
   return (
     <div className={classes.root}>
       <TableContainer className={classes.tableContainer} ref={target}>
@@ -124,7 +129,7 @@ const CoinListTable: React.FC = () => {
                         {coin.marketCapRank || '-'}
                       </Typography>
                     </TableCell>
-                    <TableCell id="sticky-column" className={classes.stickyColumn} style={{ left: 67 }}>
+                    <TableCell className={classes.stickyColumn} style={{ left: 67 }} >
                       <CoinNameCell coin={coin} />
                     </TableCell>
                     <TableCell align="right">
@@ -220,7 +225,9 @@ const CoinListTable: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <FloatingButton size="medium" color="secondary" />
+      <Hidden xsDown>
+        <FloatingButton size="medium" color="secondary" />
+      </Hidden>
     </div>
   );
 }

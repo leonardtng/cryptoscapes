@@ -1,15 +1,25 @@
 import React, { useEffect } from 'react';
-import { Box } from '@material-ui/core';
+import { Box, useTheme } from '@material-ui/core';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { fetchExchangeList, selectExchangeList, setExchangeQueryParams } from '../../../../features/exchangeListSlice';
 import { Exchange } from '../../../../models';
 import ExchangeCard from '../molecules/ExchangeCard';
 import { useInfiniteScrollingObserver } from '../../../../common/hooks/useInfiniteScrollingObserver';
 import CardSkeleton from '../../../skeletons/CardSkeleton';
+import { useWindowSize } from '../../../../common/hooks/useWindowSize';
 
 const ExchangeCardList: React.FC = () => {
+  const theme = useTheme();
+
   const dispatch = useAppDispatch();
   const exchangeList = useAppSelector(selectExchangeList);
+
+  const windowSize = useWindowSize();
+  const cardsPerRow =
+    windowSize.width < theme.breakpoints.values.sm ? 1 :
+    windowSize.width < theme.breakpoints.values.md ? 2 :
+    windowSize.width < theme.breakpoints.values.lg ? 3 :
+    windowSize.width < theme.breakpoints.values.xl ? 4 : 5
 
   useEffect(() => {
     if (exchangeList.value.length === 0 && exchangeList.status === 'IDLE') {
@@ -38,7 +48,7 @@ const ExchangeCardList: React.FC = () => {
       {exchangeList.status === 'LOADING' ? (
         <>
           {Array.from(Array(exchangeList.exchangeQueryParams.perPage).keys()).map((index: number) => {
-            return <Box key={index} width="25%" padding={1}>
+            return <Box key={index} width={`${100 / cardsPerRow}%`} padding={1}>
               <CardSkeleton />
             </Box>
           })}
@@ -46,15 +56,15 @@ const ExchangeCardList: React.FC = () => {
       ) : (
         <>
           {exchangeList.value.map((exchange: Exchange, index: number) => {
-            return <Box key={index} width="25%" padding={1}>
+            return <Box key={index} width={`${100 / cardsPerRow}%`} padding={1}>
               <ExchangeCard exchange={exchange} />
               {exchangeList.value.length === index + 1 && <div ref={lastRef} />}
             </Box>
           })}
           {exchangeList.hasMore && exchangeList.value.length !== 0 &&
             <>
-              {Array.from(Array(4).keys()).map((index: number) => {
-                return <Box key={index} width="25%" padding={1}>
+              {Array.from(Array(cardsPerRow).keys()).map((index: number) => {
+                return <Box key={index} width={`${100 / cardsPerRow}%`} padding={1}>
                   <CardSkeleton />
                 </Box>
               })}

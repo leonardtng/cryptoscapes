@@ -6,8 +6,6 @@ import DrawerFooter from '../molecules/DrawerFooter';
 import { RootModule } from '../../../../models/common/RootModule';
 import { appBarHeight, drawerWidth } from '../../../../common/shared/dimensions';
 import MainLogo from '../atoms/MainLogo';
-import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import { selectAppState, toggleMobileDrawerOpen } from '../../../../features/appStateSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawer: {
@@ -25,15 +23,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
+  mobileOpen: boolean;
+  handleDrawerToggle: () => void;
   rootModule: RootModule[];
   anchor?: "bottom" | "left" | "right" | "top";
 }
 
-const MobileDrawer: React.FC<Props> = ({ rootModule, anchor }) => {
+const MobileDrawer: React.FC<Props> = ({ mobileOpen, handleDrawerToggle, rootModule, anchor }) => {
   const classes = useStyles();
-  const dispatch = useAppDispatch();
-
-  const appState = useAppSelector(selectAppState);
 
   return (
     <MuiDrawer
@@ -42,15 +39,15 @@ const MobileDrawer: React.FC<Props> = ({ rootModule, anchor }) => {
       classes={{
         paper: classes.drawerPaper,
       }}
-      open={appState.mobileDrawerOpen}
-      onClose={() => dispatch(toggleMobileDrawerOpen(false))}
+      open={mobileOpen}
+      onClose={handleDrawerToggle}
       anchor={anchor}
     >
       <Box display="flex" justifyContent="center" height={appBarHeight} padding={2}>
         <MainLogo />
       </Box>
       <div className={classes.drawerContainer}>
-        <DrawerItems rootModule={rootModule} />
+        <DrawerItems rootModule={rootModule} handleDrawerToggle={handleDrawerToggle} />
         <DrawerFooter />
       </div>
     </MuiDrawer>

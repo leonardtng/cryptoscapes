@@ -6,7 +6,8 @@ export const useInfiniteScrollingObserver = (
   status: Status,
   fetch: any,
   setQueryParams: any,
-  hasMore: boolean
+  hasMore: boolean,
+  threshold: number = 0.5
 ) => {
   const dispatch = useAppDispatch();
 
@@ -19,9 +20,9 @@ export const useInfiniteScrollingObserver = (
         dispatch(fetch);
         dispatch(setQueryParams);
       }
-    }, { threshold: 0.5 })
+    }, { threshold: threshold })
     if (node) observer.current.observe(node)
-  }, [dispatch, fetch, setQueryParams, hasMore, status]);
+  }, [dispatch, fetch, setQueryParams, hasMore, status, threshold]);
 
   return [lastElementRef]
 };

@@ -12,7 +12,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   stickyColumn: {
-    zIndex: 3
+    zIndex: 3,
+    [theme.breakpoints.down('xs')]: {
+      left: 'auto !important'
+    }
   }
 }));
 

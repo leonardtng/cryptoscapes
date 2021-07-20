@@ -15,7 +15,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   chartWrapper: {
     padding: '16px 0 24px',
     height: 300,
-    width: 500
+    width: 500,
+    [theme.breakpoints.down('xs')]: {
+      width: 311
+    }
   },
   responsiveContainer: {
     '& .recharts-surface': {
