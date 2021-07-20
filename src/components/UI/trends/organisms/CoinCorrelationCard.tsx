@@ -41,15 +41,15 @@ const CoinCorrelationCard: React.FC = () => {
   }, [dispatch, top15, coinMarketChartList.value, coinMarketChartList.status, coinMarketChartList.selectedDayRange]);
 
   return (
-    <CardLayout>
+    <CardLayout minWidth={600}>
       <CardHeader
-        title="Trend Correlations"
+        title="Trend Correlation Heatmap"
         subheader={`Last Updated: ${getTodayDate()}`}
         titleTypographyProps={{ variant: 'h6' }}
         subheaderTypographyProps={{ variant: 'caption' }}
-        action={<HeatmapOptionToggleGroup />}
       />
       <Divider />
+      <HeatmapOptionToggleGroup />
       <div className={classes.chartWrapper}>
         {top15.length === 0 ||
           coins.status === 'LOADING' ||

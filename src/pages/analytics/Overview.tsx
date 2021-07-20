@@ -15,11 +15,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& > .MuiGrid-item': {
       height: '100%',
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.only('md')]: {
       overflow: 'scroll'
     },
     [theme.breakpoints.down('sm')]: {
-      overflow: 'scroll',
       '& ::-webkit-scrollbar': {
         display: 'none'
       }
@@ -49,6 +48,7 @@ const Overview: React.FC = () => {
       justify="center"
       alignItems="stretch"
     >
+
       <Hidden mdDown>
         {/* Height = match screen 100% */}
         <Grid item lg={4}>

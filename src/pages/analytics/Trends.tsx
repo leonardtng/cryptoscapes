@@ -10,12 +10,31 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     '& > .MuiGrid-item': {
       height: '100%',
+    },
+    [theme.breakpoints.only('md')]: {
+      overflow: 'scroll',
+      '& > .MuiGrid-item': {
+        height: 'fit-content',
+      },
+    },
+    [theme.breakpoints.down('sm')]: {
+      '& ::-webkit-scrollbar': {
+        display: 'none'
+      }
     }
   },
   innerWrapper: {
     height: '100%',
     '& > .MuiGrid-item:not(:last-child)': {
       marginBottom: theme.spacing(3)
+    },
+    [theme.breakpoints.only('md')]: {
+      '& > .MuiGrid-item': {
+        marginBottom: '0px !important'
+      },
+    },
+    [theme.breakpoints.down('sm')]: {
+      overflow: 'scroll',
     }
   }
 }));
@@ -33,10 +52,12 @@ const Trends: React.FC = () => {
       justify="center"
       alignItems="stretch"
     >
-      <Grid item xs={12} lg={8} xl={9}>
-        <CoinCorrelationCard />
-      </Grid>
+
       <Hidden mdDown>
+        {/* Height = match screen 100% */}
+        <Grid item lg={8} xl={9}>
+          <CoinCorrelationCard />
+        </Grid>
         <Grid item lg={4} xl={3}>
           <Grid container className={classes.innerWrapper} spacing={0}>
             <Grid item xs={12} style={{ height: `calc(50% - ${theme.spacing(3) / 2}px)` }}>
@@ -48,6 +69,41 @@ const Trends: React.FC = () => {
           </Grid>
         </Grid>
       </Hidden>
+
+      <Hidden smDown lgUp>
+        {/* Height = 1200 + theme.spacing(3) */}
+        <Grid item md={12}>
+          <Grid container className={classes.innerWrapper} spacing={3}>
+            <Grid item xs={6} style={{ height: 400 }}>
+              <FearGreedIndexCard />
+            </Grid>
+            <Grid item xs={6} style={{ height: 400 }}>
+              <BitcoinHashRateCard />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item md={12} style={{ height: 800 }}>
+          <CoinCorrelationCard />
+        </Grid>
+      </Hidden>
+
+      <Hidden mdUp>
+        {/* Height = content */}
+        <Grid item xs={12}>
+          <Grid container className={classes.innerWrapper} spacing={0}>
+            <Grid item xs={12} style={{ height: 400 }}>
+              <FearGreedIndexCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: 400 }}>
+              <BitcoinHashRateCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: 800 }}>
+              <CoinCorrelationCard />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Hidden>
+
     </Grid>
   )
 }

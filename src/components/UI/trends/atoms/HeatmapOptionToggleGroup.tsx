@@ -1,6 +1,6 @@
 import React from 'react';
 import { Theme, makeStyles, withStyles } from '@material-ui/core/styles';
-import { Divider, Paper } from '@material-ui/core';
+import { Box, Paper } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { selectCoinMarketChartList, setSelectedDataType, setSelectedDayRange } from '../../../../features/coinMarketChartListSlice';
@@ -10,10 +10,9 @@ import { toggleButtonsHeight } from '../../../../common/shared/dimensions';
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
-    display: 'flex',
-    margin: '16px 16px 0 0',
-    flexWrap: 'wrap',
+    width: 'fit-content',
     border: `1px solid ${theme.palette.divider}`,
+    borderRadius: 8,
     '& #data-type .MuiToggleButton-root.Mui-selected': {
       backgroundColor: `${theme.palette.primary.main}25`,
       color: theme.palette.primary.main
@@ -51,62 +50,65 @@ const HeatmapOptionToggleGroup: React.FC = () => {
   const coinMarketChartList = useAppSelector(selectCoinMarketChartList);
 
   return (
-    <Paper elevation={0} className={classes.paper}>
-      <StyledToggleButtonGroup
-        className={classes.toggleButtonGroup}
-        id="data-type"
-        value={coinMarketChartList.selectedDataType}
-        exclusive
-        onChange={
-          (event: React.MouseEvent<HTMLElement>, newDataType: keyof CoinMarketChart | null): void => {
-            if (newDataType !== null) {
-              dispatch(setSelectedDataType(newDataType));
-            };
-          }}
-      >
-        <ToggleButton value="prices">
-          Price
-        </ToggleButton>
-        <ToggleButton value="marketCaps">
-          Market Cap
-        </ToggleButton>
-        <ToggleButton value="totalVolumes">
-          Volume
-        </ToggleButton>
-      </StyledToggleButtonGroup>
-      <Divider flexItem orientation="vertical" className={classes.divider} />
-      <StyledToggleButtonGroup
-        className={classes.toggleButtonGroup}
-        id="date-range"
-        value={coinMarketChartList.selectedDayRange}
-        exclusive
-        onChange={
-          (event: React.MouseEvent<HTMLElement>, newDayRange: AvailableDayRanges | null): void => {
-            if (newDayRange !== null) {
-              dispatch(setSelectedDayRange(newDayRange));
-            };
-          }}
-      >
-        <ToggleButton value={1}>
-          1D
-        </ToggleButton>
-        <ToggleButton value={7}>
-          7D
-        </ToggleButton>
-        <ToggleButton value={30}>
-          1M
-        </ToggleButton>
-        <ToggleButton value={90}>
-          3M
-        </ToggleButton>
-        <ToggleButton value={365}>
-          1Y
-        </ToggleButton>
-        <ToggleButton value={730}>
-          2Y
-        </ToggleButton>
-      </StyledToggleButtonGroup>
-    </Paper>
+    <Box padding="16px 24px" display="flex" justifyContent="space-between">
+      <Paper elevation={0} className={classes.paper}>
+        <StyledToggleButtonGroup
+          className={classes.toggleButtonGroup}
+          id="data-type"
+          value={coinMarketChartList.selectedDataType}
+          exclusive
+          onChange={
+            (event: React.MouseEvent<HTMLElement>, newDataType: keyof CoinMarketChart | null): void => {
+              if (newDataType !== null) {
+                dispatch(setSelectedDataType(newDataType));
+              };
+            }}
+        >
+          <ToggleButton value="prices">
+            Price
+          </ToggleButton>
+          <ToggleButton value="marketCaps">
+            Market Cap
+          </ToggleButton>
+          <ToggleButton value="totalVolumes">
+            Volume
+          </ToggleButton>
+        </StyledToggleButtonGroup>
+      </Paper>
+      <Paper elevation={0} className={classes.paper}>
+        <StyledToggleButtonGroup
+          className={classes.toggleButtonGroup}
+          id="date-range"
+          value={coinMarketChartList.selectedDayRange}
+          exclusive
+          onChange={
+            (event: React.MouseEvent<HTMLElement>, newDayRange: AvailableDayRanges | null): void => {
+              if (newDayRange !== null) {
+                dispatch(setSelectedDayRange(newDayRange));
+              };
+            }}
+        >
+          <ToggleButton value={1}>
+            1D
+          </ToggleButton>
+          <ToggleButton value={7}>
+            7D
+          </ToggleButton>
+          <ToggleButton value={30}>
+            1M
+          </ToggleButton>
+          <ToggleButton value={90}>
+            3M
+          </ToggleButton>
+          <ToggleButton value={365}>
+            1Y
+          </ToggleButton>
+          <ToggleButton value={730}>
+            2Y
+          </ToggleButton>
+        </StyledToggleButtonGroup>
+      </Paper>
+    </Box>
   )
 }
 
