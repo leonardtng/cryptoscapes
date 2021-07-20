@@ -1,6 +1,6 @@
 import React from 'react';
 import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { Grid, Hidden } from '@material-ui/core';
 import TopCoinsCard from '../../components/UI/overview/organisms/TopCoinsCard';
 import CoinDominanceCard from '../../components/UI/overview/organisms/CoinDominanceCard';
 import GasOracleCard from '../../components/UI/overview/organisms/GasOracleCard';
@@ -14,12 +14,24 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     '& > .MuiGrid-item': {
       height: '100%',
+    },
+    [theme.breakpoints.down('md')]: {
+      overflow: 'scroll'
+    },
+    [theme.breakpoints.down('sm')]: {
+      overflow: 'scroll',
+      '& ::-webkit-scrollbar': {
+        display: 'none'
+      }
     }
   },
   innerWrapper: {
     height: '100%',
     '& > .MuiGrid-item:not(:last-child)': {
       marginBottom: theme.spacing(3)
+    },
+    [theme.breakpoints.down('sm')]: {
+      overflow: 'scroll'
     }
   }
 }));
@@ -37,35 +49,101 @@ const Overview: React.FC = () => {
       justify="center"
       alignItems="stretch"
     >
-      <Grid item xs={6} md={6} lg={4}>
-        <TopCoinsCard />
-      </Grid>
-      <Grid item xs={6} md={6} lg={4}>
-        <Grid container className={classes.innerWrapper} spacing={0}>
-          <Grid item xs={12} style={{ height: 275 }}>
-            <CoinDominanceCard />
-          </Grid>
-          <Grid item xs={12} style={{ height: 205 }}>
-            <GasOracleCard />
-          </Grid>
-          <Grid item xs={12} style={{ height: `calc(100% - ${275 + 205 + theme.spacing(3) * 2}px)` }}>
-            <TrendingCoinsCard />
+      <Hidden mdDown>
+        {/* Height = match screen 100% */}
+        <Grid item lg={4}>
+          <TopCoinsCard />
+        </Grid>
+        <Grid item lg={4}>
+          <Grid container className={classes.innerWrapper} spacing={0}>
+            <Grid item xs={12} style={{ height: 275 }}>
+              <CoinDominanceCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: 205 }}>
+              <GasOracleCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: `calc(100% - ${275 + 205 + theme.spacing(3) * 2}px)` }}>
+              <TrendingCoinsCard />
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid item lg={4}>
-        <Grid container className={classes.innerWrapper} spacing={0}>
-          <Grid item xs={12} style={{ height: 85 }}>
-            <BannerCardSmall />
-          </Grid>
-          <Grid item xs={12} style={{ height: `calc(50% - ${42.5 + theme.spacing(3)}px)` }}>
-            <MarketCapCard />
-          </Grid>
-          <Grid item xs={12} style={{ height: `calc(50% - ${42.5 + theme.spacing(3)}px)` }}>
-            <VolumeCard />
+        <Grid item lg={4}>
+          <Grid container className={classes.innerWrapper} spacing={0}>
+            <Grid item xs={12} style={{ height: 85 }}>
+              <BannerCardSmall />
+            </Grid>
+            <Grid item xs={12} style={{ height: `calc(50% - ${42.5 + theme.spacing(3)}px)` }}>
+              <MarketCapCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: `calc(50% - ${42.5 + theme.spacing(3)}px)` }}>
+              <VolumeCard />
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Hidden>
+
+      <Hidden smDown lgUp>
+        {/* Height = 1205 + theme.spacing(3) * 3 */}
+        <Grid item md={6}>
+          <Grid container className={classes.innerWrapper} spacing={0}>
+            <Grid item xs={12} style={{ height: 700 }}>
+              <TopCoinsCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: 205 }}>
+              <GasOracleCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: 300 }}>
+              <CoinDominanceCard />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item md={6}>
+          <Grid container className={classes.innerWrapper} spacing={0}>
+            <Grid item xs={12} style={{ height: 85 }}>
+              <BannerCardSmall />
+            </Grid>
+            <Grid item xs={12} style={{ height: 350 }}>
+              <MarketCapCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: 350 }}>
+              <VolumeCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: 420 - theme.spacing(3) }}>
+              <TrendingCoinsCard />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Hidden>
+
+      <Hidden mdUp>
+        {/* Height = content */}
+        <Grid item xs={12}>
+          <Grid container className={classes.innerWrapper} spacing={0}>
+            <Grid item xs={12} style={{ height: 85 }}>
+              <BannerCardSmall />
+            </Grid>
+            <Grid item xs={12} style={{ height: 'fit-content' }}>
+              <TopCoinsCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: 350 }}>
+              <MarketCapCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: 350 }}>
+              <VolumeCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: 205 }}>
+              <GasOracleCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: 300 }}>
+              <CoinDominanceCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: 'fit-content' }}>
+              <TrendingCoinsCard />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Hidden>
+
     </Grid>
   )
 }

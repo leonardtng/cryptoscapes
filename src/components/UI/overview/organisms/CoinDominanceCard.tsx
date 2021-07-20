@@ -11,7 +11,7 @@ import { Coin } from '../../../../models';
 
 const useStyles = makeStyles((theme: Theme) => ({
   chartWrapper: {
-    height: 200,
+    flex: 1,
     width: '100%'
   }
 }));

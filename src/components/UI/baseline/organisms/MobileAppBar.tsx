@@ -6,8 +6,8 @@ import { appBarHeight } from '../../../../common/shared/dimensions';
 import { fetchCoins, selectCoins } from '../../../../features/coinsSlice';
 import { fetchCoinCategories, selectCoinCategories } from '../../../../features/coinCategoriesSlice';
 import { useCleanReduxState } from '../../../../common/hooks/useCleanReduxState';
-import AppBarActions from '../molecules/AppBarActions';
 import SideUtils from '../molecules/SideUtils';
+import MobileAppBarActions from '../molecules/MobileAppBarActions';
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -20,7 +20,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const AppBar: React.FC = () => {
+interface Props {
+  handleDrawerToggle: () => void;
+}
+
+const MobileAppBar: React.FC<Props> = ({ handleDrawerToggle }) => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
 
@@ -44,11 +48,11 @@ const AppBar: React.FC = () => {
   return (
     <MuiAppBar position="fixed" className={classes.appBar} color="transparent">
       <Toolbar>
-        <AppBarActions />
+        <MobileAppBarActions handleDrawerToggle={handleDrawerToggle} />
         <SideUtils />
       </Toolbar>
     </MuiAppBar>
   )
 }
 
-export default AppBar;
+export default MobileAppBar;
