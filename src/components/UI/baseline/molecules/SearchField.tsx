@@ -37,13 +37,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.background.paper,
     '&:hover': {
       color: theme.palette.text.primary,
-      backgroundColor: theme.palette.primary.main
     },
     [theme.breakpoints.down('sm')]: {
       height: 32,
       width: 32,
       marginLeft: theme.spacing(2),
     }
+  },
+  hoverPrimary: {
+    '&:hover': {
+      backgroundColor: theme.palette.primary.main
+    },
+  },
+  hoverSecondary: {
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main
+    },
   }
 }));
 
@@ -110,10 +119,18 @@ const SearchField: React.FC<Props> = ({ mobile = false, toggleMobileFunction }) 
                 ...(mobile && {
                   endAdornment:
                     <Box>
-                      <IconButton className={classes.inputButton} color="primary" onClick={() => setOpen(true)}>
+                      <IconButton
+                        className={`${classes.inputButton} ${classes.hoverPrimary}`}
+                        color="primary"
+                        onClick={() => setOpen(true)}
+                      >
                         <TuneRounded fontSize="small" />
                       </IconButton>
-                      <IconButton className={classes.inputButton} color="secondary" onClick={toggleMobileFunction}>
+                      <IconButton
+                        className={`${classes.inputButton} ${classes.hoverSecondary}`}
+                        color="secondary"
+                        onClick={toggleMobileFunction}
+                      >
                         <CloseRounded fontSize="small" />
                       </IconButton>
                     </Box>
@@ -124,7 +141,11 @@ const SearchField: React.FC<Props> = ({ mobile = false, toggleMobileFunction }) 
         />
       </Box>
       {!mobile &&
-        <IconButton className={classes.inputButton} color="primary" onClick={() => setOpen(true)}>
+        <IconButton
+          className={`${classes.inputButton} ${classes.hoverPrimary}`}
+          color="primary"
+          onClick={() => setOpen(true)}
+        >
           <TuneRounded />
         </IconButton>
       }

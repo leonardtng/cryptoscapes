@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   container: {
     height: '100%',
     padding: theme.spacing(3),
+    overflow: 'hidden',
     '& .apexcharts-heatmap-rect:hover': {
       cursor: 'pointer'
     },
@@ -27,7 +28,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: `${theme.palette.background.default}dd`,
       '& .header': {
         color: theme.palette.text.secondary
-
       },
       '& .content': {
         color: theme.palette.text.primary
