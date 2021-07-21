@@ -8,18 +8,15 @@ import BitcoinHashRateCard from '../../components/UI/trends/organisms/BitcoinHas
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
     height: '100%',
+    overflow: 'scroll',
     '& > .MuiGrid-item': {
       height: '100%',
+      minHeight: 650
     },
     [theme.breakpoints.only('md')]: {
-      overflow: 'scroll',
       '& > .MuiGrid-item': {
         height: 'fit-content',
-      },
-    },
-    [theme.breakpoints.down('sm')]: {
-      '& ::-webkit-scrollbar': {
-        display: 'none'
+        minHeight: 0
       }
     }
   },

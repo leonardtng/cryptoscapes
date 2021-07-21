@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
     height: '100%',
     '& > .MuiGrid-item': {
-      height: '100%',
+      height: '100%'
     }
   }
 }));

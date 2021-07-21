@@ -15,9 +15,6 @@ const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
     '& > *': {
       minWidth: (props: Props) => props.minWidth ? props.minWidth : 'none'
     },
-    '& ::-webkit-scrollbar': {
-      display: 'none',
-    },
     '& .MuiCardHeader-avatar': {
       marginRight: 8,
     }

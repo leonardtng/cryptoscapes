@@ -22,11 +22,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: 20,
     padding: '24px 24px 0 24px',
     borderRadius: 12,
+    '& ::-webkit-scrollbar': {
+      display: 'none'
+    },
     [theme.breakpoints.down('md')]: {
-      marginRight: 0,
-      '& ::-webkit-scrollbar': {
-        display: 'none'
-      }
+      marginRight: 0
     }
   }
 }));

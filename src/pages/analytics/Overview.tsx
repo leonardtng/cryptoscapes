@@ -12,16 +12,13 @@ import VolumeCard from '../../components/UI/overview/organisms/VolumeCard';
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
     height: '100%',
+    overflow: 'scroll',
     '& > .MuiGrid-item': {
       height: '100%',
+      minHeight: 850
     },
     [theme.breakpoints.only('md')]: {
-      overflow: 'scroll'
-    },
-    [theme.breakpoints.down('sm')]: {
-      '& ::-webkit-scrollbar': {
-        display: 'none'
-      }
+      minHeight: 0
     }
   },
   innerWrapper: {

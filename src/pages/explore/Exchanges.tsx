@@ -7,10 +7,7 @@ import { useWindowSize } from '../../common/hooks/useWindowSize';
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
-    height: '100%',
-    '& ::-webkit-scrollbar': {
-      display: 'none'
-    }
+    height: '100%'
   },
   scrollContainer: {
     height: '100%',
