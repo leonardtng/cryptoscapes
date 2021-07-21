@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { fetchSupportedCoins, selectSupportedCoins } from '../../../../features/supportedCoinsSlice';
 import { Coin, SupportedCoin } from '../../../../models';
-import { SearchRounded, TuneRounded } from '@material-ui/icons';
+import { CloseRounded, SearchRounded, TuneRounded } from '@material-ui/icons';
 import { selectCoins } from '../../../../features/coinsSlice';
 import SearchOptionsDialog from '../atoms/SearchOptionsDialog';
 
@@ -24,9 +24,12 @@ const useStyles = makeStyles((theme: Theme) => ({
           borderWidth: 2
         }
       }
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: 0
     }
   },
-  searchOptionsIcon: {
+  inputButton: {
     height: 38,
     width: 38,
     marginLeft: theme.spacing(3),
@@ -35,11 +38,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     '&:hover': {
       color: theme.palette.text.primary,
       backgroundColor: theme.palette.primary.main
+    },
+    [theme.breakpoints.down('sm')]: {
+      height: 32,
+      width: 32,
+      marginLeft: theme.spacing(2),
     }
   }
 }));
 
-const SearchField: React.FC = () => {
+interface Props {
+  mobile?: boolean;
+  toggleMobileFunction?: () => void;
+}
+
+const SearchField: React.FC<Props> = ({ mobile = false, toggleMobileFunction }) => {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useAppDispatch();
@@ -52,6 +65,7 @@ const SearchField: React.FC = () => {
   const [onlySearchTop, setOnlySearchTop] = useState<boolean>(true);
 
   const handleOnChange = (event: React.ChangeEvent<{}>, coinItem: any) => {
+    if (mobile && toggleMobileFunction) toggleMobileFunction();
     if (coinItem) history.push(coinItem.id && `/coins/${coinItem.id}`);
     setValue(null); // This makes it possible to reselect the same value again if the input field is not cleared
   };
@@ -92,15 +106,28 @@ const SearchField: React.FC = () => {
                 startAdornment:
                   <InputAdornment position="start">
                     <SearchRounded />
-                  </InputAdornment>
+                  </InputAdornment>,
+                ...(mobile && {
+                  endAdornment:
+                    <Box>
+                      <IconButton className={classes.inputButton} color="primary" onClick={() => setOpen(true)}>
+                        <TuneRounded fontSize="small" />
+                      </IconButton>
+                      <IconButton className={classes.inputButton} color="secondary" onClick={toggleMobileFunction}>
+                        <CloseRounded fontSize="small" />
+                      </IconButton>
+                    </Box>
+                })
               }}
             />
           )}
         />
       </Box>
-      <IconButton className={classes.searchOptionsIcon} color="primary" onClick={() => setOpen(true)}>
-        <TuneRounded />
-      </IconButton>
+      {!mobile &&
+        <IconButton className={classes.inputButton} color="primary" onClick={() => setOpen(true)}>
+          <TuneRounded />
+        </IconButton>
+      }
       <SearchOptionsDialog
         open={open}
         toggleClose={() => setOpen(false)}

@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   dialogPaper: {
     borderRadius: 12
   },
+  title: {
+    maxWidth: 'calc(100% - 48px)'
+  },
   closeButton: {
     position: 'absolute',
     right: theme.spacing(1),
@@ -41,7 +44,7 @@ const DialogLayout: React.FC<Props> = (
   return (
     <Dialog classes={{ paper: classes.dialogPaper }} open={open} onBackdropClick={toggleClose} maxWidth={maxWidth}>
       <DialogTitle disableTypography>
-        <Typography variant="h6">{title}</Typography>
+        <Typography variant="h6" className={classes.title}>{title}</Typography>
         {subheader &&
           <Typography variant="caption" color="textSecondary">{subheader}</Typography>
         }

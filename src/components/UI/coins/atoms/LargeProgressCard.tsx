@@ -7,7 +7,8 @@ import { selectCoinDetails } from '../../../../features/coinDetailsSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   progressCircle: {
-
+    display: 'flex',
+    justifyContent: 'center'
   }
 }));
 
@@ -32,7 +33,14 @@ const LargeProgressCard: React.FC<Props> = ({ title, value }) => {
   return (
     <Box height="100%" display="flex" flexDirection="column" padding={2}>
       <Typography variant="h5" align="center">{title}</Typography>
-      <Box position="relative" display="inline-flex" flex="1" alignItems="center" justifyContent="center">
+      <Box
+        position="relative"
+        display="inline-flex"
+        flex="1"
+        alignItems="center"
+        justifyContent="center"
+        marginTop="12px"
+      >
         <CircularProgress
           className={classes.progressCircle}
           variant="determinate"
