@@ -8,7 +8,11 @@ import { useInfiniteScrollingObserver } from '../../../../common/hooks/useInfini
 import CardSkeleton from '../../../skeletons/CardSkeleton';
 import { useWindowSize } from '../../../../common/hooks/useWindowSize';
 
-const ExchangeCardList: React.FC = () => {
+interface Props {
+  top: React.MutableRefObject<any>
+}
+
+const ExchangeListCard: React.FC<Props> = ({ top }) => {
   const theme = useTheme();
 
   const dispatch = useAppDispatch();
@@ -17,9 +21,9 @@ const ExchangeCardList: React.FC = () => {
   const windowSize = useWindowSize();
   const cardsPerRow =
     windowSize.width < theme.breakpoints.values.sm ? 1 :
-    windowSize.width < theme.breakpoints.values.md ? 2 :
-    windowSize.width < theme.breakpoints.values.lg ? 3 :
-    windowSize.width < theme.breakpoints.values.xl ? 4 : 5
+      windowSize.width < theme.breakpoints.values.md ? 2 :
+        windowSize.width < theme.breakpoints.values.lg ? 3 :
+          windowSize.width < theme.breakpoints.values.xl ? 4 : 5
 
   useEffect(() => {
     if (exchangeList.value.length === 0 && exchangeList.status === 'IDLE') {
@@ -49,6 +53,7 @@ const ExchangeCardList: React.FC = () => {
         <>
           {Array.from(Array(exchangeList.exchangeQueryParams.perPage).keys()).map((index: number) => {
             return <Box key={index} width={`${100 / cardsPerRow}%`} padding={1}>
+              {index === 0 && <div ref={top} />}
               <CardSkeleton />
             </Box>
           })}
@@ -57,6 +62,7 @@ const ExchangeCardList: React.FC = () => {
         <>
           {exchangeList.value.map((exchange: Exchange, index: number) => {
             return <Box key={index} width={`${100 / cardsPerRow}%`} padding={1}>
+              {index === 0 && <div ref={top} />}
               <ExchangeCard exchange={exchange} />
               {exchangeList.value.length === index + 1 && <div ref={lastRef} />}
             </Box>
@@ -76,4 +82,4 @@ const ExchangeCardList: React.FC = () => {
   )
 }
 
-export default ExchangeCardList
+export default ExchangeListCard

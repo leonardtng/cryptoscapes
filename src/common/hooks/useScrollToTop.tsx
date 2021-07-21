@@ -3,11 +3,11 @@ import { Theme, makeStyles } from '@material-ui/core/styles';
 import { Fab, useScrollTrigger, Zoom } from '@material-ui/core';
 import { KeyboardArrowUpRounded } from '@material-ui/icons';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles<Theme, { buttonOffset: number }>((theme: Theme) => ({
   container: {
     position: 'absolute',
-    bottom: theme.spacing(3),
-    right: theme.spacing(3),
+    bottom: props => theme.spacing(props.buttonOffset),
+    right: props => theme.spacing(props.buttonOffset),
   }
 }));
 
@@ -15,10 +15,11 @@ interface Props {
   target: React.MutableRefObject<any | null>;
   top: React.MutableRefObject<any | null>;
   threshold: number;
+  buttonOffset?: number;
 }
 
-const ScrollToTopButton: React.FC<Props> = ({ target, top, threshold, ...others }) => {
-  const classes = useStyles();
+const ScrollToTopButton: React.FC<Props> = ({ target, top, threshold, buttonOffset = 3, ...others }) => {
+  const classes = useStyles({ buttonOffset: buttonOffset });
 
   const trigger = useScrollTrigger({
     target: target.current ? target.current : undefined,
@@ -45,7 +46,7 @@ const ScrollToTopButton: React.FC<Props> = ({ target, top, threshold, ...others 
 interface ButtonProps {
   color?: 'primary' | 'secondary';
   size?: 'small' | 'medium' | 'large';
-  className?: string;
+  buttonOffset?: number;
 }
 
 interface UseScrollToTopResults {

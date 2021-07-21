@@ -1,7 +1,7 @@
 import rateLimit from 'axios-rate-limit';
 import axios, { AxiosRequestConfig } from 'axios';
 
-// Metered APIs: coinGecko, blockchain.com
+// Metered APIs: Rate limit request once per 1.5 seconds
 export const http = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1500 });
 
 export const API_CONFIG:
