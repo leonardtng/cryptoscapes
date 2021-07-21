@@ -12,6 +12,7 @@ import {
 import { Box, Hidden } from '@material-ui/core';
 import CoinDetailsChart from '../molecules/CoinDetailsChart';
 import MobileCoinDetailsHeader from '../molecules/MobileCoinDetailsHeader';
+import { useWindowSize } from '../../../../common/hooks/useWindowSize';
 
 interface Props {
   coinId: string;
@@ -19,6 +20,7 @@ interface Props {
 
 const CoinDetailsCard: React.FC<Props> = ({ coinId }) => {
   const dispatch = useAppDispatch();
+  const windowSize = useWindowSize();
 
   const coinDetailsMarketChart = useAppSelector(selectCoinDetailsMarketChart);
 
@@ -34,7 +36,7 @@ const CoinDetailsCard: React.FC<Props> = ({ coinId }) => {
     <CardLayout>
       <Hidden xsDown>
         <CoinDetailsHeader />
-        <CoinDataCardGroup />
+        {windowSize.height > 820 && <CoinDataCardGroup />}
         <CoinDataTabs />
       </Hidden>
       <Hidden smUp>

@@ -11,7 +11,8 @@ import { formatNumber } from '../../../../common/helpers';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
-    height: '100%'
+    height: '100%',
+    minHeight: 400
   },
   innerWrapper: {
     height: '100%',
