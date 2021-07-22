@@ -15,13 +15,16 @@ This project was deployed on AWS and built using:
 - TypeScript
 - Material-UI
 
-## ❗  Data Sources
+## 📝  Data Sources
 The information and data used in Cryptoscapes is provided kindly by the following open sources:
 
 - [CoinGecko][5]
 - [GasNow][6]
 - [Alternative.me][7]
 - [Blockchain.com][8]
+
+## 🚧 Project Board
+The development and task management of this website was done with the help of GitHub Projects, and the project board can be found [here][9].
 
 ## 😊  Contact Me
 If you liked the website or just want to get in touch, email me at <a href="mailto:theleonardtng@gmail.com">theleonardtng@gmail.com</a> or drop me a message at the various social media platforms listed at the bottom of [my website](https://leonardntng.com). Cheers.
@@ -34,3 +37,4 @@ If you liked the website or just want to get in touch, email me at <a href="mail
 [6]: https://www.gasnow.org/
 [7]: https://alternative.me/
 [8]: https://www.blockchain.com/
+[9]: https://github.com/leonardtng/cryptoscapes/projects/1
