@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     boxShadow: 'none',
+    backgroundColor: theme.palette.background.default,
     '& .MuiToolbar-root': {
       minHeight: appBarHeight,
       justifyContent: 'space-between',
@@ -42,7 +43,7 @@ const AppBar: React.FC = () => {
   useCleanReduxState();
 
   return (
-    <MuiAppBar position="fixed" className={classes.appBar} color="transparent">
+    <MuiAppBar position="fixed" className={classes.appBar}>
       <Toolbar>
         <AppBarActions />
         <SideUtils />

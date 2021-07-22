@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     boxShadow: 'none',
+    backgroundColor: theme.palette.background.default,
     '& .MuiToolbar-root': {
       minHeight: appBarHeight,
       justifyContent: 'space-between',
@@ -46,7 +47,7 @@ const MobileAppBar: React.FC<Props> = ({ handleDrawerToggle }) => {
   useCleanReduxState();
 
   return (
-    <MuiAppBar position="fixed" className={classes.appBar} color="transparent">
+    <MuiAppBar position="fixed" className={classes.appBar}>
       <Toolbar>
         <MobileAppBarActions handleDrawerToggle={handleDrawerToggle} />
         <SideUtils />

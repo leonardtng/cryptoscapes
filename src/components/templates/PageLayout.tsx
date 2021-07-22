@@ -11,11 +11,12 @@ import MobileAppBar from '../UI/baseline/organisms/MobileAppBar';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    height: '100vh'
   },
   content: {
     flexGrow: 1,
-    height: `calc(100vh - ${appBarHeight}px)`,
+    minHeight: `calc(100% - ${appBarHeight}px)`,
     width: `calc(100% - ${drawerWidth}px - 20px)`,
     backgroundColor: theme.palette.background.paper,
     marginTop: appBarHeight,
