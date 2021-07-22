@@ -14,6 +14,7 @@ import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme: Theme) => ({
   coinList: {
+    flex: 1,
     overflow: 'scroll',
   },
   viewMore: {

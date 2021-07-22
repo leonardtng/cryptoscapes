@@ -18,6 +18,7 @@ import { useScrollToTop } from '../../../../common/hooks/useScrollToTop';
 
 const useStyles = makeStyles((theme: Theme) => ({
   statusUpdateList: {
+    flex: 1,
     overflow: 'scroll',
     paddingBottom: 8
   }

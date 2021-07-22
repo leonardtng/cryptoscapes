@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: 6
   },
   companyList: {
+    flex: 1,
     overflow: 'scroll',
     paddingBottom: 8
   }

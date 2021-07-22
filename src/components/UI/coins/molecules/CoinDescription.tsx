@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       bottom: 0,
       width: '100%',
       height: 100,
-      background: `linear-gradient(180deg,rgba(255,255,255,0),${theme.palette.card.default})`
+      background: `linear-gradient(180deg,transparent,${theme.palette.card.default})`
     }
   },
   descriptionContainer: {

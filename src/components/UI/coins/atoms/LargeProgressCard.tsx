@@ -7,8 +7,12 @@ import { selectCoinDetails } from '../../../../features/coinDetailsSlice';
 
 const useStyles = makeStyles((theme: Theme) => ({
   progressCircle: {
-    display: 'flex',
-    justifyContent: 'center'
+    height: '200px !important',
+    width: '200px !important',
+    [theme.breakpoints.down('md')]: {
+      height: '150px !important',
+      width: '150px !important',
+    }
   }
 }));
 
@@ -45,7 +49,6 @@ const LargeProgressCard: React.FC<Props> = ({ title, value }) => {
           className={classes.progressCircle}
           variant="determinate"
           value={coinDetails.status === 'LOADING' ? 0 : correctedValue}
-          size={200}
           thickness={5}
           style={{ color: getColor() }}
         />

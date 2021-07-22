@@ -11,6 +11,7 @@ import FireIcon from '../atoms/FireIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
   trendingCoinList: {
+    flex: 1,
     overflow: 'scroll',
     paddingBottom: 8
   }

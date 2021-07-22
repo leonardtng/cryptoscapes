@@ -10,6 +10,7 @@ import { toggleButtonsHeight } from '../../../../common/shared/dimensions';
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
+    height: 'fit-content',
     width: 'fit-content',
     border: `1px solid ${theme.palette.divider}`,
     borderRadius: 8,
