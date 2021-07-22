@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   contentWrapper: {
     flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
     padding: '16px 0 24px'
   }
 }));
@@ -77,7 +79,7 @@ const FearGreedIndexCard: React.FC = () => {
       />
       <CardContent className={classes.contentWrapper}>
         <FearGreedIndexGaugeChart />
-        <Box height="calc(100% - 96px)" width="100%">
+        <Box flex="1" width="100%">
           <HistoricFearGreedIndexChart />
         </Box>
       </CardContent>
