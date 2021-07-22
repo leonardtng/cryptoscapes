@@ -8,13 +8,11 @@ import { selectCoinDetails } from '../../../../features/coinDetailsSlice';
 import { coinDetailsGaugeHeight } from '../../../../common/shared/dimensions';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  gaugeSurface: {
-    '& #fear-greed-index-gauge': {
-      width: '200px !important',
-      '& svg': {
-        height: '100%',
-        width: '100%'
-      }
+  gaugeChart: {
+    height: 80,
+    width: '220px !important',
+    [theme.breakpoints.down('lg')]: {
+      width: '180px !important',
     }
   },
   gutterBottom: {
@@ -50,14 +48,14 @@ const CoinGaugeChart: React.FC<Props> = ({ title, type }) => {
   return (
     <Box height={coinDetailsGaugeHeight} display="flex" flexDirection="column" alignItems="center" padding={2}>
       {coinDetails.value && coinDetails.status !== 'LOADING' ? (
-        <Typography variant="h6" align="center">{title}</Typography>
+        <Typography variant="h6" align="center" noWrap>{title}</Typography>
       ) : (
         <Skeleton height={32} width="60%" className={classes.gutterBottom} />
       )}
-      <Box display="flex" alignItems="center" justifyContent="center" flex="1" className={classes.gaugeSurface}>
+      <Box display="flex" alignItems="center" justifyContent="center" flex="1">
         {gaugeData() !== null ? (
           <GaugeChart
-            id="fear-greed-index-gauge"
+            className={classes.gaugeChart}
             nrOfLevels={20}
             textColor={theme.palette.text.primary}
             needleColor={theme.palette.gauge.needle}

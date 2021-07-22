@@ -12,7 +12,10 @@ import { formatNumber } from '../../../../common/helpers';
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     height: '100%',
-    minHeight: 400
+    minHeight: 400,
+    '& > .MuiGrid-item': {
+      height: '100%'
+    }
   },
   innerWrapper: {
     height: '100%',

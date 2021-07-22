@@ -9,12 +9,9 @@ import RepositoryCard from '../atoms/RepositoryCard';
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     height: '100%',
-    minHeight: 400
-  },
-  innerWrapper: {
-    height: '100%',
-    '& > .MuiGrid-item:not(:last-child)': {
-      marginBottom: theme.spacing(3)
+    minHeight: 400,
+    '& > .MuiGrid-item': {
+      height: '100%'
     }
   }
 }));

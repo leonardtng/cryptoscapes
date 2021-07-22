@@ -23,7 +23,7 @@ const ExchangeListCard: React.FC<Props> = ({ top }) => {
     windowSize.width < theme.breakpoints.values.sm ? 1 :
       windowSize.width < theme.breakpoints.values.md ? 2 :
         windowSize.width < theme.breakpoints.values.lg ? 3 :
-          windowSize.width < theme.breakpoints.values.xl ? 4 : 5
+          windowSize.width < theme.breakpoints.values.xl ? 4 : 6
 
   useEffect(() => {
     if (exchangeList.value.length === 0 && exchangeList.status === 'IDLE') {

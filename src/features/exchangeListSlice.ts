@@ -16,7 +16,7 @@ const initialState: ExchangeListState = {
   status: 'IDLE',
   exchangeQueryParams: {
     page: 1,
-    perPage: 32
+    perPage: 36
   },
   hasMore: true
 };
