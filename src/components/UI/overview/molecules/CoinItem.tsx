@@ -20,6 +20,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
   coinLabelText: {
     width: 80,
+    [theme.breakpoints.down('xs')]: {
+      width: 120,
+    }
   },
   coinPrice: {
     width: 100,
@@ -30,6 +33,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         styleProps.change >= 0 ?
           theme.palette.success.main :
           theme.palette.error.main
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: 160,
     }
   },
   chartWrapper: {

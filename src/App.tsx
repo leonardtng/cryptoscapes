@@ -1,6 +1,6 @@
 import React from 'react';
 import Gilroy from './assets/fonts/Gilroy-ExtraBold.woff';
-import { createMuiTheme, CssBaseline, Theme, ThemeOptions, ThemeProvider } from '@material-ui/core';
+import { createMuiTheme, CssBaseline, responsiveFontSizes, Theme, ThemeOptions, ThemeProvider } from '@material-ui/core';
 import { useAppSelector } from './app/hooks';
 import { selectAppState } from './features/appStateSlice';
 import Main from './pages/Main';
@@ -97,7 +97,7 @@ const App: React.FC = () => {
         secondary: '#616161'
       },
       card: {
-        default: '#FBFDFF', 
+        default: '#FBFDFF',
         paper: '#E8EBF0'
       },
       gauge: {
@@ -108,7 +108,7 @@ const App: React.FC = () => {
   });
 
   return (
-    <ThemeProvider theme={appState.darkMode ? dark : light}>
+    <ThemeProvider theme={responsiveFontSizes(appState.darkMode ? dark : light)}>
       <CssBaseline />
       <Main />
     </ThemeProvider>

@@ -6,6 +6,7 @@ import { Skeleton } from '@material-ui/lab';
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   button: {
     display: 'block',
+    height: 88,
     width: '100%',
     textAlign: 'center',
     backgroundColor: theme.palette.card.paper,
@@ -13,6 +14,18 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     borderRadius: 12,
     '& .MuiSkeleton-root': {
       margin: 'auto'
+    },
+    [theme.breakpoints.down('sm')]: {
+      padding: 12,
+      '& .MuiTypography-subtitle2': {
+        fontSize: '0.75rem'
+      },
+      '& .MuiTypography-caption': {
+        fontSize: '0.65rem'
+      },
+      '& .MuiTypography-body1': {
+        fontSize: '0.8rem'
+      }
     }
   },
   flexbox: {

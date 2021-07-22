@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   conditionalButtonChild: {
     '& .MuiButton-outlined': {
-      height: 88,
       border: `2px solid ${theme.palette.secondary.main}80`
     }
   }
@@ -34,40 +33,40 @@ const GasIndicatorGroup: React.FC = () => {
 
   return (
     <Grid container spacing={2} className={classes.conditionalButtonChild}>
-    <Grid item xs={4}>
-      <GasIndicator
-        header="Slow"
-        price={safeLow}
-        time="< 30mins"
-        icon={<HourglassEmptyRounded />}
-        color={theme.palette.error.main}
-        selected={gasOracle.selectedGasFee === safeLow}
-        onClick={() => dispatch(setSelectedGasFee(safeLow))}
-      />
+      <Grid item xs={4}>
+        <GasIndicator
+          header="Slow"
+          price={safeLow}
+          time="< 30mins"
+          icon={<HourglassEmptyRounded />}
+          color={theme.palette.error.main}
+          selected={gasOracle.selectedGasFee === safeLow}
+          onClick={() => dispatch(setSelectedGasFee(safeLow))}
+        />
+      </Grid>
+      <Grid item xs={4}>
+        <GasIndicator
+          header="Normal"
+          price={standard}
+          time="< 5mins"
+          icon={<ScheduleRounded />}
+          color={theme.palette.warning.main}
+          selected={gasOracle.selectedGasFee === standard}
+          onClick={() => dispatch(setSelectedGasFee(standard))}
+        />
+      </Grid>
+      <Grid item xs={4}>
+        <GasIndicator
+          header="Fast"
+          price={fast}
+          time="< 1min"
+          icon={<FastForwardRounded />}
+          color={theme.palette.success.main}
+          selected={gasOracle.selectedGasFee === fast}
+          onClick={() => dispatch(setSelectedGasFee(fast))}
+        />
+      </Grid>
     </Grid>
-    <Grid item xs={4}>
-      <GasIndicator
-        header="Normal"
-        price={standard}
-        time="< 5mins"
-        icon={<ScheduleRounded />}
-        color={theme.palette.warning.main}
-        selected={gasOracle.selectedGasFee === standard}
-        onClick={() => dispatch(setSelectedGasFee(standard))}
-      />
-    </Grid>
-    <Grid item xs={4}>
-      <GasIndicator
-        header="Fast"
-        price={fast}
-        time="< 1min"
-        icon={<FastForwardRounded />}
-        color={theme.palette.success.main}
-        selected={gasOracle.selectedGasFee === fast}
-        onClick={() => dispatch(setSelectedGasFee(fast))}
-      />
-    </Grid>
-  </Grid>
   )
 }
 

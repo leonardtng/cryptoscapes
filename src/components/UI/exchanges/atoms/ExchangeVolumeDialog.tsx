@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 300,
     width: 500,
     [theme.breakpoints.down('xs')]: {
-      width: 311
+      width: 290
     }
   },
   responsiveContainer: {
