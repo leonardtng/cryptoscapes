@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     boxShadow: 'none',
+    color: theme.palette.text.primary,
     backgroundColor: theme.palette.background.default,
     '& .MuiToolbar-root': {
       minHeight: appBarHeight,
