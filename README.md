@@ -29,7 +29,7 @@ The development and task management of this website was done with the help of Gi
 ## 😊  Contact Me
 If you liked the website or just want to get in touch, email me at <a href="mailto:theleonardtng@gmail.com">theleonardtng@gmail.com</a> or drop me a message at the various social media platforms listed at the bottom of [my website](https://leonardntng.com). Cheers.
 
-[1]: https://cryptoscapes.com
+[1]: https://cryptoscapes.org
 [2]: https://https://redux.js.org/
 [3]: https://atomicdesign.bradfrost.com/chapter-2/#:~:text=Atomic%20design%20is%20atoms%2C%20molecules,parts%20at%20the%20same%20time.
 [4]: https://cryptoscapes.org/trends
