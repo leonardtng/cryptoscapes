@@ -27,7 +27,7 @@ The information and data used in Cryptoscapes is provided kindly by the followin
 The development and task management of this website was done with the help of GitHub Projects, and the project board can be found [here][9].
 
 ## 😊  Contact Me
-If you liked the website or just want to get in touch, email me at <a href="mailto:theleonardtng@gmail.com">theleonardtng@gmail.com</a> or drop me a message at the various social media platforms listed at the bottom of [my website](https://leonardntng.com). Cheers.
+If you liked the website or just want to get in touch, email me at <a href="mailto:theleonardtng@gmail.com">theleonardtng@gmail.com</a> or drop me a message at the various social media platforms listed at the bottom of [my website][10]. Cheers.
 
 [1]: https://cryptoscapes.org
 [2]: https://https://redux.js.org/
@@ -38,3 +38,4 @@ If you liked the website or just want to get in touch, email me at <a href="mail
 [7]: https://alternative.me/
 [8]: https://www.blockchain.com/
 [9]: https://github.com/leonardtng/cryptoscapes/projects/1
+[10]: https://leonardtng.com
