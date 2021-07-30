@@ -16,7 +16,7 @@ This project was deployed on AWS and built using:
 - Material-UI
 
 ## 📝  Data Sources
-The information and data used in Cryptoscapes is provided kindly by the following open sources:
+The information and data used in Cryptoscapes is provided kindly by the following sources:
 
 - [CoinGecko][5]
 - [GasNow][6]
