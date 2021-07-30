@@ -16,7 +16,7 @@ const MappedSentimentIcon: React.FC = () => {
   const theme = useTheme();
 
   const fearGreedIndex = useAppSelector(selectFearGreedIndex);
-  const sentimentValue = Number(fearGreedIndex.value[0].value)
+  const sentimentValue = Number(fearGreedIndex.today?.value)
 
   if (sentimentValue <= 25) {
     return <SentimentVeryDissatisfiedRounded style={{ fill: theme.palette.error.main }} />
