@@ -6,6 +6,9 @@ import { Coin } from '../../../../models';
 import CirculatingSupplyTooltip from './CirculatingSupplyTooltip'
 
 const useStyles = makeStyles((theme: Theme) => ({
+  wrapper: {
+    float: 'right'
+  },
   progressBar: {
     marginTop: theme.spacing(1),
     width: '84%',
@@ -35,7 +38,7 @@ const CirculatingSupplyCell: React.FC<Props> = ({ coin }) => {
       circulatingSupply={circulatingSupply}
       maxSupply={maxSupply}
     >
-      <Box maxWidth={200}>
+      <Box maxWidth={200} className={classes.wrapper}>
         <Typography variant="subtitle2" noWrap>
           {formatNumber(roundDecimals(circulatingSupply, 0))} {coin.symbol.toUpperCase()}
         </Typography>

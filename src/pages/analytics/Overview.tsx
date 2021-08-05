@@ -46,7 +46,40 @@ const Overview: React.FC = () => {
       alignItems="stretch"
     >
 
-      <Hidden mdDown>
+      <Hidden mdDown lgDown>
+        {/* Height = match screen 100% */}
+        <Grid item lg={4}>
+          <TopCoinsCard />
+        </Grid>
+        <Grid item lg={4}>
+          <Grid container className={classes.innerWrapper} spacing={0}>
+            <Grid item xs={12} style={{ height: 400 }}>
+              <CoinDominanceCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: 205 }}>
+              <GasOracleCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: `calc(100% - ${400 + 205 + theme.spacing(3) * 2}px)` }}>
+              <TrendingCoinsCard />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item lg={4}>
+          <Grid container className={classes.innerWrapper} spacing={0}>
+            <Grid item xs={12} style={{ height: 85 }}>
+              <BannerCardSmall />
+            </Grid>
+            <Grid item xs={12} style={{ height: `calc(50% - ${42.5 + theme.spacing(3)}px)` }}>
+              <MarketCapCard />
+            </Grid>
+            <Grid item xs={12} style={{ height: `calc(50% - ${42.5 + theme.spacing(3)}px)` }}>
+              <VolumeCard />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Hidden>
+
+      <Hidden mdDown xlUp>
         {/* Height = match screen 100% */}
         <Grid item lg={4}>
           <TopCoinsCard />
