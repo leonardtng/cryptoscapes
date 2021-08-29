@@ -7,7 +7,7 @@ After tinkering with a bunch of cryptocurrency data with Redux, I eventually dec
 
 The result was Cryptoscapes, an information dashboard that displays prices, trends, status updates, market snapshots and much more. Visit the website at [cryptoscapes.org][1] to check it out!
 
-## 🛠️  Key Techonologies
+## 🛠️  Key Technologies
 This project was deployed on AWS and built using:
 
 - React
