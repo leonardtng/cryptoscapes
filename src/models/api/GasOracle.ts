@@ -1,16 +1,11 @@
 import { GenericState } from "..";
 
 export interface GasOracle {
-  timestamp: number;
-  slow: number;
-  standard: number;
+  blockNum: number;
+  safeLow: number;
+  average: number;
   fast: number;
-  rapid: number;
-}
-
-export interface GasOracleRootObject {
-  code: number;
-  data: GasOracle
+  fastest: number;
 }
 
 export interface GasOracleState extends GenericState<GasOracle | null> {

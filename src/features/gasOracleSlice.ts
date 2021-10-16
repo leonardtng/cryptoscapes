@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction, Slice, SliceCaseReducers } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '../app/store';
-import { gasNow as API } from '../common/endpoints';
+import { ethGasStation as API } from '../common/endpoints';
 import { API_CONFIG as config, http } from '../common/constants';
-import { GasOracle, GasOracleRootObject, GasOracleState } from '../models';
+import { GasOracle, GasOracleState } from '../models';
 import { cacheWithExpiry, retrieveCache, roundDecimals, toCamelCase } from '../common/helpers';
 
 interface Reducers extends SliceCaseReducers<GasOracleState> {
@@ -28,21 +28,21 @@ export const fetchGasOracle = createAsyncThunk('gasOracle', async () => {
   } else {
 
     const response = await http.request({
-      ...config('gasNow'),
+      ...config('ethGasStation'),
       url: API.gasOracle,
       cancelToken: canceler.token
     });
 
-    const normalizedResponse = toCamelCase(response.data) as GasOracleRootObject;
+    const normalizedResponse = toCamelCase(response.data) as GasOracle;
 
-    normalizedResponse.data.slow = roundDecimals(normalizedResponse.data.slow / 10e8, 0);
-    normalizedResponse.data.standard = roundDecimals(normalizedResponse.data.standard / 10e8, 0);
-    normalizedResponse.data.fast = roundDecimals(normalizedResponse.data.fast / 10e8, 0);
-    normalizedResponse.data.rapid = roundDecimals(normalizedResponse.data.rapid / 10e8, 0);
+    normalizedResponse.safeLow = roundDecimals(normalizedResponse.safeLow / 10, 0);
+    normalizedResponse.average = roundDecimals(normalizedResponse.average / 10, 0);
+    normalizedResponse.fast = roundDecimals(normalizedResponse.fast / 10, 0);
+    normalizedResponse.fastest = roundDecimals(normalizedResponse.fastest / 10, 0);
 
-    cacheWithExpiry('gasOracle', normalizedResponse.data, 300000); // Cache Period: 5 minutes
+    cacheWithExpiry('gasOracle', normalizedResponse, 300000); // Cache Period: 5 minutes
 
-    return normalizedResponse.data as GasOracle
+    return normalizedResponse
   }
 });
 
@@ -67,7 +67,7 @@ const gasOracleSlice: Slice<GasOracleState, Reducers, 'gasOracle'> = createSlice
       .addCase(fetchGasOracle.fulfilled, (state, action) => {
         state.status = 'IDLE';
         state.value = action.payload;
-        state.selectedGasFee = action.payload.standard;
+        state.selectedGasFee = action.payload.average;
       })
       .addCase(fetchGasOracle.rejected, (state, action) => {
         state.status = 'FAILED';

@@ -33,9 +33,9 @@ export const coinGecko = {
     `/status_updates?per_page=${perPage}&page=${page}&category=${snakeCase(category)}`
 };
 
-export const gasNow = {
+export const ethGasStation = {
   gasOracle:
-    `/gas/price`
+    `/json/ethgasAPI.json`
 };
 
 export const alternativeMe = {

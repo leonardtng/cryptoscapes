@@ -37,7 +37,6 @@ import {
 } from './api/SupportedCoin';
 import {
   GasOracle as GasOracleInterface,
-  GasOracleRootObject as GasOracleRootObjectInterface,
   GasOracleState as GasOracleStateInterface
 } from './api/GasOracle';
 import {
@@ -118,7 +117,6 @@ export type CoinDetails = CoinDetailsInterface;
 export type CoinDetailsState = CoinDetailsStateInterface;
 export type SupportedCoin = SupportedCoinInterface;
 export type GasOracle = GasOracleInterface;
-export type GasOracleRootObject = GasOracleRootObjectInterface;
 export type GasOracleState = GasOracleStateInterface;
 export type TrendingCoin = TrendingCoinInterface;
 export type TrendingCoinItem = TrendingCoinItemInterface;

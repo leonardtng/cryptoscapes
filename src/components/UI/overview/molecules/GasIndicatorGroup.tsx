@@ -27,8 +27,8 @@ const GasIndicatorGroup: React.FC = () => {
 
   const gasOracle = useAppSelector(selectGasOracle);
 
-  const safeLow = gasOracle.value ? gasOracle.value.slow : 0;
-  const standard = gasOracle.value ? gasOracle.value.standard : 0;
+  const safeLow = gasOracle.value ? gasOracle.value.safeLow : 0;
+  const standard = gasOracle.value ? gasOracle.value.average : 0;
   const fast = gasOracle.value ? gasOracle.value.fast : 0;
 
   return (

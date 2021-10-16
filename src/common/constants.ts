@@ -5,8 +5,8 @@ import axios, { AxiosRequestConfig } from 'axios';
 export const http = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 1500 });
 
 export const API_CONFIG:
-  (server: 'coinGecko' | 'gasNow' | 'alternative.me' | 'blockchain.com') => AxiosRequestConfig =
-  (server: 'coinGecko' | 'gasNow' | 'alternative.me' | 'blockchain.com') => {
+  (server: 'coinGecko' | 'ethGasStation' | 'alternative.me' | 'blockchain.com') => AxiosRequestConfig =
+  (server: 'coinGecko' | 'ethGasStation' | 'alternative.me' | 'blockchain.com') => {
     switch (server) {
       case 'coinGecko':
         return {
@@ -20,9 +20,9 @@ export const API_CONFIG:
             'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload'
           }
         }
-      case 'gasNow':
+      case 'ethGasStation':
         return {
-          baseURL: 'https://www.gasnow.org/api/v3',
+          baseURL: 'https://ethgasstation.info',
           responseType: 'json',
           method: 'GET'
         }

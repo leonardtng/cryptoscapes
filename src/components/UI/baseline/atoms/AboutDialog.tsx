@@ -62,8 +62,8 @@ const AboutDialog: React.FC<Props> = ({ open, toggleClose }) => {
             <Typography variant="body2" color="textSecondary">- CoinGecko</Typography>
             <OpenInNewRounded />
           </Link>
-          <Link href="https://www.gasnow.org/" target='_blank' rel="noopener noreferrer" className={classes.link}>
-            <Typography variant="body2" color="textSecondary">- GasNow</Typography>
+          <Link href="https://ethgasstation.info/" target='_blank' rel="noopener noreferrer" className={classes.link}>
+            <Typography variant="body2" color="textSecondary">- ETH Gas Station</Typography>
             <OpenInNewRounded />
           </Link>
           <Link href="https://alternative.me/" target='_blank' rel="noopener noreferrer" className={classes.link}>
